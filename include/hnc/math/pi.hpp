@@ -28,7 +28,7 @@ namespace hnc
 	{
 		/// Pi constante (3.141592653589793)
 		template <class T = double>
-		T constexpr pi() { return double(4.) * std::atan(double(1.)); }
+		constexpr T pi() { return double(4.) * std::atan(double(1.)); }
 	}
 }
 
