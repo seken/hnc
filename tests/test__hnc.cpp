@@ -21,8 +21,8 @@
 int main()
 {
 	std::cout << "Just test hnc.hpp include" << std::endl;
-	std::cout << "hnc version  = " << hnc::version << std::endl;
-	std::cout << "hnc codename = " << hnc::codename << std::endl;
+	std::cout << "hnc version  = " << hnc::version() << std::endl;
+	std::cout << "hnc codename = " << hnc::codename() << std::endl;
 
 	return 0;
 }
