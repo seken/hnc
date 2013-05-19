@@ -14,6 +14,7 @@
 
 
 #include <iostream>
+#include <limits>
 
 #include <hnc/args.hpp>
 #include <hnc/test.hpp>
@@ -24,7 +25,6 @@
 int main()
 {
 	int nb_test = 0;
-
 	
 	hnc::args args
 	(
@@ -38,7 +38,9 @@ int main()
 			"--test3", "21", "42", "73",
 			"--test4", "21", "42",
 			"--test5", "one string", "42",
-			"--test6", "One tuple of", "3", "elements"
+			"--test6", "One tuple of", "3", "elements",
+			"--test7", "3.14159",
+			"--test8", "3.14159265358979"
 		},
 		"Just a quick test for hnc::args", "Copyright © 2012 Inria, Written by Lénaïc Bagnères, lenaic.bagneres@inria.fr"
 	);
@@ -53,6 +55,9 @@ int main()
 	auto arg_t4 = args.add_option({"--test4"}, {"x", "y", "z"}, "Excepted 2 int arguments, only 2 are given", {0, 0, 0});
 	auto arg_t5 = args.add_option({"--test5"}, {"n", "s"}, "Excepted 1 int and 1 string", std::make_tuple(std::string("default"), 0));
 	auto arg_t6 = args.add_option({"--test6"}, {"s", "n", "s"}, "Excepted 1 string, 1 int and 1 string", std::make_tuple(std::string("default"), 0, std::string("default")));
+	args.add_separator();
+	auto arg_float = args.add_option({"--test7"}, "n", "One float", float(0));
+	auto arg_double = args.add_option({"--test8"}, "n", "One double", double(0));
 	args.add_separator();
 	bool arg_version = args.add_option({"-v", "--version"}, "Display the version");
 	bool arg_help = args.add_option({"-h", "--help", "-?"}, "Display this help");
@@ -71,6 +76,8 @@ int main()
 	std::cout << "    " << "--test4 " << arg_t4 << std::endl;
 	std::cout << "    " << "--test5 " << arg_t5 << std::endl;
 	std::cout << "    " << "--test6 " << arg_t6 << std::endl;
+	std::cout << "    " << "--test7 " << arg_float << std::endl;
+	std::cout << "    " << "--test8 " << hnc::to_string(arg_double) << std::endl;
 	std::cout << "    " << "-v      " << arg_version << std::endl;
 	std::cout << "    " << "-h      " << arg_help << std::endl;
 	std::cout << std::endl;
@@ -92,7 +99,7 @@ int main()
 	std::cout << "bash completion:" << std::endl;
 	std::cout << args.bash_completion() << std::endl;
 
-	nb_test += 11;
+	nb_test += 13;
 	nb_test -= hnc::test::warning(arg_opt == true, "-opt is given\n");
 	nb_test -= hnc::test::warning(arg_version == false, "-v is not given\n");
 	nb_test -= hnc::test::warning(arg_help == true, "-? is given\n");
@@ -103,6 +110,8 @@ int main()
 	nb_test -= hnc::test::warning(arg_t4 == std::vector<int>({0, 0, 0}), "--test4 is given with 21 42, one argument miss\n");
 	nb_test -= hnc::test::warning(arg_t5 == std::make_tuple(std::string("one string"), 42), "--test5 is given with 'one string' 42\n");
 	nb_test -= hnc::test::warning(arg_t6 == std::make_tuple(std::string("One tuple of"), 3, std::string("elements")), "--test6 is given with 'One tuple of' 3 'elements'\n");
+	nb_test -= hnc::test::warning(arg_float == 3.14159f, "--test7 3.14159 is given\n");
+	nb_test -= hnc::test::warning(arg_double == 3.14159265358979, "--test8 3.14159265358979 is given\n");
 	nb_test -= hnc::test::warning(args.errors().size() == 3, "The number of errors must be 3\n");
 	
 	hnc::test::warning(nb_test == 0, "hnc::arg " + hnc::to_string(nb_test) + " test fail!\n");
