@@ -26,14 +26,22 @@
 int main()
 {
 	int nb_test = 0;
+	
+	std::string const ref_pi = "3.1415926535897932384626433832795028841971693993751058209749445923078164062862089986280348253421170679";
+		std::cout << "Reference pi         = " << ref_pi << std::endl;
 
 	++nb_test;
 	{
-		std::string const ref_pi = "3.1415926535897932384626433832795028841971693993751058209749445923078164062862089986280348253421170679";
 		std::string const pi = hnc::to_string(hnc::math::pi());
-		std::cout << "hnc::math::pi = " << pi << std::endl;
-		std::cout << "Reference pi  = " << ref_pi << std::endl;
-		nb_test -= hnc::test::warning(pi == "3.141592653589793", "hnc::math::pi == " + pi + " instead of 3.141592653589793\n");
+		std::cout << "hnc::math::pi        = " << pi << std::endl;
+		nb_test -= hnc::test::warning(pi.substr(0, pi.size() - 1) == ref_pi.substr(0, pi.size() - 1), "hnc::math::pi == " + pi + " instead of " + ref_pi.substr(0, pi.size() - 1) + "\n");
+	}
+
+	++nb_test;
+	{
+		std::string const pi = hnc::to_string(hnc::math::pi<float>());
+		std::cout << "hnc::math::pi<float> = " << pi << std::endl;
+		nb_test -= hnc::test::warning(pi.substr(0, pi.size() - 1) == ref_pi.substr(0, pi.size() - 1), "hnc::math::pi == " + pi + " instead of " + ref_pi.substr(0, pi.size() - 1) + "\n");
 	}
 
 	hnc::test::warning(nb_test == 0, "hnc::math::pi: " + hnc::to_string(nb_test) + " test fail!\n");
