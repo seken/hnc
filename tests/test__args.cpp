@@ -31,6 +31,8 @@ int main(int argc, char * * argv)
 	bool arg_opt = args.add_option({"--opt", "--option"}, "One option");
 	// Option with one argument (last boolean means the option must be present, false by default)
 	int arg_int = args.add_option({"--i", "--int"}, "n", "One integer", 0, true);
+	// Option with a float (the return type depends on the 4th argument)
+	float arg_float = args.add_option({"--float"}, "n", "One float", float(0));
 	args.add_separator();
 	// Option with several same type arguments
 	auto arg_ints = args.add_option
@@ -65,6 +67,7 @@ int main(int argc, char * * argv)
 	std::cout << "Options:" << std::endl;
 	std::cout << "    " << "--opt   " << arg_opt << std::endl;
 	std::cout << "    " << "--int   " << arg_int << std::endl;
+	std::cout << "    " << "--float " << arg_float << std::endl;
 	std::cout << "    " << "--ints  " << arg_ints << std::endl;
 	std::cout << "    " << "--tuple " << arg_tuple << std::endl;
 	std::cout << "    " << "-v      " << arg_version << std::endl;

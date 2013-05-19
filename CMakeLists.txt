@@ -86,7 +86,7 @@ cmake_minimum_required(VERSION 2.6)
 		add_executable(${test} "tests/${test}.cpp")
 		# args
 		if ("${test}" STREQUAL "test__args")
-			add_test(${test} "${test}" "--opt" "--int" "42" "--ints" "21" "42" "73" "--types" "this is a" "tuple" "with" "5" "elements")
+			add_test(${test} "${test}" "--opt" "--int" "42" "--float" "3.14" "--ints" "21" "42" "73" "--types" "this is a" "tuple" "with" "5" "elements")
 		elseif (${test} STREQUAL "test__args_without_argument")
 			add_test(${test} "${test}" "--opt0" "--option1" "--opt3")
 		elseif (${test} STREQUAL "test__args_with_one_argument")
