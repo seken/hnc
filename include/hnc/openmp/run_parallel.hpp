@@ -16,13 +16,13 @@
 // along with hnc. If not, see <http://www.gnu.org/licenses/>
 
 
-#ifndef HNC_HPC_OMP_RUN_PARALLEL_HPP
-#define HNC_HPC_OMP_RUN_PARALLEL_HPP
+#ifndef HNC_OPENMP_RUN_PARALLEL_HPP
+#define HNC_OPENMP_RUN_PARALLEL_HPP
 
 
 namespace hnc
 {
-	namespace omp
+	namespace openmp
 	{
 		template <class func>
 		void run_parallel(func & f)
@@ -37,9 +37,9 @@ namespace hnc
 		 * #include <hnc/openmp.hpp>
 		 * @endcode
 		 *
-		 * OpenMP works with preprocessor, so hnc::omp::run_parallel is writen for 1, 2, 3, 4, ... functions as parameters (if not, please write the good function and send it to me(!))
+		 * OpenMP works with preprocessor, so hnc::openmp::run_parallel is writen for 1, 2, 3, 4, ... functions as parameters (if not, please write the good function and send it to me(!))
 		 * @code
-		 * hnc::omp::run_parallel(f0, f1, f2); //, f3, fx, ...
+		 * hnc::openmp::run_parallel(f0, f1, f2); //, f3, fx, ...
 		 * @endcode
 		 *
 		 * @param[in,out] f0 Task (a function without parameter)

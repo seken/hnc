@@ -16,8 +16,8 @@
 // along with hnc. If not, see <http://www.gnu.org/licenses/>
 
 
-#ifndef HNC_HPC_OMP_RUN_AT_SAME_TIME_HPP
-#define HNC_HPC_OMP_RUN_AT_SAME_TIME_HPP
+#ifndef HNC_OPENMP_RUN_AT_SAME_TIME_HPP
+#define HNC_OPENMP_RUN_AT_SAME_TIME_HPP
 
 #if defined(_OPENMP)
 #include <omp.h>
@@ -26,7 +26,7 @@
 
 namespace hnc
 {
-	namespace omp
+	namespace openmp
 	{
 		template <class func>
 		void run_at_same_time(func & f)
@@ -41,11 +41,11 @@ namespace hnc
 		 * #include <hnc/openmp.hpp>
 		 * @endcode
 		 *
-		 * Unlike hnc::omp::run_parallel, this function ensures task are executed at the same time
+		 * Unlike hnc::openmp::run_parallel, this function ensures task are executed at the same time
 		 *
-		 * OpenMP works with preprocessor, so hnc::omp::run_at_same_time is writen for 1, 2, 3, 4, ... functions as parameters (if not, please write the good function and send it to me(!))
+		 * OpenMP works with preprocessor, so hnc::openmp::run_at_same_time is writen for 1, 2, 3, 4, ... functions as parameters (if not, please write the good function and send it to me(!))
 		 * @code
-		 * hnc::omp::run_at_same_time(f0, f1, f2); //, f3, fx, ...
+		 * hnc::openmp::run_at_same_time(f0, f1, f2); //, f3, fx, ...
 		 * @endcode
 		 *
 		 * @param[in,out] f0 Task (a function without parameter)

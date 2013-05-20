@@ -15,11 +15,11 @@
 
 all:
 	@echo "Usage:"
-	@echo "mkdir -p build && cd build && cmake .."
-	@echo "make clean"
+	@echo "mkdir -p build && cd build && cmake .. # To compile hnc library (first step)"
+	@echo "make clean                             # To clean (remove all no-source files)"
 
 clean:
 	rm -rf build/* doc/html/* doc/latex/*
 	rm -rf *~
-	cd include/hnc/ && rm -rf *~ boost/serialization/*~ gnuplot/*~ hpc/*~ hpc/omp/*~ iterator/*~ math/*~ scheduler/*~
-	rm -rf test_visual/*~ tests/*~ tests_human/*~
+	cd include/hnc/ && rm -rf *~ gnuplot/*~ iterator/*~ math/*~ mpi/*~ openmp/*~ scheduler/*~
+	rm -rf tests/*~ tests_human/*~ tests_visual/*~

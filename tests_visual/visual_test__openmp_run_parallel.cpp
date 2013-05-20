@@ -20,7 +20,7 @@
 #include <string>
 #include <functional>
 
-#include <hnc/omp/run_at_same_time.hpp>
+#include <hnc/openmp/run_parallel.hpp>
 #include <hnc/test.hpp>
 #include <hnc/to_string.hpp>
 
@@ -60,30 +60,30 @@ int main()
 	int nb_test = 0;
 
 	std::cout << "Use fonction:" << std::endl;
-	hnc::omp::run_at_same_time(fct);
+	hnc::openmp::run_parallel(fct);
 	std::cout << std::endl;
 
 	std::cout << "Use fonction, functor object:" << std::endl;
-	hnc::omp::run_at_same_time(fct, obj_fct);
+	hnc::openmp::run_parallel(fct, obj_fct);
 	std::cout << std::endl;
 
 	std::cout << "Use fonction, functor object, lambda function:" << std::endl;
-	hnc::omp::run_at_same_time(fct, obj_fct, lambda_fct);
+	hnc::openmp::run_parallel(fct, obj_fct, lambda_fct);
 	std::cout << std::endl;
 
 	std::cout << "Use fonction, functor object, lambda function, fonction:" << std::endl;
-	hnc::omp::run_at_same_time(fct, obj_fct, lambda_fct, fct);
+	hnc::openmp::run_parallel(fct, obj_fct, lambda_fct, fct);
 	std::cout << std::endl;
 
 	std::cout << "Use fonction, functor object, lambda function, fonction, functor object:" << std::endl;
-	hnc::omp::run_at_same_time(fct, obj_fct, lambda_fct, fct, obj_fct);
+	hnc::openmp::run_parallel(fct, obj_fct, lambda_fct, fct, obj_fct);
 	std::cout << std::endl;
 
 	std::cout << "Use fonction, functor object, lambda function, fonction, functor object, lambda function:" << std::endl;
-	hnc::omp::run_at_same_time(fct, obj_fct, lambda_fct, fct, obj_fct, lambda_fct);
+	hnc::openmp::run_parallel(fct, obj_fct, lambda_fct, fct, obj_fct, lambda_fct);
 	std::cout << std::endl;
 
-	hnc::test::warning(nb_test == 0, "hnc::omp::run_at_same_time: " + hnc::to_string(nb_test) + " test fail!\n");
+	hnc::test::warning(nb_test == 0, "hnc::openmp::run_parallel: " + hnc::to_string(nb_test) + " test fail!\n");
 
 	return nb_test;
 }

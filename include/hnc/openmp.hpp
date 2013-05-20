@@ -16,12 +16,12 @@
 // along with hnc. If not, see <http://www.gnu.org/licenses/>
 
 
-#ifndef HNC_HPC_OMP_HPP
-#define HNC_HPC_OMP_HPP
+#ifndef HNC_OPENMP_HPP
+#define HNC_OPENMP_HPP
 
 
-#include "omp/run_parallel.hpp"
-#include "omp/run_at_same_time.hpp"
+#include "openmp/run_parallel.hpp"
+#include "openmp/run_at_same_time.hpp"
 
 
 namespace hnc
@@ -33,9 +33,11 @@ namespace hnc
 	 * #include <hnc/openmp.hpp>
 	 * @endcode
 	 *
+	 * TODO What is OpenMP ?
+	 * 
 	 * TODO Link to (simple) OpenMP Tutorial
 	 */
-	namespace omp
+	namespace openmp
 	{
 		// For Doxygen only
 	}
