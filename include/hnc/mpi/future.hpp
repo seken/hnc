@@ -42,6 +42,10 @@ namespace hnc
 
 		/**
 		 * @brief Base class to send functor to a slave with a hnc::mpi::future
+		 *
+		 * @code
+		 * #include <hnc/mpi/future.hpp>
+		 * @endcode
 		 * 
 		 * To send a function to a hnc::mpi::future slave, you need derivate this class
 		 * 
@@ -388,6 +392,10 @@ namespace hnc
 		/**
 		 * @brief Provides a mechanism to access the result of remote (MPI) operations
 		 *
+		 * @code
+		 * #include <hnc/mpi/future.hpp>
+		 * @endcode
+		 *
 		 * hnc::mpi::future take a hnc::mpi::functor and a processor id. The remote processor compute the functor. The result is available once by get method.
 		 *
 		 * @pre The MPI environment is set @n
@@ -682,6 +690,10 @@ namespace hnc
 
 		/**
 		 * @brief Create the MPI environment to use hnc::mpi::future
+		 *
+		 * @code
+		 * #include <hnc/mpi/future.hpp>
+		 * @endcode
 		 *
 		 * After the creation of the MPI environment, only the master (rank 0) must continue.@n
 		 * You can use this code
