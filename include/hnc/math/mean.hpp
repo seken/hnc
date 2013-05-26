@@ -88,7 +88,7 @@ namespace hnc
 		double mean(Container<T> const & c)
 		{
 			#ifndef NDEBUG
-				hnc::hassert(c.size() > 0, std::length_error("hnc::mean, Can not compute the mean of empty container"));
+				hnc::hassert(c.size() > 0, std::length_error("hnc::math::mean, Can not compute the mean of empty container"));
 			#endif
 			return (double(hnc::sum(c)) / c.size());
 		}

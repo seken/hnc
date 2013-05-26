@@ -57,7 +57,7 @@ namespace hnc
 		double median(input_iterator const & begin, input_iterator const & end)
 		{
 			#ifndef NDEBUG
-				hnc::hassert(std::distance(begin, end) > 0, std::length_error("hnc::median, Can not compute the median of empty container"));
+				hnc::hassert(std::distance(begin, end) > 0, std::length_error("hnc::math::median, Can not compute the median of empty container"));
 			#endif
 			// Get size
 			auto size = std::distance(begin, end);

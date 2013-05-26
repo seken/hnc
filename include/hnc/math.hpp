@@ -21,6 +21,8 @@
 
 #include "math/pi.hpp"
 
+#include "math/nth_root.hpp"
+
 #include "sum.hpp"
 #include "math/mean.hpp"
 #include "math/median.hpp"
