@@ -37,7 +37,9 @@
 	#include <boost/serialization/string.hpp>
 	#include <boost/serialization/utility.hpp>
 	#include <boost/serialization/valarray.hpp>
+	#define STD std
 	#include <boost/serialization/vector.hpp>
+	#undef STD
 
 #endif
 
