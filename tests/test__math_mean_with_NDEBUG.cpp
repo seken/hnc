@@ -44,7 +44,7 @@ int main()
 	#endif
 
 	{
-		std::vector<int> c(0);
+		std::vector<double> c(0);
 		std::cout << "Mean of empty std::vector of int:" << std::endl;
 		++nb_test;
 		{
@@ -116,10 +116,10 @@ int main()
 	}
 
 	{
-		std::vector<int> c;
-		int sum = 0;
+		std::vector<double> c;
+		double sum = 0;
 		for (int i = -14; i < 741; i += 78) { c.push_back(i); sum += i; }
-		double meanRef = double(sum) / c.size();
+		double meanRef = sum / c.size();
 		std::cout << "Mean of std::vector of int:" << std::endl;
 		std::cout << "- Reference                 = " << meanRef << std::endl;
 		++nb_test;
@@ -137,14 +137,14 @@ int main()
 	}
 
 	{
-		std::vector<int> c;
+		std::vector<double> c;
 		std::size_t size = 0;
-		int sum0 = 0;
+		double sum0 = 0;
 		for (int i = 57; i < 47825; i += 145) { c.push_back(i); sum0 += i; ++size; }
-		double meanRef0 = double(sum0) / size;
-		int sum1 = 0;
+		double meanRef0 = sum0 / size;
+		double sum1 = 0;
 		for (int i = -475; i < 41; i += 7) { c.push_back(i); sum1 += i; }
-		double meanRef1 = double(sum1) / (c.size() - size);
+		double meanRef1 = sum1 / (c.size() - size);
 		std::cout << "Partial mean of std::vector of int:" << std::endl;
 		++nb_test;
 		{

@@ -26,6 +26,7 @@
 #include "sum.hpp"
 #include "math/mean.hpp"
 #include "math/median.hpp"
+#include "math/geometric_mean.hpp"
 #include "math/variance.hpp"
 
 

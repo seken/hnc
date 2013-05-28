@@ -119,18 +119,6 @@ namespace hnc
 			// General
 			return nth_root(a, n, is_integer<std::numeric_limits<T>::is_integer>());
 		}
-// 		template <class T>
-// 		T nth_root(T const & a, unsigned int const n)
-// 		{
-
-// 			std::cout << std::numeric_limits<T>::epsilon() << std::endl;
-// 			std::cout << std::numeric_limits<T>::is_integer << std::endl;
-// 			std::cout << std::endl;
-// 			
-// 			return 0;
-// 		}
-
-		
 	}
 }
 

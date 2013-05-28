@@ -76,18 +76,18 @@ int main()
 	{
 		std::list<int> c;
 		c.push_back(42);
-		double meanRef = 42;
+		int meanRef = 42;
 		std::cout << "Mean of std::list of one int:" << std::endl;
 		std::cout << "- Reference                 = " << meanRef << std::endl;
 		++nb_test;
 		{
-			double mean = hnc::math::mean(c);
+			int mean = hnc::math::mean(c);
 			std::cout << "- hnc::math::mean container = " << mean << std::endl;
 			nb_test -= hnc::test::warning(mean == meanRef, "hnc::math::mean container == " + hnc::to_string(mean) + " instead of " + hnc::to_string(meanRef) + "\n");
 		}
 		++nb_test;
 		{
-			double mean = hnc::math::mean(c.begin(), c.end());
+			int mean = hnc::math::mean(c.begin(), c.end());
 			std::cout << "- hnc::math::mean iterator  = " << mean << std::endl;
 			nb_test -= hnc::test::warning(mean == meanRef, "hnc::math::mean iterator == " + hnc::to_string(mean) + " instead of " + hnc::to_string(meanRef) + "\n");
 		}
@@ -97,29 +97,29 @@ int main()
 		std::list<int> c;
 		c.push_back(42);
 		c.push_back(13);
-		double meanRef = 27.5;
+		int meanRef = 27; // 27.5;
 		std::cout << "Mean of std::list of two int:" << std::endl;
 		std::cout << "- Reference                 = " << meanRef << std::endl;
 		++nb_test;
 		{
-			double mean = hnc::math::mean(c);
+			int mean = hnc::math::mean(c);
 			std::cout << "- hnc::math::mean container = " << mean << std::endl;
 			nb_test -= hnc::test::warning(mean == meanRef, "hnc::math::mean container == " + hnc::to_string(mean) + " instead of " + hnc::to_string(meanRef) + "\n");
 		}
 		++nb_test;
 		{
-			double mean = hnc::math::mean(c.begin(), c.end());
+			int mean = hnc::math::mean(c.begin(), c.end());
 			std::cout << "- hnc::math::mean iterator  = " << mean << std::endl;
 			nb_test -= hnc::test::warning(mean == meanRef, "hnc::math::mean iterator == " + hnc::to_string(mean) + " instead of " + hnc::to_string(meanRef) + "\n");
 		}
 	}
 
 	{
-		std::vector<int> c;
-		int sum = 0;
-		for (int i = -412; i < 649; i += 13) { c.push_back(i); sum += i; }
+		std::vector<double> c;
+		double sum = 0;
+		for (double i = -412; i < 649; i += 13) { c.push_back(i); sum += i; }
 		double meanRef = double(sum) / c.size();
-		std::cout << "Mean of std::vector of int:" << std::endl;
+		std::cout << "Mean of std::vector of double:" << std::endl;
 		std::cout << "- Reference                 = " << meanRef << std::endl;
 		++nb_test;
 		{
@@ -136,12 +136,12 @@ int main()
 	}
 
 	{
-		std::vector<int> c;
+		std::vector<double> c;
 		std::size_t size = 0;
-		int sum0 = 0;
+		double sum0 = 0;
 		for (int i = -785; i < -42; i += 21) { c.push_back(i); sum0 += i; ++size; }
-		double meanRef0 = double(sum0) / size;
-		int sum1 = 0;
+		double meanRef0 = sum0 / size; // double(sum0) / size;
+		double sum1 = 0;
 		for (int i = 485; i < 4892; i += 42) { c.push_back(i); sum1 += i; }
 		double meanRef1 = double(sum1) / (c.size() - size);
 		std::cout << "Partial mean of std::vector of int:" << std::endl;

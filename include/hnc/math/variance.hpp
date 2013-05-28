@@ -47,16 +47,18 @@ namespace hnc
 		 *
 		 * @pre The distance beetween first and last element is >= 1
 		 *
-		 * @return the variance (a double)
+		 * @return the variance
 		 */
 		template <class forward_iterator>
-		double variance(forward_iterator begin, forward_iterator const & end)
+		typename std::iterator_traits<forward_iterator>::value_type variance(forward_iterator begin, forward_iterator const & end)
 		{
-			double mean = hnc::math::mean(begin, end);
-			double variance = 0.;
+			using return_t = typename std::iterator_traits<forward_iterator>::value_type;
+			
+			return_t mean = hnc::math::mean(begin, end);
+			return_t variance = 0.;
 			for (forward_iterator it = begin; it != end; ++it)
 			{
-				double tmp = double(*it) - mean; // tmp = X - E(X)
+				return_t tmp = return_t(*it) - mean; // tmp = X - E(X)
 				variance += tmp * tmp;
 			}
 			variance /= std::distance(begin, end);
@@ -82,10 +84,10 @@ namespace hnc
 		 *
 		 * @pre The size of the container is >= 1
 		 *
-		 * @return the variance (a double)
+		 * @return the variance
 		 */
 		template <class T, template <class, class Alloc = std::allocator<T>> class Container>
-		double variance(Container<T> const & c)
+		T variance(Container<T> const & c)
 		{ return hnc::math::variance(c.begin(), c.end()); }
 	}
 }

@@ -51,15 +51,16 @@ namespace hnc
 		 *
 		 * @exception std::length_error: hnc::hassert distance between iterators is >= 1 if NDEBUG is not defined
 		 *
-		 * @return the arithmetic mean (a double)
+		 * @return the arithmetic mean
 		 */
 		template <class forward_iterator>
-		double mean(forward_iterator const & begin, forward_iterator const & end)
+		typename std::iterator_traits<forward_iterator>::value_type mean(forward_iterator const & begin, forward_iterator const & end)
 		{
+			auto size = std::distance(begin, end);
 			#ifndef NDEBUG
-				hnc::hassert(std::distance(begin, end) > 0, std::length_error("hnc::sum, Can not compute the mean of empty container"));
+				hnc::hassert(size > 0, std::length_error("hnc::math::mean, Can not compute the mean of empty container"));
 			#endif
-			return (double(hnc::sum(begin, end)) / std::distance(begin, end));
+			return (hnc::sum(begin, end) / size);
 		}
 
 		/**
@@ -82,15 +83,15 @@ namespace hnc
 		 *
 		 * @exception std::length_error: hnc::hassert container size is >= 1 if NDEBUG is not defined
 		 *
-		 * @return the arithmetic mean (a double)
+		 * @return the arithmetic mean (a long double)
 		 */
 		template <class T, template <class, class Alloc = std::allocator<T>> class Container>
-		double mean(Container<T> const & c)
+		T mean(Container<T> const & c)
 		{
 			#ifndef NDEBUG
 				hnc::hassert(c.size() > 0, std::length_error("hnc::math::mean, Can not compute the mean of empty container"));
 			#endif
-			return (double(hnc::sum(c)) / c.size());
+			return (hnc::sum(c) / c.size());
 		}
 	}
 }

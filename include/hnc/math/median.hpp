@@ -54,16 +54,19 @@ namespace hnc
 		 * @return the median
 		 */
 		template <class input_iterator>
-		double median(input_iterator const & begin, input_iterator const & end)
+		typename std::iterator_traits<input_iterator>::value_type median(input_iterator const & begin, input_iterator const & end)
 		{
-			#ifndef NDEBUG
-				hnc::hassert(std::distance(begin, end) > 0, std::length_error("hnc::math::median, Can not compute the median of empty container"));
-			#endif
 			// Get size
 			auto size = std::distance(begin, end);
+			
+			#ifndef NDEBUG
+				hnc::hassert(size > 0, std::length_error("hnc::math::median, Can not compute the median of empty container"));
+			#endif
+				
 			// Do a partial sort copy
-			std::vector<typename std::iterator_traits<input_iterator>::value_type> partial_sort(std::distance(begin, end)/2 + 1);
+			std::vector<typename std::iterator_traits<input_iterator>::value_type> partial_sort(size/2 + 1);
 			std::partial_sort_copy(begin, end, partial_sort.begin(), partial_sort.end());
+			
 			// Odd
 			if (size % 2 == 1)
 			{
