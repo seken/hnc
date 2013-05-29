@@ -275,6 +275,69 @@ int main()
 	}
 	std::cout << std::endl;
 
+	// 0.00506 0.001059 0.001058 0.001057 0.001056 0.001057 0.001056 0.001057 0.001057 0.001056 0.001056
+	{
+		std::vector<double> c({0.00506, 0.001059, 0.001058, 0.001057, 0.001056, 0.001057, 0.001056, 0.001057, 0.001057, 0.001056, 0.001056});
+		double ref = 0.001218604; // 0.001218603789285642
+		std::cout << "Geometric mean of std::vector of {0.00506, 0.001059, 0.001058, 0.001057, 0.001056, 0.001057, 0.001056, 0.001057, 0.001057, 0.001056, 0.001056}:" << std::endl;
+		std::cout << "- Reference                           = " << ref << std::endl;
+		++nb_test;
+		{
+			double geo_mean = hnc::math::geometric_mean(c);
+			std::cout << "- hnc::math::geometric_mean container = " << geo_mean << std::endl;
+			nb_test -= hnc::test::warning(std::abs(geo_mean - ref) < 0.0000001, "hnc::math::geometric_mean container == " + hnc::to_string(geo_mean) + " instead of " + hnc::to_string(ref) + "\n");
+		}
+		++nb_test;
+		{
+			double geo_mean = hnc::math::geometric_mean(c.begin(), c.end());
+			std::cout << "- hnc::math::geometric_mean iterator  = " << geo_mean << std::endl;
+			nb_test -= hnc::test::warning(std::abs(geo_mean - ref) < 0.0000001, "hnc::math::geometric_mean iterator == " + hnc::to_string(geo_mean) + " instead of " + hnc::to_string(ref) + "\n");
+		}
+	}
+	std::cout << std::endl;
+
+	// 0.00506 0.001059 0.001058 0.001057 0.001056 0.001057 0.001056 0.001057 0.001057 0.001056 0.001056
+	{
+		std::vector<float> c({0.00506, 0.001059, 0.001058, 0.001057, 0.001056, 0.001057, 0.001056, 0.001057, 0.001057, 0.001056, 0.001056});
+		float ref = 0.001218604; // 0.001218603789285642
+		std::cout << "Geometric mean of std::vector of {0.00506, 0.001059, 0.001058, 0.001057, 0.001056, 0.001057, 0.001056, 0.001057, 0.001057, 0.001056, 0.001056}:" << std::endl;
+		std::cout << "- Reference                           = " << ref << std::endl;
+		++nb_test;
+		{
+			float geo_mean = hnc::math::geometric_mean(c);
+			std::cout << "- hnc::math::geometric_mean container = " << geo_mean << std::endl;
+			nb_test -= hnc::test::warning(std::abs(geo_mean - ref) < 0.0000001, "hnc::math::geometric_mean container == " + hnc::to_string(geo_mean) + " instead of " + hnc::to_string(ref) + "\n");
+		}
+		++nb_test;
+		{
+			float geo_mean = hnc::math::geometric_mean(c.begin(), c.end());
+			std::cout << "- hnc::math::geometric_mean iterator  = " << geo_mean << std::endl;
+			nb_test -= hnc::test::warning(std::abs(geo_mean - ref) < 0.0000001, "hnc::math::geometric_mean iterator == " + hnc::to_string(geo_mean) + " instead of " + hnc::to_string(ref) + "\n");
+		}
+	}
+	std::cout << std::endl;
+
+	// 0.00506 0.001059 0.001058 0.001057 0.001056 0.001057 0.001056 0.001057 0.001057 0.001056 0.001056
+	{
+		std::vector<double> c({56498494.8498, 84964898.5564, 8546521.6458, 546844.546, 84698489646., 84684.});
+		double ref = 2.33221e+07; // 23322107.28263711;
+		std::cout << "Geometric mean of std::vector of {56498494.8498, 84964898.5564, 8546521.6458, 546844.546, 84698489646., 84684.}:" << std::endl;
+		std::cout << "- Reference                           = " << ref << std::endl;
+		++nb_test;
+		{
+			double geo_mean = hnc::math::geometric_mean(c);
+			std::cout << "- hnc::math::geometric_mean container = " << geo_mean << std::endl;
+			nb_test -= hnc::test::warning(std::abs(geo_mean - ref) < 100, "hnc::math::geometric_mean container == " + hnc::to_string(geo_mean) + " instead of " + hnc::to_string(ref) + "\n");
+		}
+		++nb_test;
+		{
+			double geo_mean = hnc::math::geometric_mean(c.begin(), c.end());
+			std::cout << "- hnc::math::geometric_mean iterator  = " << geo_mean << std::endl;
+			nb_test -= hnc::test::warning(std::abs(geo_mean - ref) < 100, "hnc::math::geometric_mean iterator == " + hnc::to_string(geo_mean) + " instead of " + hnc::to_string(ref) + "\n");
+		}
+	}
+	std::cout << std::endl;
+
 	hnc::test::warning(nb_test == 0, "hnc::math::geometric_mean: " + hnc::to_string(nb_test) + " test fail!\n");
 
 	return nb_test;

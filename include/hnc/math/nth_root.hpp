@@ -43,9 +43,11 @@ namespace hnc
 		{
 			T r = 1;
 			T delta = r;
+			T previous_delta = 0;
 
-			while (std::abs(delta / int(r)) > std::numeric_limits<T>::epsilon())
+			while (std::abs(delta + previous_delta) > std::numeric_limits<T>::epsilon())
 			{
+				previous_delta = delta;
 				delta = r;
 				// Compute
 				r = (T(1) / n) * (T(n - 1) * r + (a / std::pow(r, n - 1)));

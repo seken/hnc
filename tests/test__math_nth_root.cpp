@@ -252,7 +252,7 @@ int main()
 		unsigned int const n = 4;
 		float a = 785785.58;
 		float r = hnc::math::nth_root(a, n);
-		nb_test -= hnc::test::warning(std::abs(std::pow(r, n) - a) <= 0.1, hnc::to_string(n) + "th root of " + hnc::to_string(a) + " is not " + hnc::to_string(r) + " (" + hnc::to_string(r) + "^" + hnc::to_string(n) + " = " + hnc::to_string(std::pow(r, n)) + " != " + hnc::to_string(a) + ")\n");
+		nb_test -= hnc::test::warning(std::abs(std::pow(r, n) - a) <= 0.2, hnc::to_string(n) + "th root of " + hnc::to_string(a) + " is not " + hnc::to_string(r) + " (" + hnc::to_string(r) + "^" + hnc::to_string(n) + " = " + hnc::to_string(std::pow(r, n)) + " != " + hnc::to_string(a) + ")\n");
 		std::cout << n << "th root of " << a << " = " << r << std::endl;
 	}
 
@@ -322,6 +322,64 @@ int main()
 	{
 		unsigned int const n = 6;
 		double a = 849.85435616;
+		double r = hnc::math::nth_root(a, n);
+		nb_test -= hnc::test::warning(std::abs(std::pow(r, n) - a) <= 0.1, hnc::to_string(n) + "th root of " + hnc::to_string(a) + " is not " + hnc::to_string(r) + " (" + hnc::to_string(r) + "^" + hnc::to_string(n) + " = " + hnc::to_string(std::pow(r, n)) + " != " + hnc::to_string(a) + ")\n");
+		std::cout << n << "th root of " << a << " = " << r << std::endl;
+	}
+
+	std::cout << std::endl;
+
+	// Little double
+
+	++nb_test;
+	{
+		unsigned int const n = 6;
+		double a = 0.00000085435616;
+		double r = hnc::math::nth_root(a, n);
+		nb_test -= hnc::test::warning(std::abs(std::pow(r, n) - a) <= 0.1, hnc::to_string(n) + "th root of " + hnc::to_string(a) + " is not " + hnc::to_string(r) + " (" + hnc::to_string(r) + "^" + hnc::to_string(n) + " = " + hnc::to_string(std::pow(r, n)) + " != " + hnc::to_string(a) + ")\n");
+		std::cout << n << "th root of " << a << " = " << r << std::endl;
+	}
+
+	++nb_test;
+	{
+		unsigned int const n = 7;
+		double a = 0.00000085435616;
+		double r = hnc::math::nth_root(a, n);
+		nb_test -= hnc::test::warning(std::abs(std::pow(r, n) - a) <= 0.1, hnc::to_string(n) + "th root of " + hnc::to_string(a) + " is not " + hnc::to_string(r) + " (" + hnc::to_string(r) + "^" + hnc::to_string(n) + " = " + hnc::to_string(std::pow(r, n)) + " != " + hnc::to_string(a) + ")\n");
+		std::cout << n << "th root of " << a << " = " << r << std::endl;
+	}
+
+	++nb_test;
+	{
+		unsigned int const n = 8;
+		double a = 0.00000085435616;
+		double r = hnc::math::nth_root(a, n);
+		nb_test -= hnc::test::warning(std::abs(std::pow(r, n) - a) <= 0.1, hnc::to_string(n) + "th root of " + hnc::to_string(a) + " is not " + hnc::to_string(r) + " (" + hnc::to_string(r) + "^" + hnc::to_string(n) + " = " + hnc::to_string(std::pow(r, n)) + " != " + hnc::to_string(a) + ")\n");
+		std::cout << n << "th root of " << a << " = " << r << std::endl;
+	}
+
+	++nb_test;
+	{
+		unsigned int const n = 9;
+		double a = 0.00000085435616;
+		double r = hnc::math::nth_root(a, n);
+		nb_test -= hnc::test::warning(std::abs(std::pow(r, n) - a) <= 0.1, hnc::to_string(n) + "th root of " + hnc::to_string(a) + " is not " + hnc::to_string(r) + " (" + hnc::to_string(r) + "^" + hnc::to_string(n) + " = " + hnc::to_string(std::pow(r, n)) + " != " + hnc::to_string(a) + ")\n");
+		std::cout << n << "th root of " << a << " = " << r << std::endl;
+	}
+
+	++nb_test;
+	{
+		unsigned int const n = 10;
+		double a = 0.00000085435616;
+		double r = hnc::math::nth_root(a, n);
+		nb_test -= hnc::test::warning(std::abs(std::pow(r, n) - a) <= 0.1, hnc::to_string(n) + "th root of " + hnc::to_string(a) + " is not " + hnc::to_string(r) + " (" + hnc::to_string(r) + "^" + hnc::to_string(n) + " = " + hnc::to_string(std::pow(r, n)) + " != " + hnc::to_string(a) + ")\n");
+		std::cout << n << "th root of " << a << " = " << r << std::endl;
+	}
+
+	++nb_test;
+	{
+		unsigned int const n = 11;
+		double a = 0.00506 * 0.001059 * 0.001058 * 0.001057 * 0.001056 * 0.001057 * 0.001056 * 0.001057 * 0.001057 * 0.001056 * 0.001056;
 		double r = hnc::math::nth_root(a, n);
 		nb_test -= hnc::test::warning(std::abs(std::pow(r, n) - a) <= 0.1, hnc::to_string(n) + "th root of " + hnc::to_string(a) + " is not " + hnc::to_string(r) + " (" + hnc::to_string(r) + "^" + hnc::to_string(n) + " = " + hnc::to_string(std::pow(r, n)) + " != " + hnc::to_string(a) + ")\n");
 		std::cout << n << "th root of " << a << " = " << r << std::endl;
