@@ -173,7 +173,7 @@ namespace hnc
 	 * - all elapsed times
 	 *
 	 * @code
-	 * hnc::benchmark b;
+	 * hnc::benchmark_name_opt b;
 	 *
 	 * b["Name of the test"]["option 1"].start();
 	 * // Some computation
