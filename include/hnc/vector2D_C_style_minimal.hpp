@@ -15,7 +15,7 @@
 
 /**
  * @file
- * @brief Just for operator<<(std::ostream & o, hnc::vector2D<T> const & c)
+ * @brief Just for operator<<(std::ostream & o, hnc::vector2D_C_style_minimal<T> const & c)
  */
 
 #ifndef HNC_VECTOR2D_C_STYLE_MINIMAL_HPP
@@ -175,7 +175,7 @@ namespace hnc
 		/**
 		 * @brief Const access by [i][j]
 		 * 
-		 * @param i Id row
+		 * @param i Row index
 		 * 
 		 * @return a T const * to have [j]
 		 */
@@ -184,7 +184,7 @@ namespace hnc
 		/**
 		 * @brief Access by [i][j]
 		 *
-		 * @param i Id row
+		 * @param i Row index
 		 *
 		 * @return a T * to have [j]
 		 */

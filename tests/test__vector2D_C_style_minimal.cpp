@@ -21,20 +21,6 @@
 #include <hnc/test.hpp>
 #include <hnc/to_string.hpp>
 
-
-
-
-
-
-
-
-
-
-
-
-
-#include<vector>
-
 int main()
 {
 	int nb_test = 0;
@@ -101,11 +87,6 @@ int main()
 		nb_test -= hnc::test::warning(v_base.nb_row() == 0 && v_base.nb_col() == 0, "hnc::vector2D_C_style_minimal move constructor fails\n");
 	}
 	std::cout << std::endl;
-
-std::vector<double> v0(10, 4699);
-std::vector<double> v1;
-v1 = std::move(v0);
-std::vector<double> v2 = std::move(v1);
 	
 	// Move assignement operator
 	nb_test += 2;
