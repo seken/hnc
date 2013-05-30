@@ -47,7 +47,7 @@ namespace hnc
 
 		/// Proxy class for a line of const hnc::vector2D_minimal
 		template <class U>
-		class vector2D_minimal_line_const
+		class line_const
 		{
 		private:
 
@@ -65,7 +65,7 @@ namespace hnc
 			 * @param[in,out] c A hnc::vector2D_minimal
 			 * @param[in]     i Row index
 			 */
-			vector2D_minimal_line_const(hnc::vector2D_minimal<U> const & c, std::size_t const i) : m_data(c), m_i(i)
+			line_const(hnc::vector2D_minimal<U> const & c, std::size_t const i) : m_data(c), m_i(i)
 			{ }
 
 			/**
@@ -83,7 +83,7 @@ namespace hnc
 		
 		/// Proxy class for a line of hnc::vector2D_minimal
 		template <class U>
-		class vector2D_minimal_line
+		class line
 		{
 		private:
 
@@ -101,7 +101,7 @@ namespace hnc
 			 * @param[in,out] c A hnc::vector2D_minimal
 			 * @param[in]     i Row index
 			 */
-			vector2D_minimal_line(hnc::vector2D_minimal<U> & c, std::size_t const i) : m_data(c), m_i(i)
+			line(hnc::vector2D_minimal<U> & c, std::size_t const i) : m_data(c), m_i(i)
 			{ }
 			
 			/**
@@ -302,9 +302,9 @@ namespace hnc
 		 * 
 		 * @return a proxy to have [j]
 		 */
-		hnc::vector2D_minimal<T>::vector2D_minimal_line_const<T> operator[](std::size_t const i) const
+		hnc::vector2D_minimal<T>::line_const<T> operator[](std::size_t const i) const
 		{
-			return hnc::vector2D_minimal<T>::vector2D_minimal_line_const<T>(*this, i);
+			return hnc::vector2D_minimal<T>::line_const<T>(*this, i);
 		}
 		/**
 		 * @brief Acces by [i][j]
@@ -313,9 +313,9 @@ namespace hnc
 		 * 
 		 * @return a proxy to have [j]
 		 */
-		hnc::vector2D_minimal<T>::vector2D_minimal_line<T> operator[](std::size_t const i)
+		hnc::vector2D_minimal<T>::line<T> operator[](std::size_t const i)
 		{
-			return hnc::vector2D_minimal<T>::vector2D_minimal_line<T>(*this, i);
+			return hnc::vector2D_minimal<T>::line<T>(*this, i);
 		}
 	};
 }
