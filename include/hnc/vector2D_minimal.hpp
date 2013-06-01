@@ -29,7 +29,7 @@
 namespace hnc
 {
 	/**
-	 * @brief Minimal encapsulation for a C style 2D array with dynamic allocation
+	 * @brief Minimal encapsulation of std::vector<T> with 2D access
 	 *
 	 * @code
 	 * #include <hnc/vector2D_minimal.hpp>
@@ -238,8 +238,8 @@ namespace hnc
 		/**
 		 * @brief Const access by fonctor
 		 * 
-		 * @param i Id row
-		 * @param j Id column
+		 * @param i Row index
+		 * @param j Column index
 		 * 
 		 * @return the value at (i, j)
 		 */
@@ -250,8 +250,8 @@ namespace hnc
 		/**
 		 * @brief Acces by fonctor
 		 * 
-		 * @param i Id row
-		 * @param j Id column
+		 * @param i Row index
+		 * @param j Column index
 		 * 
 		 * @return the value at (i, j)
 		 */
@@ -266,8 +266,8 @@ namespace hnc
 		 * @brief Safe const acces
 		 * Throw std::out_of_range if access is out of range
 		 * 
-		 * @param i Id row
-		 * @param j Id column
+		 * @param i Row index
+		 * @param j Column index
 		 *
 		 * @exception std::out_of_range if out of range access (check by std::vector)
 		 * 
@@ -281,8 +281,8 @@ namespace hnc
 		 * @brief Safe acces
 		 * Throw std::out_of_range if access is out of range
 		 * 
-		 * @param i Id row
-		 * @param j Id column
+		 * @param i Row index
+		 * @param j Column index
 		 *
 		 * @exception std::out_of_range if out of range access (check by std::vector)
 		 * 
@@ -298,7 +298,7 @@ namespace hnc
 		/**
 		 * @brief Const access by [i][j]
 		 * 
-		 * @param i Id row
+		 * @param i Row index
 		 * 
 		 * @return a proxy to have [j]
 		 */
@@ -309,7 +309,7 @@ namespace hnc
 		/**
 		 * @brief Acces by [i][j]
 		 * 
-		 * @param i Id row
+		 * @param i Row index
 		 * 
 		 * @return a proxy to have [j]
 		 */
