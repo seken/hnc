@@ -16,8 +16,8 @@
 // along with hnc. If not, see <http://www.gnu.org/licenses/>
 
 
-#ifndef HNC_HPC_MPI_HPP
-#define HNC_HPC_MPI_HPP
+#ifndef HNC_MPI_HPP
+#define HNC_MPI_HPP
 
 
 #include "mpi/future.hpp"
