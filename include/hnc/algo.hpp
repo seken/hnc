@@ -1,4 +1,4 @@
-// Copyright © 2012 Lénaïc Bagnères, hnc@singularity.fr
+// Copyright © 2013 Lénaïc Bagnères, hnc@singularity.fr
 
 // This file is part of hnc.
 
@@ -16,23 +16,19 @@
 // along with hnc. If not, see <http://www.gnu.org/licenses/>
 
 
-#ifndef HNC_MATH_HPP
-#define HNC_MATH_HPP
+#ifndef HNC_ALGO_HPP
+#define HNC_ALGO_HPP
 
-#include "math/pi.hpp"
 
-#include "math/nth_root.hpp"
+#include "algo/sum.hpp"
 
-#include "math/mean.hpp"
-#include "math/median.hpp"
-#include "math/geometric_mean.hpp"
-#include "math/variance.hpp"
+#include "algo/genetic_algo.hpp"
 
 
 namespace hnc
 {
-	/// @brief Provides some mathematical functions
-	namespace math
+	/// @brief Generic algorithms
+	namespace algo
 	{
 		// For Doxygen only
 	}

@@ -22,7 +22,7 @@
 #include <iterator>
 #include <stdexcept>
 
-#include "../sum.hpp"
+#include "../algo.hpp"
 #include "../assert.hpp"
 
 
@@ -60,7 +60,7 @@ namespace hnc
 			#ifndef NDEBUG
 				hnc::hassert(size > 0, std::length_error("hnc::math::mean, Can not compute the mean of empty container"));
 			#endif
-			return (hnc::sum(begin, end) / size);
+			return (hnc::algo::sum(begin, end) / size);
 		}
 
 		/**
@@ -91,7 +91,7 @@ namespace hnc
 			#ifndef NDEBUG
 				hnc::hassert(c.size() > 0, std::length_error("hnc::math::mean, Can not compute the mean of empty container"));
 			#endif
-			return (hnc::sum(c) / c.size());
+			return (hnc::algo::sum(c) / c.size());
 		}
 	}
 }
