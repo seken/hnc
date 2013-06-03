@@ -33,10 +33,10 @@ namespace hnc
 		 * #include <hnc/algo.hpp>
 		 * @endcode
 		 *
-		 * @param[in] first0 Iterator of first element of the first container
-		 * @param[in] last0  Iterator of last element of the first container (not included)
-		 * @param[in] first1 Iterator of first element of the second container
-		 * @param[in] last1  Iterator of last element (upper bound) of the second container (not included)
+		 * @param[in] first0 Iterator on first element of the first container
+		 * @param[in] last0  Iterator on last element of the first container (not included)
+		 * @param[in] first1 Iterator on first element of the second container
+		 * @param[in] last1  Iterator on last element (upper bound) of the second container (not included)
 		 * @param[in] comp   Function to compare two elements
 		 *
 		 * @return true if all comparisons return true, false otherwise
@@ -76,10 +76,10 @@ namespace hnc
 		 * #include <hnc/algo.hpp>
 		 * @endcode
 		 *
-		 * @param[in] first0 Iterator of first element of the first container
-		 * @param[in] last0  Iterator of last element of the first container (not included)
-		 * @param[in] first1 Iterator of first element of the second container
-		 * @param[in] last1  Iterator of last element (upper bound) of the second container (not included)
+		 * @param[in] first0 Iterator on first element of the first container
+		 * @param[in] last0  Iterator on last element of the first container (not included)
+		 * @param[in] first1 Iterator on first element of the second container
+		 * @param[in] last1  Iterator on last element (upper bound) of the second container (not included)
 		 *
 		 * @return true if all comparisons return true, false otherwise
 		 *
