@@ -13,8 +13,8 @@
 // limitations under the License.
 
 
-#ifndef HNC_SUM_HPP
-#define HNC_SUM_HPP
+#ifndef HNC_ALGO_SUM_HPP
+#define HNC_ALGO_SUM_HPP
 
 
 namespace hnc

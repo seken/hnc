@@ -21,8 +21,8 @@
  * @brief Just for operator<<(std::ostream & o, hnc::algo::ga::solution_grade<solution_t, grade_t> const & solution)
  */
 
-#ifndef HNC_GENETIC_ALGO_HPP
-#define HNC_GENETIC_ALGO_HPP
+#ifndef HNC_ALGO_GENETIC_ALGO_HPP
+#define HNC_ALGO_GENETIC_ALGO_HPP
 
 #include <iostream>
 #include <vector>
