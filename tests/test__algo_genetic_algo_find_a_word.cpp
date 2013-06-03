@@ -112,7 +112,7 @@ int main()
 	search_a_word evolve_functions(target);
 
 	// Create population
-	hnc::algo::ga::genetic_algo<std::string, unsigned int, search_a_word> ga
+	hnc::algo::genetic_algo::genetic_algo<std::string, unsigned int, search_a_word> ga
 	(
 		evolve_functions,
 		2,                                 // nb_archipelago,
@@ -127,9 +127,9 @@ int main()
 		10,                                // nb_generation_between_archipelago_migration = 10,
 		-1,                                // nb_same_solution_max = 20,
 		std::chrono::duration<double>(0.), // max_time = std::chrono::duration<double>(0.),
-		hnc::algo::ga::minimal_plus_log,         // log_level = no_log, minimal_log, minimal_plus_log, archipelago_log, island_log, solution_grade_log
+		hnc::algo::genetic_algo::minimal_plus_log,         // log_level = no_log, minimal_log, minimal_plus_log, archipelago_log, island_log, solution_grade_log
 		1,                                 // nb_generation_between_copy_best_solution = 1
-		hnc::algo::ga::system_clock_now          // std::function<unsigned int ()> const & generate_seed = system_clock_now()
+		hnc::algo::genetic_algo::system_clock_now          // std::function<unsigned int ()> const & generate_seed = system_clock_now()
 	);
 	// Star genetic algo
 	ga.evolve();

@@ -18,7 +18,7 @@
 
 /**
  * @file
- * @brief Just for operator<<(std::ostream & o, hnc::algo::ga::solution_grade<solution_t, grade_t> const & solution)
+ * @brief Just for operator<<(std::ostream & o, hnc::algo::genetic_algo::solution_grade<solution_t, grade_t> const & solution)
  */
 
 #ifndef HNC_ALGO_GENETIC_ALGO_HPP
@@ -40,7 +40,7 @@ namespace hnc
 	namespace algo
 	{
 		/// Genetic algorithm namespace
-		namespace ga
+		namespace genetic_algo
 		{
 			/// Typedef for archipelago
 			template <class T>
@@ -415,7 +415,7 @@ namespace hnc
 							auto & random_solution_index = m_random_solution_index[archipelago][island];
 
 							// To stock new generation
-							hnc::algo::ga::island<solution_grade<solution_t, grade_t>> new_generation;
+							hnc::algo::genetic_algo::island<solution_grade<solution_t, grade_t>> new_generation;
 							// We can estimate the size with crossover and mutation probabilities
 							new_generation.reserve((m_crossover_probability + m_mutation_probability + 0.1) * m_solutions_grades[archipelago][island].size());
 
@@ -547,13 +547,13 @@ namespace hnc
 
 
 /**
- * Display a hnc::algo::ga::solution_grade<solution_t, grade_t>
+ * Display a hnc::algo::genetic_algo::solution_grade<solution_t, grade_t>
  * @param o        Out stream
  * @param solution A solution
  * @return the out stream
  */
 template <class solution_t, class grade_t>
-std::ostream & operator<<(std::ostream & o, hnc::algo::ga::solution_grade<solution_t, grade_t> const & solution)
+std::ostream & operator<<(std::ostream & o, hnc::algo::genetic_algo::solution_grade<solution_t, grade_t> const & solution)
 {
 	o << "(" << solution.solution << ", " << solution.grade << ")";
 	return o;
