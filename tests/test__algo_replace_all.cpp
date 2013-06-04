@@ -572,6 +572,38 @@ int main()
 	}
 	std::cout << std::endl;
 
+
+	std::cout << "const std::string\n" << std::endl;
+
+	++nb_test;
+	{
+		std::string const c = "a std::string";
+		std::string r = hnc::algo::replace_all(c, std::string("a "), std::string("works with "));
+		std::cout << c << "\n" << r << std::endl;
+		nb_test -= hnc::test::warning
+		(
+			r == "works with std::string",
+			"hnc::algo::replace_all fails\n"
+		);
+	}
+	std::cout << std::endl;
+
+
+	std::cout << "const Complete container\n" << std::endl;
+
+	++nb_test;
+	{
+		std::string const c = "replace all";
+		std::string r = hnc::algo::replace_all(c, std::string("replace all"), std::string("all replaced"));
+		std::cout << c << "\n" << r << std::endl;
+		nb_test -= hnc::test::warning
+		(
+			r == "all replaced",
+			"hnc::algo::replace_all fails\n"
+		);
+	}
+	std::cout << std::endl;
+
 	
 	std::cout << "Iterator\n" << std::endl;
 

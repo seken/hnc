@@ -95,9 +95,9 @@ namespace hnc
 		 * #include <hnc/algo.hpp>
 		 * @endcode
 		 *
-		 * @param[in] c Container like std::vector, std::list
-		 * @param[in] old_values Container with values to be replaced
-		 * @param[in] new_values Container with replacement values
+		 * @param[in,out] c          Container like std::vector, std::list
+		 * @param[in]     old_values Container with values to be replaced
+		 * @param[in]     new_values Container with replacement values
 		 *
 		 * @return the container
 		 *
@@ -107,6 +107,29 @@ namespace hnc
 		Container & replace_all(Container & c, Container const & old_values, Container const & new_values)
 		{
 			return hnc::algo::replace_all(c, c.begin(), c.end(), old_values, new_values);
+		}
+
+		/**
+		 * @brief Replace all values by others in a container
+		 *
+		 * @code
+		 * #include <hnc/algo.hpp>
+		 * @endcode
+		 *
+		 * @param[in] c          Container like std::vector, std::list
+		 * @param[in] old_values Container with values to be replaced
+		 * @param[in] new_values Container with replacement values
+		 *
+		 * @return a container after replaces
+		 *
+		 * @note Consider std::replace to replace one element by one other element
+		 */
+		template <class Container>
+		Container replace_all(Container const & c, Container const & old_values, Container const & new_values)
+		{
+			Container r = c;
+			hnc::algo::replace_all(r, r.begin(), r.end(), old_values, new_values);
+			return r;
 		}
 	}
 }

@@ -24,6 +24,12 @@
 
 #include "algo/genetic_algo.hpp"
 
+#include "algo/compare_range.hpp"
+#include "algo/find_range.hpp"
+#include "algo/replace_range.hpp"
+#include "algo/replace.hpp"
+#include "algo/replace_all.hpp"
+
 
 namespace hnc
 {
