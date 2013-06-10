@@ -192,7 +192,7 @@ cmake_minimum_required(VERSION 2.6)
 
 	message(STATUS "---")
 	message(STATUS "You can execute:")
-	message(STATUS "    make         # To compile clan library & clan")
+	message(STATUS "    make         # To compile hnc tests")
 	message(STATUS "    make test    # To execute tests")
 	message(STATUS "    make install # To install library, include and CMake module")
 	message(STATUS "                 # If you need root access:")
