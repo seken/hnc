@@ -75,6 +75,36 @@ namespace hnc
 			/// Destructor
 			virtual ~incomplete_implementation() noexcept { }
 		};
+
+		/// Exception "file not found"
+		class file_not_found : public std::runtime_error
+		{
+		public:
+
+			/**
+			 * @brief Constructor
+			 *
+			 * @param[in] what_arg Description of the error
+			 */
+			explicit file_not_found (std::string const & what_arg) :
+				std::runtime_error(what_arg)
+			{ }
+
+			/// @copydoc hnc::except::file_not_found::file_not_found(std::string const &)
+			explicit file_not_found (char const * const what_arg) :
+				std::runtime_error(what_arg)
+			{ }
+
+			/// Return the description of the error
+			/// @return the description of the error
+			virtual char const * what() const noexcept
+			{
+				return std::runtime_error::what();
+			}
+
+			/// Destructor
+			virtual ~file_not_found() noexcept { }
+		};
 	}
 }
 

@@ -24,6 +24,8 @@ int main()
 {
 	int nb_test = 0;
 
+	// incomplete_implementation
+
 	++nb_test;
 	try
 	{
@@ -42,6 +44,32 @@ int main()
 		throw hnc::except::incomplete_implementation("hnc::except::incomplete_implementation with char const * const");
 	}
 	catch (hnc::except::incomplete_implementation const & e)
+	{
+		std::cerr << e.what() << std::endl;
+		--nb_test;
+	}
+	std::cout << std::endl;
+
+	// file_not_found
+
+	++nb_test;
+	try
+	{
+		throw hnc::except::file_not_found(std::string("hnc::except::file_not_found with std::string"));
+	}
+	catch (hnc::except::file_not_found const & e)
+	{
+		std::cerr << e.what() << std::endl;
+		--nb_test;
+	}
+	std::cout << std::endl;
+
+	++nb_test;
+	try
+	{
+		throw hnc::except::file_not_found("hnc::except::file_not_found with char const * const");
+	}
+	catch (hnc::except::file_not_found const & e)
 	{
 		std::cerr << e.what() << std::endl;
 		--nb_test;
