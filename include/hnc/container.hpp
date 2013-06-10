@@ -199,6 +199,12 @@ namespace hnc
 		bool operator==(container<T> const & c) const { return m_data == c.m_data; }
 
 		/**
+		 * @brief Compare the elements of two containers
+		 * @return true if one element of the container is not equals, else false
+		 */
+		bool operator!=(container<T> const & c) const { return ! (m_data == c.m_data); }
+
+		/**
 		 * @brief Return a iterator pointing to the first element
 		 * @return a iterator pointing to the first element
 		 */
