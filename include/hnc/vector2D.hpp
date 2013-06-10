@@ -616,6 +616,40 @@ namespace hnc
 			return const_reverse_iterator(m_lines_const_ptr, 0);
 		}
 
+		// Operator
+		
+		/**
+		 * @brief Equality operator
+		 *
+		 * @param[in] v A hnc::vector2D<T> for the comparaison
+		 *
+		 * @return true if hnc::vector2D<T> are equals, false otherwise
+		 */
+		bool operator==(hnc::vector2D<T> const & v) const
+		{
+			// Different size
+			if (this->nb_row() != v.nb_row() || this->nb_col() != v.nb_col())
+			{
+				return false;
+			}
+			else
+			{
+				return (m_data == v.m_data);
+			}
+		}
+
+		/**
+		 * @brief Inequality operator
+		 *
+		 * @param[in] v A hnc::vector2D<T> for the comparaison
+		 *
+		 * @return true if hnc::vector2D<T> are not equals, false otherwise
+		 */
+		bool operator!=(hnc::vector2D<T> const & v) const
+		{
+			return ! (*this == v);
+		}
+
 		// Add / remove
 		
 		/**
