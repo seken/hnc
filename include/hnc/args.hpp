@@ -19,7 +19,7 @@
  * @brief Just for operator<<(std::ostream & o, hnc::args const & args)
  */
 
-#ifndef HNC_ARSG_HPP
+#ifndef HNC_ARGS_HPP
 #define HNC_ARGS_HPP
 
 #include <vector>
