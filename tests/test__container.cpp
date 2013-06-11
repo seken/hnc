@@ -82,6 +82,12 @@ int main()
 
 	++nb_test;
 	{
+		hnc::container<char> c({'a', 'b', 'c'});
+		nb_test -= hnc::test::warning(!(c != hnc::container<char>({'a', 'b', 'c'})), "hnc::container operator != test fail!\n");
+	}
+
+	++nb_test;
+	{
 		hnc::container<char> c;
 		c = hnc::container<char>({'a', 'b', 'c'});
 		nb_test -= hnc::test::warning(c == hnc::container<char>({'a', 'b', 'c'}), "hnc::container operator = test fail!\n");

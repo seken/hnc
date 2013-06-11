@@ -222,6 +222,83 @@ int main()
 		nb_test -= hnc::test::warning(same_value, "vector2D copy does not work\n");
 	}
 
+	// Check operator == and !=
+
+	++nb_test;
+	{
+		hnc::vector2D<int> v({{10,11,12,13,14}, {15,16,17,18,19}, {20,21,22,23,24}, {25,26,27,28,29}});
+		nb_test -= hnc::test::warning(v == v, "vector2D operator == test a. fails\n");
+	}
+
+	++nb_test;
+	{
+		hnc::vector2D<int> v0({{10,11,12,13,14}, {15,16,17,18,19}, {20,21,22,23,24}, {25,26,27,28,29}});
+		hnc::vector2D<int> v1({{10,11,12,13,14}, {15,16,17,18,19}, {20,21,22,23,24}, {25,26,27,28,29}});
+		nb_test -= hnc::test::warning(v0 == v1, "vector2D operator == test b. fails\n");
+	}
+
+	++nb_test;
+	{
+		hnc::vector2D<int> v0({{10,11,12,13,14}, {15,16,17,18,19}, {20,21,22,23,24}, {25,26,27,28,29}});
+		hnc::vector2D<int> v1({{99,99,99,99,99}, {99,99,99,99,99}, {99,99,99,99,99}, {99,99,99,99,99}});
+		nb_test -= hnc::test::warning((v0 == v1) == false, "vector2D operator == test c. fails\n");
+	}
+
+	++nb_test;
+	{
+		hnc::vector2D<int> v0({{10,11,12,13,14}, {15,16,17,18,19}, {20,21,22,23,24}, {25,26,27,28,29}});
+		hnc::vector2D<int> v1({{99,11,12,13,14}, {15,16,17,18,19}, {20,21,22,23,24}, {25,26,27,28,29}});
+		nb_test -= hnc::test::warning((v0 == v1) == false, "vector2D operator == test d. fails\n");
+	}
+
+	++nb_test;
+	{
+		hnc::vector2D<int> v0({{10,11,12,13,14}, {15,16,17,18,19}, {20,21,22,23,24}, {25,26,27,28,29}});
+		hnc::vector2D<int> v1({{10,11,12,13,14}, {15,16,17,18,19}, {20,21,22,23,24}, {25,26,27,28,99}});
+		nb_test -= hnc::test::warning((v0 == v1) == false, "vector2D operator == test e. fails\n");
+	}
+
+	++nb_test;
+	{
+		hnc::vector2D<int> v0({{10,11,12,13,14}, {15,16,17,18,19}, {20,21,22,23,24}, {25,26,27,28,29}});
+		hnc::vector2D<int> v1({{10,11,12,13,14}, {15,16,17,18,99}, {20,21,22,23,24}, {25,26,27,28,29}});
+		nb_test -= hnc::test::warning((v0 == v1) == false, "vector2D operator == test f. fails\n");
+	}
+
+	++nb_test;
+	{
+		hnc::vector2D<int> v0({{10,11,12,13,14}, {15,16,17,18,19}, {20,21,22,23,24}, {25,26,27,28,29}});
+		hnc::vector2D<int> v1({{99,11,12,13,14}, {15,16,17,18,19}, {20,21,22,23,24}, {25,26,27,28,29}});
+		nb_test -= hnc::test::warning(v0 != v1, "vector2D operator != test a. fails\n");
+	}
+
+	++nb_test;
+	{
+		hnc::vector2D<int> v0({{10,11,12,13,14}, {15,16,17,18,19}, {20,21,22,23,24}, {25,26,27,28,29}});
+		hnc::vector2D<int> v1({{10,11,12,13,14}, {15,16,17,18,19}, {20,21,22,23,24}, {25,26,27,28,99}});
+		nb_test -= hnc::test::warning(v0 != v1, "vector2D operator != test b. fails\n");
+	}
+
+	++nb_test;
+	{
+		hnc::vector2D<int> v0({{10,11,12,13,14}, {15,16,17,18,19}, {20,21,22,23,24}, {25,26,27,28,29}});
+		hnc::vector2D<int> v1({{10,11,12,13,14}, {15,16,17,18,99}, {20,21,22,23,24}, {25,26,27,28,29}});
+		nb_test -= hnc::test::warning(v0 != v1, "vector2D operator != test c. fails\n");
+	}
+
+	++nb_test;
+	{
+		hnc::vector2D<int> v({{10,11,12,13,14}, {15,16,17,18,19}, {20,21,22,23,24}, {25,26,27,28,29}});
+		nb_test -= hnc::test::warning((v != v) == false, "vector2D operator != test a. fails\n");
+	}
+
+	++nb_test;
+	{
+		hnc::vector2D<int> v0({{10,11,12,13,14}, {15,16,17,18,19}, {20,21,22,23,24}, {25,26,27,28,29}});
+		hnc::vector2D<int> v1({{10,11,12,13,14}, {15,16,17,18,19}, {20,21,22,23,24}, {25,26,27,28,29}});
+		nb_test -= hnc::test::warning((v0 != v1) == false, "vector2D operator != test b. fails\n");
+	}
+
 	// Check add row
 
 	++nb_test;
