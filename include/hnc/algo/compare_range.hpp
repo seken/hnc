@@ -40,7 +40,8 @@ namespace hnc
 		 * @param[in] comp   Function to compare two elements
 		 *
 		 * @return true if all comparisons return true, false otherwise
-		 * 
+		 *
+		 * @note Consider Boost.Range
 		 * @note Consider std::equal_range to compare a sequence with one element
 		 */
 		template <class forward_iterator_t0, class forward_iterator_t1, class compare>
@@ -83,6 +84,7 @@ namespace hnc
 		 *
 		 * @return true if all comparisons return true, false otherwise
 		 *
+		 * @note Consider Boost.Range
 		 * @note Consider std::equal_range to compare a sequence with one element
 		 */
 		template <class forward_iterator_t0, class forward_iterator_t1>

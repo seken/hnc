@@ -42,6 +42,7 @@ namespace hnc
 		 *
 		 * @return a iterator on the first element of the finded sequence, last if not found
 		 *
+		 * @note Consider Boost.Range
 		 * @note Consider std::find to find one element in a sequence
 		 */
 		template <class forward_iterator_t0, class forward_iterator_t1>
@@ -89,6 +90,7 @@ namespace hnc
 		 *
 		 * @return a iterator on the first element of the finded sequence, last if not found
 		 *
+		 * @note Consider Boost.Range
 		 * @note Consider std::find to find one element in a sequence
 		 */
 		template <class forward_iterator_t, class Container>

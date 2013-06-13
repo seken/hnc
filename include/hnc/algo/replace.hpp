@@ -38,13 +38,14 @@ namespace hnc
 		 * @endcode
 		 *
 		 * @param[in] c          Container like std::vector, std::list
-		 * @param[in] begin      Iterator of first element
+		 * @param[in] first      Iterator of first element
 		 * @param[in] last       Iterator of last element (not included)
 		 * @param[in] old_values Container with values to be replaced
 		 * @param[in] new_values Container with replacement values
 		 *
 		 * @return the container
 		 *
+		 * @note Consider Boost.Range
 		 * @note Consider std::replace to replace one element by one other element
 		 */
 		template <class Container>
@@ -100,6 +101,7 @@ namespace hnc
 		 *
 		 * @return a container after replace
 		 *
+		 * @note Consider Boost.Range
 		 * @note Consider std::replace to replace one element by one other element
 		 */
 		template <class Container>
