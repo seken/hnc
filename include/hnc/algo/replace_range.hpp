@@ -54,7 +54,6 @@ namespace hnc
 		{
 			using iterator_t0 = typename Container::iterator;
 			using difference_t0 = typename std::iterator_traits<iterator_t0>::difference_type;
-			using difference_t1 = typename std::iterator_traits<forward_iterator_t>::difference_type;
 			// Get size
 			difference_t0 range_size = std::distance(first, last);
 			difference_t0 values_size = std::distance(values_first, values_last);
