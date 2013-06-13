@@ -22,6 +22,8 @@
 
 #include "algo/sum.hpp"
 
+#include "algo/split.hpp"
+
 #include "algo/genetic_algo.hpp"
 
 #include "algo/compare_range.hpp"
