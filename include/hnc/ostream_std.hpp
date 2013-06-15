@@ -42,14 +42,37 @@
 template <class T, template <class, class Alloc = std::allocator<T>> class container>
 std::ostream & operator<<(std::ostream & o, container<T> const & c)
 {
+	#if defined(HNC_ostream_std_no_data)
+
 	// Display size
 	o << "[size = " << c.size();
-	#if !defined(HNC_ostream_std_no_data)
+		// Display data
+		o << " | ...";
+	o << "]";
+	
+	#elif defined(HNC_ostream_std_size)
+
+	// Display size
+	o << "[size = " << c.size();
 		// Display data
 		o << " |";
 		for (T const & e : c) { o << " " << e; }
-	#endif
 	o << "]";
+	
+	#else
+	
+	// Display size
+	o << "{";
+		// Display data
+		for (T const & e : c)
+		{
+			if (&e != &c.front()) { o << ", "; }
+			o << e;
+		}
+	o << "}";
+	
+	#endif
+	
 	// Return stream
 	return o;
 }
