@@ -34,7 +34,7 @@ namespace hnc
 	 */
 	template <class T>
 	int to_int(T const & in)
-	{ return hnc::to_<double>(in); }
+	{ return hnc::to_<int>(in); }
 }
 
 #endif
