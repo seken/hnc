@@ -28,6 +28,8 @@
 #include "math/geometric_mean.hpp"
 #include "math/variance.hpp"
 
+#include "math/cartesian_product.hpp"
+
 
 namespace hnc
 {
