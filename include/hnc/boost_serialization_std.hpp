@@ -16,6 +16,12 @@
 /**
  * @file
  * @brief Provides Boost Serialization for std (std::vector, std::list, ...)
+ *
+ *
+ * If you want compile without Boost.Serialization, you can define the macro
+ * @code
+ * #define NO_HNC_Boost_Serialization
+ * @endcode
  */
 
 #ifndef HNC_BOOST_SERIALIZATION_STD_HPP
