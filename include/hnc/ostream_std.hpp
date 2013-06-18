@@ -32,7 +32,8 @@
  * #include <hnc/ostream_std.hpp>
  * @endcode
  * 
- * To no display data, define HNC_ostream_std_no_data macro
+ * To no display data, define HNC_ostream_container_no_data macro
+ * To display data, define HNC_ostream_container_size macro
  *
  * @param[in,out] o Output stream
  * @param[in]     c A std container
@@ -42,15 +43,15 @@
 template <class T, template <class, class Alloc = std::allocator<T>> class container>
 std::ostream & operator<<(std::ostream & o, container<T> const & c)
 {
-	#if defined(HNC_ostream_std_no_data)
+	#if defined(HNC_ostream_container_no_data)
 
 	// Display size
 	o << "[size = " << c.size();
-		// Display data
+		// No data
 		o << " | ...";
 	o << "]";
 	
-	#elif defined(HNC_ostream_std_size)
+	#elif defined(HNC_ostream_container_size)
 
 	// Display size
 	o << "[size = " << c.size();
@@ -61,7 +62,6 @@ std::ostream & operator<<(std::ostream & o, container<T> const & c)
 	
 	#else
 	
-	// Display size
 	o << "{";
 		// Display data
 		for (T const & e : c)

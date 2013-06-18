@@ -855,24 +855,52 @@ namespace hnc
  * @param[out] o Out stream
  * @param[in]  v A hnc::vector2D<T>
  *
+ * To no display data, define HNC_ostream_container_no_data macro
+ * To display data, define HNC_ostream_container_size macro
+ *
  * @return the out stream
  */
 template <class T>
 std::ostream & operator<<(std::ostream & o, hnc::vector2D<T> const & v)
 {
+	#if defined(HNC_ostream_container_no_data)
+
+	// Display size
+	o << "[size = " << v.nb_row() << " rows, " << v.nb_col() << " cols]";
+
+	#elif defined(HNC_ostream_container_size)
+
 	// Display size
 	o << "[size = " << v.nb_row() << " rows, " << v.nb_col() << " cols]" << "\n";
-	#if defined(hnc_ostream_container_data)
-		for (std::size_t row = 0; row < v.nb_row(); ++row)
+	// Display data
+	for (std::size_t row = 0; row < v.nb_row(); ++row)
+	{
+		o << ((row == 0) ? ("[") : (" "));
+		for (std::size_t col = 0; col < v.nb_col(); ++col)
 		{
-			o << ((row == 0) ? ("[") : (" "));
-			for (std::size_t col = 0; col < v.nb_col(); ++col)
-			{
-				o << " " << v[row][col];
-			}
-			o << ((row == v.nb_row() - 1) ? (" ]") : ("\n"));
+			o << " " << v[row][col];
 		}
+		o << ((row == v.nb_row() - 1) ? (" ]") : ("\n"));
+	}
+
+	#else
+
+	// Display data
+	for (std::size_t row = 0; row < v.nb_row(); ++row)
+	{
+		o << ((row == 0) ? ("{") : (" "));
+		o << " {";
+		// Display data
+		for (std::size_t col = 0; col < v.nb_col(); ++col)
+		{
+			if (col != 0) { o << ", "; }
+			o << v[row][col];
+		}
+		o << ((row == v.nb_row() - 1) ? ("} }") : ("},\n"));
+	}
+
 	#endif
+
 	// Return stream
 	return o;
 }

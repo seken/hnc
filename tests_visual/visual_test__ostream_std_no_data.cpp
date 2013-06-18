@@ -19,7 +19,7 @@
 #include <tuple>
 #include <algorithm>
 
-#define HNC_ostream_std_no_data
+#define HNC_ostream_container_no_data
 #include <hnc/ostream_std.hpp>
 #include <hnc/test.hpp>
 
