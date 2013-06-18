@@ -16,7 +16,11 @@
 #ifndef HNC_SSL_HPP
 #define HNC_SSL_HPP
 
-// #include "ssl/hash/md5.hpp"
+#include "ssl/hash/md2.hpp"
+#include "ssl/hash/md4.hpp"
+#include "ssl/hash/md5.hpp"
+#include "ssl/hash/mdc2.hpp"
+#include "ssl/hash/rmd160.hpp"
 #include "ssl/hash/sha.hpp"
 
 
