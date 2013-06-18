@@ -61,6 +61,15 @@ cmake_minimum_required(VERSION 2.6)
 	endif()
 
 
+# OpenSSL
+	find_package(OpenSSL REQUIRED)
+	if (OPENSSL_FOUND)
+		message(STATUS "OpenSSL found :) ${OPENSSL_LIBRARIES}")
+	else()
+		message(STATUS "OpenSSL not found :(")
+	endif()
+
+
 # Include directories (to use #include <> instead of #include "")
 
 	# hnc
@@ -128,6 +137,19 @@ cmake_minimum_required(VERSION 2.6)
 			set_target_properties("${test}_without_mpi" PROPERTIES COMPILE_FLAGS "-DNO_HNC_Boost_Serialization -DNO_HNC_Boost_MPI")
 			message(STATUS "Add test tests/${test}_without_mpi")
 			add_test("${test}_without_mpi" "${test}_without_mpi")
+		# OpenSSL
+		elseif ("${test}" MATCHES ".*test__ssl.*")
+			# With OpenSSL
+			if (OPENSSL_FOUND)
+				add_executable(${test} "tests/${test}.cpp")
+				target_link_libraries(${test} ${OPENSSL_LIBRARIES})
+				add_test(${test} "${test}")
+			endif()
+			# Without OpenSSL
+			add_executable("${test}_without_ssl" "tests/${test}.cpp")
+			set_target_properties("${test}_without_ssl" PROPERTIES COMPILE_FLAGS "-DNO_HNC_SSL")
+			message(STATUS "Add test tests/${test}_without_ssl")
+			add_test("${test}_without_ssl" "${test}_without_ssl")
 		# Executable
 		else()
 			# Executable
