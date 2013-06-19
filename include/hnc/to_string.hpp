@@ -1,4 +1,4 @@
-// Copyright © 2012 Lénaïc Bagnères, hnc@singularity.fr
+// Copyright © 2012,2013 Lénaïc Bagnères, hnc@singularity.fr
 
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -47,6 +47,18 @@ namespace hnc
 		o << in;
 		// Output the stream in string
 		return (o.str());
+	}
+
+	template <class T>
+	std::string to_string(std::string const & in)
+	{
+		return in;
+	}
+
+	template <class T>
+	std::string to_string(char const * const in)
+	{
+		return std::string(in);
 	}
 }
 

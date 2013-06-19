@@ -1,4 +1,4 @@
-// Copyright © 2012 Lénaïc Bagnères, hnc@singularity.fr
+// Copyright © 2012,2013 Lénaïc Bagnères, hnc@singularity.fr
 
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -50,6 +50,14 @@ int main()
 	++nb_test;
 	{
 		std::string i = "a std::string";
+		std::string s = hnc::to_string(i);
+		std::cout << s << " == " << i << std::endl;
+		nb_test -= hnc::test::warning(s == i, "hnc::to_string fail!\n");
+	}
+
+	++nb_test;
+	{
+		char const * const i = "a char const * const";
 		std::string s = hnc::to_string(i);
 		std::cout << s << " == " << i << std::endl;
 		nb_test -= hnc::test::warning(s == i, "hnc::to_string fail!\n");
