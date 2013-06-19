@@ -215,6 +215,78 @@ namespace hnc
 		}
 
 		/**
+		 * @brief Add prefix (before the basename, after the dirname)
+		 *
+		 * @param[in] pathname            Pathname
+		 * @param[in] prefix              Prefix to add
+		 * @param[in] directory_separator Directory separator char (hnc::filesystem::directory_separator::common by default)
+		 *
+		 * @return the pathname with the prefix
+		 */
+		std::string add_prefix
+		(
+			std::string const & pathname,
+			std::string const & prefix,
+			char const directory_separator = hnc::filesystem::directory_separator::common
+		)
+		{
+			// Get dirname with separator
+			std::string const dirname = [&pathname, &directory_separator]() -> std::string
+			{
+				std::string r = hnc::filesystem::dirname(pathname);
+				if (r != "") { r += directory_separator; }
+				return r;
+			}();
+			// Get basename
+			std::string const basename = hnc::filesystem::basename(pathname);
+			// Get extension with .
+			std::string const extension = [&pathname]() -> std::string
+			{
+				std::string r = hnc::filesystem::extension(pathname);
+				if (r != "") { r = "." + r; }
+				return r;
+			}();
+			// Return
+			return dirname + prefix + basename + extension;
+		}
+
+		/**
+		 * @brief Add suffix (after the basename, before the extension)
+		 *
+		 * @param[in] pathname            Pathname
+		 * @param[in] suffix              Suffix to add
+		 * @param[in] directory_separator Directory separator char (hnc::filesystem::directory_separator::common by default)
+		 * 
+		 * @return the pathname with the suffix
+		 */
+		std::string add_suffix
+		(
+			std::string const & pathname,
+			std::string const & suffix,
+			char const directory_separator = hnc::filesystem::directory_separator::common
+		)
+		{
+			// Get dirname with separator
+			std::string const dirname = [&pathname, &directory_separator]() -> std::string
+			{
+				std::string r = hnc::filesystem::dirname(pathname);
+				if (r != "") { r += directory_separator; }
+				return r;
+			}();
+			// Get basename
+			std::string const basename = hnc::filesystem::basename(pathname);
+			// Get extension with .
+			std::string const extension = [&pathname]() -> std::string
+			{
+				std::string r = hnc::filesystem::extension(pathname);
+				if (r != "") { r = "." + r; }
+				return r;
+			}();
+			// Return
+			return dirname + basename + suffix + extension;
+		}
+
+		/**
 		 * @brief Return true if the file exists, false otherwise
 		 *
 		 * @param[in] pathname Pathname wanted
@@ -251,21 +323,12 @@ namespace hnc
 			// File exists
 			else
 			{
-				// To generate new pathname
-				std::string const dirname = hnc::filesystem::dirname(pathname);
-				std::string const basename = hnc::filesystem::basename(pathname);
-				std::string const extension = [&pathname]() -> std::string
-				{
-					std::string r = hnc::filesystem::extension(pathname);
-					if (r != "") { r = "." + r; }
-					return r;
-				}();
 				// Find the next available pathname
 				std::string available_pathname = pathname;
 				unsigned int i = 0;
 				do
 				{
-					available_pathname = dirname + directory_separator + basename + separator + std::to_string(i) + extension;
+					available_pathname = hnc::filesystem::add_suffix(pathname, separator + std::to_string(i), directory_separator);
 					++i;
 				}
 				while (hnc::filesystem::file_exists(available_pathname) == true);

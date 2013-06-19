@@ -307,6 +307,74 @@ int main()
 
 	std::cout << std::endl;
 
+	// Add prefix and suffix
+
+	++nb_test;
+	{
+		std::string const s = "/path/to/file.ext";
+		std::string const r = hnc::filesystem::add_prefix(s, "prefix_");
+		std::cout << "Add prefix: \"" << s << "\" become \"" << r << "\"" << std::endl;
+		nb_test -= hnc::test::warning(r == "/path/to/prefix_file.ext", "hnc::filesystem::add_prefix fails\n");
+	}
+
+	++nb_test;
+	{
+		std::string const s = "/path/to/file";
+		std::string const r = hnc::filesystem::add_prefix(s, "prefix_");
+		std::cout << "Add prefix: \"" << s << "\" become \"" << r << "\"" << std::endl;
+		nb_test -= hnc::test::warning(r == "/path/to/prefix_file", "hnc::filesystem::add_prefix fails\n");
+	}
+
+	++nb_test;
+	{
+		std::string const s = "file.ext";
+		std::string const r = hnc::filesystem::add_prefix(s, "prefix_");
+		std::cout << "Add prefix: \"" << s << "\" become \"" << r << "\"" << std::endl;
+		nb_test -= hnc::test::warning(r == "prefix_file.ext", "hnc::filesystem::add_prefix fails\n");
+	}
+
+	++nb_test;
+	{
+		std::string const s = "file";
+		std::string const r = hnc::filesystem::add_prefix(s, "prefix_");
+		std::cout << "Add prefix: \"" << s << "\" become \"" << r << "\"" << std::endl;
+		nb_test -= hnc::test::warning(r == "prefix_file", "hnc::filesystem::add_prefix fails\n");
+	}
+
+	++nb_test;
+	{
+		std::string const s = "/path/to/file.ext";
+		std::string const r = hnc::filesystem::add_suffix(s, "_suffix");
+		std::cout << "Add suffix: \"" << s << "\" become \"" << r << "\"" << std::endl;
+		nb_test -= hnc::test::warning(r == "/path/to/file_suffix.ext", "hnc::filesystem::add_suffix fails\n");
+	}
+
+	++nb_test;
+	{
+		std::string const s = "/path/to/file";
+		std::string const r = hnc::filesystem::add_suffix(s, "_suffix");
+		std::cout << "Add suffix: \"" << s << "\" become \"" << r << "\"" << std::endl;
+		nb_test -= hnc::test::warning(r == "/path/to/file_suffix", "hnc::filesystem::add_suffix fails\n");
+	}
+
+	++nb_test;
+	{
+		std::string const s = "file.ext";
+		std::string const r = hnc::filesystem::add_suffix(s, "_suffix");
+		std::cout << "Add suffix: \"" << s << "\" become \"" << r << "\"" << std::endl;
+		nb_test -= hnc::test::warning(r == "file_suffix.ext", "hnc::filesystem::add_suffix fails\n");
+	}
+
+	++nb_test;
+	{
+		std::string const s = "file";
+		std::string const r = hnc::filesystem::add_suffix(s, "_suffix");
+		std::cout << "Add suffix: \"" << s << "\" become \"" << r << "\"" << std::endl;
+		nb_test -= hnc::test::warning(r == "file_suffix", "hnc::filesystem::add_suffix fails\n");
+	}
+
+	std::cout << std::endl;
+
 	// File exists & filename_without_overwrite
 
 	++nb_test;
