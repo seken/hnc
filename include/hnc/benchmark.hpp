@@ -110,6 +110,9 @@ namespace hnc
 
 		/**
 		 * @brief Return the mean of all elapsed times
+		 *
+		 * Benchmark is a long tail distribution, mean (may) have no sense; use media or geometric mean instead
+		 * 
 		 * @return the mean of all elapsed times
 		 */
 		double mean() const { return hnc::math::mean(all); }
@@ -129,7 +132,7 @@ namespace hnc
 	 * - max
 	 * - median
 	 * - geometric mean
-	 * - mean
+	 * - mean (benchmark is a long tail distribution, mean (may) have no sense; use media or geometric mean instead)
 	 * - all elapsed times
 	 *
 	 * @code
@@ -156,6 +159,28 @@ namespace hnc
 	typedef std::map<std::string, hnc::benchmark_base> benchmark;
 
 	/**
+	 * @brief Return a std::map of double, key is the name of the benchmark, value is the mean
+	 *
+	 * @param[in] b hnc::benchmark
+	 * 
+	 * @return a std::map of double, key is the name of the benchmark, value is the mean
+	 */
+	std::map<std::string, double> benchmark_extract_mean(hnc::benchmark const & b)
+	{
+		std::map<std::string, double> r;
+		
+		for (auto const & t : b)
+		{
+			auto const & key = t.first;
+			auto const & value = t.second;
+			
+			r[key] = value.median();
+		}
+
+		return r;
+	}
+
+	/**
 	 * @brief Save benchmarks by name, and other string (for example, by option)
 	 *
 	 * hnc::benchmark_name_opt (Benchmark[name][option]) is a map (std::map) of a map (std::map) of hnc::benchmark_base @n
@@ -169,7 +194,7 @@ namespace hnc
 	 * - max
 	 * - median
 	 * - geometric mean
-	 * - mean
+	 * - mean (benchmark is a long tail distribution, mean (may) have no sense; use media or geometric mean instead)
 	 * - all elapsed times
 	 *
 	 * @code

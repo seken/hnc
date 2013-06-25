@@ -19,6 +19,7 @@
 #include <iostream>
 
 #include <hnc/benchmark.hpp>
+#include <hnc/ostream_std.hpp>
 #include <hnc/sleep.hpp>
 #include <hnc/test.hpp>
 
@@ -32,14 +33,12 @@ int main()
 	b["Test 0"].start();
 	b["Test 0"].stop();
 	std::cout << "Test 0 took " << b["Test 0"].all.back() << " seconds (must be close to 0 second)" << std::endl;
-
 	std::cout << std::endl;
 
 	b["Test 1"].start();
 	hnc::sleep::s(1);
 	b["Test 1"].stop();
 	std::cout << "Test 1 took " << b["Test 1"].all.back() << " seconds (must be close to 1 second)" << std::endl;
-
 	std::cout << std::endl;
 
 	b["Test 2"].start();
@@ -67,7 +66,6 @@ int main()
 	nb_test -= hnc::test::warning(b["Test 2"].median() >= b["Test 2"].min() && b["Test 2"].median() <= b["Test 2"].max(), "hnc::benchmark Test 2: median is not between min and max\n");
 	++nb_test;
 	nb_test -= hnc::test::warning(b["Test 2"].all.back() >= b["Test 2"].min() && b["Test 2"].all.back() <= b["Test 2"].max(), "hnc::benchmark Test 2: last is not between min and max\n");
-
 	std::cout << std::endl;
 
 	b["Test 3"].push_back(20.);
@@ -102,7 +100,9 @@ int main()
 	nb_test -= hnc::test::warning(b["Test 3"].mean() == 5.5, "hnc::benchmark Test 3: min is not 5.5\n");
 	++nb_test;
 	nb_test -= hnc::test::warning(b["Test 3"].median() == 1., "hnc::benchmark Test 3: min is not 1.\n");
+	std::cout << std::endl;
 
+	std::cout << hnc::benchmark_extract_mean(b) << std::endl;
 	std::cout << std::endl;
 
 	// Display the benchmark
