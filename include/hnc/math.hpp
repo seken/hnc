@@ -33,7 +33,13 @@
 
 namespace hnc
 {
-	/// @brief Provides some mathematical functions
+	/**
+	 * @brief Provides some mathematical functions
+	 *
+	 * @code
+	 * #include <hnc/math.hpp>
+	 * @endcode
+	 */
 	namespace math
 	{
 		// For Doxygen only
