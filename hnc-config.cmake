@@ -29,7 +29,7 @@ find_path(HNC_INCLUDE_DIR NAMES hnc/hnc.hpp)
 if (HNC_INCLUDE_DIR)
 	message(STATUS "Library hnc found =) ${HNC_INCLUDE_DIR}")
 else()
-	message(STATUS "Library hnc not found =(")
+	message(STATUS "Library hnc not found :(")
 endif()
 
 include(FindPackageHandleStandardArgs)
