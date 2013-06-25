@@ -23,6 +23,7 @@
 
 #include <iostream>
 #include <tuple>
+#include <map>
 
 
 /**
@@ -117,6 +118,37 @@ std::ostream & operator<<(std::ostream & o, std::tuple<T...> const & t)
   o << "(";
   print_tuple(o, t, static_int_counter<sizeof...(T) - 1>());
   o << ")";
+  return o;
+}
+
+/**
+ * @brief Display a std::map
+ *
+ * @code
+ * #include <hnc/ostream_std.hpp>
+ * @endcode
+ *
+ * @param[in,out] o   Output stream
+ * @param[in]     map A std::map
+ *
+ * @return the output stream
+ */
+template <class key_t, class value_t>
+std::ostream & operator<<(std::ostream & o, std::map<key_t, value_t> const & map)
+{
+  o << "{";
+  
+  for (auto key_value_it = map.begin(); key_value_it != map.end(); ++key_value_it)
+  {
+	  key_t const & key = key_value_it->first;
+	  value_t const & value = key_value_it->second;
+	  
+	  if (key_value_it != map.begin()) { o << ", "; }
+	  o << key << ": " << value;
+  }
+  
+  o << "}";
+  
   return o;
 }
 

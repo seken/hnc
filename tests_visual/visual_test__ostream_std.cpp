@@ -66,6 +66,16 @@ int main()
 	}
 	std::cout << std::endl;
 
+	{
+		std::map<std::string, int> data;
+		data["A"] = 1;
+		data["B"] = 2;
+		data["C"] = 5;
+		data["D"] = 3;
+		std::cout << "Display a map" << std::endl;
+		std::cout << data << std::endl;
+	}
+
 	hnc::test::warning(nb_test == 0, "hnc::ostream_STL_containers: " + hnc::to_string(nb_test) + " test fail!\n");
 
 	return nb_test;
