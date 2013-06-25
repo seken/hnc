@@ -17,7 +17,7 @@ cmake_minimum_required(VERSION 2.6)
 
 
 # User's settings - C++ Flags
-
+	
 # 	set(release "TRUE")
 	set(release "FALSE")
 
@@ -34,25 +34,25 @@ cmake_minimum_required(VERSION 2.6)
 
 	
 # Boost MPI
-
+	message(STATUS "---")
 	find_package(Boost COMPONENTS mpi serialization)
 	if (Boost_FOUND)
 		# Boost.MPI and Boost.Serialization
 		set(boost_mpi_serialization "${Boost_LIBRARIES}")
-		message(STATUS "Boost.MPI and Boost.Serialization found :) ${boost_mpi_serialization}")
+		message(STATUS "Boost.MPI and Boost.Serialization found =) ${boost_mpi_serialization}")
 		# MPI compiler
 		find_program(MPICXX_COMPILER NAMES mpic++ mpicxx mpiCC mpicc)
 		if (MPICXX_COMPILER)
 			# Change the compiler
-			message(STATUS "MPI C++ compiler found = ${MPICXX_COMPILER}")
+			message(STATUS "MPI C++ compiler found =) ${MPICXX_COMPILER}")
 			set(CMAKE_CXX_COMPILER ${MPICXX_COMPILER})
 		else()
 			message(STATUS "MPI C++ compiler not found :(")
 		endif()
-		# MPI run
-		find_program(MPIRUN_EXE NAMES mpirun)
-		if (MPIRUN_EXE)
-			message(STATUS "mpirun executable found = ${MPIRUN_EXE}")
+		# mpirun
+		find_program(mpirun_exe NAMES mpirun)
+		if (mpirun_exe)
+			message(STATUS "mpirun executable found =) ${mpirun_exe}")
 		else()
 			message(STATUS "mpirun executable not found :(")
 		endif()
@@ -62,17 +62,29 @@ cmake_minimum_required(VERSION 2.6)
 
 
 # OpenSSL
+	message(STATUS "---")
 	find_package(OpenSSL REQUIRED)
 	if (OPENSSL_FOUND)
-		message(STATUS "OpenSSL found :) ${OPENSSL_LIBRARIES}")
+		message(STATUS "OpenSSL found =) ${OPENSSL_LIBRARIES}")
 	else()
 		message(STATUS "OpenSSL not found :(")
+	endif()
+
+
+# Gnuplot
+	message(STATUS "---")
+	find_program(Gnuplot_exe NAMES gnuplot)
+	if (Gnuplot_exe)
+		message(STATUS "gnuplot executable found =) ${Gnuplot_exe}")
+	else()
+		message(STATUS "gnuplot executable not found :(")
 	endif()
 
 
 # Include directories (to use #include <> instead of #include "")
 
 	# hnc
+	message(STATUS "---")
 	set(hnc_INCLUDE "./include")
 	message(STATUS "Include hnc = ${hnc_INCLUDE}")
 	include_directories("${hnc_INCLUDE}")
@@ -80,14 +92,18 @@ cmake_minimum_required(VERSION 2.6)
 
 # Build hnc doxygen
 
+	message(STATUS "---")
 	find_package(Doxygen)
 	if(DOXYGEN_FOUND)
+		message(STATUS "Doxygen found =)")
 		add_custom_target(
 			doc
 			${DOXYGEN_EXECUTABLE}
 			WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/${hnc_INCLUDE}/hnc"
 			COMMENT "Generating API documentation with Doxygen" VERBATIM
 		)
+	else()
+		message(STATUS "Doxygen not found :(")
 	endif()
 
 
@@ -129,8 +145,8 @@ cmake_minimum_required(VERSION 2.6)
 				target_link_libraries(${test} ${boost_mpi_serialization})
 				add_test(${test} "${test}")
 			endif()
-			if (MPIRUN_EXE)
-				add_test("${test}_with_mpirun_np_4" "${MPIRUN_EXE}" "-np" "4" "${test}")
+			if (mpirun_exe)
+				add_test("${test}_with_mpirun_np_4" "${mpirun_exe}" "-np" "4" "${test}")
 			endif()
 			# without
 			add_executable("${test}_without_mpi" "tests/${test}.cpp")
@@ -150,6 +166,18 @@ cmake_minimum_required(VERSION 2.6)
 			set_target_properties("${test}_without_ssl" PROPERTIES COMPILE_FLAGS "-DNO_HNC_SSL")
 			message(STATUS "Add test tests/${test}_without_ssl")
 			add_test("${test}_without_ssl" "${test}_without_ssl")
+		# Gnuplot
+		elseif ("${test}" MATCHES ".*test__gnuplot_gnuplot_.*")
+			# Test & executable
+			add_executable(${test} "tests/${test}.cpp")
+			add_test(${test} "${test}")
+			# Gnuplot
+			if (Gnuplot_exe)
+				string(REPLACE "test__" "hnc_" gnuplot_script ${test})
+				string(REPLACE "${gnuplot_script}" "${gnuplot_script}.png.gnuplot" gnuplot_script ${gnuplot_script})
+				message(STATUS "Add test gnuplot ${gnuplot_script}")
+				add_test("${test}_gnuplot" "${Gnuplot_exe}" "${gnuplot_script}")
+			endif()
 		# Executable
 		else()
 			# Executable
