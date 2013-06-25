@@ -49,13 +49,11 @@ namespace hnc
 		return (o.str());
 	}
 
-	template <class T>
 	std::string to_string(std::string const & in)
 	{
 		return in;
 	}
 
-	template <class T>
 	std::string to_string(char const * const in)
 	{
 		return std::string(in);

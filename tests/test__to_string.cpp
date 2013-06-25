@@ -63,6 +63,13 @@ int main()
 		nb_test -= hnc::test::warning(s == i, "hnc::to_string fail!\n");
 	}
 
+	++nb_test;
+	{
+		std::string s = hnc::to_string("a char []");
+		std::cout << s << " == " << "a char []" << std::endl;
+		nb_test -= hnc::test::warning(s == "a char []", "hnc::to_string fail!\n");
+	}
+
 	hnc::test::warning(nb_test == 0, "hnc::to_string: " + hnc::to_string(nb_test) + " test fail!\n");
 
 	return nb_test;
