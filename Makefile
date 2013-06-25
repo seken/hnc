@@ -14,9 +14,13 @@
 
 
 all:
+	@echo ""
 	@echo "Usage:"
-	@echo "mkdir -p build && cd build && cmake .. # To compile hnc library (first step)"
-	@echo "make clean                             # To clean (remove all no-source files)"
+	@echo ""
+	@echo "  mkdir -p build && cd build && cmake .. # To compile hnc library (first step)"
+	@echo ""
+	@echo "  make clean                             # To clean (remove all no-source files)"
+	@echo ""
 
 clean:
 	rm -rf build/* doc/html/* doc/latex/*
