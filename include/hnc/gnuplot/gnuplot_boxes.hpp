@@ -47,7 +47,11 @@ namespace hnc
 		 * data["F"] = 2;
 		 * data["G"] = 1;
 		 * 
-		 * hnc::gnuplot::gnuplot_boxes gp(hnc::gnuplot::output_terminal_png("hnc_gnuplot_gnuplot_boxes").size(640, 480), data);
+		 * hnc::gnuplot::gnuplot_boxes gp
+		 * (
+		 * 	hnc::gnuplot::output_terminal_png("hnc_gnuplot_gnuplot_boxes").size(640, 480),
+		 * 	data
+		 * );
 		 * 
 		 * gp.set_title("hnc::gnuplot::gnuplot\\_boxes");
 		 * gp.y_range.range(0, gp.max_data_value() + 1);
