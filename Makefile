@@ -25,5 +25,5 @@ all:
 clean:
 	rm -rf build/* doc/html/* doc/latex/*
 	rm -rf *~
-	cd include/hnc/ && rm -rf *~ algo/*~ gnuplot/*~ iterator/*~ math/*~ mpi/*~ openmp/*~ ssl/*~ ssl/cipher/*~ ssl/hash/*~ ssl/public_key/*~ scheduler/*~
+	cd include/hnc/ && rm -rf *~ algo/*~ gnuplot/*~ html/*~ iterator/*~ math/*~ mpi/*~ openmp/*~ ssl/*~ ssl/cipher/*~ ssl/hash/*~ ssl/public_key/*~ scheduler/*~
 	rm -rf tests/*~ tests_human/*~ tests_visual/*~
