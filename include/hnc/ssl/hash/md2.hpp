@@ -42,7 +42,7 @@ namespace hnc
 			 */
 			md2_raw_data md2(std::string const & /*s*/)
 			{
-				hnc::test::warning(false, "hnc::ssl::hash::md2 is not support, OpenSSL md2 is deprecated and removed in Debian\n");
+				hnc::test::warning(false, "hnc::ssl::hash::md2 is not supported, OpenSSL md2 is deprecated and removed in Debian\n");
 				return md2_raw_data();
 			}
 		}

@@ -65,7 +65,7 @@ namespace hnc
 			#else
 			rmd160_raw_data rmd160(std::string const & /*s*/)
 			{
-				hnc::test::warning(false, "hnc::ssl::hash::rmd160 is not support, please install OpenSSL and recompile this program without NO_HNC_SSL define\n");
+				hnc::test::warning(false, "hnc::ssl::hash::rmd160 is not supported, please install OpenSSL and recompile this program without NO_HNC_SSL define\n");
 				return rmd160_raw_data();
 			}
 			#endif

@@ -66,7 +66,7 @@ namespace hnc
 			#else
 			sha_raw_data sha(std::string const & /*s*/)
 			{
-				hnc::test::warning(false, "hnc::ssl::hash::sha is not support, please install OpenSSL and recompile this program without NO_HNC_SSL define\n");
+				hnc::test::warning(false, "hnc::ssl::hash::sha is not supported, please install OpenSSL and recompile this program without NO_HNC_SSL define\n");
 				return sha_raw_data();
 			}
 			#endif
@@ -99,7 +99,7 @@ namespace hnc
 			#else
 			sha1_raw_data sha1(std::string const & /*s*/)
 			{
-				hnc::test::warning(false, "hnc::ssl::hash::sha1 is not support, please install OpenSSL and recompile this program without NO_HNC_SSL define\n");
+				hnc::test::warning(false, "hnc::ssl::hash::sha1 is not supported, please install OpenSSL and recompile this program without NO_HNC_SSL define\n");
 				return sha1_raw_data();
 			}
 			#endif
@@ -132,7 +132,7 @@ namespace hnc
 			#else
 			sha224_raw_data sha224(std::string const & /*s*/)
 			{
-				hnc::test::warning(false, "hnc::ssl::hash::sha224 is not support, please install OpenSSL and recompile this program without NO_HNC_SSL define\n");
+				hnc::test::warning(false, "hnc::ssl::hash::sha224 is not supported, please install OpenSSL and recompile this program without NO_HNC_SSL define\n");
 				return sha224_raw_data();
 			}
 			#endif
@@ -170,7 +170,7 @@ namespace hnc
 			#else
 			sha256_raw_data sha256(std::string const & /*s*/)
 			{
-				hnc::test::warning(false, "hnc::ssl::hash::sha256 is not support, please install OpenSSL and recompile this program without NO_HNC_SSL define\n");
+				hnc::test::warning(false, "hnc::ssl::hash::sha256 is not supported, please install OpenSSL and recompile this program without NO_HNC_SSL define\n");
 				return sha256_raw_data();
 			}
 			#endif
@@ -203,7 +203,7 @@ namespace hnc
 			#else
 			sha384_raw_data sha384(std::string const & /*s*/)
 			{
-				hnc::test::warning(false, "hnc::ssl::hash::sha384 is not support, please install OpenSSL and recompile this program without NO_HNC_SSL define\n");
+				hnc::test::warning(false, "hnc::ssl::hash::sha384 is not supported, please install OpenSSL and recompile this program without NO_HNC_SSL define\n");
 				return sha384_raw_data();
 			}
 			#endif
@@ -241,7 +241,7 @@ namespace hnc
 			#else
 			sha512_raw_data sha512(std::string const & /*s*/)
 			{
-				hnc::test::warning(false, "hnc::ssl::hash::sha512 is not support, please install OpenSSL and recompile this program without NO_HNC_SSL define\n");
+				hnc::test::warning(false, "hnc::ssl::hash::sha512 is not supported, please install OpenSSL and recompile this program without NO_HNC_SSL define\n");
 				return sha512_raw_data();
 			}
 			#endif

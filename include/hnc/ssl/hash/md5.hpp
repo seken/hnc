@@ -65,7 +65,7 @@ namespace hnc
 			#else
 			md5_raw_data md5(std::string const & /*s*/)
 			{
-				hnc::test::warning(false, "hnc::ssl::hash::md5 is not support, please install OpenSSL and recompile this program without NO_HNC_SSL define\n");
+				hnc::test::warning(false, "hnc::ssl::hash::md5 is not supported, please install OpenSSL and recompile this program without NO_HNC_SSL define\n");
 				return md5_raw_data();
 			}
 			#endif
