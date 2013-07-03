@@ -26,6 +26,17 @@
 
 namespace hnc
 {
+	/**
+	 * @brief Character encoding
+	 *
+	 * @code
+	 * #include <hnc/character_encoding.hpp>
+	 * @endcode
+	 *
+	 * http://en.wikipedia.org/wiki/Character_encoding
+	 *
+	 * hnc::character_encoding::utf8, hnc::character_encoding::ascii, ...
+	 */
 	namespace character_encoding
 	{
 		/**
@@ -34,8 +45,6 @@ namespace hnc
 		 * @code
 		 * #include <hnc/character_encoding.hpp>
 		 * @endcode
-		 *
-		 * http://en.wikipedia.org/wiki/Character_encoding
 		 *
 		 * Default encoding if utf-8 hnc::character_encoding::utf8
 		 */
