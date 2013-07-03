@@ -61,6 +61,34 @@ cmake_minimum_required(VERSION 2.6)
 	endif()
 
 
+# Boost System
+	message(STATUS "---")
+	find_package(Boost COMPONENTS system)
+	if (Boost_FOUND)
+		set(boost_system "${Boost_LIBRARIES}")
+		foreach(lib ${boost_mpi_serialization})
+			string(REPLACE "${lib}" "" boost_system ${boost_system})
+		endforeach()
+		message(STATUS "Boost.System found =) ${boost_system}")
+	else()
+		message(STATUS "Boost.System not found :(")
+	endif()
+
+
+# Boost Asio
+	message(STATUS "---")
+	if (boost_system)
+		find_file(boost_asio "boost/asio.hpp")
+		if (boost_asio)
+			message (STATUS "Boost.Asio found =) (header boost/asio.hpp found: ${boost_asio})")
+		else()
+			message(STATUS "Boost.Asio not found :( (header boost/asio.hpp not found)")
+		endif()
+	else()
+		message(STATUS "Boost.Asio needs Boost.System :(")
+	endif()
+
+
 # OpenSSL
 	message(STATUS "---")
 	find_package(OpenSSL REQUIRED)
@@ -178,6 +206,19 @@ cmake_minimum_required(VERSION 2.6)
 				message(STATUS "Add test gnuplot ${gnuplot_script}")
 				add_test("${test}_gnuplot" "${Gnuplot_exe}" "${gnuplot_script}")
 			endif()
+		# Boost.Asio
+		elseif (("${test}" STREQUAL "test__http") OR ("${test}" STREQUAL "test__http_get") OR ("${test}" STREQUAL "test__http_w3c_validator") OR ("${test}" STREQUAL "test__html_head") OR ("${test}" STREQUAL "test__html_webpage") OR ("${test}" STREQUAL "test__tabular"))
+			# With Boost.Asio
+			if (boost_asio)
+				add_executable(${test} "tests/${test}.cpp")
+				target_link_libraries(${test} ${boost_system})
+				add_test(${test} "${test}")
+			endif()
+			# Without Boost.Asio
+			add_executable("${test}_without_boost_asio" "tests/${test}.cpp")
+			set_target_properties("${test}_without_boost_asio" PROPERTIES COMPILE_FLAGS "-DNO_HNC_Boost_Asio")
+			message(STATUS "Add test tests/${test}_without_boost_asio")
+			add_test("${test}_without_boost_asio" "${test}_without_boost_asio")
 		# Executable
 		else()
 			# Executable
