@@ -37,18 +37,6 @@ int main()
 	std::cout << hnc::html::doctype::html_5() << std::endl;
 	std::cout << std::endl;
 
-	std::cout << "HTML 4.01 Strict" << std::endl;
-	std::cout << hnc::html::doctype::html_4d01_strict() << std::endl;
-	std::cout << std::endl;
-
-	std::cout << "HTML 4.01 Transitional" << std::endl;
-	std::cout << hnc::html::doctype::html_4d01_transitional() << std::endl;
-	std::cout << std::endl;
-
-	std::cout << "HTML 4.01 Frameset" << std::endl;
-	std::cout << hnc::html::doctype::html_4d01_frameset() << std::endl;
-	std::cout << std::endl;
-
 	std::cout << "XHTML 1.0 Strict" << std::endl;
 	std::cout << hnc::html::doctype::xhtml_1d0_strict() << std::endl;
 	std::cout << std::endl;
@@ -63,6 +51,18 @@ int main()
 
 	std::cout << "XHTML 1.1" << std::endl;
 	std::cout << hnc::html::doctype::xhtml_1d1() << std::endl;
+	std::cout << std::endl;
+
+	std::cout << "HTML 4.01 Strict" << std::endl;
+	std::cout << hnc::html::doctype::html_4d01_strict() << std::endl;
+	std::cout << std::endl;
+
+	std::cout << "HTML 4.01 Transitional" << std::endl;
+	std::cout << hnc::html::doctype::html_4d01_transitional() << std::endl;
+	std::cout << std::endl;
+
+	std::cout << "HTML 4.01 Frameset" << std::endl;
+	std::cout << hnc::html::doctype::html_4d01_frameset() << std::endl;
 	std::cout << std::endl;
 
 	hnc::test::warning(nb_test == 0, "hnc::html::doctype: " + hnc::to_string(nb_test) + " test fail!\n");

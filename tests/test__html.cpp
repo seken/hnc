@@ -13,27 +13,14 @@
 // limitations under the License.
 
 
-#ifndef HNC_HTML_HPP
-#define HNC_HTML_HPP
+#include <iostream>
 
-#include "html/doctype.hpp"
-#include "html/head.hpp"
-#include "html/webpage.hpp"
+#include <hnc/html.hpp>
 
 
-namespace hnc
+int main()
 {
-	/**
-	 * @brief HTML code generation
-	 *
-	 * @code
-	 * #include <hnc/html.hpp>
-	 * @endcode
-	 */
-	namespace html
-	{
-		// For Doxygen only
-	}
-}
+	std::cout << "Just test html.hpp include" << std::endl;
 
-#endif
+	return 0;
+}

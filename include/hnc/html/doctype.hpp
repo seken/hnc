@@ -85,57 +85,6 @@ namespace hnc
 			 * @endcode
 			 */
 			using html_5 = hnc::html::doctype::html;
-			
-			/**
-			 * @brief HTML 4.01 Strict doctype
-			 *
-			 * @code
-			 * #include <hnc/html.hpp>
-			 * @endcode
-			 */
-			class html_4d01_strict : public hnc::html::doctype::html
-			{
-			public:
-
-				/// Constructor
-				html_4d01_strict() :
-					hnc::html::doctype::html(R"(<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">)")
-				{ }
-			};
-
-			/**
-			 * @brief HTML 4.01 Transitional doctype
-			 *
-			 * @code
-			 * #include <hnc/html.hpp>
-			 * @endcode
-			 */
-			class html_4d01_transitional : public hnc::html::doctype::html
-			{
-			public:
-
-				/// Constructor
-				html_4d01_transitional() :
-					hnc::html::doctype::html(R"(<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">)")
-				{ }
-			};
-
-			/**
-			 * @brief HTML 4.01 Frameset doctype
-			 *
-			 * @code
-			 * #include <hnc/html.hpp>
-			 * @endcode
-			 */
-			class html_4d01_frameset : public hnc::html::doctype::html
-			{
-			public:
-
-				/// Constructor
-				html_4d01_frameset() :
-					hnc::html::doctype::html(R"(<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Frameset//EN" "http://www.w3.org/TR/html4/frameset.dtd">)")
-				{ }
-			};
 
 			/**
 			 * @brief XHTML 1.0 Strict doctype
@@ -202,6 +151,57 @@ namespace hnc
 				/// Constructor
 				xhtml_1d1() :
 					hnc::html::doctype::html(R"(<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">)")
+				{ }
+			};
+
+			/**
+			 * @brief HTML 4.01 Strict doctype
+			 *
+			 * @code
+			 * #include <hnc/html.hpp>
+			 * @endcode
+			 */
+			class html_4d01_strict : public hnc::html::doctype::html
+			{
+			public:
+
+				/// Constructor
+				html_4d01_strict() :
+					hnc::html::doctype::html(R"(<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">)")
+				{ }
+			};
+
+			/**
+			 * @brief HTML 4.01 Transitional doctype
+			 *
+			 * @code
+			 * #include <hnc/html.hpp>
+			 * @endcode
+			 */
+			class html_4d01_transitional : public hnc::html::doctype::html
+			{
+			public:
+
+				/// Constructor
+				html_4d01_transitional() :
+					hnc::html::doctype::html(R"(<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">)")
+				{ }
+			};
+
+			/**
+			 * @brief HTML 4.01 Frameset doctype
+			 *
+			 * @code
+			 * #include <hnc/html.hpp>
+			 * @endcode
+			 */
+			class html_4d01_frameset : public hnc::html::doctype::html
+			{
+			public:
+
+				/// Constructor
+				html_4d01_frameset() :
+					hnc::html::doctype::html(R"(<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Frameset//EN" "http://www.w3.org/TR/html4/frameset.dtd">)")
 				{ }
 			};
 		}
