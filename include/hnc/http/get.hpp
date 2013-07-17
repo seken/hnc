@@ -116,12 +116,8 @@ namespace hnc
 					// Connexion
 					boost::asio::ip::tcp::iostream http_stream(host(), "http");
 
-					// Error in connexion
-					if (http_stream == false)
-					{
-						throw http_stream.error().message();
-					}
-					else
+					// Connexion is ok
+					if (http_stream)
 					{
 						// Get
 						http_stream << this->to_string();
@@ -135,6 +131,11 @@ namespace hnc
 								r.push_back(line);
 							}
 						}
+					}
+					// Error in connexion
+					else
+					{
+						throw http_stream.error().message();
 					}
 
 					// It is an redirection // FIXME ?
