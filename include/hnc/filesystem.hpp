@@ -40,6 +40,8 @@ namespace hnc
 	 */
 	namespace filesystem
 	{
+		// Pathname operations
+		
 		/**
 		 * @brief Directory separator (e.g. '/' by default, '/' on GNU/Linux and all (including Windows), '\' for Windows only)
 		 * 
@@ -154,6 +156,31 @@ namespace hnc
 		}
 
 		/**
+		 * @brief Return the dirname and the basename of a pathname
+		 *
+		 * @param[in] pathname            Pathname
+		 * @param[in] directory_separator Directory separator char (hnc::filesystem::directory_separator::common by default)
+		 *
+		 * @return the dirname and the basename of a pathname
+		 */
+		std::string dir_and_basename
+		(
+			std::string const & pathname,
+			char const directory_separator = hnc::filesystem::directory_separator::common
+		)
+		{
+			// Dirname
+			std::string dirname = hnc::filesystem::dirname(pathname, directory_separator);
+			// Basename
+			std::string basename = hnc::filesystem::basename(pathname, directory_separator);
+
+			// Return
+			if (dirname.empty()) { return basename; }
+			else if (basename.empty()) { return dirname + directory_separator; }
+			else { return dirname + directory_separator + basename; }
+		}
+
+		/**
 		 * @brief Return the extension of a file (without the '.')
 		 *
 		 * @param[in] pathname            Pathname
@@ -181,37 +208,6 @@ namespace hnc
 			{
 				return "";
 			}
-		}
-
-		/**
-		 * @brief Return a temporary filename (with tmpnam function from cstdio)
-		 *
-		 * http://www.cplusplus.com/reference/cstdio/tmpnam/
-		 *
-		 * @return the temporary filename
-		 */
-		std::string tmp_filename()
-		{
-			// Generate filename
-			char filename_buffer[L_tmpnam];
-			std::string filename = std::tmpnam(filename_buffer);
-			// fopen and fclose file (else fstream does not work...)
-			FILE * f = std::fopen(filename.c_str(), "w");
-			std::fclose(f);
-			// Return
-			return filename;
-		}
-
-		/**
-		 * @brief Remove a file (with remove function from cstdio)
-		 *
-		 * http://www.cplusplus.com/reference/cstdio/tmpnam/
-		 * 
-		 * @param[in] pathname Pathname
-		 */
-		void remove(std::string const & pathname)
-		{
-			std::remove(pathname.c_str());
 		}
 
 		/**
@@ -256,7 +252,7 @@ namespace hnc
 		 * @param[in] pathname            Pathname
 		 * @param[in] suffix              Suffix to add
 		 * @param[in] directory_separator Directory separator char (hnc::filesystem::directory_separator::common by default)
-		 * 
+		 *
 		 * @return the pathname with the suffix
 		 */
 		std::string add_suffix
@@ -286,6 +282,8 @@ namespace hnc
 			return dirname + basename + suffix + extension;
 		}
 
+		// I/O operations
+
 		/**
 		 * @brief Return true if the file exists, false otherwise
 		 *
@@ -297,6 +295,55 @@ namespace hnc
 		{
 			std::ifstream f(pathname);
 			return f;
+		}
+
+		/**
+		 * @brief Remove a file (with remove function from cstdio)
+		 *
+		 * http://www.cplusplus.com/reference/cstdio/tmpnam/
+		 * 
+		 * @param[in] pathname Pathname
+		 */
+		void remove(std::string const & pathname)
+		{
+			std::remove(pathname.c_str());
+		}
+
+		/**
+		 * @brief Copy a file
+		 *
+		 * http://stackoverflow.com/questions/10195343/copy-a-file-in-an-sane-safe-and-efficient-way
+		 *
+		 * @param[in] source_filename      Source filename
+		 * @param[in] destination_filename Destination filename
+		 */
+		void copy_file(std::string const & source_filename, std::string const & destination_filename)
+		{
+			std::ifstream  source(source_filename, std::ios::binary);
+			std::ofstream  destination(destination_filename, std::ios::binary);
+
+			destination << source.rdbuf();
+		}
+
+		// Filename generation
+
+		/**
+		 * @brief Return a temporary filename (with tmpnam function from cstdio)
+		 *
+		 * http://www.cplusplus.com/reference/cstdio/tmpnam/
+		 *
+		 * @return the temporary filename
+		 */
+		std::string tmp_filename()
+		{
+			// Generate filename
+			char filename_buffer[L_tmpnam];
+			std::string filename = std::tmpnam(filename_buffer);
+			// fopen and fclose file (else fstream does not work...)
+			FILE * f = std::fopen(filename.c_str(), "w");
+			std::fclose(f);
+			// Return
+			return filename;
 		}
 
 		/**

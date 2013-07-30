@@ -203,6 +203,50 @@ int main()
 
 	std::cout << std::endl;
 
+	// Dirname and Basename
+
+	++nb_test;
+	{
+		std::string const s = "/path/to/file.ext";
+		std::string const r = hnc::filesystem::dir_and_basename(s);
+		std::cout << "Dirname and Basename of \"" << s << "\" is \"" << r << "\"" << std::endl;
+		nb_test -= hnc::test::warning(r == "/path/to/file", "hnc::filesystem::dir_and_basename fails\n");
+	}
+
+	++nb_test;
+	{
+		std::string const s = "file.ext";
+		std::string const r = hnc::filesystem::dir_and_basename(s);
+		std::cout << "Dirname and Basename of \"" << s << "\" is \"" << r << "\"" << std::endl;
+		nb_test -= hnc::test::warning(r == "file", "hnc::filesystem::dir_and_basename fails\n");
+	}
+
+	++nb_test;
+	{
+		std::string const s = "/path/to/";
+		std::string const r = hnc::filesystem::dir_and_basename(s);
+		std::cout << "Dirname and Basename of \"" << s << "\" is \"" << r << "\"" << std::endl;
+		nb_test -= hnc::test::warning(r == "/path/to/", "hnc::filesystem::dir_and_basename fails\n");
+	}
+
+	++nb_test;
+	{
+		std::string const s = "";
+		std::string const r = hnc::filesystem::dir_and_basename(s);
+		std::cout << "Dirname and Basename of \"" << s << "\" is \"" << r << "\"" << std::endl;
+		nb_test -= hnc::test::warning(r == "", "hnc::filesystem::dir_and_basename fails\n");
+	}
+
+	++nb_test;
+	{
+		std::string const s = "f";
+		std::string const r = hnc::filesystem::dir_and_basename(s);
+		std::cout << "Dirname and Basename of \"" << s << "\" is \"" << r << "\"" << std::endl;
+		nb_test -= hnc::test::warning(r == "f", "hnc::filesystem::dir_and_basename fails\n");
+	}
+
+	std::cout << std::endl;
+
 	// Extension
 
 	++nb_test;
@@ -283,26 +327,6 @@ int main()
 		std::string const r = hnc::filesystem::extension(s);
 		std::cout << "Extension of \"" << s << "\" is \"" << r << "\"" << std::endl;
 		nb_test -= hnc::test::warning(r == "", "hnc::filesystem::extension fails\n");
-	}
-
-	std::cout << std::endl;
-
-	// Tmp filename & remove
-
-	for (unsigned int i = 0; i < 10; ++i)
-	{
-		nb_test += 2;
-		std::string const r = hnc::filesystem::tmp_filename();
-		std::cout << "Tmp filename = \"" << r << "\"" << std::endl;
-		{
-			std::fstream f(r);
-			nb_test -= hnc::test::warning(f.is_open() == true, "hnc::filesystem::tmp_filename fails\n");
-		}
-		hnc::filesystem::remove(r);
-		{
-			std::fstream f(r);
-			nb_test -= hnc::test::warning(f.is_open() == false, "hnc::filesystem::remove fails\n");
-		}
 	}
 
 	std::cout << std::endl;
@@ -414,6 +438,55 @@ int main()
 		nb_test -= hnc::test::warning(hnc::filesystem::file_exists(n0) == true && hnc::filesystem::file_exists(n1) == false, "hnc::filesystem::filename_without_overwrite fails\n");
 		hnc::filesystem::remove(f0);
 		hnc::filesystem::remove(n0);
+	}
+
+	std::cout << std::endl;
+
+	// Tmp filename & remove
+
+	for (unsigned int i = 0; i < 10; ++i)
+	{
+		nb_test += 2;
+		std::string const r = hnc::filesystem::tmp_filename();
+		std::cout << "Tmp filename = \"" << r << "\"" << std::endl;
+		{
+			std::fstream f(r);
+			nb_test -= hnc::test::warning(f.is_open() == true, "hnc::filesystem::tmp_filename fails\n");
+		}
+		hnc::filesystem::remove(r);
+		{
+			std::fstream f(r);
+			nb_test -= hnc::test::warning(f.is_open() == false, "hnc::filesystem::remove fails\n");
+		}
+	}
+
+	std::cout << std::endl;
+
+	// copy_file
+
+	++nb_test;
+	{
+		// txt
+		std::string const txt = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor.";
+		std::cout << "txt      = " << txt << std::endl;
+		// Source
+		std::string const src_filename = hnc::filesystem::tmp_filename();
+		{
+			std::ofstream f(src_filename);
+			f << txt;
+		}
+		// Destination
+		std::string const dest_filename = hnc::filesystem::filename_without_overwrite(src_filename);
+		hnc::filesystem::copy_file(src_filename, dest_filename);
+		{
+			std::ifstream f(dest_filename);
+			std::string copy_txt; std::getline(f, copy_txt);
+			// copy_txt
+			std::cout << "copy_txt = " << txt << std::endl;
+			nb_test -= hnc::test::warning(copy_txt == txt, "hnc::filesystem::copy_file fails\n");
+		}
+		// Remove
+		hnc::filesystem::remove(dest_filename);
 	}
 
 	std::cout << std::endl;
