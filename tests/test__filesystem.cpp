@@ -15,6 +15,7 @@
 
 #include <iostream>
 #include <fstream>
+#include <string>
 
 #include <hnc/filesystem.hpp>
 #include <hnc/test.hpp>
@@ -26,25 +27,6 @@ int main()
 	std::cout << std::endl;
 	
 	int nb_test = 0;
-
-// 	{
-// 		std::vector<int> c(0);
-// 		int sumRef = 0;
-// 		std::cout << "Sum of empty std::vector of int:" << std::endl;
-// 		std::cout << "- Reference                = " << sumRef << std::endl;
-// 		++nb_test;
-// 		{
-// 			int sum = hnc::algo::sum(c);
-// 			std::cout << "- hnc::algo::sum container = " << sum << std::endl;
-// 			nb_test -= hnc::test::warning(sum == sumRef, "hnc::algo::sum container == " + hnc::to_string(sum) + " instead of " + hnc::to_string(sumRef) + "\n");
-// 		}
-// 		++nb_test;
-// 		{
-// 			int sum = hnc::algo::sum(c.begin(), c.end());
-// 			std::cout << "- hnc::algo::sum iterator  = " << sum << std::endl;
-// 			nb_test -= hnc::test::warning(sum == sumRef, "hnc::algo::sum iterator == " + hnc::to_string(sum) + " instead of " + hnc::to_string(sumRef) + "\n");
-// 		}
-// 	}
 
 	nb_test += 5;
 	{
@@ -399,6 +381,76 @@ int main()
 
 	std::cout << std::endl;
 
+	// read_file
+
+	++nb_test;
+	{
+		std::cout << "hnc::filesystem::read_file" << std::endl;
+		// Write
+		std::string const txt = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. \nSed non risus. \nSuspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor.\n";
+		std::cout << "txt:" << std::endl << txt;
+		std::string const filename = hnc::filesystem::tmp_filename();
+		{
+			std::ofstream f(filename);
+			f << txt;
+		}
+		// Read
+		std::string const read_txt = hnc::filesystem::read_file(filename);
+		std::cout << "txt:" << std::endl << read_txt;
+		nb_test -= hnc::test::warning(read_txt == txt, "hnc::filesystem::read_file fails\n");
+		// Remove
+		hnc::filesystem::remove(filename);
+	}
+
+	std::cout << std::endl;
+
+	// copy_file
+
+	++nb_test;
+	{
+		std::cout << "hnc::filesystem::copy_file" << std::endl;
+		// txt
+		std::string const txt = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. \nSed non risus. \nSuspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor.\n";
+		std::cout << "txt:" << std::endl << txt;
+		// Source
+		std::string const src_filename = hnc::filesystem::tmp_filename();
+		{
+			std::ofstream f(src_filename);
+			f << txt;
+		}
+		// Destination
+		std::string const dest_filename = hnc::filesystem::filename_without_overwrite(src_filename);
+		hnc::filesystem::copy_file(src_filename, dest_filename);
+		std::string const copy_txt = hnc::filesystem::read_file(dest_filename);
+		std::cout << "copy_txt:" << std::endl << copy_txt;
+		nb_test -= hnc::test::warning(copy_txt == txt, "hnc::filesystem::copy_file fails\n");
+		// Remove
+		hnc::filesystem::remove(src_filename);
+		hnc::filesystem::remove(dest_filename);
+	}
+
+	std::cout << std::endl;
+
+	// Tmp filename & remove
+
+	for (unsigned int i = 0; i < 10; ++i)
+	{
+		nb_test += 2;
+		std::string const r = hnc::filesystem::tmp_filename();
+		std::cout << "Tmp filename = \"" << r << "\"" << std::endl;
+		{
+			std::fstream f(r);
+			nb_test -= hnc::test::warning(f.is_open() == true, "hnc::filesystem::tmp_filename fails\n");
+		}
+		hnc::filesystem::remove(r);
+		{
+			std::fstream f(r);
+			nb_test -= hnc::test::warning(f.is_open() == false, "hnc::filesystem::remove fails\n");
+		}
+	}
+
+	std::cout << std::endl;
+
 	// File exists & filename_without_overwrite
 
 	++nb_test;
@@ -438,55 +490,6 @@ int main()
 		nb_test -= hnc::test::warning(hnc::filesystem::file_exists(n0) == true && hnc::filesystem::file_exists(n1) == false, "hnc::filesystem::filename_without_overwrite fails\n");
 		hnc::filesystem::remove(f0);
 		hnc::filesystem::remove(n0);
-	}
-
-	std::cout << std::endl;
-
-	// Tmp filename & remove
-
-	for (unsigned int i = 0; i < 10; ++i)
-	{
-		nb_test += 2;
-		std::string const r = hnc::filesystem::tmp_filename();
-		std::cout << "Tmp filename = \"" << r << "\"" << std::endl;
-		{
-			std::fstream f(r);
-			nb_test -= hnc::test::warning(f.is_open() == true, "hnc::filesystem::tmp_filename fails\n");
-		}
-		hnc::filesystem::remove(r);
-		{
-			std::fstream f(r);
-			nb_test -= hnc::test::warning(f.is_open() == false, "hnc::filesystem::remove fails\n");
-		}
-	}
-
-	std::cout << std::endl;
-
-	// copy_file
-
-	++nb_test;
-	{
-		// txt
-		std::string const txt = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor.";
-		std::cout << "txt      = " << txt << std::endl;
-		// Source
-		std::string const src_filename = hnc::filesystem::tmp_filename();
-		{
-			std::ofstream f(src_filename);
-			f << txt;
-		}
-		// Destination
-		std::string const dest_filename = hnc::filesystem::filename_without_overwrite(src_filename);
-		hnc::filesystem::copy_file(src_filename, dest_filename);
-		{
-			std::ifstream f(dest_filename);
-			std::string copy_txt; std::getline(f, copy_txt);
-			// copy_txt
-			std::cout << "copy_txt = " << txt << std::endl;
-			nb_test -= hnc::test::warning(copy_txt == txt, "hnc::filesystem::copy_file fails\n");
-		}
-		// Remove
-		hnc::filesystem::remove(dest_filename);
 	}
 
 	std::cout << std::endl;

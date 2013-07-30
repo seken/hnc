@@ -325,6 +325,43 @@ namespace hnc
 			destination << source.rdbuf();
 		}
 
+		/**
+		 * @brief Read whole text file
+		 *
+		 * http://insanecoding.blogspot.fr/2011/11/how-to-read-in-file-in-c.html
+		 *
+		 * @param[in] filename Text filename
+		 *
+		 * @return A std::string that contains the whole text file. If file is not ok, returns empty string
+		 */
+		std::string read_file(std::string const & filename)
+		{
+			std::ifstream f(filename, std::ios::in | std::ios::binary);
+
+			// File ok
+			if (f)
+			{
+				// Get the size
+				f.seekg(0, std::ios::end);
+				std::string r(f.tellg(), '\0');
+
+				// Rewind the file
+				f.seekg(0, std::ios::beg);
+
+				// Read (and close) the file
+				f.read(&r[0], r.size());
+				f.close();
+
+				// Return
+				return r;
+			}
+			// File not ok
+			else
+			{
+				return std::string();
+			}
+		}
+
 		// Filename generation
 
 		/**
