@@ -22,6 +22,7 @@
 #include <string>
 
 #include <hnc/algo/replace_all.hpp>
+#include <hnc/algo/replace.hpp>
 #include <hnc/test.hpp>
 #include <hnc/to_string.hpp>
 #include <hnc/ostream_std.hpp>
@@ -717,6 +718,123 @@ int main()
 		nb_test -= hnc::test::warning
 		(
 			r == decltype(r)({'t', 'e', 's', 't', ' ', 't', 'o', ' ', 'd', 'e', 'l', 'e', 't', 'e', ' ', 'h', 'n', 'c', ':', ':', 'a', 'l', 'g', 'o', ':', ':', 'r', 'e', 'p', 'l', 'a', 'c', 'e'}),
+			"hnc::algo::replace_all fails\n"
+		);
+	}
+	std::cout << std::endl;
+
+
+	// a -> ba, _ -> \_
+
+	std::cout << "a -> ba, _ -> \\_\n" << std::endl;
+
+	++nb_test;
+	{
+		std::string c = "a";
+		std::string r = c;
+		hnc::algo::replace_all(r, std::string("a"), std::string("ba"));
+		std::cout << c << "\n" << r << std::endl;
+		nb_test -= hnc::test::warning
+		(
+			r == "ba",
+			"hnc::algo::replace_all fails\n"
+		);
+	}
+	std::cout << std::endl;
+
+	++nb_test;
+	{
+		std::string c = "_";
+		std::string r = c;
+		hnc::algo::replace_all(r, std::string("_"), std::string("\\_"));
+		std::cout << c << "\n" << r << std::endl;
+		nb_test -= hnc::test::warning
+		(
+			r == "\\_",
+			"hnc::algo::replace_all fails\n"
+		);
+	}
+	std::cout << std::endl;
+
+	++nb_test;
+	{
+		std::string c = "txt_txt";
+		std::string r = c;
+		hnc::algo::replace_all(r, std::string("_"), std::string("\\_"));
+		std::cout << c << "\n" << r << std::endl;
+		nb_test -= hnc::test::warning
+		(
+			r == "txt\\_txt",
+			"hnc::algo::replace_all fails\n"
+		);
+	}
+	std::cout << std::endl;
+
+	++nb_test;
+	{
+		std::string c = "txt_txt_txt";
+		std::string r = c;
+		hnc::algo::replace_all(r, std::string("_"), std::string("\\_"));
+		std::cout << c << "\n" << r << std::endl;
+		nb_test -= hnc::test::warning
+		(
+			r == "txt\\_txt\\_txt",
+			"hnc::algo::replace_all fails\n"
+		);
+	}
+	std::cout << std::endl;
+
+	++nb_test;
+	{
+		std::string c = "_txt_txt_txt_";
+		std::string r = c;
+		hnc::algo::replace_all(r, std::string("_"), std::string("\\_"));
+		std::cout << c << "\n" << r << std::endl;
+		nb_test -= hnc::test::warning
+		(
+			r == "\\_txt\\_txt\\_txt\\_",
+			"hnc::algo::replace_all fails\n"
+		);
+	}
+	std::cout << std::endl;
+
+	++nb_test;
+	{
+		std::list<char> c({'_'});
+		std::list<char> r = c;
+		hnc::algo::replace_all(r, {'_'}, {'\\', '_'});
+		std::cout << c << "\n" << r << std::endl;
+		nb_test -= hnc::test::warning
+		(
+			r == decltype(r)({'\\', '_'}),
+			"hnc::algo::replace_all fails\n"
+		);
+	}
+	std::cout << std::endl;
+
+	++nb_test;
+	{
+		std::list<char> c({'_', 't', 'x', 't', '_', 't', 'x', 't', '_', 't', 'x', 't', '_'});
+		std::list<char> r = c;
+		hnc::algo::replace_all(r, {'_'}, {'\\', '_'});
+		std::cout << c << "\n" << r << std::endl;
+		nb_test -= hnc::test::warning
+		(
+			r == decltype(r)({'\\', '_', 't', 'x', 't', '\\', '_', 't', 'x', 't', '\\', '_', 't', 'x', 't', '\\', '_'}),
+			"hnc::algo::replace_all fails\n"
+		);
+	}
+	std::cout << std::endl;
+
+	++nb_test;
+	{
+		std::string c = "_txt_txt_txt_";
+		std::string r = c;
+		hnc::algo::replace_all(r, std::string("_"), std::string("\\_\\__\\___"));
+		std::cout << c << "\n" << r << std::endl;
+		nb_test -= hnc::test::warning
+		(
+			r == "\\_\\__\\___txt\\_\\__\\___txt\\_\\__\\___txt\\_\\__\\___",
 			"hnc::algo::replace_all fails\n"
 		);
 	}

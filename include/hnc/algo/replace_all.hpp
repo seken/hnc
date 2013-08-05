@@ -70,8 +70,8 @@ namespace hnc
 				// Resume and advance iterators
 				if (old_values.size() < new_values.size())
 				{
-					it = std::next(c.begin(), distance_begin_it + new_values.size() - old_values.size());
-					last = std::next(it, distance_it_last);
+					it = std::next(c.begin(), distance_begin_it + new_values.size() - old_values.size() + 1);
+					last = std::next(it, distance_it_last - 1);
 				}
 				else if (old_values.size() > new_values.size())
 				{
