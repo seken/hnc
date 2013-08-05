@@ -22,7 +22,6 @@
 #include <string>
 
 #include <hnc/algo/replace_all.hpp>
-#include <hnc/algo/replace.hpp>
 #include <hnc/test.hpp>
 #include <hnc/to_string.hpp>
 #include <hnc/ostream_std.hpp>
@@ -388,6 +387,20 @@ int main()
 
 	++nb_test;
 	{
+		std::vector<char> c({'a', 'a', 'a', 'a', 'a'});
+		std::vector<char> r = c;
+		hnc::algo::replace_all(r, {'a'}, {'b'});
+		std::cout << c << "\n" << r << std::endl;
+		nb_test -= hnc::test::warning
+		(
+			r == decltype(r)({'b', 'b', 'b', 'b', 'b'}),
+			"hnc::algo::replace_all fails\n"
+		);
+	}
+	std::cout << std::endl;
+
+	++nb_test;
+	{
 		std::vector<char> c({'t', 't', 'e', 'e', 's', 's', 't', 't'});
 		std::vector<char> r = c;
 		hnc::algo::replace_all(r, {'t', 't'}, {'t'});
@@ -432,11 +445,11 @@ int main()
 	{
 		std::vector<char> c({'t', 't', 'e', 'e', 's', 's', 't', 't'});
 		std::vector<char> r = c;
-  hnc::algo::replace_all
+		hnc::algo::replace_all
 		(
-   hnc::algo::replace_all
+			hnc::algo::replace_all
 			(
-    hnc::algo::replace_all
+				hnc::algo::replace_all
 				(
 					r,
 					{'t', 't'}, {'t'}
@@ -456,6 +469,20 @@ int main()
 
 
 	std::cout << "Consecutive with std::list\n" << std::endl;
+
+	++nb_test;
+	{
+		std::list<char> c({'a', 'a', 'a', 'a', 'a'});
+		std::list<char> r = c;
+		hnc::algo::replace_all(r, {'a'}, {'b'});
+		std::cout << c << "\n" << r << std::endl;
+		nb_test -= hnc::test::warning
+		(
+			r == decltype(r)({'b', 'b', 'b', 'b', 'b'}),
+			"hnc::algo::replace_all fails\n"
+		);
+	}
+	std::cout << std::endl;
 
 	++nb_test;
 	{
