@@ -109,6 +109,16 @@ cmake_minimum_required(VERSION 2.6)
 	endif()
 
 
+# LaTeX
+	message(STATUS "---")
+	find_program(pdflatex_exe NAMES pdflatex)
+	if (pdflatex_exe)
+		message(STATUS "pdflatex executable found =) ${pdflatex_exe}")
+	else()
+		message(STATUS "pdflatex executable not found :(")
+	endif()
+
+
 # Include directories (to use #include <> instead of #include "")
 
 	# hnc
@@ -162,11 +172,14 @@ cmake_minimum_required(VERSION 2.6)
 	)
 
 	foreach(test ${tests})
+	
 		string(REPLACE ".cpp" "" test ${test})
 		string(REPLACE "${CMAKE_CURRENT_SOURCE_DIR}/tests/" "" test ${test})
 		message(STATUS "Add test tests/${test}")
-		# Executable MPI
+		
+		# Executable MPI, Compilation with Boost.MPI
 		if ("${test}" MATCHES ".*test__.*mpi.*")
+		
 			# with Boost.MPI
 			if (boost_mpi_serialization AND MPICXX_COMPILER)
 				add_executable(${test} "tests/${test}.cpp")
@@ -176,53 +189,51 @@ cmake_minimum_required(VERSION 2.6)
 			if (mpirun_exe)
 				add_test("${test}_with_mpirun_np_4" "${mpirun_exe}" "-np" "4" "${test}")
 			endif()
+			
 			# without
 			add_executable("${test}_without_mpi" "tests/${test}.cpp")
 			set_target_properties("${test}_without_mpi" PROPERTIES COMPILE_FLAGS "-DNO_HNC_Boost_Serialization -DNO_HNC_Boost_MPI")
 			message(STATUS "Add test tests/${test}_without_mpi")
 			add_test("${test}_without_mpi" "${test}_without_mpi")
-		# OpenSSL
+			
+		# Compilation with OpenSSL
 		elseif ("${test}" MATCHES ".*test__ssl.*")
+		
 			# With OpenSSL
 			if (OPENSSL_FOUND)
 				add_executable(${test} "tests/${test}.cpp")
 				target_link_libraries(${test} ${OPENSSL_LIBRARIES})
 				add_test(${test} "${test}")
 			endif()
+			
 			# Without OpenSSL
 			add_executable("${test}_without_ssl" "tests/${test}.cpp")
 			set_target_properties("${test}_without_ssl" PROPERTIES COMPILE_FLAGS "-DNO_HNC_SSL")
 			message(STATUS "Add test tests/${test}_without_ssl")
 			add_test("${test}_without_ssl" "${test}_without_ssl")
-		# Gnuplot
-		elseif ("${test}" MATCHES ".*test__gnuplot_gnuplot_.*")
-			# Test & executable
-			add_executable(${test} "tests/${test}.cpp")
-			add_test(${test} "${test}")
-			# Gnuplot
-			if (Gnuplot_exe)
-				string(REPLACE "test__" "hnc_" gnuplot_script ${test})
-				string(REPLACE "${gnuplot_script}" "${gnuplot_script}.png.gnuplot" gnuplot_script ${gnuplot_script})
-				message(STATUS "Add test gnuplot ${gnuplot_script}")
-				add_test("${test}_gnuplot" "${Gnuplot_exe}" "${gnuplot_script}")
-			endif()
-		# Boost.Asio
-		elseif (("${test}" STREQUAL "test__http") OR ("${test}" STREQUAL "test__http_get") OR ("${test}" STREQUAL "test__http_w3c_validator") OR ("${test}" STREQUAL "test__html_head") OR ("${test}" STREQUAL "test__html_webpage") OR ("${test}" STREQUAL "test__tabular"))
+			
+		# Compilation with Boost.Asio
+		elseif (("${test}" STREQUAL "test__http") OR ("${test}" STREQUAL "test__http_get") OR ("${test}" STREQUAL "test__http_w3c_validator") OR ("${test}" STREQUAL "test__html_head") OR ("${test}" STREQUAL "test__html_webpage") OR ("${test}" MATCHES "test__tabular.*"))
+		
 			# With Boost.Asio
 			if (boost_asio)
 				add_executable(${test} "tests/${test}.cpp")
 				target_link_libraries(${test} ${boost_system})
 				add_test(${test} "${test}")
 			endif()
+			
 			# Without Boost.Asio
 			add_executable("${test}_without_boost_asio" "tests/${test}.cpp")
 			set_target_properties("${test}_without_boost_asio" PROPERTIES COMPILE_FLAGS "-DNO_HNC_Boost_Asio")
 			message(STATUS "Add test tests/${test}_without_boost_asio")
 			add_test("${test}_without_boost_asio" "${test}_without_boost_asio")
+			
 		# Executable
 		else()
+		
 			# Executable
 			add_executable(${test} "tests/${test}.cpp")
+			
 			# Test with args
 			if ("${test}" STREQUAL "test__args")
 				add_test(${test} "${test}" "--opt" "--int" "42" "--float" "3.14" "--ints" "21" "42" "73" "--types" "this is a" "tuple" "with" "5" "elements")
@@ -234,11 +245,34 @@ cmake_minimum_required(VERSION 2.6)
 				add_test(${test} "${test}" "--n" "21" "42" "73" "--x_y" "800" "600" "--U" "21" "--v" "--C" "d" "e" "f")
 			elseif (${test} STREQUAL "test__args_with_different_type_arguments")
 				add_test(${test} "${test}" "--n" "21" "42" "73" "--x_y" "800" "600" "--U" "21" "--v" "--C" "d" "e" "f" "--t" "42" "One word" "c" "1" "--i" "21" "--A" "b")
+				
 			# Test
 			else()
 				add_test(${test} "${test}")
 			endif()
+			
 		endif()
+		
+		# Add a Gnuplot check
+		if ("${test}" MATCHES ".*test__gnuplot_gnuplot_.*")
+			if (Gnuplot_exe)
+				string(REPLACE "test__" "hnc_" gnuplot_script ${test})
+				string(REPLACE "${gnuplot_script}" "${gnuplot_script}.png.gnuplot" gnuplot_script ${gnuplot_script})
+				message(STATUS "Add test gnuplot ${gnuplot_script}")
+				add_test("${test}_gnuplot" "${Gnuplot_exe}" "${gnuplot_script}")
+			endif()
+		endif()
+		
+		# Add a LaTeX check
+		if (("${test}" MATCHES ".*test__latex_.*") OR ("${test}" MATCHES "test__tabular.*"))
+			if (pdflatex_exe)
+				string(REPLACE "test__" "hnc_" latex_document ${test})
+				string(REPLACE "${latex_document}" "${latex_document}.tex" latex_document ${latex_document})
+				message(STATUS "Add test pdflatex ${latex_document}")
+				add_test("${test}_pdflatex" "${pdflatex_exe}" "-interaction=nonstopmode" "${latex_document}")
+			endif()
+		endif()
+		
 	endforeach()
 
 	# Visual tests
