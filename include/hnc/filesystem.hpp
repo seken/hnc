@@ -1,4 +1,4 @@
-// Copyright © 2012 Inria, Written by Lénaïc Bagnères, lenaic.bagneres@inria.fr
+// Copyright © 2013 Inria, Written by Lénaïc Bagnères, lenaic.bagneres@inria.fr
 
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
