@@ -95,7 +95,7 @@ namespace hnc
 		template <class T>
 		T nth_root(T const & a, unsigned int const n)
 		{
-			static_assert(std::numeric_limits<T>::is_specialized, "hnc::math::nth_root works for arithmetic types only");
+			static_assert(std::is_arithmetic<T>::value, "hnc::math::nth_root works for arithmetic types only");
 			
 			// If n is even and a < 0
 			if (n % 2 == 0 && a < T(0))
