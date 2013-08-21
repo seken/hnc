@@ -44,7 +44,6 @@ namespace hnc
 		 * @b From http://gnuplot.sourceforge.net/docs_4.2/node294.html
 		 * - In 2-d, xrange and yrange determine the extent of the axes, trange determines the range of the parametric variable in parametric mode or the range of the angle in polar mode. Similarly in parametric 3-d, xrange, yrange, and zrange govern the axes and urange and vrange govern the parametric variables
 		 * - In polar mode, rrange determines the radial range plotted. 5#5rmin6#6 acts as an additive constant to the radius, whereas 5#5rmax6#6 acts as a clip to the radius -- no point with radius greater than 5#5rmax6#6 will be plotted. xrange and yrange are affected -- the ranges can be set as if the graph was of r(t)-rmin, with rmin added to all the labels
-		 * 
 		 */
 		class axis_range
 		{
@@ -132,20 +131,6 @@ namespace hnc
 		};
 
 		inline hnc::gnuplot::axis_range::~axis_range() { }
-		
-		/**
-		 * @brief Display a hnc::gnuplot::axis_range<axis_name>
-		 *
-		 * @param[out] o          Out stream
-		 * @param[in]  axis_range A hnc::gnuplot::axis_range<axis_name>
-		 *
-		 * @return the out stream
-		 */
-		std::ostream & operator<<(std::ostream & o, hnc::gnuplot::axis_range const & axis_range)
-		{
-			o << axis_range.to_string();
-			return o;
-		}
 
 		/**
 		 * @brief Synxtax for xrange
@@ -317,6 +302,20 @@ namespace hnc
 			vr_range() : hnc::gnuplot::axis_range("vr") { }
 		};
 	}
+}
+
+/**
+ * @brief Display a hnc::gnuplot::axis_range
+ *
+ * @param[out] o          Out stream
+ * @param[in]  axis_range A hnc::gnuplot::axis_range
+ *
+ * @return the out stream
+ */
+std::ostream & operator<<(std::ostream & o, hnc::gnuplot::axis_range const & axis_range)
+{
+	o << axis_range.to_string();
+	return o;
 }
 
 #endif
