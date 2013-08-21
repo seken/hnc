@@ -27,6 +27,7 @@
 
 #include "output_terminal.hpp"
 #include "x_range.hpp"
+#include "x_tics.hpp"
 #include "style.hpp"
 #include "plot.hpp"
 #include "../to_string.hpp"
@@ -122,6 +123,12 @@ namespace hnc
 			/// y_range
 			hnc::gnuplot::y_range y_range;
 
+			/// x_tics
+			hnc::gnuplot::x_tics x_tics;
+
+			/// y_tics
+			hnc::gnuplot::y_tics y_tics;
+
 		protected:
 
 			/// style
@@ -142,14 +149,25 @@ namespace hnc
 			 * @param[in] terminal_output Terminal output hnc::gnuplot::output_terminal_pdf, hnc::gnuplot::output_terminal_svg, hnc::gnuplot::output_terminal_png
 			 */
 			template <class terminal_output_t>
-			gnuplot(terminal_output_t const & terminal_output) :
-				m_output_filename(terminal_output.output_filename()),
-				m_scrip_filename(m_output_filename + ".gnuplot"),
-				m_terminal_output(hnc::to_string(terminal_output))
-			{ }
+			gnuplot(terminal_output_t const & terminal_output)
+			{
+				set_terminal_output(terminal_output);
+			}
 
 			/// Destructor
 			virtual ~gnuplot() = 0;
+
+			/**
+			 * @brief Set the terminal output
+			 * @param[in] terminal_output Terminal output hnc::gnuplot::output_terminal_pdf, hnc::gnuplot::output_terminal_svg, hnc::gnuplot::output_terminal_png
+			 */
+			template <class terminal_output_t>
+			void set_terminal_output(terminal_output_t const & terminal_output)
+			{
+				m_output_filename = terminal_output.output_filename();
+				m_scrip_filename = m_output_filename + ".gnuplot";
+				m_terminal_output = hnc::to_string(terminal_output);
+			}
 
 			// Script & data in file
 
