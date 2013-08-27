@@ -119,7 +119,6 @@ namespace hnc
 		 */
 		std::size_t nb_row() const { return m_nb_row; }
 
-
 		/**
 		 * @brief Return the number of columns
 		 * @return the number of columns
@@ -131,6 +130,7 @@ namespace hnc
 		 *
 		 * @param[in] v2D A vector2D
 		 *
+		 * @return the vector2D_C_style_minimal
 		 */
 		vector2D_C_style_minimal<T> operator=(vector2D_C_style_minimal<T> && v2D)
 		{
@@ -156,7 +156,8 @@ namespace hnc
 		 * @brief Affectation operator between two vector2D
 		 *
 		 * @param[in] v2D A vector2D
-		 * 
+		 *
+		 * @return the vector2D_C_style_minimal
 		 */
 		vector2D_C_style_minimal<T> operator=(vector2D_C_style_minimal<T> const & v2D)
 		{

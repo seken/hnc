@@ -19,7 +19,6 @@
 
 #include <iostream>
 
-#define hnc_ostream_container_data
 #include <hnc/vector2D.hpp>
 #include <hnc/test.hpp>
 #include <hnc/to_string.hpp>

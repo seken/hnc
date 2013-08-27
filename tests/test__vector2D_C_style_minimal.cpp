@@ -15,8 +15,6 @@
 
 #include <iostream>
 
-#define hnc_ostream_container_data
-
 #include <hnc/vector2D_C_style_minimal.hpp>
 #include <hnc/test.hpp>
 #include <hnc/to_string.hpp>
@@ -123,7 +121,7 @@ int main()
 				if (v[i][j] != 12) { test = false; }
 			}
 		}
-		bool test_base = v_base.nb_row() == 3 && v.nb_col() == 5;
+		bool test_base = v_base.nb_row() == 3 && v_base.nb_col() == 5;
 		for (std::size_t i = 0; i < v_base.nb_row(); ++i)
 		{
 			for (std::size_t j = 0; j < v_base.nb_col(); ++j)
