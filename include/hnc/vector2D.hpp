@@ -96,7 +96,29 @@ namespace hnc
 			{
 				return (*p_data)(m_i, j);
 			}
+			
+			/**
+			* @brief Const access to the first value of the line
+			*
+			* @return a proxy to have the first value of the line
+			*/
+			U const & front() const
+			{
+				return (*p_data)(m_i, 0);
+			}
 
+			/**
+			* @brief Const access to the last value of the line
+			* 
+			* @pre Line has at least one value
+			*
+			* @return a proxy to have the last value of the line
+			*/
+			U const & back() const
+			{
+				return (*p_data)(m_i, p_data->nb_col() - 1);
+			}
+			
 			/**
 			 * @brief Return a const iterator to the beginning
 			 * @return a const iterator to the beginning
@@ -200,6 +222,48 @@ namespace hnc
 			U & operator[](std::size_t const j)
 			{
 				return (*p_data)(m_i, j);
+			}
+
+			/**
+			* @brief Const access to the first value of the line
+			*
+			* @return a proxy to have the first value of the line
+			*/
+			U const & front() const
+			{
+				return (*p_data)(m_i, 0);
+			}
+			/**
+			* @brief Access to the first value of the line
+			*
+			* @return a proxy to have the first value of the line
+			*/
+			U & front()
+			{
+				return (*p_data)(m_i, 0);
+			}
+
+			/**
+			* @brief Const access to the last value of the line
+			* 
+			* @pre Line has at least one value
+			*
+			* @return a proxy to have the last value of the line
+			*/
+			U const & back() const
+			{
+				return (*p_data)(m_i, p_data->nb_col() - 1);
+			}
+			/**
+			* @brief Const access to the last value of the line
+			* 
+			* @pre Line has at least one value
+			*
+			* @return a proxy to have the last value of the line
+			*/
+			U & back()
+			{
+				return (*p_data)(m_i, p_data->nb_col() - 1);
 			}
 
 			/**
@@ -538,6 +602,50 @@ namespace hnc
 		hnc::vector2D<T>::line_ptr<T> & operator[](std::size_t const i)
 		{
 			return m_lines_ptr[i];
+		}
+		
+		// front, back
+
+		/**
+		 * @brief Const access to the first line
+		 *
+		 * @return a proxy to have the first line
+		 */
+		hnc::vector2D<T>::line_const_ptr<T> const & front() const
+		{
+			return m_lines_const_ptr[0];
+		}
+		/**
+		 * @brief Access to the first line
+		 *
+		 * @return a proxy to have the first line
+		 */
+		hnc::vector2D<T>::line_const_ptr<T> & front()
+		{
+			return m_lines_const_ptr[0];
+		}
+
+		/**
+		 * @brief Const access to the last line
+		 * 
+		 * @pre vector2D has at least one line
+		 *
+		 * @return a proxy to have the last line
+		 */
+		hnc::vector2D<T>::line_const_ptr<T> const & back() const
+		{
+			return m_lines_const_ptr[m_nb_row - 1];
+		}
+		/**
+		 * @brief Access to the last line
+		 * 
+		 * @pre vector2D has at least one line
+		 *
+		 * @return a proxy to have the last line
+		 */
+		hnc::vector2D<T>::line_const_ptr<T> & back()
+		{
+			return m_lines_const_ptr[m_nb_row - 1];
 		}
 		
 		// Iterator
