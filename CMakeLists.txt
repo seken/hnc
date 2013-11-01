@@ -91,7 +91,7 @@ cmake_minimum_required(VERSION 2.6)
 
 # OpenSSL
 	message(STATUS "---")
-	find_package(OpenSSL REQUIRED)
+	find_package(OpenSSL)
 	if (OPENSSL_FOUND)
 		message(STATUS "OpenSSL found =) ${OPENSSL_LIBRARIES}")
 	else()
@@ -171,139 +171,110 @@ cmake_minimum_required(VERSION 2.6)
 		tests/*.cpp
 	)
 
-	foreach(test ${tests})
+	foreach(test_source ${tests})
 	
-		string(REPLACE ".cpp" "" test ${test})
-		string(REPLACE "${CMAKE_CURRENT_SOURCE_DIR}/tests/" "" test ${test})
-		message(STATUS "Add test tests/${test}")
+		# Get test name and source
+		string(REPLACE ".cpp" "" test_name ${test_source})
+		string(REPLACE "${CMAKE_CURRENT_SOURCE_DIR}/tests/" "test__" test_name ${test_name})
+		
+		message(STATUS "Add test ${test_name}")
 		
 		# Executable MPI, Compilation with Boost.MPI
-		if ("${test}" MATCHES ".*test__.*mpi.*")
+		if ("${test_name}" MATCHES ".*test__.*mpi.*")
 		
 			# with Boost.MPI
 			if (boost_mpi_serialization AND MPICXX_COMPILER)
-				add_executable(${test} "tests/${test}.cpp")
-				target_link_libraries(${test} ${boost_mpi_serialization})
-				add_test(${test} "${test}")
+				add_executable(${test_name} "${test_source}")
+				target_link_libraries(${test_name} ${boost_mpi_serialization})
+				add_test(${test_name} ${test_name})
 			endif()
 			if (mpirun_exe)
-				add_test("${test}_with_mpirun_np_4" "${mpirun_exe}" "-np" "4" "${test}")
+				add_test("${test_name}_with_mpirun_np_4" "${mpirun_exe}" "-np" "4" "${test_name}")
 			endif()
 			
 			# without
-			add_executable("${test}_without_mpi" "tests/${test}.cpp")
-			set_target_properties("${test}_without_mpi" PROPERTIES COMPILE_FLAGS "-DNO_HNC_Boost_Serialization -DNO_HNC_Boost_MPI")
-			message(STATUS "Add test tests/${test}_without_mpi")
-			add_test("${test}_without_mpi" "${test}_without_mpi")
+			add_executable("${test_name}_without_mpi" "${test_source}")
+			set_target_properties("${test_name}_without_mpi" PROPERTIES COMPILE_FLAGS "-DNO_HNC_Boost_Serialization -DNO_HNC_Boost_MPI")
+			message(STATUS "Add test ${test_name}_without_mpi")
+			add_test("${test_name}_without_mpi" "${test_name}_without_mpi")
 			
 		# Compilation with OpenSSL
-		elseif ("${test}" MATCHES ".*test__ssl.*")
+		elseif ("${test_name}" MATCHES ".*test__ssl.*")
 		
 			# With OpenSSL
 			if (OPENSSL_FOUND)
-				add_executable(${test} "tests/${test}.cpp")
-				target_link_libraries(${test} ${OPENSSL_LIBRARIES})
-				add_test(${test} "${test}")
+				add_executable(${test_name} "${test_source}")
+				target_link_libraries(${test_name} ${OPENSSL_LIBRARIES})
+				add_test(${test_name} "${test_name}")
 			endif()
 			
 			# Without OpenSSL
-			add_executable("${test}_without_ssl" "tests/${test}.cpp")
-			set_target_properties("${test}_without_ssl" PROPERTIES COMPILE_FLAGS "-DNO_HNC_SSL")
-			message(STATUS "Add test tests/${test}_without_ssl")
-			add_test("${test}_without_ssl" "${test}_without_ssl")
+			add_executable("${test_name}_without_ssl" "${test_source}")
+			set_target_properties("${test_name}_without_ssl" PROPERTIES COMPILE_FLAGS "-DNO_HNC_SSL")
+			message(STATUS "Add test ${test_name}_without_ssl")
+			add_test("${test_name}_without_ssl" "${test_name}_without_ssl")
 			
 		# Compilation with Boost.Asio
-		elseif (("${test}" STREQUAL "test__http") OR ("${test}" STREQUAL "test__http_get") OR ("${test}" STREQUAL "test__http_w3c_validator") OR ("${test}" STREQUAL "test__html_head") OR ("${test}" STREQUAL "test__html_webpage") OR ("${test}" MATCHES "test__tabular.*"))
+		elseif (("${test_name}" STREQUAL "test__http") OR ("${test_name}" STREQUAL "test__http_get") OR ("${test_name}" STREQUAL "test__http_w3c_validator") OR ("${test_name}" STREQUAL "test__html_head") OR ("${test_name}" STREQUAL "test__html_webpage") OR ("${test_name}" MATCHES "test__tabular.*"))
 		
 			# With Boost.Asio
 			if (boost_asio)
-				add_executable(${test} "tests/${test}.cpp")
-				target_link_libraries(${test} ${boost_system})
-				add_test(${test} "${test}")
+				add_executable(${test_name} "${test_source}")
+				target_link_libraries(${test_name} ${boost_system})
+				add_test(${test_name} "${test_name}")
 			endif()
 			
 			# Without Boost.Asio
-			add_executable("${test}_without_boost_asio" "tests/${test}.cpp")
-			set_target_properties("${test}_without_boost_asio" PROPERTIES COMPILE_FLAGS "-DNO_HNC_Boost_Asio")
-			message(STATUS "Add test tests/${test}_without_boost_asio")
-			add_test("${test}_without_boost_asio" "${test}_without_boost_asio")
+			add_executable("${test_name}_without_boost_asio" "${test_source}")
+			set_target_properties("${test_name}_without_boost_asio" PROPERTIES COMPILE_FLAGS "-DNO_HNC_Boost_Asio")
+			message(STATUS "Add test ${test_name}_without_boost_asio")
+			add_test("${test_name}_without_boost_asio" "${test_name}_without_boost_asio")
 			
 		# Executable
 		else()
 		
 			# Executable
-			add_executable(${test} "tests/${test}.cpp")
+			add_executable(${test_name} "${test_source}")
 			
 			# Test with args
-			if ("${test}" STREQUAL "test__args")
-				add_test(${test} "${test}" "--opt" "--int" "42" "--float" "3.14" "--ints" "21" "42" "73" "--types" "this is a" "tuple" "with" "5" "elements")
-			elseif (${test} STREQUAL "test__args_without_argument")
-				add_test(${test} "${test}" "--opt0" "--option1" "--opt3")
-			elseif (${test} STREQUAL "test__args_with_one_argument")
-				add_test(${test} "${test}" "--n" "21" "--M" "42" "--u" "--V" "--c" "c" "--W" "word" "--s" "A few words is a sentence")
-			elseif (${test} STREQUAL "test__args_with_same_type_arguments")
-				add_test(${test} "${test}" "--n" "21" "42" "73" "--x_y" "800" "600" "--U" "21" "--v" "--C" "d" "e" "f")
-			elseif (${test} STREQUAL "test__args_with_different_type_arguments")
-				add_test(${test} "${test}" "--n" "21" "42" "73" "--x_y" "800" "600" "--U" "21" "--v" "--C" "d" "e" "f" "--t" "42" "One word" "c" "1" "--i" "21" "--A" "b")
+			if ("${test_name}" STREQUAL "test__args")
+				add_test(${test_name} "${test_name}" "--opt" "--int" "42" "--float" "3.14" "--ints" "21" "42" "73" "--types" "this is a" "tuple" "with" "5" "elements")
+			elseif (${test_name} STREQUAL "test__args_without_argument")
+				add_test(${test_name} "${test_name}" "--opt0" "--option1" "--opt3")
+			elseif (${test_name} STREQUAL "test__args_with_one_argument")
+				add_test(${test_name} "${test_name}" "--n" "21" "--M" "42" "--u" "--V" "--c" "c" "--W" "word" "--s" "A few words is a sentence")
+			elseif (${test_name} STREQUAL "test__args_with_same_type_arguments")
+				add_test(${test_name} "${test_name}" "--n" "21" "42" "73" "--x_y" "800" "600" "--U" "21" "--v" "--C" "d" "e" "f")
+			elseif (${test_name} STREQUAL "test__args_with_different_type_arguments")
+				add_test(${test_name} "${test_name}" "--n" "21" "42" "73" "--x_y" "800" "600" "--U" "21" "--v" "--C" "d" "e" "f" "--t" "42" "One word" "c" "1" "--i" "21" "--A" "b")
 				
 			# Test
 			else()
-				add_test(${test} "${test}")
+				add_test(${test_name} "${test_name}")
 			endif()
 			
 		endif()
 		
 		# Add a Gnuplot check
-		if ("${test}" MATCHES ".*test__gnuplot_gnuplot_.*")
+		if ("${test_name}" MATCHES ".*test__gnuplot_gnuplot_.*")
 			if (Gnuplot_exe)
-				string(REPLACE "test__" "hnc_" gnuplot_script ${test})
+				string(REPLACE "test__" "hnc_" gnuplot_script ${test_name})
 				string(REPLACE "${gnuplot_script}" "${gnuplot_script}.png.gnuplot" gnuplot_script ${gnuplot_script})
 				message(STATUS "Add test gnuplot ${gnuplot_script}")
-				add_test("${test}_gnuplot" "${Gnuplot_exe}" "${gnuplot_script}")
+				add_test("${test_name}_gnuplot" "${Gnuplot_exe}" "${gnuplot_script}")
 			endif()
 		endif()
 		
 		# Add a LaTeX check
-		if (("${test}" MATCHES ".*test__latex_.*") OR ("${test}" MATCHES "test__tabular.*"))
+		if (("${test_name}" MATCHES ".*test__latex_.*") OR ("${test_name}" MATCHES "test__tabular.*"))
 			if (pdflatex_exe)
-				string(REPLACE "test__" "hnc_" latex_document ${test})
+				string(REPLACE "test__" "hnc_" latex_document ${test_name})
 				string(REPLACE "${latex_document}" "${latex_document}.tex" latex_document ${latex_document})
 				message(STATUS "Add test pdflatex ${latex_document}")
-				add_test("${test}_pdflatex" "${pdflatex_exe}" "-interaction=nonstopmode" "${latex_document}")
+				add_test("${test_name}_pdflatex" "${pdflatex_exe}" "-interaction=nonstopmode" "${latex_document}")
 			endif()
 		endif()
 		
-	endforeach()
-
-	# Visual tests
-
-	file(
-		GLOB_RECURSE
-		tests
-		tests_visual/*.cpp
-	)
-
-	foreach(test ${tests})
-		string(REPLACE ".cpp" "" test ${test})
-		string(REPLACE "${CMAKE_CURRENT_SOURCE_DIR}/tests_visual/" "" test ${test})
-		message(STATUS "Add visual test tests_visual/${test}")
-		add_executable(${test} "tests_visual/${test}.cpp")
-		add_test(${test} "${test}")
-	endforeach()
-
-	# Human tests
-
-	file(
-		GLOB_RECURSE
-		tests
-		tests_human/*.cpp
-	)
-
-	foreach(test ${tests})
-		string(REPLACE ".cpp" "" test ${test})
-		string(REPLACE "${CMAKE_CURRENT_SOURCE_DIR}/tests_human/" "" test ${test})
-		message(STATUS "Add human test tests_human/${test}")
-		add_executable(${test} "tests_human/${test}.cpp")
 	endforeach()
 
 

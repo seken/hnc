@@ -14,6 +14,7 @@
 
 
 #include <iostream>
+#include <iterator>
 
 #include <hnc/iterator.hpp>
 #include <hnc/container.hpp>
@@ -100,7 +101,7 @@ unsigned int test_const_it(const_random_iterator a)
 
 	if ((a + 2) != (a + 4 - 2)) { ++nb_test_fail; }
 
-	if (b != (b + a - a)) { ++nb_test_fail; }
+	if (b != (b + (a - a))) { ++nb_test_fail; }
 	
 	// Supports inequality comparisons (<, >, <= and >=) between iterators
 	// a < b

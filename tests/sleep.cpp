@@ -51,11 +51,11 @@ int main()
 	std::cout << "Sleep for 1 second" << std::endl;
 	hnc::sleep::s(1);
 
-	std::cout << "Sleep for 1 minute" << std::endl;
-	hnc::sleep::min(1);
+// 	std::cout << "Sleep for 1 minute" << std::endl;
+// 	hnc::sleep::min(1);
 
-	std::cout << "Sleep for 1 hour" << std::endl;
-	hnc::sleep::h(1);
+// 	std::cout << "Sleep for 1 hour" << std::endl;
+// 	hnc::sleep::h(1);
 
 	return 0;
 }

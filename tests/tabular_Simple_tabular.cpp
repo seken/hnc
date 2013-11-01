@@ -13,7 +13,7 @@
 // limitations under the License.
 
 
-#include "test__tabular.hpp"
+#include "tabular.hpp"
 
 
 int main()

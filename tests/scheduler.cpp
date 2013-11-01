@@ -1,4 +1,4 @@
-// Copyright © 2013 Inria, Written by Lénaïc Bagnères, lenaic.bagneres@inria.fr
+// Copyright © 2012 Lénaïc Bagnères, hnc@singularity.fr
 
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -14,28 +14,13 @@
 
 
 #include <iostream>
-#include <vector>
-#include <list>
-#include <tuple>
-#include <algorithm>
 
-#include <hnc/vector2D_minimal.hpp>
-#include <hnc/test.hpp>
+#include <hnc/scheduler.hpp>
 
 
 int main()
 {
-	{
-		hnc::vector2D_minimal<int> c(5, 10, 42);
-		std::cout << c << std::endl;
-	}
-	std::cout << std::endl;
-
-	{
-		hnc::vector2D_minimal<double> c(5, 10, 73.21);
-		std::cout << c << std::endl;
-	}
-	std::cout << std::endl;
+	std::cout << "Just test scheduler.hpp include" << std::endl;
 
 	return 0;
 }

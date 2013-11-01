@@ -146,8 +146,56 @@ int main()
 				}
 			}
 		}
-		nb_test -= hnc::test::warning(same_value, "vector2D reference values are false with [row][col] acces\n");
+		nb_test -= hnc::test::warning(same_value, "vector2D reference values are false with [row][col] access\n");
 	}
+	
+	++nb_test;
+	{
+		bool same_value = true;
+		// 0
+		if (ref.front()[0] != 10) { same_value = false; }
+		if (ref.front()[1] != 11) { same_value = false; }
+		if (ref.front()[2] != 12) { same_value = false; }
+		if (ref.front()[3] != 13) { same_value = false; }
+		if (ref.front()[4] != 14) { same_value = false; }
+		nb_test -= hnc::test::warning(same_value, "vector2D .front() fails\n");
+	}
+	
+	++nb_test;
+	{
+		bool same_value = true;
+		// 0
+		if (ref.back()[0] != 25) { same_value = false; }
+		if (ref.back()[1] != 26) { same_value = false; }
+		if (ref.back()[2] != 27) { same_value = false; }
+		if (ref.back()[3] != 28) { same_value = false; }
+		if (ref.back()[4] != 29) { same_value = false; }
+		nb_test -= hnc::test::warning(same_value, "vector2D .back() fails\n");
+	}
+	
+	++nb_test;
+	{
+		bool same_value = true;
+		// 0
+		if (ref[0].front() != 10) { same_value = false; }
+		if (ref[1].front() != 15) { same_value = false; }
+		if (ref[2].front() != 20) { same_value = false; }
+		if (ref[3].front() != 25) { same_value = false; }
+		nb_test -= hnc::test::warning(same_value, "vector2D [i].front() fails\n");
+	}
+	
+	++nb_test;
+	{
+		bool same_value = true;
+		// 0
+		if (ref[0].back() != 14) { same_value = false; }
+		if (ref[1].back() != 19) { same_value = false; }
+		if (ref[2].back() != 24) { same_value = false; }
+		if (ref[3].back() != 29) { same_value = false; }
+		nb_test -= hnc::test::warning(same_value, "vector2D [i].back() fails\n");
+	}
+
+	// Check constructors
 
 	++nb_test;
 	{
@@ -164,8 +212,6 @@ int main()
 		}
 		nb_test -= hnc::test::warning(same_value, "vector2D constructor copy does not work\n");
 	}
-
-	// Check constructors
 	
 	++nb_test;
 	{
