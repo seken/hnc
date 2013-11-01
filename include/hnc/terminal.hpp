@@ -47,17 +47,17 @@ namespace hnc
 			std::string const reset         = "\033[0m";  ///< Color by default
 			std::string const black         = "\033[30m"; ///< Color black
 			std::string const red           = "\033[31m"; ///< Color red
-			std::string const light_red     = "\033[1;31m"; ///< Color red
+			std::string const light_red     = "\033[1;31m"; ///< Color light red
 			std::string const green         = "\033[32m"; ///< Color green
-			std::string const light_green   = "\033[1;32m"; ///< Color green
+			std::string const light_green   = "\033[1;32m"; ///< Color light green
 			std::string const orange        = "\033[33m"; ///< Color orange
-			std::string const light_orange  = "\033[1;33m"; ///< Color orange
+			std::string const light_orange  = "\033[1;33m"; ///< Color light orange
 			std::string const blue          = "\033[34m"; ///< Color blue
-			std::string const light_blue    = "\033[1;34m"; ///< Color blue
+			std::string const light_blue    = "\033[1;34m"; ///< Color light blue
 			std::string const magenta       = "\033[35m"; ///< Color magenta
-			std::string const light_magenta = "\033[1;35m"; ///< Color magenta
+			std::string const light_magenta = "\033[1;35m"; ///< Color light magenta
 			std::string const cyan          = "\033[36m"; ///< Color cyan
-			std::string const light_cyan    = "\033[1;36m"; ///< Color cyan
+			std::string const light_cyan    = "\033[1;36m"; ///< Color light cyan
 			std::string const white         = "\033[37m"; ///< Color white
 		}
 
