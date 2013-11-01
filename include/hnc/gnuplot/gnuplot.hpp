@@ -234,6 +234,9 @@ namespace hnc
 				script += hnc::to_string(x_range);
 				script += hnc::to_string(y_range);
 				script += "\n";
+				script += hnc::to_string(x_tics);
+				script += hnc::to_string(y_tics);
+				script += "\n";
 				for (auto const & style : m_style) { script += hnc::to_string(style); }
 				script += "\n";
 				// Plot
