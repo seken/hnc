@@ -205,23 +205,13 @@ namespace hnc
 		}
 
 		/**
-		 * @brief Operator +
-		 * @param[in] it Iterator
-		 * @return a copy of the iterator after operation
-		 */
-		const_reverse_iterator operator+(const_reverse_iterator const & it) const
-		{
-			return ((p_data == it.p_data) ? (*this + it.m_i) : (*this));
-		}
-
-		/**
 		 * @brief Operator -
 		 * @param[in] it Iterator
-		 * @return a copy of the iterator after operation
+		 * @return the difference between the iterators
 		 */
-		const_reverse_iterator operator-(const_reverse_iterator const & it) const
+		typename const_reverse_iterator::difference_type operator-(const_reverse_iterator const & it) const
 		{
-			return ((p_data == it.p_data) ? (*this - it.m_i) : (*this));
+			return m_i - it.m_i;
 		}
 
 		// Supports inequality comparisons (<, >, <= and >=) between iterators
