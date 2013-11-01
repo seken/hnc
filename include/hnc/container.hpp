@@ -105,6 +105,16 @@ namespace hnc
 		{ }
 
 		/**
+		 * @brief Constructor with input iterator
+		 * @param[in] first Iterator of first element
+		 * @param[in] last  Iterator of last element (not included)
+		 */
+		template <class input_iterator>
+		container(input_iterator const & first, input_iterator const & last) :
+			std::vector<T>(first, last)
+		{ }
+
+		/**
 		 * @brief Constructor with std::vector
 		 * @param[in] v A std::vector<T>
 		 */
