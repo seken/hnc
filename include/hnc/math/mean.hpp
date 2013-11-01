@@ -22,7 +22,7 @@
 #include <iterator>
 #include <stdexcept>
 
-#include "../algo.hpp"
+#include "../algo/sum.hpp"
 #include "../assert.hpp"
 
 
