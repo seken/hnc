@@ -300,7 +300,7 @@ namespace hnc
 		/**
 		 * @brief Remove a file (with remove function from cstdio)
 		 *
-		 * http://www.cplusplus.com/reference/cstdio/tmpnam/
+		 * http://www.cplusplus.com/reference/cstdio/remove/
 		 * 
 		 * @param[in] pathname Pathname
 		 */
