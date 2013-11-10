@@ -23,6 +23,9 @@
 
 #include <type_traits>
 
+#include "hnc/math/pi.hpp"
+#include "degree.hpp"
+
 
 namespace hnc
 {
@@ -61,11 +64,14 @@ namespace hnc
 		/// @copydoc hnc::radian::value
 		T radian_value() const { return value(); }
 		
+		/// @copydoc hnc::degree::value
+		T degree_value() const { return ((value() * T(180)) / math::pi()); }
+		
 		/**
 		 * @brief Return a hnc::degree with converted value
 		 * @return the a hnc::degree with converted value
 		 */
-		T to_degree() const { return hnc::degree((m_value * T(180)) / hnc::math::pi()); }
+		//degree<T> to_degree() const { return degree<T>((m_value * T(180)) / math::pi()); } // Error while compiling
 	};
 }
 

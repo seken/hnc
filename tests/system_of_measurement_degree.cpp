@@ -18,6 +18,7 @@
 #include <string>
 
 #include <hnc/system_of_measurement/degree.hpp>
+#include <hnc/system_of_measurement/radian.hpp>
 #include <hnc/test.hpp>
 #include <hnc/to_string.hpp>
 
@@ -57,6 +58,14 @@ int main()
 	}
 	std::cout << std::endl;
 
+	nb_test += 1;
+	{
+		std::cout << "hnc::degree<double> angle = hnc::radian<double>(90).to_degree();" << std::endl;
+		hnc::degree<double> angle_degree = hnc::degree<double>(90); std::cout << angle_degree << std::endl;
+		hnc::radian<double> angle_radian = hnc::radian<double>(angle_degree.radian_value()); std::cout << angle_radian << std::endl;
+		nb_test -= hnc::test::warning(angle_degree.radian_value() == angle_radian.value(), "hnc::degree fails\n");
+	}
+	
 	hnc::test::warning(nb_test == 0, "hnc::degree: " + hnc::to_string(nb_test) + " test fail!\n");
 
 	return nb_test;
