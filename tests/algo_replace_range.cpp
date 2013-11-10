@@ -79,7 +79,7 @@ int main()
 		std::string src  = "a std::string";
 		std::string dest = "a std::string replaced";
 		std::string c = src;
-		hnc::algo::replace_range(c, c.begin(), c.end(), dest.begin(), dest.end());
+		hnc::algo::replace_range(c, c.begin(), c.end(), dest);
 		std::cout << src << "\n" << c << std::endl;
 		nb_test -= hnc::test::warning
 		(
@@ -109,7 +109,7 @@ int main()
 		std::string src  = "a std::string wtih a typo";
 		std::string dest = "with";
 		std::string c = src;
-		hnc::algo::replace_range(c, c.begin() + 14, c.begin() + 14 + 4, dest.begin(), dest.end());
+		hnc::algo::replace_range(c, c.begin() + 14, c.begin() + 14 + 4, dest);
 		std::cout << src << "\n" << c << std::endl;
 		nb_test -= hnc::test::warning
 		(
@@ -139,7 +139,7 @@ int main()
 		std::string src  = "a string";
 		std::string dest = " std::";
 		std::string c = src;
-		hnc::algo::replace_range(c, c.begin() + 1, c.begin() + 1 + 1, dest.begin(), dest.end());
+		hnc::algo::replace_range(c, c.begin() + 1, c.begin() + 1 + 1, dest);
 		std::cout << src << "\n" << c << std::endl;
 		nb_test -= hnc::test::warning
 		(

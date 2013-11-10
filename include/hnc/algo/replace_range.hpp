@@ -87,6 +87,33 @@ namespace hnc
 				}
 			}
 		}
+		
+		/**
+		 * @brief Replace a sequence of a container by an other container
+		 *
+		 * @code
+		 * #include <hnc/algo.hpp>
+		 * @endcode
+		 *
+		 * @param[in] c          Container
+		 * @param[in] first      Iterator on first element
+		 * @param[in] last       Iterator on last element (not included)
+		 * @param[in] new_values New values
+		 *
+		 * @warning Iterators of the container can became invalid (if insert or remove values)
+		 *
+		 * @note Consider std::replace to replace one value by one other value
+		 */
+		template <class Container_T0, class Container_T1>
+		void replace_range
+		(
+			Container_T0 & c,
+			typename Container_T0::iterator first, typename Container_T0::iterator last,
+			Container_T1 const & new_values
+		)
+		{
+			hnc::algo::replace_range(c, first, last, new_values.begin(), new_values.end());
+		}
 	}
 }
 
