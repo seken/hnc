@@ -60,6 +60,12 @@ namespace hnc
 
 		/// @copydoc hnc::radian::value
 		T radian_value() const { return value(); }
+		
+		/**
+		 * @brief Return a hnc::degree with converted value
+		 * @return the a hnc::degree with converted value
+		 */
+		T to_degree() const { return hnc::degree((m_value * T(180)) / hnc::math::pi()); }
 	};
 }
 
