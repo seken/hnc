@@ -6,8 +6,8 @@ Basic (but useful) C++11 header-only library
 
 Files can be under different licenses, see the header of a file to know its license and copyright.
 List of the licenses actually used:
-– Apache License, Version 2.0
-– GNU Affero General Public License 3+
+- Apache License, Version 2.0
+- GNU Affero General Public License 3+
 
 
  ----------------------------

@@ -1,4 +1,4 @@
-// Copyright © 2012 Lénaïc Bagnères, hnc@singularity.fr
+// Copyright © 2012, 2013 Lénaïc Bagnères, hnc@singularity.fr
 
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -19,89 +19,47 @@
 #include <string>
 
 
-/*! @mainpage A C++11 header only library
+/*! @mainpage hnc https://gitorious.org/hnc
  *
  * @section section_introduction Introduction
  *
- * hnc is a C++11 header only library.
- *
- * TODO why hnc ?
- *
- * To use hnc, you only need a C++11 compiler like GCC 4.7
- *
- * @n
- *
- *
- * @section section_decription Description
- *
- * hnc contains ... TODO
- *
- * @n
- *
- *
- * @section section_get_hnc Get hnc
- *
- * @section section_download Download
- *
- * You can get the last development version: @n
- * TODO
- *
- * Release: @n
- * TODO
- *
- * Old release: @n
- * TODO
- *
- * @section section_building_and_installation Building & Installation
- *
- * hnc is a header only library, you have nothing to build to use hnc !
- *
- * hnc contains many tests and a doxygen documentation, use CMake in a terminal:
- * @code
+ * Basic (but useful) C++11 header-only library
+ * 
+ * Files can be under different licenses, see the header of a file to know its license and copyright.
+ * List of the licenses actually used:
+ * - Apache License, Version 2.0
+ * - GNU Affero General Public License 3+
+ * 
+ * @section section_system_requirement System requirement for hnc
+ * 
+ * hnc uses CMake build system.
+ * 
+ * The required packages are:
+ * build-essential cmake git doxygen
+ * 
+ * The optional packages (but recommended) are:
+ * libssl-dev gnuplot libboost-all-dev libboost-mpi-dev
+ * 
+ * @section section_installation Installation of hnc
+ * 
+ * @subsection subsection_installation_with_cmake With CMake
+ * 
+ * Your C++ compiler must support common features of C++11
+ * GCC 4.7 works (GCC 4.7.2 is in Debian Wheezy)
+ * 
+ * Use CMake to build hnc:
  * mkdir build
  * cd build
+ * cmake .. #-DCMAKE_INSTALL_PREFIX=/path/to/install/hnc
  * make
- * make test
- * make doc
- * make install
- * @endcode
- *
- * @section section_manual_installation Manual installation
- *
- * TODO
- *
- * @section section_local_installation Local installation
- *
- * TODO
- *
- * @n
- *
- *
- * @section section_getting_use_hnc Use hnc
- *
- * TODO
- *
- * @section section_getting_started Getting started
- *
- * TODO
- *
- * @n
- *
- *
- * @section section_bug Bug
- *
- * TODO
- *
- * @n
- *
- *
- * @section section_licence Licence
- *
- * TODO
- *
- * @n
- *
- *
+ * # make doc
+ * # make test
+ * make install # su -c "make install" # sudo make install
+ * 
+ * @subsection subsection_installation_without_cmake Without CMake
+ * 
+ * hnc is an header-only library, you can copy the include directory in /usr/local or in your project.
+ * 
  */
 
 
