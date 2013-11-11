@@ -29,42 +29,73 @@ int main()
 	
 	int nb_test = 0;
 
-	++nb_test;
+	nb_test += 3;
 	{
-		std::cout << "Create default angles" << std::endl;
+		std::cout << "Default constructor" << std::endl;
 		hnc::radian<double> angle_double; std::cout << angle_double << std::endl;
 		hnc::radian<int> angle_int; std::cout << angle_int << std::endl;
 		hnc::radian<char> angle_char; std::cout << angle_char << std::endl;
 // 		hnc::radian<std::string> angle_string; // Must fails at compile time
-		nb_test -= hnc::test::warning(true, "hnc::radian fails\n");
+		nb_test -= hnc::test::warning(angle_double.value() == 0.0, "hnc::radian fails\n");
+		nb_test -= hnc::test::warning(angle_int.value() == 0, "hnc::radian fails\n");
+		nb_test -= hnc::test::warning(angle_char.value() == char(0), "hnc::radian fails\n");
 	}
 	std::cout << std::endl;
 
-	nb_test += 2;
+	nb_test += 4;
 	{
-		std::cout << "hnc::radian<int> angle(1);" << std::endl;
+		std::cout << "Constructor with value" << std::endl;
 		hnc::radian<int> angle(1); std::cout << angle << std::endl;
 		nb_test -= hnc::test::warning(angle.value() == 1, "hnc::radian fails\n");
 		nb_test -= hnc::test::warning(angle.value() == angle.radian_value(), "hnc::radian fails\n");
+		nb_test -= hnc::test::warning(angle == hnc::radian<int>(1), "hnc::radian fails\n");
+		nb_test -= hnc::test::warning(angle != hnc::radian<int>(0), "hnc::radian fails\n");
 	}
 	std::cout << std::endl;
 
-	nb_test += 2;
+	nb_test += 4;;
 	{
-		std::cout << "hnc::radian<double> angle = hnc::radian<double>(3.14);" << std::endl;
-		hnc::radian<double> angle = hnc::radian<double>(3.14); std::cout << angle << std::endl;
-		nb_test -= hnc::test::warning(angle.value() == 3.14, "hnc::radian fails\n");
+		std::cout << "Copy constructor" << std::endl;
+		hnc::radian<float> angle(hnc::radian<float>(42)); std::cout << angle << std::endl;
+		nb_test -= hnc::test::warning(angle.value() == 42, "hnc::radian fails\n");
 		nb_test -= hnc::test::warning(angle.value() == angle.radian_value(), "hnc::radian fails\n");
+		nb_test -= hnc::test::warning(angle == hnc::radian<float>(42), "hnc::radian fails\n");
+		nb_test -= hnc::test::warning(angle != hnc::radian<float>(0), "hnc::radian fails\n");
 	}
 	std::cout << std::endl;
 
-	nb_test += 1;
+	nb_test += 4;
 	{
-		std::cout << "hnc::degree<double> angle = hnc::radian<double>(90).to_degree();" << std::endl;
-		hnc::radian<double> angle_radian = hnc::radian<double>(90); std::cout << angle_radian << std::endl;
-		hnc::degree<double> angle_degree = hnc::degree<double>(angle_radian.degree_value()); std::cout << angle_degree << std::endl;
-		nb_test -= hnc::test::warning(angle_radian.degree_value() == angle_degree.value(), "hnc::radian fails\n");
+		std::cout << "Operator=" << std::endl;
+		hnc::radian<float> angle; angle = hnc::radian<float>(73); std::cout << angle << std::endl;
+		nb_test -= hnc::test::warning(angle.value() == 73, "hnc::radian fails\n");
+		nb_test -= hnc::test::warning(angle.value() == angle.radian_value(), "hnc::radian fails\n");
+		nb_test -= hnc::test::warning(angle == hnc::radian<float>(73), "hnc::radian fails\n");
+		nb_test -= hnc::test::warning(angle != hnc::radian<float>(0), "hnc::radian fails\n");
 	}
+	std::cout << std::endl;
+
+	nb_test += 3;
+	{
+		std::cout << "Constructor with hnc::degree" << std::endl;
+		hnc::degree<double> angle_degree(90); std::cout << angle_degree << " (" << angle_degree.radian_value() << "r)" << std::endl;
+		hnc::radian<double> angle_radian(angle_degree); std::cout << angle_radian << " (" << angle_radian.degree_value() << "°)" << std::endl;
+		nb_test -= hnc::test::warning(angle_radian.value() == angle_degree.radian_value(), "hnc::radian fails\n");
+		nb_test -= hnc::test::warning(angle_radian.degree_value() == angle_degree.value(), "hnc::radian fails\n");
+		nb_test -= hnc::test::warning(angle_radian == angle_degree, "hnc::radian fails\n");
+	}
+	std::cout << std::endl;
+
+	nb_test += 3;
+	{
+		std::cout << "Operator= with hnc::degree" << std::endl;
+		hnc::degree<double> angle_degree(180); std::cout << angle_degree << " (" << angle_degree.radian_value() << "r)" << std::endl;
+		hnc::radian<double> angle_radian; angle_radian = angle_degree; std::cout << angle_radian << " (" << angle_radian.degree_value() << "°)" << std::endl;
+		nb_test -= hnc::test::warning(angle_radian.value() == angle_degree.radian_value(), "hnc::radian fails\n");
+		nb_test -= hnc::test::warning(angle_radian.degree_value() == angle_degree.value(), "hnc::radian fails\n");
+		nb_test -= hnc::test::warning(angle_radian == angle_degree, "hnc::radian fails\n");
+	}
+	std::cout << std::endl;
 	
 	hnc::test::warning(nb_test == 0, "hnc::radian: " + hnc::to_string(nb_test) + " test fail!\n");
 

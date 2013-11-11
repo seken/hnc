@@ -29,6 +29,10 @@
 
 namespace hnc
 {
+	// Forward declaration of class radian
+	template <class T>
+	class radian;
+	
 	/**
 	 * @brief Degree (angle)
 	 *
@@ -42,7 +46,6 @@ namespace hnc
 	template <class T>
 	class degree
 	{
-
 	static_assert(std::is_arithmetic<T>::value, "hnc::degree works for arithmetic types only");
 		
 	private:
@@ -52,8 +55,80 @@ namespace hnc
 
 	public:
 
-		/// Default construtor
+		/**
+		 * @brief Construtor
+		 * 
+		 * @param[in] degree_value Degree value (T(0) by default)
+		 */
 		explicit degree(T const degree_value = T(0)) : m_value(degree_value) { }
+		
+		/**
+		 * @brief Constructor with hnc::radian
+		 * 
+		 * @param[in] radian A hnc::radian
+		 */
+		degree(hnc::radian<T> const radian) : m_value(radian.degree_value()) { }
+		
+		/**
+		 * @brief Operator= between hnc::degree and hnc::radian
+		 * 
+		 * @param[in] radian A hnc::radian
+		 * 
+		 * @return the hnc::degree
+		 */
+		hnc::degree<T> & operator=(hnc::radian<T> const radian)
+		{
+			m_value = radian.degree_value();
+			return *this;
+		}
+		
+		/**
+		 * @brief Operator== between two hnc::degree
+		 * 
+		 * @param[in] degree A hnc::degree
+		 * 
+		 * @return true if the hnc::degree are equals, false otherwise
+		 */
+		bool operator==(hnc::degree<T> const degree)
+		{
+			return (m_value == degree.value());
+		}
+		
+		/**
+		 * @brief Operator!= between two hnc::degree
+		 * 
+		 * @param[in] degree A hnc::degree
+		 * 
+		 * @return true if the hnc::degree are not equals, false otherwise
+		 */
+		bool operator!=(hnc::degree<T> const degree)
+		{
+			return (! (*this == degree));
+		}
+		
+		/**
+		 * @brief Operator== between hnc::degree and hnc::radian
+		 * 
+		 * @param[in] radian A hnc::radian
+		 * 
+		 * @return true if the hnc::degree and the hnc::radian are equals, false otherwise
+		 */
+		bool operator==(hnc::radian<T> const radian)
+		{
+			return (m_value == radian.degree_value());
+		}
+		
+		/**
+		 * @brief Operator!= between hnc::degree and hnc::radian
+		 * 
+		 * @param[in] radian A hnc::radian
+		 * 
+		 * @return true if the hnc::degree and the hnc::radian are not equals, false otherwise
+		 */
+		bool operator!=(hnc::radian<T> const radian)
+		{
+			return (! (*this == radian));
+		}
 
 		/**
 		 * @brief Return the degree value
@@ -71,7 +146,7 @@ namespace hnc
 		 * @brief Return a hnc::radian with converted value
 		 * @return the a hnc::radian with converted value
 		 */
-		//radian<T> to_radian() const { return radian<T>((m_value * math::pi()) / T(180)); } // Error while compiling
+		radian<T> to_radian() const { return hnc::radian<T>(radian_value()); }
 	};
 }
 
