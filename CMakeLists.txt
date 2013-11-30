@@ -137,7 +137,7 @@ cmake_minimum_required(VERSION 2.6)
 		add_custom_target(
 			doc
 			${DOXYGEN_EXECUTABLE}
-			WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/${hnc_INCLUDE}/hnc"
+			WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/include/hnc"
 			COMMENT "Generating API documentation with Doxygen" VERBATIM
 		)
 	else()
@@ -282,6 +282,7 @@ cmake_minimum_required(VERSION 2.6)
 
 	install(DIRECTORY include/ DESTINATION include FILES_MATCHING PATTERN "*.hpp")
 	install(FILES hnc-config.cmake DESTINATION lib/hnc)
+	install(DIRECTORY doc/doxygen DESTINATION share/hnc)
 
 
 # Little help

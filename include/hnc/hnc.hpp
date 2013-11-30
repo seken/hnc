@@ -19,7 +19,7 @@
 #include <string>
 
 
-/*! @mainpage hnc https://gitorious.org/hnc
+/*! @mainpage hnc https://gitorious.org/hnc http://hnc.toile-libre.org/index.php?page=development#hnc https://www.lri.fr/~bagneres/index.php?page=development#hnc
  *
  * @section section_introduction Introduction
  *
@@ -34,32 +34,31 @@
  * 
  * hnc uses CMake build system.
  * 
- * The required packages are:
+ * The required packages are: @n
  * build-essential cmake git doxygen
  * 
- * The optional packages (but recommended) are:
+ * The optional packages (but recommended) are: @n
  * libssl-dev gnuplot libboost-all-dev libboost-mpi-dev
  * 
  * @section section_installation Installation of hnc
  * 
  * @subsection subsection_installation_with_cmake With CMake
  * 
- * Your C++ compiler must support common features of C++11
+ * Your C++ compiler must support common features of C++11 @n
  * GCC 4.7 works (GCC 4.7.2 is in Debian Wheezy)
  * 
- * Use CMake to build hnc:
- * mkdir build
- * cd build
- * cmake .. #-DCMAKE_INSTALL_PREFIX=/path/to/install/hnc
- * make
- * # make doc
- * # make test
+ * Use CMake to build hnc: @n
+ * mkdir build @n
+ * cd build @n
+ * cmake .. #-DCMAKE_INSTALL_PREFIX=/path/to/install/hnc @n
+ * make @n
+ * make doc @n
+ * make test @n
  * make install # su -c "make install" # sudo make install
  * 
  * @subsection subsection_installation_without_cmake Without CMake
  * 
  * hnc is an header-only library, you can copy the include directory in /usr/local or in your project.
- * 
  */
 
 
@@ -67,10 +66,10 @@
 namespace hnc
 {
 	/// Version of hnc
-	std::string version() { return "0.0.0"; }
+	inline std::string version() { return "0.0.0"; }
 
 	/// Codename of hnc
-	std::string codename() { return "hope ;)"; }
+	inline std::string codename() { return "hope ;)"; }
 }
 
 #endif
