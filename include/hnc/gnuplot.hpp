@@ -21,6 +21,7 @@
 
 #include "gnuplot/gnuplot.hpp"
 #include "gnuplot/gnuplot_boxes.hpp"
+#include "gnuplot/gnuplot_lines.hpp"
 
 
 namespace hnc

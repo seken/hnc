@@ -18,7 +18,7 @@
 
 #include <iostream>
 
-#include <hnc/gnuplot/gnuplot_boxes.hpp>
+#include <hnc/gnuplot/gnuplot_lines.hpp>
 #include <hnc/system.hpp>
 #include <hnc/test.hpp>
 #include <hnc/to_string.hpp>
@@ -31,25 +31,43 @@ int main()
 	int nb_test = 0;
 	
 	{
-		std::map<std::string, int> data;
-		data["A"] = 1;
-		data["B"] = 2;
-		data["C"] = 5;
-		data["D"] = 3;
-		data["E"] = 4;
-		data["F"] = 2;
-		data["G"] = 1;
+		std::map<std::string, int> data_0;
+		data_0["A"] = 1;
+		data_0["B"] = 2;
+		data_0["C"] = 5;
+		data_0["D"] = 3;
+		data_0["E"] = 4;
+		data_0["F"] = 2;
+		data_0["G"] = 1;
 		
-		hnc::gnuplot::gnuplot_boxes gp
+		std::map<std::string, int> data_1;
+		data_1["A"] = 3;
+		data_1["B"] = 6;
+		data_1["C"] = 2;
+		data_1["D"] = 1;
+		data_1["E"] = 2;
+		data_1["F"] = 3;
+		data_1["G"] = 2;
+		
+		std::map<std::string, int> data_2;
+		data_2["A"] = 2;
+		data_2["B"] = 3;
+		data_2["C"] = 4;
+		data_2["D"] = 3;
+		data_2["E"] = 4;
+		data_2["F"] = 7;
+		data_2["G"] = 3;
+		
+		hnc::gnuplot::gnuplot_lines gp
 		(
-			hnc::gnuplot::output_terminal_png("hnc_gnuplot_gnuplot_boxes").size(640, 480),
-			data
+			hnc::gnuplot::output_terminal_png("hnc_gnuplot_gnuplot_lines_with_multilines").size(640, 480)
 		);
-		gp.plot().fill();
-		gp.plot().set_title("boxes legend");
+		gp.add_line(data_0, "First line");
+		gp.add_line(data_1, "Second line");
+		gp.add_line(data_2, "Third line");
 
-		gp.set_title("hnc::gnuplot::gnuplot\\_boxes");
-		gp.y_range.range(0, gp.max_data_value() + 1);
+		gp.set_title("hnc::gnuplot::gnuplot\\_lines\\_with\\_multilines");
+		gp.y_range.range(0, gp.max_data_value() + 2);
 		
 		// Write in files
 		gp.write_script_in_file();
@@ -73,8 +91,8 @@ int main()
 		{
 			std::cout << "Minimum data value = " << gp.min_data_value() << std::endl;
 			std::cout << "Maximum data value = " << gp.max_data_value() << std::endl;
-			nb_test -= hnc::test::warning(gp.min_data_value() == 1, "hnc::gnuplot::gnuplot_boxes:min_data_value fails\n");
-			nb_test -= hnc::test::warning(gp.max_data_value() == 5, "hnc::gnuplot::gnuplot_boxes:max_data_value fails\n");
+			nb_test -= hnc::test::warning(gp.min_data_value() == 1, "hnc::gnuplot::gnuplot_lines:min_data_value fails\n");
+			nb_test -= hnc::test::warning(gp.max_data_value() == 7, "hnc::gnuplot::gnuplot_lines:max_data_value fails\n");
 		}
 		std::cout << std::endl;
 
@@ -83,7 +101,7 @@ int main()
 		std::cout << std::endl;
 	}
 
-	hnc::test::warning(nb_test == 0, "hnc::gnuplot::gnuplot_boxes: " + hnc::to_string(nb_test) + " test fail!\n");
+	hnc::test::warning(nb_test == 0, "hnc::gnuplot::gnuplot_lines: " + hnc::to_string(nb_test) + " test fail!\n");
 
 	return nb_test;
 }

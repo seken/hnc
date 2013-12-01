@@ -18,7 +18,7 @@
 
 #include <iostream>
 
-#include <hnc/gnuplot/gnuplot_boxes.hpp>
+#include <hnc/gnuplot/gnuplot_lines.hpp>
 #include <hnc/system.hpp>
 #include <hnc/test.hpp>
 #include <hnc/to_string.hpp>
@@ -40,15 +40,14 @@ int main()
 		data["F"] = 2;
 		data["G"] = 1;
 		
-		hnc::gnuplot::gnuplot_boxes gp
+		hnc::gnuplot::gnuplot_lines gp
 		(
-			hnc::gnuplot::output_terminal_png("hnc_gnuplot_gnuplot_boxes").size(640, 480),
+			hnc::gnuplot::output_terminal_png("hnc_gnuplot_gnuplot_lines").size(640, 480),
 			data
 		);
-		gp.plot().fill();
-		gp.plot().set_title("boxes legend");
+		gp.plot().set_title("lines legend");
 
-		gp.set_title("hnc::gnuplot::gnuplot\\_boxes");
+		gp.set_title("hnc::gnuplot::gnuplot\\_lines");
 		gp.y_range.range(0, gp.max_data_value() + 1);
 		
 		// Write in files
@@ -73,8 +72,8 @@ int main()
 		{
 			std::cout << "Minimum data value = " << gp.min_data_value() << std::endl;
 			std::cout << "Maximum data value = " << gp.max_data_value() << std::endl;
-			nb_test -= hnc::test::warning(gp.min_data_value() == 1, "hnc::gnuplot::gnuplot_boxes:min_data_value fails\n");
-			nb_test -= hnc::test::warning(gp.max_data_value() == 5, "hnc::gnuplot::gnuplot_boxes:max_data_value fails\n");
+			nb_test -= hnc::test::warning(gp.min_data_value() == 1, "hnc::gnuplot::gnuplot_lines:min_data_value fails\n");
+			nb_test -= hnc::test::warning(gp.max_data_value() == 5, "hnc::gnuplot::gnuplot_lines:max_data_value fails\n");
 		}
 		std::cout << std::endl;
 
@@ -83,7 +82,7 @@ int main()
 		std::cout << std::endl;
 	}
 
-	hnc::test::warning(nb_test == 0, "hnc::gnuplot::gnuplot_boxes: " + hnc::to_string(nb_test) + " test fail!\n");
+	hnc::test::warning(nb_test == 0, "hnc::gnuplot::gnuplot_lines: " + hnc::to_string(nb_test) + " test fail!\n");
 
 	return nb_test;
 }

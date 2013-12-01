@@ -138,7 +138,7 @@ namespace hnc
 			template <class numeric_t>
 			plot_boxes set_data(std::map<std::string, numeric_t> const & data)
 			{
-				static_assert(std::numeric_limits<numeric_t>::is_specialized, "hnc::gnuplot::plot_boxes::plot_boxes works for numeric types only");
+				static_assert(std::numeric_limits<numeric_t>::is_specialized, "hnc::gnuplot::plot_boxes::set_data works for numeric types only");
 
 				// Get data
 				std::string r;

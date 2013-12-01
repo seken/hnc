@@ -52,11 +52,11 @@ namespace hnc
 		 * 	hnc::gnuplot::output_terminal_png("hnc_gnuplot_gnuplot_boxes").size(640, 480),
 		 * 	data
 		 * );
+		 * gp.plot().fill();
+		 * gp.plot().set_title("boxes legend");
 		 * 
 		 * gp.set_title("hnc::gnuplot::gnuplot\\_boxes");
 		 * gp.y_range.range(0, gp.max_data_value() + 1);
-		 * 
-		 * gp.plot().set_title("boxes legend");
 		 * @endcode
 		 */
 		class gnuplot_boxes : public hnc::gnuplot::gnuplot
@@ -76,12 +76,25 @@ namespace hnc
 
 			/**
 			 * @brief Constructor
+			 * 
 			 * @param[in] terminal_output Terminal output hnc::gnuplot::output_terminal_pdf, hnc::gnuplot::output_terminal_svg, hnc::gnuplot::output_terminal_png
+			 * @param[in] data            A std::map with std::string as key (x tick) and a numeric as value (y value)
+			 *
+			 * Data example:
+			 * @code
+			 * std::map<std::string, int> data;
+			 * data["A"] = 1;
+			 * data["B"] = 2;
+			 * data["C"] = 5;
+			 * data["D"] = 3;
+			 * @endcode
 			 */
 			template <class terminal_output_t, class numeric_t>
 			gnuplot_boxes(terminal_output_t const & terminal_output, std::map<std::string, numeric_t> const & data) :
 				hnc::gnuplot::gnuplot(terminal_output),
-				m_plot(m_output_filename + ".data")
+				m_plot(m_output_filename + ".data"),
+				m_min_data_value(std::numeric_limits<double>::max()),
+				m_max_data_value(std::numeric_limits<double>::min())
 			{
 				this->set_data(data);
 			}
