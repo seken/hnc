@@ -282,7 +282,9 @@ cmake_minimum_required(VERSION 2.6)
 
 	install(DIRECTORY include/ DESTINATION include FILES_MATCHING PATTERN "*.hpp")
 	install(FILES hnc-config.cmake DESTINATION lib/hnc)
-	install(DIRECTORY doc/doxygen DESTINATION share/hnc)
+	if (IS_DIRECTORY doc/doxygen)
+		install(DIRECTORY doc/doxygen DESTINATION share/hnc)
+	endif()
 
 
 # Little help
