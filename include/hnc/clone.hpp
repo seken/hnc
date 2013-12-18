@@ -28,8 +28,85 @@ namespace hnc
 	
 	/// @brief is cloneable
 	template <class T>
-	class is_cloneable<T, typename this_type<decltype(std::declval<T&>().clone())>::is_valid> : public std::true_type
+	class is_cloneable<T, typename this_type<decltype(std::declval<T &>().clone())>::is_valid> : public std::true_type
 	{ };
+}
+
+/**
+ * @brief Generate .clone() method
+ *
+ * This macro generate the .clone() const method which return a std::unique_ptr of the base class
+ *
+ * @code
+ * class B
+ * {
+ * public:
+ * 	virtual ~B() { }
+ * 	hnc_generate_clone_method(B, B)
+ * };
+ * 
+ * class D
+ * {
+ * public:
+ * 	virtual ~D() { }
+ * 	hnc_generate_clone_method(B, D)
+ * };
+ * @endcode
+ *
+ * @param[in] base_t    Type of the base class
+ * @param[in] derived_t Type of the derived class
+ *
+ * @note Consider hnc::cloneable(base_t, derived_t) for template and inheritance solution
+ */
+#define hnc_generate_clone_method(base_t, derived_t) \
+	virtual std::unique_ptr<base_t> clone() const \
+	{ \
+		return std::unique_ptr<base_t>(new derived_t(*this)); \
+	}
+
+namespace hnc
+{
+	/**
+	 * @brief Base class for cloneable
+	 *
+	 * hnc::cloneable takes two template arguments: the base and the derived class
+	 *
+	 * Add a clone method to the derived class
+	 * @code
+	 * class B : public hnc::cloneable<B, B>
+	 * {
+	 * public:
+	 * 	virtual ~B() { }
+	 * };
+	 * @endcode
+	 *
+	 * @warning If the class have already a clone method, you must specify which one to use
+	 * @code
+	 * class D : public B, public hnc::cloneable<B, D>
+	 * {
+	 * public:
+	 * 	virtual ~D() { }
+	 * 	using hnc::cloneable<B, D>::clone();
+	 * };
+	 * @endcode
+	 *
+	 * @note Consider hnc_generate_clone_method(base_t, derived_t) macro to generate .clone() method
+	 */
+	template <class base_t, class derived_t>
+	class cloneable
+	{
+	public:
+		
+		/// Destructor
+		virtual ~cloneable() { }
+		
+		/// @brief Clone the derived_t object and return a base_t
+		/// @return A std::unique_ptr of base_t
+		virtual std::unique_ptr<base_t> clone() const
+		{
+			return std::unique_ptr<base_t>(new derived_t(*static_cast<derived_t const *>(this)));
+		}
+	};
 }
 
 namespace hnc

@@ -37,7 +37,7 @@ class B : public A
 {
 public:
 	virtual ~B() { }
-	virtual void display(std::ostream & o) const { o << "one_B"; }
+	virtual void display(std::ostream & o) const override { o << "one_B"; }
 };
 
 
@@ -53,7 +53,7 @@ class D : public C
 public:
 	virtual ~D() { }
 	D clone() const { return D(*this); }
-	virtual void display(std::ostream & o) const { o << "one_D"; }
+	virtual void display(std::ostream & o) const override { o << "one_D"; }
 };
 
 
@@ -61,7 +61,7 @@ class E
 {
 public:
 	virtual ~E() { }
-	std::unique_ptr<E> clone() const { std::cout << "E::clone()" << std::endl; return std::unique_ptr<E>(new E(*this)); }
+	virtual std::unique_ptr<E> clone() const { std::cout << "E::clone()" << std::endl; return std::unique_ptr<E>(new E(*this)); }
 	virtual void display(std::ostream & o) const { o << "one_E"; }
 };
 
@@ -69,13 +69,73 @@ class F : public E
 {
 public:
 	virtual ~F() { }
-	std::unique_ptr<F> clone() const { std::cout << "F::clone()" << std::endl; return std::unique_ptr<F>(new F(*this)); }
-	virtual void display(std::ostream & o) const { o << "one_F"; }
+	virtual std::unique_ptr<E> clone() const override { std::cout << "F::clone()" << std::endl; return std::unique_ptr<E>(new F(*this)); }
+	virtual void display(std::ostream & o) const override { o << "one_F"; }
 };
+
+class G : public E, public hnc::cloneable<E, G>
+{
+public:
+	virtual ~G() { }
+	using hnc::cloneable<E, G>::clone;
+	virtual void display(std::ostream & o) const override { o << "one_G"; }
+};
+
+
+class H : public hnc::cloneable<H, H>
+{
+public:
+	virtual ~H() { }
+	virtual void display(std::ostream & o) const { o << "one_H"; }
+};
+
+class I : public H, public hnc::cloneable<H, I>
+{
+public:
+	virtual ~I() { }
+	using hnc::cloneable<H, I>::clone;
+	virtual void display(std::ostream & o) const override { o << "one_I"; }
+};
+
+class J : public I, public hnc::cloneable<H, J>
+{
+public:
+	virtual ~J() { }
+	using hnc::cloneable<H, J>::clone;
+	virtual void display(std::ostream & o) const override { o << "one_J"; }
+};
+
+
+class K
+{
+public:
+	virtual ~K() { }
+	hnc_generate_clone_method(K, K)
+	virtual void display(std::ostream & o) const { o << "one_K"; }
+};
+
+class L : public K
+{
+public:
+	virtual ~L() { }
+	hnc_generate_clone_method(K, L)
+	virtual void display(std::ostream & o) const { o << "one_L"; }
+};
+
+class M : public L
+{
+public:
+	virtual ~M() { }
+	hnc_generate_clone_method(K, M)
+	virtual void display(std::ostream & o) const { o << "one_M"; }
+};
+
 
 std::ostream & operator<<(std::ostream & o, A const & v) { v.display(o); return o; }
 std::ostream & operator<<(std::ostream & o, C const & v) { v.display(o); return o; }
 std::ostream & operator<<(std::ostream & o, E const & v) { v.display(o); return o; }
+std::ostream & operator<<(std::ostream & o, H const & v) { v.display(o); return o; }
+std::ostream & operator<<(std::ostream & o, K const & v) { v.display(o); return o; }
 
 template <class T>
 std::ostream & operator<<(std::ostream & o, std::unique_ptr<T> const & p) { o << *p; return o; }
@@ -89,7 +149,7 @@ void test_is_cloneable_and_clone
 	int & nb_test
 )
 {
-	nb_test += 2;
+	nb_test += 3;
 	
 	if (hnc::is_cloneable<T>())
 	{
@@ -99,12 +159,16 @@ void test_is_cloneable_and_clone
 	{
 		std::cout << type_name << " is not cloneable" << std::endl;
 	}
-	nb_test -= hnc::test::warning(hnc::is_cloneable<T>() == expected_result, "hnc::clone fails with a " + type_name + " !\n");
+	nb_test -= hnc::test::warning(hnc::is_cloneable<T>() == expected_result, type_name + " should be hnc::is_cloneable\n");
 	
-	std::cout << "Original = " << t << std::endl;
-	std::cout << "Clone    = " << hnc::to_string(hnc::clone(t)) << std::endl;
+	auto clone = hnc::to_string(hnc::clone(t));
+	auto clone_of_clone = hnc::to_string(hnc::clone(clone));
+	std::cout << "Original       = " << t << std::endl;
+	std::cout << "Clone          = " << clone << std::endl;
+	std::cout << "Clone of clone = " << clone_of_clone << std::endl;
+	nb_test -= hnc::test::warning(hnc::to_string(clone) == expected_clone_display, "hnc::clone display fails with a " + type_name + "\n");
+	nb_test -= hnc::test::warning(hnc::to_string(clone_of_clone) == expected_clone_display, "hnc::clone of clone display fails with a " + type_name + "\n");
 	std::cout << std::endl;
-	nb_test -= hnc::test::warning(hnc::to_string(hnc::clone(t)) == expected_clone_display, "hnc::clone display fails with a " + type_name + " !\n");
 }
 
 
@@ -126,8 +190,15 @@ int main()
 	
 	test_is_cloneable_and_clone(E(), "E", true, "one_E", nb_test);
 	test_is_cloneable_and_clone(F(), "F", true, "one_F", nb_test);
+	test_is_cloneable_and_clone(G(), "G", true, "one_G", nb_test);
 	
-	std::cout << std::endl;
+	test_is_cloneable_and_clone(H(), "H", true, "one_H", nb_test);
+	test_is_cloneable_and_clone(I(), "I", true, "one_I", nb_test);
+	test_is_cloneable_and_clone(J(), "J", true, "one_J", nb_test);
+	
+	test_is_cloneable_and_clone(K(), "K", true, "one_K", nb_test);
+	test_is_cloneable_and_clone(L(), "L", true, "one_L", nb_test);
+	test_is_cloneable_and_clone(M(), "M", true, "one_M", nb_test);
 
 	hnc::test::warning(nb_test == 0, "hnc::clone: " + hnc::to_string(nb_test) + " test fail!\n");
 
