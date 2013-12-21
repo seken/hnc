@@ -52,7 +52,7 @@ class D : public C
 {
 public:
 	virtual ~D() { }
-	D clone() const { return D(*this); }
+	std::unique_ptr<D> clone() const { return std::unique_ptr<D>(new D(*this)); }
 	virtual void display(std::ostream & o) const override { o << "one_D"; }
 };
 
@@ -149,7 +149,7 @@ void test_is_cloneable_and_clone
 	int & nb_test
 )
 {
-	nb_test += 3;
+	nb_test += 4;
 	
 	if (hnc::is_cloneable<T>())
 	{
@@ -163,11 +163,14 @@ void test_is_cloneable_and_clone
 	
 	auto clone = hnc::to_string(hnc::clone(t));
 	auto clone_of_clone = hnc::to_string(hnc::clone(clone));
-	std::cout << "Original       = " << t << std::endl;
-	std::cout << "Clone          = " << clone << std::endl;
-	std::cout << "Clone of clone = " << clone_of_clone << std::endl;
+	auto clone_to_unique_ptr = hnc::clone_to_unique_ptr(t);
+	std::cout << "Original                 = " << hnc::to_string(t) << std::endl;
+	std::cout << "Clone                    = " << hnc::to_string(clone) << std::endl;
+	std::cout << "Clone of clone           = " << hnc::to_string(clone_of_clone) << std::endl;
+	std::cout << "Clone to std::unique_ptr = " << hnc::to_string(*clone_to_unique_ptr) << std::endl;
 	nb_test -= hnc::test::warning(hnc::to_string(clone) == expected_clone_display, "hnc::clone display fails with a " + type_name + "\n");
 	nb_test -= hnc::test::warning(hnc::to_string(clone_of_clone) == expected_clone_display, "hnc::clone of clone display fails with a " + type_name + "\n");
+	nb_test -= hnc::test::warning(hnc::to_string(*clone_to_unique_ptr) == expected_clone_display, "hnc::clone_to_unique_ptr display fails with a " + type_name + "\n");
 	std::cout << std::endl;
 }
 

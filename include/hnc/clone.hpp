@@ -21,12 +21,12 @@
 
 namespace hnc
 {
-	/// @brief is not cloneable
+	/// @brief Type is not cloneable
 	template <class T, class sfinae_valid_type = void>
 	class is_cloneable : public std::false_type
 	{ };
 	
-	/// @brief is cloneable
+	/// @brief Type is cloneable
 	template <class T>
 	class is_cloneable<T, typename this_type<decltype(std::declval<T &>().clone())>::is_valid> : public std::true_type
 	{ };
@@ -121,20 +121,55 @@ namespace hnc
 		return T(v);
 	}
 	
+	/// @brief Clone the object with .clone() method
+	/// @param[in] t   An object
+	/// @param[in] tag std::true_type
+	/// @return a clone of the object
 	template <class T>
 	auto clone(T const & v, std::true_type const /*tag*/) -> decltype(v.clone())
 	{
 		return v.clone();
 	}
 	
-	/// @brief Clone the object with .clone() method
-	/// @param[in] t   An object
-	/// @param[in] tag std::true_type
+	/// @brief Clone the object
+	/// @param[in] t An object
 	/// @return a clone of the object
 	template <class T>
 	auto clone(T const & v) -> decltype(hnc::clone(v, hnc::is_cloneable<T>()))
 	{
 		return hnc::clone(v, hnc::is_cloneable<T>());
+	}
+}
+
+namespace hnc
+{
+	/// @brief Clone the object with copy constructor
+	/// @param[in] t   An object
+	/// @param[in] tag std::false_type
+	/// @return a clone of the object in a std::unique_ptr
+	template <class T>
+	std::unique_ptr<T> clone_to_unique_ptr(T const & v, std::false_type const /*tag*/)
+	{
+		return std::unique_ptr<T>(new T(v));
+	}
+	
+	/// @brief Clone the object with .clone() method
+	/// @param[in] t   An object
+	/// @param[in] tag std::true_type
+	/// @return a clone of the object in a std::unique_ptr
+	template <class T>
+	auto clone_to_unique_ptr(T const & v, std::true_type const /*tag*/) -> decltype(v.clone())
+	{
+		return v.clone();
+	}
+	
+	/// @brief Clone the object
+	/// @param[in] t An object
+	/// @return a clone of the object in a std::unique_ptr
+	template <class T>
+	auto clone_to_unique_ptr(T const & v) -> decltype(hnc::clone_to_unique_ptr(v, hnc::is_cloneable<T>()))
+	{
+		return hnc::clone_to_unique_ptr(v, hnc::is_cloneable<T>());
 	}
 }
 
