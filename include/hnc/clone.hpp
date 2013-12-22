@@ -28,7 +28,7 @@ namespace hnc
 	
 	/// @brief Type is cloneable
 	template <class T>
-	class is_cloneable<T, typename this_type<decltype(std::declval<T &>().clone())>::is_valid> : public std::true_type
+	class is_cloneable<T, typename hnc::this_type<decltype(std::declval<T &>().clone())>::is_valid> : public std::true_type
 	{ };
 }
 
