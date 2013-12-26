@@ -213,7 +213,7 @@ namespace hnc
 		/// @return a reference to the stored object to access of its members
 		using std::unique_ptr<T>::operator->;
 		
-	private:
+	protected:
 		
 		/// @brief Constructor from a raw pointer
 		/// @param[in] p A raw pointer
