@@ -160,7 +160,6 @@ namespace hnc
 		template <class derived_t>
 		copy_ptr(hnc::copy_ptr<derived_t> const & p) : std::unique_ptr<T>()
 		{
-			
 			if (p)
 			{
 				std::unique_ptr<T>::operator=
@@ -188,6 +187,7 @@ namespace hnc
 		hnc_generate_copy_and_move_assignment(copy_ptr<T>)
 		
 		/// @brief Return the stored pointer
+		/// @pre The pointer is nott nullptr
 		/// @return the stored pointer
 		using std::unique_ptr<T>::get;
 		
@@ -206,10 +206,12 @@ namespace hnc
 		using std::unique_ptr<T>::swap;
 		
 		/// @brief Return a reference to the stored object
+		/// @pre The pointer is nott nullptr
 		/// @return a reference to the stored object
 		using std::unique_ptr<T>::operator*;
 		
 		/// @brief Return a reference to the stored object to access of its members
+		/// @pre The pointer is nott nullptr
 		/// @return a reference to the stored object to access of its members
 		using std::unique_ptr<T>::operator->;
 		

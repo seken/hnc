@@ -105,7 +105,7 @@ int main()
 	
 	nb_test += 5;
 	{
-		hnc::value_ptr<std::string> v(std::string("hnc::value_ptr of std::string"));
+		hnc::value_ptr<std::string> v("hnc::value_ptr of std::string");
 		hnc::value_ptr<std::string> v_copy_constructor(v);
 		hnc::value_ptr<std::string> v_copy_assignement; v_copy_assignement = v;
 		std::cout << v << std::endl;
@@ -118,7 +118,7 @@ int main()
 		hnc::value_ptr<std::string> v0 = v;
 		hnc::value_ptr<std::string> v1 = v;
 		hnc::value_ptr<std::string> v_move_constructor(std::move(v0));
-		hnc::value_ptr<std::string> v_move_assignement(std::string("default value")); v_move_assignement = std::move(v1);
+		hnc::value_ptr<std::string> v_move_assignement("default value"); v_move_assignement = std::move(v1);
 // 		std::cout << v0 << std::endl;
 // 		std::cout << v1 << std::endl;
 		std::cout << v_move_constructor << std::endl;

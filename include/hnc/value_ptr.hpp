@@ -89,15 +89,14 @@ namespace hnc
 		{ }
 		
 		/// @brief Constrcutor
-		/// @param[in] v Value
-		template <class U>
-		value_ptr(U const & v) : hnc::copy_ptr<T>(hnc::clone_to_unique_ptr(v).release())
+		/// @param[in] value Value
+		value_ptr(T const & value) : hnc::copy_ptr<T>(hnc::clone_to_unique_ptr(value).release())
 		{ }
 		
 		/// @brief Copy constrcutor
-		/// @param[in] v Value
+		/// @param[in] value Value
 		template <class U>
-		value_ptr(hnc::value_ptr<U> const & v) : hnc::copy_ptr<T>(hnc::clone_to_unique_ptr(*v).release())
+		value_ptr(hnc::value_ptr<U> const & value) : hnc::copy_ptr<T>(hnc::clone_to_unique_ptr(*value).release())
 		{ }
 		
 		/// @brief Return the stored pointer
@@ -123,15 +122,15 @@ hnc_overload_std_swap_with_swap_method_for_template_class(hnc::value_ptr<T>, cla
 /**
  * @brief Display a hnc::value_ptr of T
  *
- * @param[in,out] o Out stream
- * @param[in]     v A hnc::value_ptr of T
+ * @param[in,out] o     Out stream
+ * @param[in]     value A hnc::value_ptr of T
  *
  * @return the out stream
  */
 template <class T>
-std::ostream & operator<<(std::ostream & o, hnc::value_ptr<T> const & v)
+std::ostream & operator<<(std::ostream & o, hnc::value_ptr<T> const & value)
 {
-	o << *v;
+	o << *value;
 	return o;
 }
 
