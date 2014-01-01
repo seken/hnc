@@ -1,3 +1,9 @@
+# Copyright © 2012-2014 Lénaïc Bagnères, hnc@singularity.fr
+
+https://gitorious.org/hnc
+http://hnc.toile-libre.org/index.php?page=development#hnc
+https://www.lri.fr/~bagneres/index.php?page=development#hnc
+
  -------------------------------
 | hnc https://gitorious.org/hnc |
  -------------------------------
@@ -46,3 +52,17 @@ Without CMake
 -------------
  
 hnc is an header-only library, you can copy the include directory in /usr/local or in your project.
+
+
+ ---------
+| Use hnc |
+ ---------
+ 
+If you use CMake, add these lines in your CMakeLists.txt:
+# hnc
+message(STATUS "---")
+find_package(hnc REQUIRED)
+# See /hnc/installation/path/lib/hnc/hnc-config.cmake for CMake variables
+
+If you have make the documentation, the doxygen is in:
+/hnc/installation/path/share/hnc/doxygen/

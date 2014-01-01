@@ -1,4 +1,4 @@
-// Copyright © 2012, 2013 Lénaïc Bagnères, hnc@singularity.fr
+// Copyright © 2012-2014 Lénaïc Bagnères, hnc@singularity.fr
 
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -19,7 +19,11 @@
 #include <string>
 
 
-/*! @mainpage hnc https://gitorious.org/hnc http://hnc.toile-libre.org/index.php?page=development#hnc https://www.lri.fr/~bagneres/index.php?page=development#hnc
+/*! @mainpage hnc https://gitorious.org/hnc
+ * 
+ * https://gitorious.org/hnc @n
+ * http://hnc.toile-libre.org/index.php?page=development#hnc @n
+ * https://www.lri.fr/~bagneres/index.php?page=development#hnc
  *
  * @section section_introduction Introduction
  *
@@ -47,18 +51,34 @@
  * Your C++ compiler must support common features of C++11 @n
  * GCC 4.7 works (GCC 4.7.2 is in Debian Wheezy)
  * 
- * Use CMake to build hnc: @n
- * mkdir build @n
- * cd build @n
- * cmake .. #-DCMAKE_INSTALL_PREFIX=/path/to/install/hnc @n
- * make @n
- * make doc @n
- * make test @n
- * make install # su -c "make install" # sudo make install
+ * Use CMake to build hnc:
+ * @code
+   mkdir build
+   cd build
+   cmake .. #-DCMAKE_INSTALL_PREFIX=/path/to/install/hnc
+   make
+   make doc
+   make test
+   make install # su -c "make install" # sudo make install
+   @endcode
  * 
  * @subsection subsection_installation_without_cmake Without CMake
  * 
  * hnc is an header-only library, you can copy the include directory in /usr/local or in your project.
+ * 
+ * @section section_use Use hnc
+ * 
+ * If you use CMake, add these lines in your CMakeLists.txt:
+ * @code
+   # hnc
+   message(STATUS "---")
+   find_package(hnc REQUIRED)
+   # See /hnc/installation/path/lib/hnc/hnc-config.cmake for CMake variables
+   @endcode
+ * 
+ * If you have make the documentation, the doxygen is in: @n
+ * /hnc/installation/path/share/hnc/doxygen/
+ * 
  */
 
 
