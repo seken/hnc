@@ -1,4 +1,4 @@
-// Copyright © 2012 Inria, Written by Lénaïc Bagnères, lenaic.bagneres@inria.fr
+// Copyright © 2013, 2014 Inria, Written by Lénaïc Bagnères, lenaic.bagneres@inria.fr
 
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -73,6 +73,64 @@ int main()
 	{
 		std::cerr << e.what() << std::endl;
 		--nb_test;
+	}
+	std::cout << std::endl;
+
+	// parse_error
+
+	++nb_test;
+	try
+	{
+		throw hnc::except::parse_error(std::string("hnc::except::parse_error with std::string"));
+	}
+	catch (hnc::except::parse_error const & e)
+	{
+		std::cerr << e.what() << std::endl;
+		--nb_test;
+	}
+	std::cout << std::endl;
+
+	++nb_test;
+	try
+	{
+		throw hnc::except::parse_error("hnc::except::parse_error with char const * const");
+	}
+	catch (hnc::except::parse_error const & e)
+	{
+		std::cerr << e.what() << std::endl;
+		--nb_test;
+	}
+	std::cout << std::endl;
+
+	nb_test += 3;
+	try
+	{
+		throw hnc::except::parse_error(std::string("hnc::except::parse_error with std::string"), 42, 21);
+	}
+	catch (hnc::except::parse_error const & e)
+	{
+		std::cerr << e.what() << std::endl;
+		std::cerr << "Line number   = " << e.line_number() << std::endl;
+		std::cerr << "Column number = " << e.column_number() << std::endl;
+		--nb_test;
+		nb_test -= hnc::test::warning(e.line_number() == 42, "hnc::except::parse_error line number is " + hnc::to_string(e.line_number()) + " instead of 42\n");
+		nb_test -= hnc::test::warning(e.column_number() == 21, "hnc::except::parse_error column number is " + hnc::to_string(e.column_number()) + " instead of 21\n");
+	}
+	std::cout << std::endl;
+
+	nb_test += 3;
+	try
+	{
+		throw hnc::except::parse_error("hnc::except::parse_error with char const * const", 73, 42);
+	}
+	catch (hnc::except::parse_error const & e)
+	{
+		std::cerr << e.what() << std::endl;
+		std::cerr << "Line number   = " << e.line_number() << std::endl;
+		std::cerr << "Column number = " << e.column_number() << std::endl;
+		--nb_test;
+		nb_test -= hnc::test::warning(e.line_number() == 73, "hnc::except::parse_error line number is " + hnc::to_string(e.line_number()) + " instead of 73\n");
+		nb_test -= hnc::test::warning(e.column_number() == 42, "hnc::except::parse_error column number is " + hnc::to_string(e.column_number()) + " instead of 42\n");
 	}
 	std::cout << std::endl;
 	

@@ -1,4 +1,4 @@
-// Copyright © 2013 Lénaïc Bagnères, hnc@singularity.fr
+// Copyright © 2013, 2014 Lénaïc Bagnères, hnc@singularity.fr
 
 // This file is part of hnc.
 
@@ -46,7 +46,7 @@ namespace hnc
 	 */
 	namespace except
 	{
-		/// Exception to report incomplete implementation
+		/// @brief Exception to report incomplete implementation
 		class incomplete_implementation : public std::logic_error
 		{
 		public:
@@ -56,12 +56,12 @@ namespace hnc
 			 *
 			 * @param[in] what_arg Description of the error
 			 */
-			explicit incomplete_implementation (std::string const & what_arg) :
+			explicit incomplete_implementation(std::string const & what_arg) :
 				std::logic_error(what_arg)
 			{ }
 
 			/// @copydoc hnc::except::incomplete_implementation::incomplete_implementation(std::string const &)
-			explicit incomplete_implementation (char const * const what_arg) :
+			explicit incomplete_implementation(char const * const what_arg) :
 				std::logic_error(what_arg)
 			{ }
 
@@ -76,7 +76,7 @@ namespace hnc
 			virtual ~incomplete_implementation() noexcept { }
 		};
 
-		/// Exception "file not found"
+		/// @brief Exception "file not found"
 		class file_not_found : public std::runtime_error
 		{
 		public:
@@ -86,12 +86,12 @@ namespace hnc
 			 *
 			 * @param[in] what_arg Description of the error
 			 */
-			explicit file_not_found (std::string const & what_arg) :
+			explicit file_not_found(std::string const & what_arg) :
 				std::runtime_error(what_arg)
 			{ }
 
 			/// @copydoc hnc::except::file_not_found::file_not_found(std::string const &)
-			explicit file_not_found (char const * const what_arg) :
+			explicit file_not_found(char const * const what_arg) :
 				std::runtime_error(what_arg)
 			{ }
 
@@ -104,6 +104,56 @@ namespace hnc
 
 			/// Destructor
 			virtual ~file_not_found() noexcept { }
+		};
+
+		/// @brief Exception "parse error"
+		class parse_error : public std::logic_error
+		{
+		protected:
+			
+			/// @brief Line number
+			unsigned int m_line_number;
+			
+			/// @brief Column number
+			unsigned int m_column_number;
+			
+		public:
+
+			/**
+			 * @brief Constructor
+			 *
+			 * @param[in] what_arg Description of the error
+			 */
+			explicit parse_error(std::string const & what_arg, unsigned int line_number = 0, unsigned int column_number = 0) :
+				std::logic_error(what_arg),
+				m_line_number(line_number),
+				m_column_number(column_number)
+			{ }
+
+			/// @copydoc hnc::except::parse_error::parse_error(std::string const &)
+			explicit parse_error(char const * const what_arg, unsigned int line_number = 0, unsigned int column_number = 0) :
+				std::logic_error(what_arg),
+				m_line_number(line_number),
+				m_column_number(column_number)
+			{ }
+
+			/// Return the description of the error
+			/// @return the description of the error
+			virtual char const * what() const noexcept
+			{
+				return std::logic_error::what();
+			}
+			
+			/// @brief Return the line number of the error
+			/// @return the line number of the error
+			virtual unsigned int line_number() const { return m_line_number; }
+			
+			/// @brief Return the column number of the error
+			/// @return the column number of the error
+			virtual unsigned int column_number() const { return m_column_number; }
+
+			/// Destructor
+			virtual ~parse_error() noexcept { }
 		};
 	}
 }
