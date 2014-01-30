@@ -1,4 +1,4 @@
-// Copyright © 2013 Lénaïc Bagnères, hnc@singularity.fr
+// Copyright © 2013, 2014 Lénaïc Bagnères, hnc@singularity.fr
 
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -181,6 +181,11 @@ namespace hnc
 		/// @param[in] p A rvalue reference to a hnc::copy_ptr
 		template <class U>
 		copy_ptr(hnc::copy_ptr<U> && p) : std::unique_ptr<T>(p.release())
+		{ }
+		
+		/// @brief Constructor from T
+		/// @param[in] value Value
+		copy_ptr(T const & value) : hnc::copy_ptr<T>(hnc::clone_to_unique_ptr(value).release())
 		{ }
 		
 		/// @brief Copy and move assignment
