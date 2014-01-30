@@ -1,4 +1,4 @@
-// Copyright © 2013 Lénaïc Bagnères, hnc@singularity.fr
+// Copyright © 2013, 2014 Lénaïc Bagnères, hnc@singularity.fr
 
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -22,7 +22,7 @@
 namespace hnc
 {
 	/**
-	 * @brief hnc::value_ptr of T is like a T with inclusion polymorphism
+	 * @brief hnc::value_ptr<T> is like a T with inclusion polymorphism
 	 * 
 	 * @code
 	 * #include <hnc/value_ptr.hpp>
@@ -88,7 +88,7 @@ namespace hnc
 		value_ptr() : hnc::copy_ptr<T>(hnc::make_copy_ptr<T>())
 		{ }
 		
-		/// @brief Constrcutor
+		/// @brief Constructor
 		/// @param[in] value Value
 		value_ptr(T const & value) : hnc::copy_ptr<T>(hnc::clone_to_unique_ptr(value).release())
 		{ }
@@ -114,16 +114,45 @@ namespace hnc
 		/// @return a reference to the stored object to access of its members
 		using hnc::copy_ptr<T>::operator->;
 	};
+
+	/**
+	 * @brief Equality operator between two hnc::value_ptr<T>
+	 *
+	 * @param[in] v0 An hnc::value_ptr<T>
+	 * @param[in] v1 An hnc::value_ptr<T>
+	 *
+	 * @return true if hnc::value_ptr<T> are equals, false otherwise
+	 */
+	template <class T>
+	bool operator==(hnc::value_ptr<T> const & v0, hnc::value_ptr<T> const & v1)
+	{
+		if (&v0 == &v1) { return true; }
+		else { return (*v0 == *v1); }
+	}
+
+	/**
+	 * @brief Inequality operator between two hnc::value_ptr<T>
+	 *
+	 * @param[in] v0 An hnc::value_ptr<T>
+	 * @param[in] v1 An hnc::value_ptr<T>
+	 *
+	 * @return true if hnc::value_ptr<T> are not equals, false otherwise
+	 */
+	template <class T>
+	bool operator!=(hnc::value_ptr<T> const & v0, hnc::value_ptr<T> const & v1)
+	{
+		return (!(v0 == v1));
+	}
 }
 
 /// @brief std::swap between two hnc::value_ptr
 hnc_overload_std_swap_with_swap_method_for_template_class(hnc::value_ptr<T>, class T)
 
 /**
- * @brief Display a hnc::value_ptr of T
+ * @brief Display a hnc::value_ptr<T>
  *
  * @param[in,out] o     Out stream
- * @param[in]     value A hnc::value_ptr of T
+ * @param[in]     value A hnc::value_ptr<T>
  *
  * @return the out stream
  */
