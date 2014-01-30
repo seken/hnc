@@ -620,9 +620,9 @@ namespace hnc
 		 *
 		 * @return a proxy to have the first line
 		 */
-		hnc::vector2D<T>::line_const_ptr<T> & front()
+		hnc::vector2D<T>::line_ptr<T> & front()
 		{
-			return m_lines_const_ptr[0];
+			return m_lines_ptr[0];
 		}
 
 		/**
@@ -643,9 +643,9 @@ namespace hnc
 		 *
 		 * @return a proxy to have the last line
 		 */
-		hnc::vector2D<T>::line_const_ptr<T> & back()
+		hnc::vector2D<T>::line_ptr<T> & back()
 		{
-			return m_lines_const_ptr[m_nb_row - 1];
+			return m_lines_ptr[m_nb_row - 1];
 		}
 		
 		// Iterator
