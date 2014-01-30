@@ -23,7 +23,7 @@
 
 #include <type_traits>
 
-#include "hnc/math/pi.hpp"
+#include "../math/pi.hpp"
 #include "radian.hpp"
 
 
