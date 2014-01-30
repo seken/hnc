@@ -46,7 +46,8 @@ namespace hnc
 		
 		/// @brief Copy constrcutor
 		/// @param[in] value Value
-		optional_ptr(hnc::optional_ptr<T> const & value) : hnc::copy_ptr<T>(hnc::clone_to_unique_ptr(*value).release())
+		optional_ptr(hnc::optional_ptr<T> const & value) :
+			hnc::copy_ptr<T>((value) ? hnc::clone_to_unique_ptr(*value).release() : std::unique_ptr<T>().release())
 		{ }
 		
 		/// @brief Operator bool
