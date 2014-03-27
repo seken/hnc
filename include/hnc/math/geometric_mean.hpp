@@ -1,4 +1,4 @@
-// Copyright © 2013 Lénaïc Bagnères, hnc@singularity.fr
+// Copyright © 2013, 2014 Lénaïc Bagnères, hnc@singularity.fr
 
 // This file is part of hnc.
 
@@ -35,8 +35,8 @@ namespace hnc
 		 * @brief Geometric mean between two iterators
 		 *
 		 * @code
-		 * #include <hnc/math.hpp>
-		 * @endcode
+		   #include <hnc/math.hpp>
+		   @endcode
 		 * 
 		 * Compute @f$ \text{geometric_mean} = \sqrt[n]{x_1 \times x_2 \times x_3 \times ... \times x_n} @f$
 		 *
@@ -56,7 +56,7 @@ namespace hnc
 		typename std::iterator_traits<input_iterator>::value_type geometric_mean(input_iterator const & begin, input_iterator const & end)
 		{
 			// Get size
-			auto size = std::distance(begin, end);
+			auto const size = std::distance(begin, end);
 			
 			#ifndef NDEBUG
 				hnc::hassert(size > 0, std::length_error("hnc::math::geometric_mean, Can not compute the geometric mean of empty container"));
@@ -69,15 +69,15 @@ namespace hnc
 			element_t x = std::accumulate(begin, end, element_t(1), std::multiplies<element_t>());
 
 			// Return the geometric mean = nth_root of x
-			return hnc::math::nth_root(x, size);
+			return element_t(hnc::math::nth_root(x, std::size_t(size)));
 		}
 
 		/**
 		 * @brief Geometric mean of a container
 		 *
 		 * @code
-		 * #include <hnc/math.hpp>
-		 * @endcode
+		   #include <hnc/math.hpp>
+		   @endcode
 		 *
 		 * Compute @f$ \text{geometric_mean} = \sqrt[n]{x_1 \times x_2 \times x_3 \times ... \times x_n} @f$
 		 *

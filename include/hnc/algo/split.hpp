@@ -1,4 +1,4 @@
-// Copyright © 2013 Lénaïc Bagnères, hnc@singularity.fr
+// Copyright © 2013, 2014 Lénaïc Bagnères, hnc@singularity.fr
 
 // This file is part of hnc.
 
@@ -31,8 +31,8 @@ namespace hnc
 		 * @brief Split the container with a delimiter
 		 *
 		 * @code
-		 * #include <hnc/algo.hpp>
-		 * @endcode
+		   #include <hnc/algo.hpp>
+		   @endcode
 		 *
 		 * @param[in] c                Container like std::vector, std::string, std::list
 		 * @param[in] first            Const iterator of first element
@@ -86,8 +86,8 @@ namespace hnc
 		 * @brief Split the container with a delimiter
 		 *
 		 * @code
-		 * #include <hnc/algo.hpp>
-		 * @endcode
+		   #include <hnc/algo.hpp>
+		   @endcode
 		 *
 		 * @param[in] c                Container like std::vector, std::string, std::list
 		 * @param[in] delimiter        Delimiter

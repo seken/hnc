@@ -1,4 +1,4 @@
-// Copyright © 2013 Inria, Written by Lénaïc Bagnères, lenaic.bagneres@inria.fr
+// Copyright © 2013, 2014 Inria, Written by Lénaïc Bagnères, lenaic.bagneres@inria.fr
 
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -13,11 +13,6 @@
 // limitations under the License.
 
 
-/**
- * @file
- * @brief Just for operator<< between std::ostream & o and hnc::http::w3c_validator, hnc::http::w3c_validator::error and hnc::http::w3c_validator::server
- */
-
 #ifndef HNC_HTTP_W3C_VALIDATOR_HPP
 #define HNC_HTTP_W3C_VALIDATOR_HPP
 
@@ -30,7 +25,7 @@
 #include "../html/webpage.hpp"
 #include "get.hpp"
 #include "../test.hpp"
-#include "../to_int.hpp"
+#include "../to_type.hpp"
 #include "../to_string.hpp"
 
 
@@ -42,17 +37,19 @@ namespace hnc
 		 * @brief W3C validator
 		 *
 		 * @code
-		 * #include <hnc/http.hpp>
-		 * @endcode
+		   #include <hnc/http.hpp>
+		   @endcode
 		 *
 		 * http://validator.w3.org/
 		 * http://validator.w3.org/docs/api.html
 		 *
 		 * @warning Actually, hnc::http::get method does not work with redirection. So, hnc::http::w3c_validator uses hnc::http::w3c_validator::server_local. On Debian GNU/Linux distribution you can install the package:
 		 * @code
-		 * w3c-markup-validator
-		 * @endcode
+		   w3c-markup-validator
+		   @endcode
+		 *
 		 * Default: the local server http://localhost/w3c-validator/ hnc::http::w3c_validator::server_local
+		 *
 		 * Alternative: the public server http://validator.w3.org/ hnc::http::w3c_validator::server_public
 		 *
 		 * @todo Only the local server works
@@ -66,8 +63,8 @@ namespace hnc
 			 * @brief W3C validator error or warning
 			 *
 			 * @code
-			 * #include <hnc/http.hpp>
-			 * @endcode
+			   #include <hnc/http.hpp>
+			   @endcode
 			 */
 			class error
 			{
@@ -90,22 +87,19 @@ namespace hnc
 
 			public:
 
-				/**
-				 * @brief Constructor
-				 *
-				 * @param[in] line        Line of the error/warning
-				 * @param[in] column      Column of the error/warning
-				 * @param[in] source      Source (chunck of code) with the error/warning
-				 * @param[in] explanation Explanation (description) of the error/warning
-				 * @param[in] message     Id message and message of the error/warning
-				 */
+				/// @brief Constructor
+				/// @param[in] line        Line of the error/warning
+				/// @param[in] column      Column of the error/warning
+				/// @param[in] source      Source (chunck of code) with the error/warning
+				/// @param[in] explanation Explanation (description) of the error/warning
+				/// @param[in] message     Id message and message of the error/warning
 				error
 				(
 					unsigned int line = 0,
 					unsigned int column = 0,
 					std::string const & source = "",
 					std::string const & explanation = "",
-					std::pair<int, std::string> const & message = std::pair<int, std::string>(0, "")
+					std::pair<int, std::string> const & message = { 0, std::string("") }
 				) :
 					m_line(line),
 					m_column(column),
@@ -114,13 +108,9 @@ namespace hnc
 					m_message(message)
 				{ }
 
-				/**
-				 * @brief Get the error in a std::string
-				 *
-				 * @param[in] indent Identation string (empty by default)
-				 * 
-				 * @return the error in a std::string
-				 */
+				/// @brief Get the error in a std::string
+				/// @param[in] indent Identation string (empty by default)
+				/// @return the error in a std::string
 				std::string to_string(std::string const & indent = "") const
 				{
 					// Return
@@ -152,13 +142,13 @@ namespace hnc
 					return r;
 				}
 			};
-
+			
 			/**
 			 * @brief W3C validator server
 			 *
 			 * @code
-			 * #include <hnc/http.hpp>
-			 * @endcode
+			   #include <hnc/http.hpp>
+			   @endcode
 			 *
 			 * Base class for w3c_validator server :
 			 * - hnc::http::w3c_validator::server_local (by default)
@@ -173,7 +163,7 @@ namespace hnc
 
 			public:
 
-				/// Constructor
+				/// @brief Constructor
 				server() :
 					server("127.0.0.1", "/w3c-validator/check")
 				{ }
@@ -188,12 +178,9 @@ namespace hnc
 
 			protected:
 
-				/**
-				 * @brief Constructor
-				 *
-				 * @param[in] server_host    Server host
-				 * @param[in] server_webpage Server webpage
-				 */
+				/// @brief Constructor
+				/// @param[in] server_host    Server host
+				/// @param[in] server_webpage Server webpage
 				server
 				(
 					std::string const & server_host,
@@ -202,13 +189,13 @@ namespace hnc
 					m_url(server_host, server_webpage, "http", 80)
 				{ }
 			};
-
+			
 			/**
 			 * @brief W3C validator public server http://validator.w3.org/
 			 *
 			 * @code
-			 * #include <hnc/http.hpp>
-			 * @endcode
+			   #include <hnc/http.hpp>
+			   @endcode
 			 *
 			 * Server host :
 			 * - validator.w3.org
@@ -216,8 +203,8 @@ namespace hnc
 			 * Server webpage
 			 * - /check
 			 *
-			 * @b According http://validator.w3.org/docs/api.html @n
-			 * @b Note: If you wish to call the validator programmatically for a batch of documents, please make sure that your script will sleep for @b at @b least @b 1 @b second between requests. The Markup Validation service is a free, public service for all, your respect is appreciated. thanks.
+			 * @b Note @b from http://validator.w3.org/docs/api.html @n
+			 * If you wish to call the validator programmatically for a batch of documents, please make sure that your script will sleep for @b at @b least @b 1 @b second between requests. The Markup Validation service is a free, public service for all, your respect is appreciated. thanks.
 			 */
 			class server_public : public hnc::http::w3c_validator::server
 			{
@@ -233,8 +220,8 @@ namespace hnc
 			 * @brief W3C validator local server http://localhost/w3c-validator/
 			 *
 			 * @code
-			 * #include <hnc/http.hpp>
-			 * @endcode
+			   #include <hnc/http.hpp>
+			   @endcode
 			 *
 			 * Server host :
 			 * - 127.0.0.1
@@ -244,14 +231,14 @@ namespace hnc
 			 *
 			 * On Debian GNU/Linux distribution you can install the package:
 			 * @code
-			 * w3c-markup-validator
-			 * @endcode
+			   w3c-markup-validator
+			   @endcode
 			 */
 			class server_local : public hnc::http::w3c_validator::server
 			{
 			public:
 
-				/// Constructor
+				/// @brief Constructor
 				server_local() :
 					hnc::http::w3c_validator::server("127.0.0.1", "/w3c-validator/check")
 				{ }
@@ -279,12 +266,9 @@ namespace hnc
 
 		public:
 
-			/**
-			 * @brief Constructor from std::string
-			 *
-			 * @param[in] html             HTML to validate
-			 * @param[in] validator_server Validator server (hnc::http::w3c_validator::server_local by default)
-			 */
+			/// @brief Constructor from std::string
+			/// @param[in] html             HTML to validate
+			/// @param[in] validator_server Validator server (hnc::http::w3c_validator::server_local by default)
 			w3c_validator
 			(
 				std::string const & html,
@@ -317,7 +301,7 @@ namespace hnc
 							std::vector<hnc::http::w3c_validator::error> & errors_or_warnings
 						) -> void
 						{
-							std::size_t const nb = hnc::to_int(line.substr(prefix.size(), line.size() - prefix.size()));
+							std::size_t const nb = hnc::to_<std::size_t>(line.substr(prefix.size(), line.size() - prefix.size()));
 							errors_or_warnings.resize(nb, hnc::http::w3c_validator::error(0, 0, "Source extraction is not implemented yet", "Explanation extraction is not implemented yet", std::make_pair(0, "Message extraction is not implemented yet")));
 						};
 						
@@ -339,13 +323,10 @@ namespace hnc
 					hnc::test::warning(false, "hnc::http::w3c_validator: Can not connect: " + e + "\n");
 				}
 			}
-
-			/**
-			 * @brief Constructor from std::string
-			 *
-			 * @param[in] html             HTML to validate
-			 * @param[in] validator_server Validator server (hnc::http::w3c_validator::server_local by default)
-			 */
+			
+			/// @brief Constructor from std::string
+			/// @param[in] html             HTML to validate
+			/// @param[in] validator_server Validator server (hnc::http::w3c_validator::server_local by default)
 			w3c_validator
 			(
 				hnc::html::webpage const & html,
@@ -382,63 +363,51 @@ namespace hnc
 			/// @return the raw result (std::vector of linse)
 			std::vector<std::string> const & raw_result() const { return m_raw_result; }
 		};
+			
+		/// @brief Operator << between a std::ostream and a hnc::http::w3c_validator::error
+		/// @param[in,out] o     Output stream
+		/// @param[in]     error A hnc::http::w3c_validator::error
+		/// @return the output stream
+		inline std::ostream & operator<<(std::ostream & o, hnc::http::w3c_validator::error const & error)
+		{
+			o << error.to_string();
+			return o;
+		}
+		
+		/// @brief Operator << between a std::ostream and a hnc::http::w3c_validator::server
+		/// @param[in,out] o                    Output stream
+		/// @param[in]     w3c_validator_server A hnc::http::w3c_validator::server
+		/// @return the output stream
+		inline std::ostream & operator<<(std::ostream & o, hnc::http::w3c_validator::server const & w3c_validator_server)
+		{
+			o << w3c_validator_server.url();
+			return o;
+		}
+		
+		/// @brief Operator << between a std::ostream and a hnc::http::w3c_validator
+		/// @param[in,out] o             Output stream
+		/// @param[in]     w3c_validator A hnc::http::w3c_validator
+		/// @return the output stream
+		inline std::ostream & operator<<(std::ostream & o, hnc::http::w3c_validator const & w3c_validator)
+		{
+			// TODO
+			o << "W3C validator (" << w3c_validator.validator_server() << "):" << "\n";
+			o << "- validity = " << std::boolalpha << w3c_validator.validity() << "\n";
+			o << "- errors   = " << w3c_validator.errors().size() << "\n";
+			for (hnc::http::w3c_validator::error const & error : w3c_validator.errors())
+			{
+				o << error.to_string("  ");
+			}
+			o << "- warnings = " << w3c_validator.warnings().size() << "\n";
+			for (hnc::http::w3c_validator::error const & error : w3c_validator.warnings())
+			{
+				o << error.to_string("  ");
+			}
+			o << "- doctype  = " << w3c_validator.doctype() << "\n";
+			o << "- charset  = " << w3c_validator.charset() << "\n";
+			return o;
+		}
 	}
-}
-
-/**
- * @brief Display a hnc::http::w3c_validator::error
- *
- * @param[out] o     Out stream
- * @param[in]  error A hnc::http::w3c_validator::error
- *
- * @return the out stream
- */
-std::ostream & operator<<(std::ostream & o, hnc::http::w3c_validator::error const & error)
-{
-	o << error.to_string();
-	return o;
-}
-
-/**
- * @brief Display a hnc::http::w3c_validator::server
- *
- * @param[out] o                    Out stream
- * @param[in]  w3c_validator_server A hnc::http::w3c_validator::server
- *
- * @return the out stream
- */
-std::ostream & operator<<(std::ostream & o, hnc::http::w3c_validator::server const & w3c_validator_server)
-{
-	o << w3c_validator_server.url();
-	return o;
-}
-
-/**
- * @brief Display a hnc::http::w3c_validator
- *
- * @param[out] o             Out stream
- * @param[in]  w3c_validator A hnc::http::w3c_validator
- *
- * @return the out stream
- */
-std::ostream & operator<<(std::ostream & o, hnc::http::w3c_validator const & w3c_validator)
-{
-	// TODO
-	o << "W3C validator (" << w3c_validator.validator_server() << "):" << "\n";
-	o << "- validity = " << std::boolalpha << w3c_validator.validity() << "\n";
-	o << "- errors   = " << w3c_validator.errors().size() << "\n";
-	for (hnc::http::w3c_validator::error const & error : w3c_validator.errors())
-	{
-		o << error.to_string("  ");
-	}
-	o << "- warnings = " << w3c_validator.warnings().size() << "\n";
-	for (hnc::http::w3c_validator::error const & error : w3c_validator.warnings())
-	{
-		o << error.to_string("  ");
-	}
-	o << "- doctype  = " << w3c_validator.doctype() << "\n";
-	o << "- charset  = " << w3c_validator.charset() << "\n";
-	return o;
 }
 
 #endif

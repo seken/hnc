@@ -1,4 +1,4 @@
-// Copyright © 2013 Inria, Written by Lénaïc Bagnères, lenaic.bagneres@inria.fr
+// Copyright © 2013, 2014 Inria, Written by Lénaïc Bagnères, lenaic.bagneres@inria.fr
 
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -12,11 +12,6 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-
-/**
- * @file
- * @brief Just for operator<<(std::ostream & o, hnc::html::webpage const & html_webpage)
- */
 
 #ifndef HNC_HTML_WEBPAGE_HPP
 #define HNC_HTML_WEBPAGE_HPP
@@ -37,8 +32,8 @@ namespace hnc
 		 * @brief HTML Web page
 		 *
 		 * @code
-		 * #include <hnc/html.hpp>
-		 * @endcode
+		   #include <hnc/html.hpp>
+		   @endcode
 		 */
 		class webpage
 		{
@@ -61,12 +56,10 @@ namespace hnc
 
 		public:
 
-			/**
-			 * @brief Constructor
-			 *
-			 * @param[in] html_doctype HTML doctype
-			 * @param[in] html_head    HTML head
-			 */
+			/// @brief Constructor
+			/// @param[in] html_doctype HTML doctype
+			/// @param[in] html_head    HTML head
+			/// @param[in] lang_code    Language
 			webpage
 			(
 				hnc::html::head const & html_head,
@@ -94,10 +87,8 @@ namespace hnc
 				}
 			}
 
-			/**
-			 * @brief Set the data (html code) (inside the body)
-			 * @param[in] data Data (html code in a std::string) to put inside the body
-			 */
+			/// @brief Set the data (html code) (inside the body)
+			/// @param[in] data Data (html code in a std::string) to put inside the body
 			void set_data(std::string const & data) { m_data = data; }
 
 			/// @brief Get the HTML code
@@ -149,21 +140,17 @@ namespace hnc
 				return page;
 			}
 		};
-	}
-}
 
-/**
- * @brief Display a hnc::html::webpage
- *
- * @param[out] o            Out stream
- * @param[in]  html_webpage A hnc::html::webpage
- *
- * @return the out stream
- */
-std::ostream & operator<<(std::ostream & o, hnc::html::webpage const & html_webpage)
-{
-	o << html_webpage.html();
-	return o;
+		/// @brief Operator << between a std::ostream and a hnc::html::webpage
+		/// @param[in,out] o            Output stream
+		/// @param[in]     html_webpage A hnc::html::webpage
+		/// @return the output stream
+		inline std::ostream & operator<<(std::ostream & o, hnc::html::webpage const & html_webpage)
+		{
+			o << html_webpage.html();
+			return o;
+		}
+	}
 }
 
 #endif

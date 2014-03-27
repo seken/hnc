@@ -1,4 +1,4 @@
-// Copyright © 2013 Inria, Written by Lénaïc Bagnères, lenaic.bagneres@inria.fr
+// Copyright © 2013, 2014 Inria, Written by Lénaïc Bagnères, lenaic.bagneres@inria.fr
 // Copyright © 2013 Lénaïc Bagnères, hnc@singularity.fr
 
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -44,6 +44,10 @@ namespace hnc
 			/**
 			 * @brief Computhe the sha
 			 *
+			 * @code
+			   #include <hnc/ssl.hpp>
+			   @endcode
+			 *
 			 * @param[in] s A std::string
 			 *
 			 * @note If NO_HNC_SSL is defined, the function returns default raw_data and displays a warning message
@@ -82,6 +86,10 @@ namespace hnc
 			/**
 			 * @brief Computhe the sha1
 			 *
+			 * @code
+			   #include <hnc/ssl.hpp>
+			   @endcode
+			 *
 			 * @param[in] s A std::string
 			 *
 			 * @note If NO_HNC_SSL is defined, the function returns default raw_data and displays a warning message
@@ -115,6 +123,10 @@ namespace hnc
 			/**
 			 * @brief Computhe the sha224
 			 *
+			 * @code
+			   #include <hnc/ssl.hpp>
+			   @endcode
+			 *
 			 * @param[in] s A std::string
 			 *
 			 * @note If NO_HNC_SSL is defined, the function returns default raw_data and displays a warning message
@@ -147,6 +159,10 @@ namespace hnc
 			#ifndef NO_HNC_SSL
 			/**
 			 * @brief Computhe the sha256
+			 *
+			 * @code
+			   #include <hnc/ssl.hpp>
+			   @endcode
 			 *
 			 * @param[in] s A std::string
 			 *
@@ -186,6 +202,10 @@ namespace hnc
 			/**
 			 * @brief Computhe the sha384
 			 *
+			 * @code
+			   #include <hnc/ssl.hpp>
+			   @endcode
+			 *
 			 * @param[in] s A std::string
 			 *
 			 * @note If NO_HNC_SSL is defined, the function returns default raw_data and displays a warning message
@@ -218,6 +238,10 @@ namespace hnc
 			#ifndef NO_HNC_SSL
 			/**
 			 * @brief Computhe the sha512
+			 *
+			 * @code
+			   #include <hnc/ssl.hpp>
+			   @endcode
 			 *
 			 * @param[in] s A std::string
 			 *

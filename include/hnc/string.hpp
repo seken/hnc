@@ -1,4 +1,4 @@
-// Copyright © 2013 Lénaïc Bagnères, hnc@singularity.fr
+// Copyright © 2013, 2014 Lénaïc Bagnères, hnc@singularity.fr
 
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -21,9 +21,11 @@
 
 /**
  * @brief std::string literal
+ * 
  * @code
- * "Hello world!"_s // string, not "zero-terminated array of char"
- * @endcode
+   "Hello world!"_s // string, not "zero-terminated array of char"
+   @endcode
+ *
  * http://www.stroustrup.com/C++11FAQ.html#UD-literals
  */
 std::string operator"" _s(char const * p, std::size_t const n)
@@ -38,8 +40,8 @@ namespace hnc
 	 * @brief Functions on string
 	 *
 	 * @code
-	 * #include <hnc/string.hpp>
-	 * @endcode
+	   #include <hnc/string.hpp>
+	   @endcode
 	 */
 	namespace string
 	{

@@ -1,4 +1,4 @@
-// Copyright © 2013 Inria, Written by Lénaïc Bagnères, lenaic.bagneres@inria.fr
+// Copyright © 2013, 2014 Inria, Written by Lénaïc Bagnères, lenaic.bagneres@inria.fr
 
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -13,11 +13,6 @@
 // limitations under the License.
 
 
-/**
- * @file
- * @brief Just for operator<<(std::ostream & o, hnc::vector2D_C_style_minimal<T> const & c)
- */
-
 #ifndef HNC_VECTOR2D_C_STYLE_MINIMAL_HPP
 #define HNC_VECTOR2D_C_STYLE_MINIMAL_HPP
 
@@ -28,8 +23,8 @@ namespace hnc
 	 * @brief Minimal encapsulation for a C style 2D array with dynamic allocation
 	 *
 	 * @code
-	 * #include <hnc/vector2D_C_style_minimal.hpp>
-	 * @endcode
+	   #include <hnc/vector2D_C_style_minimal.hpp>
+	   @endcode
 	 *
 	 * @note For other use, have a look to:
 	 * - hnc::vector2D
@@ -52,13 +47,10 @@ namespace hnc
 
 	public:
 
-		/**
-		 * @brief Constructor
-		 *
-		 * @param[in] nb_row        Number of rows
-		 * @param[in] nb_col        Number of columns
-		 * @param[in] default_value Default value (T() by default)
-		 */
+		/// @brief Constructor
+		/// @param[in] nb_row        Number of rows
+		/// @param[in] nb_col        Number of columns
+		/// @param[in] default_value Default value (T() by default)
 		vector2D_C_style_minimal(std::size_t const nb_row = 0, std::size_t const nb_col = 0, T const & default_value = T()) :
 			p_data(nullptr),
 			m_nb_row(nb_row),
@@ -77,11 +69,8 @@ namespace hnc
 			}
 		}
 
-		/**
-		 * @brief Constructor by copy
-		 *
-		 * @param[in] v2D A vector2D
-		 */
+		/// @brief Copy constructor
+		/// @param[in] v2D A vector2D
 		vector2D_C_style_minimal(vector2D_C_style_minimal<T> const & v2D) :
 			vector2D_C_style_minimal(v2D.nb_row(), v2D.nb_col())
 		{
@@ -94,11 +83,8 @@ namespace hnc
 			}
 		}
 
-		/**
-		 * @brief Constructor by RValues reference
-		 *
-		 * @param[in] v2D A vector2D (will be destroyed)
-		 */
+		/// @brief Constructor by RValues reference
+		/// @param[in] v2D A vector2D (will be destroyed)
 		vector2D_C_style_minimal(vector2D_C_style_minimal<T> && v2D) :
 			p_data(v2D.p_data), m_nb_row(v2D.m_nb_row), m_nb_col(v2D.m_nb_col)
 		{
@@ -107,31 +93,23 @@ namespace hnc
 			v2D.p_data = nullptr;
 		}
 
-		/// Destructor
+		/// @brief Destructor
 		~vector2D_C_style_minimal()
 		{
 			destructor();
 		}
 
-		/**
-		 * @brief Return the number of rows
-		 * @return the number of rows
-		 */
+		/// @brief Return the number of rows
+		/// @return the number of rows
 		std::size_t nb_row() const { return m_nb_row; }
 
-		/**
-		 * @brief Return the number of columns
-		 * @return the number of columns
-		 */
+		/// @brief Return the number of columns
+		/// @return the number of columns
 		std::size_t nb_col() const { return m_nb_col; }
 
-		/**
-		 * @brief Move assignment operator between two vector2D 
-		 *
-		 * @param[in] v2D A vector2D
-		 *
-		 * @return the vector2D_C_style_minimal
-		 */
+		/// @brief Move assignment operator between two vector2D 
+		/// @param[in] v2D A vector2D
+		/// @return the vector2D_C_style_minimal
 		vector2D_C_style_minimal<T> operator=(vector2D_C_style_minimal<T> && v2D)
 		{
 			// If it is a different vector2D
@@ -152,13 +130,9 @@ namespace hnc
 			return *this;
 		}
 
-		/**
-		 * @brief Affectation operator between two vector2D
-		 *
-		 * @param[in] v2D A vector2D
-		 *
-		 * @return the vector2D_C_style_minimal
-		 */
+		/// @brief Affectation operator between two vector2D
+		/// @param[in] v2D A vector2D
+		/// @return the vector2D_C_style_minimal
 		vector2D_C_style_minimal<T> operator=(vector2D_C_style_minimal<T> const & v2D)
 		{
 			// If it is a different vector2D
@@ -173,27 +147,19 @@ namespace hnc
 			return *this;
 		}
 
-		/**
-		 * @brief Const access by [i][j]
-		 * 
-		 * @param i Row index
-		 * 
-		 * @return a T const * to have [j]
-		 */
+		/// @brief Const access by [i][j]
+		/// @param i Row index
+		/// @return a T const * to have [j]
 		T const * operator[](size_t const i) const { return p_data[i]; }
 
-		/**
-		 * @brief Access by [i][j]
-		 *
-		 * @param i Row index
-		 *
-		 * @return a T * to have [j]
-		 */
+		/// @brief Access by [i][j]
+		/// @param i Row index
+		/// @return a T * to have [j]
 		T * operator[](size_t const i) { return p_data[i]; }
 
 	private:
 
-		/// Fake destructor
+		/// @brief Fake destructor
 		void destructor()
 		{
 				std::size_t nb_row_for_delete = m_nb_row;
@@ -211,62 +177,31 @@ namespace hnc
 				p_data = nullptr;
 		}
 	};
-}
-
-/**
- * @brief Display a hnc::vector2D_C_style_minimal<T>
- * 
- * @param[out] o Out stream
- * @param[in]  v A hnc::vector2D_C_style_minimal<T>
- *
- * To no display data, define HNC_ostream_container_no_data macro
- * To display data, define HNC_ostream_container_size macro
- * 
- * @return the out stream
- */
-template <class T>
-std::ostream & operator<<(std::ostream & o, hnc::vector2D_C_style_minimal<T> const & v)
-{
-	#if defined(HNC_ostream_container_no_data)
-
-	// Display size
-	o << "[size = " << v.nb_row() << " rows, " << v.nb_col() << " cols]";
-
-	#elif defined(HNC_ostream_container_size)
-
-	// Display size
-	o << "[size = " << v.nb_row() << " rows, " << v.nb_col() << " cols]" << "\n";
-	// Display data
-	for (std::size_t row = 0; row < v.nb_row(); ++row)
+	
+	/// @brief Operator << between a std::ostream and a hnc::vector2D_C_style_minimal<T>
+	/// @param[in,out] o Output stream
+	/// @param[in]     v A hnc::vector2D_C_style_minimal<T>
+	/// @return the output stream
+	template <class T>
+	std::ostream & operator<<(std::ostream & o, hnc::vector2D_C_style_minimal<T> const & v)
 	{
-		o << ((row == 0) ? ("[") : (" "));
-		for (std::size_t col = 0; col < v.nb_col(); ++col)
-		{
-			o << " " << v[row][col];
-		}
-		o << ((row == v.nb_row() - 1) ? (" ]") : ("\n"));
-	}
-
-	#else
-
-	// Display data
-	for (std::size_t row = 0; row < v.nb_row(); ++row)
-	{
-		o << ((row == 0) ? ("{") : (" "));
-		o << " {";
 		// Display data
-		for (std::size_t col = 0; col < v.nb_col(); ++col)
+		for (std::size_t row = 0; row < v.nb_row(); ++row)
 		{
-			if (col != 0) { o << ", "; }
-			o << v[row][col];
+			o << ((row == 0) ? ("{") : (" "));
+			o << " {";
+			// Display data
+			for (std::size_t col = 0; col < v.nb_col(); ++col)
+			{
+				if (col != 0) { o << ", "; }
+				o << v[row][col];
+			}
+			o << ((row == v.nb_row() - 1) ? ("} }") : ("},\n"));
 		}
-		o << ((row == v.nb_row() - 1) ? ("} }") : ("},\n"));
+
+		// Return stream
+		return o;
 	}
-
-	#endif
-
-	// Return stream
-	return o;
 }
 
 #endif

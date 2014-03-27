@@ -136,8 +136,8 @@ int main()
 	std::cout << std::endl;
 
 	{
-		std::vector<float> c({4, 1, 1.f/32});
-		float ref = 0.5;
+		std::vector<float> c({4.f, 1.f, 1.f / 32.f});
+		float ref = 0.5f;
 		std::cout << "Geometric mean of std::vector of {4, 1, 1.f/32}:" << std::endl;
 		std::cout << "- Reference                           = " << ref << std::endl;
 		++nb_test;
@@ -156,8 +156,8 @@ int main()
 	std::cout << std::endl;
 
 	{
-		std::list<float> c({1, 1000});
-		float ref = 31.62278;
+		std::list<float> c({1.f, 1000.f});
+		float ref = 31.62278f;
 		std::cout << "Geometric mean of std::list of {1, 1000}:" << std::endl;
 		std::cout << "- Reference                           = " << ref << std::endl;
 		++nb_test;
@@ -176,7 +176,7 @@ int main()
 	std::cout << std::endl;
 
 	{
-		std::vector<float> c({10, 0.1f});
+		std::vector<float> c({10.f, 0.1f});
 		float ref = 1;
 		std::cout << "Geometric mean of std::vector of {10, 0.1f}:" << std::endl;
 		std::cout << "- Reference                           = " << ref << std::endl;

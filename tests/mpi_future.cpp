@@ -139,7 +139,7 @@ public:
 		std::cout << "remote_compute_factorial " + hnc::to_string(n) + "\n";
 		for (unsigned int i = 2; i <= n; i++)
 		{
-			r *= i;
+			r *= result_t(i);
 		}
 	}
 
@@ -254,7 +254,7 @@ int main()
 	#endif
 
 	// Test this on different processors
-	for (unsigned int processor = 0; processor < 8; ++processor)
+	for (int processor = 0; processor < 8; ++processor)
 	{
 		std::cout << "Computation on processor " << processor << std::endl;
 		

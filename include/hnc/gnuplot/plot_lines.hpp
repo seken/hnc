@@ -1,4 +1,4 @@
-// Copyright © 2013 Lénaïc Bagnères, hnc@singularity.fr
+// Copyright © 2013, 2014 Lénaïc Bagnères, hnc@singularity.fr
 
 // This file is part of hnc.
 
@@ -35,8 +35,8 @@ namespace hnc
 		 * @brief Plot with lines
 		 * 
 		 * @code
-		 * #include <hnc/gnuplot.hpp>
-		 * @endcode
+		   #include <hnc/gnuplot.hpp>
+		   @endcode
 		 *
 		 * http://www.manpagez.com/info/gnuplot/gnuplot-4.4.3/gnuplot_141.php#lines
 		 */
@@ -44,16 +44,13 @@ namespace hnc
 		{
 		public:
 
-			/**
-			 * @brief Constructor
-			 * @param[in] filename Data filename (no filename by default)
-			 * @param[in] box_width Width of the boxes (ratio) (0.73 by default)
-			 */
+			/// @brief Constructor
+			/// @param[in] data_filename Data filename (no filename by default)
 			plot_lines(std::string const & data_filename = "") :
 				plot(data_filename)
 			{
 				// using 0:2:xtic(1) with lines
-				set_using(0, 2);
+				set_using(0, 2u);
 				set_x_tick_labels(1);
 				set_with("lines");
 			}
@@ -64,12 +61,12 @@ namespace hnc
 			 * @param[in] data A std::map with std::string as key (x tick) and a numeric as value (y value)
 			 *
 			 * @code
-			 * std::map<std::string, int> data;
-			 * data["A"] = 1;
-			 * data["B"] = 2;
-			 * data["C"] = 5;
-			 * data["D"] = 3;
-			 * @endcode
+			   std::map<std::string, int> data;
+			   data["A"] = 1;
+			   data["B"] = 2;
+			   data["C"] = 5;
+			   data["D"] = 3;
+			   @endcode
 			 * 
 			 * @return the plot
 			 */

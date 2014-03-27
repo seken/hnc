@@ -38,7 +38,7 @@ int main()
 	{
 		unsigned int const n = 2;
 		int a = 0;
-		int r = hnc::math::nth_root(a, n);
+		int r = int(hnc::math::nth_root(a, n));
 		int ref = 0;
 		nb_test -= hnc::test::warning(r == ref, hnc::to_string(n) + "th root of " + hnc::to_string(a) + " = " + hnc::to_string(r) + " instead of " + hnc::to_string(ref) + "\n");
 		std::cout << n << "th root of " << a << " = " << r << std::endl;
@@ -72,7 +72,7 @@ int main()
 	{
 		unsigned int const n = 0;
 		int a = 5498654;
-		int r = hnc::math::nth_root(a, n);
+		int r = int(hnc::math::nth_root(a, n));
 		int ref = 1;
 		nb_test -= hnc::test::warning(r == ref, hnc::to_string(n) + "th root of " + hnc::to_string(a) + " = " + hnc::to_string(r) + " instead of " + hnc::to_string(ref) + "\n");
 		std::cout << n << "th root of " << a << " = " << r << std::endl;
@@ -81,7 +81,7 @@ int main()
 	++nb_test;
 	{
 		unsigned int const n = 0;
-		float a = 564968.849;
+		float a = 564968.849f;
 		float r = hnc::math::nth_root(a, n);
 		float ref = 1;
 		nb_test -= hnc::test::warning(r == ref, hnc::to_string(n) + "th root of " + hnc::to_string(a) + " = " + hnc::to_string(r) + " instead of " + hnc::to_string(ref) + "\n");
@@ -106,7 +106,7 @@ int main()
 	{
 		unsigned int const n = 1;
 		int a = 785785;
-		int r = hnc::math::nth_root(a, n);
+		int r = int(hnc::math::nth_root(a, n));
 		int ref = a;
 		nb_test -= hnc::test::warning(r == ref, hnc::to_string(n) + "th root of " + hnc::to_string(a) + " = " + hnc::to_string(r) + " instead of " + hnc::to_string(ref) + "\n");
 		std::cout << n << "th root of " << a << " = " << r << std::endl;
@@ -115,7 +115,7 @@ int main()
 	++nb_test;
 	{
 		unsigned int const n = 1;
-		float a = 785.875785;
+		float a = 785.875785f;
 		float r = hnc::math::nth_root(a, n);
 		float ref = a;
 		nb_test -= hnc::test::warning(r == ref, hnc::to_string(n) + "th root of " + hnc::to_string(a) + " = " + hnc::to_string(r) + " instead of " + hnc::to_string(ref) + "\n");
@@ -140,8 +140,8 @@ int main()
 	{
 		unsigned int const n = 2;
 		int a = 5875;
-		int r = hnc::math::nth_root(a, n);
-		int ref = std::sqrt(a);
+		int r = int(hnc::math::nth_root(a, n));
+		int ref = int(std::sqrt(a));
 		nb_test -= hnc::test::warning(r == ref, hnc::to_string(n) + "th root of " + hnc::to_string(a) + " = " + hnc::to_string(r) + " instead of " + hnc::to_string(ref) + "\n");
 		std::cout << n << "th root of " << a << " = " << r << std::endl;
 	}
@@ -149,7 +149,7 @@ int main()
 	++nb_test;
 	{
 		unsigned int const n = 2;
-		float a = 785785.58;
+		float a = 785785.58f;
 		float r = hnc::math::nth_root(a, n);
 		float ref = std::sqrt(a);
 		nb_test -= hnc::test::warning(r == ref, hnc::to_string(n) + "th root of " + hnc::to_string(a) + " = " + hnc::to_string(r) + " instead of " + hnc::to_string(ref) + "\n");
@@ -174,8 +174,8 @@ int main()
 	{
 		unsigned int const n = 3;
 		int a = 85785;
-		int r = hnc::math::nth_root(a, n);
-		int ref = std::cbrt(a);
+		int r = int(hnc::math::nth_root(a, n));
+		int ref = int(std::cbrt(a));
 		nb_test -= hnc::test::warning(r == ref, hnc::to_string(n) + "th root of " + hnc::to_string(a) + " = " + hnc::to_string(r) + " instead of " + hnc::to_string(ref) + "\n");
 		std::cout << n << "th root of " << a << " = " << r << std::endl;
 	}
@@ -183,7 +183,7 @@ int main()
 	++nb_test;
 	{
 		unsigned int const n = 3;
-		float a = 5237877.58;
+		float a = 5237877.58f;
 		float r = hnc::math::nth_root(a, n);
 		float ref = std::cbrt(a);
 		nb_test -= hnc::test::warning(r == ref, hnc::to_string(n) + "th root of " + hnc::to_string(a) + " = " + hnc::to_string(r) + " instead of " + hnc::to_string(ref) + "\n");
@@ -208,8 +208,8 @@ int main()
 	{
 		unsigned int const n = 3;
 		int a = 85785;
-		int r = hnc::math::nth_root(a, n);
-		int ref = std::cbrt(a);
+		int r = int(hnc::math::nth_root(a, n));
+		int ref = int(std::cbrt(a));
 		nb_test -= hnc::test::warning(r == ref, hnc::to_string(n) + "th root of " + hnc::to_string(a) + " = " + hnc::to_string(r) + " instead of " + hnc::to_string(ref) + "\n");
 		std::cout << n << "th root of " << a << " = " << r << std::endl;
 	}
@@ -217,7 +217,7 @@ int main()
 	++nb_test;
 	{
 		unsigned int const n = 3;
-		float a = 5237877.58;
+		float a = 5237877.58f;
 		float r = hnc::math::nth_root(a, n);
 		float ref = std::cbrt(a);
 		nb_test -= hnc::test::warning(r == ref, hnc::to_string(n) + "th root of " + hnc::to_string(a) + " = " + hnc::to_string(r) + " instead of " + hnc::to_string(ref) + "\n");
@@ -242,7 +242,7 @@ int main()
 	{
 		unsigned int const n = 4;
 		int a = 6561;
-		int r = hnc::math::nth_root(a, n);
+		int r = int(hnc::math::nth_root(a, n));
 		nb_test -= hnc::test::warning(std::pow(r, n) == a, hnc::to_string(n) + "th root of " + hnc::to_string(a) + " is not " + hnc::to_string(r) + " (" + hnc::to_string(r) + "^" + hnc::to_string(n) + " = " + hnc::to_string(std::pow(r, n)) + " != " + hnc::to_string(a) + ")\n");
 		std::cout << n << "th root of " << a << " = " << r << std::endl;
 	}
@@ -250,7 +250,7 @@ int main()
 	++nb_test;
 	{
 		unsigned int const n = 4;
-		float a = 785785.58;
+		float a = 785785.58f;
 		float r = hnc::math::nth_root(a, n);
 		nb_test -= hnc::test::warning(std::abs(std::pow(r, n) - a) <= 0.2, hnc::to_string(n) + "th root of " + hnc::to_string(a) + " is not " + hnc::to_string(r) + " (" + hnc::to_string(r) + "^" + hnc::to_string(n) + " = " + hnc::to_string(std::pow(r, n)) + " != " + hnc::to_string(a) + ")\n");
 		std::cout << n << "th root of " << a << " = " << r << std::endl;
@@ -273,7 +273,7 @@ int main()
 	{
 		unsigned int const n = 5;
 		int a = 1048576;
-		int r = hnc::math::nth_root(a, n);
+		int r = int(hnc::math::nth_root(a, n));
 		nb_test -= hnc::test::warning(std::pow(r, n) == a, hnc::to_string(n) + "th root of " + hnc::to_string(a) + " is not " + hnc::to_string(r) + " (" + hnc::to_string(r) + "^" + hnc::to_string(n) + " = " + hnc::to_string(std::pow(r, n)) + " != " + hnc::to_string(a) + ")\n");
 		std::cout << n << "th root of " << a << " = " << r << std::endl;
 	}
@@ -281,7 +281,7 @@ int main()
 	++nb_test;
 	{
 		unsigned int const n = 5;
-		float a = 785.875785;
+		float a = 785.875785f;
 		float r = hnc::math::nth_root(a, n);
 		nb_test -= hnc::test::warning(std::abs(std::pow(r, n) - a) <= 0.1, hnc::to_string(n) + "th root of " + hnc::to_string(a) + " is not " + hnc::to_string(r) + " (" + hnc::to_string(r) + "^" + hnc::to_string(n) + " = " + hnc::to_string(std::pow(r, n)) + " != " + hnc::to_string(a) + ")\n");
 		std::cout << n << "th root of " << a << " = " << r << std::endl;
@@ -304,7 +304,7 @@ int main()
 	{
 		unsigned int const n = 6;
 		int a = 1771561;
-		int r = hnc::math::nth_root(a, n);
+		int r = int(hnc::math::nth_root(a, n));
 		nb_test -= hnc::test::warning(std::pow(r, n) == a, hnc::to_string(n) + "th root of " + hnc::to_string(a) + " is not " + hnc::to_string(r) + " (" + hnc::to_string(r) + "^" + hnc::to_string(n) + " = " + hnc::to_string(std::pow(r, n)) + " != " + hnc::to_string(a) + ")\n");
 		std::cout << n << "th root of " << a << " = " << r << std::endl;
 	}
@@ -312,7 +312,7 @@ int main()
 	++nb_test;
 	{
 		unsigned int const n = 6;
-		float a = 5785.78585;
+		float a = 5785.78585f;
 		float r = hnc::math::nth_root(a, n);
 		nb_test -= hnc::test::warning(std::abs(std::pow(r, n) - a) <= 0.1, hnc::to_string(n) + "th root of " + hnc::to_string(a) + " is not " + hnc::to_string(r) + " (" + hnc::to_string(r) + "^" + hnc::to_string(n) + " = " + hnc::to_string(std::pow(r, n)) + " != " + hnc::to_string(a) + ")\n");
 		std::cout << n << "th root of " << a << " = " << r << std::endl;

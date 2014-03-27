@@ -1,4 +1,4 @@
-// Copyright © 2013 Inria, Written by Lénaïc Bagnères, lenaic.bagneres@inria.fr
+// Copyright © 2013, 2014 Inria, Written by Lénaïc Bagnères, lenaic.bagneres@inria.fr
 
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -12,11 +12,6 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-
-/**
- * @file
- * @brief Just for operator<<(std::ostream & o, hnc::html::head const & html_head)
- */
 
 #ifndef HNC_HTML_HEAD_HPP
 #define HNC_HTML_HEAD_HPP
@@ -37,8 +32,8 @@ namespace hnc
 		 * @brief HTML head markup
 		 *
 		 * @code
-		 * #include <hnc/html.hpp>
-		 * @endcode
+		   #include <hnc/html.hpp>
+		   @endcode
 		 *
 		 * http://www.w3schools.com/html/html_head.asp
 		 */
@@ -71,12 +66,10 @@ namespace hnc
 
 		public:
 
-			/**
-			 * @brief Constructor
-			 *
-			 * @param[in] title   Title
-			 * @param[in] charset Character encoding (charset) (default value hnc::character_encoding::utf8)
-			 */
+			/// @brief Constructor
+			/// @param[in] title        Title
+			/// @param[in] html_version A hnc::html::head::html_version_t
+			/// @param[in] charset      Character encoding (charset) (default value hnc::character_encoding::utf8)
 			head
 			(
 				std::string const & title,
@@ -88,18 +81,14 @@ namespace hnc
 				m_charset(charset)
 			{ }
 
-			/**
-			 * @brief Set the tile
-			 * @param[in] title Title
-			 * @return The HTML head
-			 */
+			/// @brief Set the tile
+			/// @param[in] title Title
+			/// @return The HTML head
 			head & set_tile(std::string const & title) { m_title = title; return *this; }
 
-			/**
-			 * @brief Set the Character encoding (charset)
-			 * @param[in] charset Character encoding (charset)
-			 * @return The HTML head
-			 */
+			/// @brief Set the Character encoding (charset)
+			/// @param[in] charset Character encoding (charset)
+			/// @return The HTML head
 			head & set_charset(hnc::character_encoding::encoding const & charset) { m_charset = charset; return *this; }
 
 			/// @brief Return the HTML version (a hnc::html::head::html_version_t)
@@ -110,8 +99,8 @@ namespace hnc
 			 * @brief Use HTML 5 version (by default)
 			 *
 			 * @code
-			 * <meta charset="utf-8">
-			 * @endcode
+			    <meta charset="utf-8">
+			   @endcode
 			 *
 			 * @return The HTML head
 			 */
@@ -121,8 +110,8 @@ namespace hnc
 			 * @brief Use xHTML version
 			 *
 			 * @code
-			 * <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-			 * @endcode
+			   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+			   @endcode
 			 * 
 			 * @return The HTML head 
 			 */
@@ -132,46 +121,36 @@ namespace hnc
 			 * @brief Use HTML 4 version
 			 *
 			 * @code
-			 * <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-			 * @endcode
+			   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+			   @endcode
 			 *
 			 * @return The HTML head
 			 */
 			head & use_html4() { m_html_version = hnc::html::head::html_version_t::html4; return *this; }
 
-			/**
-			 * @brief Set the keywords
-			 * @param[in] keywords Keywords (a std::vector of std::string)
-			 * @return The HTML head
-			 */
+			/// @brief Set the keywords
+			/// @param[in] keywords Keywords (a std::vector of std::string)
+			/// @return The HTML head
 			head & set_keywords(std::vector<std::string> const & keywords) { m_keywords = keywords; return *this; }
 
-			/**
-			 * @brief Add a keyword
-			 * @param[in] keyword Keyword to add
-			 * @return The HTML head
-			 */
+			/// @brief Add a keyword
+			/// @param[in] keyword Keyword to add
+			/// @return The HTML head
 			head & add_keyword(std::string const & keyword) { m_keywords.push_back(keyword); return *this; }
 
-			/**
-			 * @brief Set the description
-			 * @param[in] description Description
-			 * @return The HTML head
-			 */
+			/// @brief Set the description
+			/// @param[in] description Description
+			/// @return The HTML head
 			head & set_description(std::string const & description) { m_description = description; return *this; }
 
-			/**
-			 * @brief Set the author
-			 * @param[in] author Author
-			 * @return The HTML head
-			 */
+			/// @brief Set the author
+			/// @param[in] author Author
+			/// @return The HTML head
 			head & set_author(std::string const & author) { m_author = author; return *this; }
 
-			/**
-			 * @brief Return the head HTML code
-			 * @param[in] tab Tabulation ("\t" by default)
-			 * @return the head HTML code
-			 */
+			/// @brief Return the head HTML code
+			/// @param[in] tab Tabulation ("\t" by default)
+			/// @return the head HTML code
 			std::string html(std::string const & tab = "\t") const
 			{
 				std::string head;
@@ -223,21 +202,17 @@ namespace hnc
 				return head;
 			}
 		};
+		
+		/// @brief Operator << between a std::ostream and a hnc::html::head
+		/// @param[in,out] o         Output stream
+		/// @param[in]     html_head A hnc::html::head
+		/// @return the output stream
+		inline std::ostream & operator<<(std::ostream & o, hnc::html::head const & html_head)
+		{
+			o << html_head.html();
+			return o;
+		}
 	}
-}
-
-/**
- * @brief Display a hnc::html::head
- *
- * @param[out] o         Out stream
- * @param[in]  html_head A hnc::html::head
- *
- * @return the out stream
- */
-std::ostream & operator<<(std::ostream & o, hnc::html::head const & html_head)
-{
-	o << html_head.html();
-	return o;
 }
 
 #endif

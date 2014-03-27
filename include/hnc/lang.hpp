@@ -1,4 +1,4 @@
-// Copyright © 2013 Lénaïc Bagnères, hnc@singularity.fr
+// Copyright © 2013, 2014 Lénaïc Bagnères, hnc@singularity.fr
 
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -30,8 +30,8 @@ namespace hnc
 	 * @brief Language codes
 	 *
 	 * @code
-	 * #include <hnc/lang.hpp>
-	 * @endcode
+	   #include <hnc/lang.hpp>
+	   @endcode
 	 *
 	 * http://en.wikipedia.org/wiki/ISO_639
 	 * http://en.wikipedia.org/wiki/List_of_ISO_639-2_codes
@@ -43,11 +43,11 @@ namespace hnc
 		/**
 		 * @brief No lang language code
 		 *
-		 * Base class for language code
-		 *
 		 * @code
-		 * #include <hnc/lang.hpp>
-		 * @endcode
+		   #include <hnc/lang.hpp>
+		   @endcode
+		 *
+		 * Base class for language code
 		 */
 		class lang_code
 		{
@@ -67,10 +67,10 @@ namespace hnc
 
 		public:
 
-			/// Default contructor
+			/// @brief Default contructor
 			lang_code() = default;
 
-			/// Destructor
+			/// @brief Destructor
 			virtual ~lang_code() { }
 
 			/// @brief Return true if no language is specified, false otherwise
@@ -99,14 +99,11 @@ namespace hnc
 
 		protected:
 
-			/**
-			 * @brief Constructor
-			 *
-			 * @param[in] name      Name of the language
-			 * @param[in] iso_639_1 ISO 639-1 language code
-			 * @param[in] iso_639_2 ISO 639-2 language code
-			 * @param[in] iso_639_3 ISO 639-3 language code
-			 */
+			/// @brief Constructor
+			/// @param[in] name      Name of the language
+			/// @param[in] iso_639_1 ISO 639-1 language code
+			/// @param[in] iso_639_2 ISO 639-2 language code
+			/// @param[in] iso_639_3 ISO 639-3 language code
 			lang_code
 			(
 				std::string const & name,
@@ -120,7 +117,17 @@ namespace hnc
 				m_iso_639_3(iso_639_3)
 			{ }
 		};
-
+		
+		/// @brief Operator << between a std::ostream and a hnc::lang::lang_code
+		/// @param[in,out] o         Output stream
+		/// @param[in]     lang_code A hnc::lang::lang_code
+		/// @return the output stream
+		inline std::ostream & operator<<(std::ostream & o, hnc::lang::lang_code const & lang_code)
+		{
+			o << lang_code.name();
+			return o;
+		}
+		
 		// ISO 639-1
 
 		// A
@@ -129,14 +136,14 @@ namespace hnc
 		 * @brief Afar language code
 		 *
 		 * @code
-		 * #include <hnc/lang.hpp>
-		 * @endcode
+		   #include <hnc/lang.hpp>
+		   @endcode
 		 */
 		class afar : public hnc::lang::lang_code
 		{
 		public:
 
-			/// Constructor
+			/// @brief Constructor
 			afar() : hnc::lang::lang_code("Afar", "aa", "aar", "aar") { }
 		};
 
@@ -144,14 +151,14 @@ namespace hnc
 		 * @brief Abkhazian language code
 		 *
 		 * @code
-		 * #include <hnc/lang.hpp>
-		 * @endcode
+		   #include <hnc/lang.hpp>
+		   @endcode
 		 */
 		class abkhazian : public hnc::lang::lang_code
 		{
 		public:
 
-			/// Constructor
+			/// @brief Constructor
 			abkhazian() : hnc::lang::lang_code("Abkhazian", "ab", "abk", "abk") { }
 		};
 
@@ -159,14 +166,14 @@ namespace hnc
 		 * @brief Afrikaans language code
 		 *
 		 * @code
-		 * #include <hnc/lang.hpp>
-		 * @endcode
+		   #include <hnc/lang.hpp>
+		   @endcode
 		 */
 		class afrikaans : public hnc::lang::lang_code
 		{
 		public:
 
-			/// Constructor
+			/// @brief Constructor
 			afrikaans() : hnc::lang::lang_code("Afrikaans", "af", "afr", "afr") { }
 		};
 
@@ -174,14 +181,14 @@ namespace hnc
 		 * @brief Akan language code
 		 *
 		 * @code
-		 * #include <hnc/lang.hpp>
-		 * @endcode
+		   #include <hnc/lang.hpp>
+		   @endcode
 		 */
 		class akan : public hnc::lang::lang_code
 		{
 		public:
 
-			/// Constructor
+			/// @brief Constructor
 			akan() : hnc::lang::lang_code("Akan", "ak", "aka", "aka") { }
 		};
 
@@ -189,14 +196,14 @@ namespace hnc
 		 * @brief Albanian language code
 		 *
 		 * @code
-		 * #include <hnc/lang.hpp>
-		 * @endcode
+		   #include <hnc/lang.hpp>
+		   @endcode
 		 */
 		class albanian : public hnc::lang::lang_code
 		{
 		public:
 
-			/// Constructor
+			/// @brief Constructor
 			albanian() : hnc::lang::lang_code("Albanian", "sq", "sqi", "sqi") { }
 		};
 
@@ -204,14 +211,14 @@ namespace hnc
 		 * @brief Amharic language code
 		 *
 		 * @code
-		 * #include <hnc/lang.hpp>
-		 * @endcode
+		   #include <hnc/lang.hpp>
+		   @endcode
 		 */
 		class amharic : public hnc::lang::lang_code
 		{
 		public:
 
-			/// Constructor
+			/// @brief Constructor
 			amharic() : hnc::lang::lang_code("Amharic", "am", "amh", "amh") { }
 		};
 
@@ -219,14 +226,14 @@ namespace hnc
 		 * @brief Arabic language code
 		 *
 		 * @code
-		 * #include <hnc/lang.hpp>
-		 * @endcode
+		   #include <hnc/lang.hpp>
+		   @endcode
 		 */
 		class arabic : public hnc::lang::lang_code
 		{
 		public:
 
-			/// Constructor
+			/// @brief Constructor
 			arabic() : hnc::lang::lang_code("Arabic", "ar", "ara", "ara") { }
 		};
 
@@ -234,14 +241,14 @@ namespace hnc
 		 * @brief Aragonese language code
 		 *
 		 * @code
-		 * #include <hnc/lang.hpp>
-		 * @endcode
+		   #include <hnc/lang.hpp>
+		   @endcode
 		 */
 		class aragonese : public hnc::lang::lang_code
 		{
 		public:
 
-			/// Constructor
+			/// @brief Constructor
 			aragonese() : hnc::lang::lang_code("Aragonese", "an", "arg", "arg") { }
 		};
 
@@ -251,14 +258,14 @@ namespace hnc
 		 * @brief German language code
 		 *
 		 * @code
-		 * #include <hnc/lang.hpp>
-		 * @endcode
+		   #include <hnc/lang.hpp>
+		   @endcode
 		 */
 		class german : public hnc::lang::lang_code
 		{
 		public:
 
-			/// Constructor
+			/// @brief Constructor
 			german() : hnc::lang::lang_code("German", "de", "deu", "deu") { }
 		};
 
@@ -268,14 +275,14 @@ namespace hnc
 		 * @brief English language code
 		 *
 		 * @code
-		 * #include <hnc/lang.hpp>
-		 * @endcode
+		   #include <hnc/lang.hpp>
+		   @endcode
 		 */
 		class english : public hnc::lang::lang_code
 		{
 		public:
 
-			/// Constructor
+			/// @brief Constructor
 			english() : hnc::lang::lang_code("English", "en", "eng", "eng") { }
 		};
 
@@ -285,31 +292,17 @@ namespace hnc
 		 * @brief French language code
 		 *
 		 * @code
-		 * #include <hnc/lang.hpp>
-		 * @endcode
+		   #include <hnc/lang.hpp>
+		   @endcode
 		 */
 		class french : public hnc::lang::lang_code
 		{
 		public:
 
-			/// Constructor
+			/// @brief Constructor
 			french() : hnc::lang::lang_code("French", "fr", "fra", "fra") { }
 		};
 	}
-}
-
-/**
- * @brief Display a hnc::lang::lang_code
- *
- * @param[out] o         Out stream
- * @param[in]  lang_code hnc::lang::lang_code
- *
- * @return the out stream
- */
-std::ostream & operator<<(std::ostream & o, hnc::lang::lang_code const & lang_code)
-{
-	o << lang_code.name();
-	return o;
 }
 
 #endif

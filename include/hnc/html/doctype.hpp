@@ -1,4 +1,4 @@
-// Copyright © 2013 Inria, Written by Lénaïc Bagnères, lenaic.bagneres@inria.fr
+// Copyright © 2013, 2014 Inria, Written by Lénaïc Bagnères, lenaic.bagneres@inria.fr
 
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -12,11 +12,6 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-
-/**
- * @file
- * @brief Just for operator<<(std::ostream & o, hnc::html::doctype::html const & html_doctype)
- */
 
 #ifndef HNC_HTML_DOCTYPE_HPP
 #define HNC_HTML_DOCTYPE_HPP
@@ -33,8 +28,8 @@ namespace hnc
 		 * @brief HTML doctypes
 		 *
 		 * @code
-		 * #include <hnc/html.hpp>
-		 * @endcode
+		   #include <hnc/html.hpp>
+		   @endcode
 		 *
 		 * http://www.w3schools.com/tags/tag_doctype.asp
 		 */
@@ -44,8 +39,8 @@ namespace hnc
 			 * @brief HTML doctype
 			 *
 			 * @code
-			 * #include <hnc/html.hpp>
-			 * @endcode
+			   #include <hnc/html.hpp>
+			   @endcode
 			 */
 			class html
 			{
@@ -56,7 +51,7 @@ namespace hnc
 
 			public:
 
-				/// Constructor
+				/// @brief Constructor
 				html() :
 					m_doctype(R"(<!DOCTYPE html>)")
 				{ }
@@ -64,25 +59,35 @@ namespace hnc
 				/// Destructor
 				virtual ~html() { }
 
-				/// Return the doctype (HTML code)
+				/// @brief Return the doctype (HTML code)
 				/// @return the doctype (HTML code)
 				std::string const & doctype() const { return m_doctype; }
 
 			protected:
 
-				/// Constructor
+				/// @brief Constructor
 				/// @param[in] doctype Doctype as string
 				html(std::string const & doctype) :
 					m_doctype(doctype)
 				{ }
 			};
 			
+			/// @brief Operator << between a std::ostream and a hnc::html::doctype::html
+			/// @param[in,out] o            Output stream
+			/// @param[in]     html_doctype A hnc::html::doctype::html
+			/// @return the output stream
+			inline std::ostream & operator<<(std::ostream & o, hnc::html::doctype::html const & html_doctype)
+			{
+				o << html_doctype.doctype();
+				return o;
+			}
+			
 			/**
 			 * @brief HTML 5 doctype
 			 *
 			 * @code
-			 * #include <hnc/html.hpp>
-			 * @endcode
+			   #include <hnc/html.hpp>
+			   @endcode
 			 */
 			using html_5 = hnc::html::doctype::html;
 
@@ -90,8 +95,8 @@ namespace hnc
 			 * @brief XHTML 1.0 Strict doctype
 			 *
 			 * @code
-			 * #include <hnc/html.hpp>
-			 * @endcode
+			   #include <hnc/html.hpp>
+			   @endcode
 			 */
 			class xhtml_1d0_strict : public hnc::html::doctype::html
 			{
@@ -107,8 +112,8 @@ namespace hnc
 			 * @brief XHTML 1.0 Transitional doctype
 			 *
 			 * @code
-			 * #include <hnc/html.hpp>
-			 * @endcode
+			   #include <hnc/html.hpp>
+			   @endcode
 			 */
 			class xhtml_1d0_transitional : public hnc::html::doctype::html
 			{
@@ -124,8 +129,8 @@ namespace hnc
 			 * @brief XHTML 1.0 Frameset doctype
 			 *
 			 * @code
-			 * #include <hnc/html.hpp>
-			 * @endcode
+			   #include <hnc/html.hpp>
+			   @endcode
 			 */
 			class xhtml_1d0_frameset : public hnc::html::doctype::html
 			{
@@ -141,8 +146,8 @@ namespace hnc
 			 * @brief XHTML 1.1 doctype
 			 *
 			 * @code
-			 * #include <hnc/html.hpp>
-			 * @endcode
+			   #include <hnc/html.hpp>
+			   @endcode
 			 */
 			class xhtml_1d1 : public hnc::html::doctype::html
 			{
@@ -158,8 +163,8 @@ namespace hnc
 			 * @brief HTML 4.01 Strict doctype
 			 *
 			 * @code
-			 * #include <hnc/html.hpp>
-			 * @endcode
+			   #include <hnc/html.hpp>
+			   @endcode
 			 */
 			class html_4d01_strict : public hnc::html::doctype::html
 			{
@@ -175,8 +180,8 @@ namespace hnc
 			 * @brief HTML 4.01 Transitional doctype
 			 *
 			 * @code
-			 * #include <hnc/html.hpp>
-			 * @endcode
+			   #include <hnc/html.hpp>
+			   @endcode
 			 */
 			class html_4d01_transitional : public hnc::html::doctype::html
 			{
@@ -192,8 +197,8 @@ namespace hnc
 			 * @brief HTML 4.01 Frameset doctype
 			 *
 			 * @code
-			 * #include <hnc/html.hpp>
-			 * @endcode
+			   #include <hnc/html.hpp>
+			   @endcode
 			 */
 			class html_4d01_frameset : public hnc::html::doctype::html
 			{
@@ -206,20 +211,6 @@ namespace hnc
 			};
 		}
 	}
-}
-
-/**
- * @brief Display a hnc::html::doctype::html
- *
- * @param[out] o            Out stream
- * @param[in]  html_doctype A hnc::html::doctype::html
- *
- * @return the out stream
- */
-std::ostream & operator<<(std::ostream & o, hnc::html::doctype::html const & html_doctype)
-{
-	o << html_doctype.doctype();
-	return o;
 }
 
 #endif

@@ -1,4 +1,4 @@
-// Copyright © 2013 Lénaïc Bagnères, hnc@singularity.fr
+// Copyright © 2013, 2014 Lénaïc Bagnères, hnc@singularity.fr
 
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -21,7 +21,13 @@
 
 namespace hnc
 {
-	/// @brief Container for 3 values (x, y and z)
+	/**
+	 * @brief Container for 3 values (x, y and z)
+	 * 
+	 * @code
+	   #include <hnc/vector3.hpp>
+	   @endcode
+	 */
 	template <class T>
 	class vector3
 	{
@@ -36,50 +42,35 @@ namespace hnc
 		/// z
 		T z;
 
-		/**
-		 * @brief Constructor
-		 * 
-		 * @param x
-		 * @param y
-		 * @param z
-		 */
+		/// @brief Constructor
+		/// @param x x
+		/// @param y y
+		/// @param z z
 		explicit vector3<T>(T const & x = T(), T const & y = T(), T const & z = T()) :
 			x(x), y(y), z(z)
 		{ }
 
-		/**
-		 * @brief Equality operator
-		 * 
-		 * @param[in] v A hnc::vector3
-		 * 
-		 * @return true if hnc::vector3 have same values
-		 */
+		/// @brief Equality operator
+		/// @param[in] v A hnc::vector3
+		/// @return true if hnc::vector3 have same values
 		bool operator==(vector3 const & v) const { return (x == v.x && y == v.y && z == v.z); }
 
-		/**
-		 * @brief Inequality operator
-		 * 
-		 * @param[in] v A hnc::vector3
-		 * 
-		 * @return true if hnc::vector3 have different values
-		 */
+		/// @brief Inequality operator
+		/// @param[in] v A hnc::vector3
+		/// @return true if hnc::vector3 have different values
 		bool operator!=(vector3 const & v) const { return (! ((*this) == v)); }
 	};
-}
-
-/**
- * @brief Display a hnc::vector3
- *
- * @param[in,out] o Out stream
- * @param[in]     v A hnc::vector3
- *
- * @return the out stream
- */
-template <class T>
-std::ostream & operator << (std::ostream & o, hnc::vector3<T> const & v)
-{
-	o << "{" << v.x << ", " << v.y << ", " << v.z << "}";
-	return o;
+	
+	/// @brief Operator << between a std::ostream and a hnc::vector3<T>
+	/// @param[in,out] o       Output stream
+	/// @param[in]     vector3 A hnc::vector3<T>
+	/// @return the output stream
+	template <class T>
+	std::ostream & operator << (std::ostream & o, hnc::vector3<T> const & vector3)
+	{
+		o << "{ " << vector3.x << ", " << vector3.y << ", " << vector3.z << " }";
+		return o;
+	}
 }
 
 #endif

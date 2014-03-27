@@ -14,7 +14,7 @@ private:
 	std::bernoulli_distribution m_random_bool;
 
 	/// Distribution to crossover
-	std::uniform_int_distribution<int> m_random_int;
+	std::uniform_int_distribution<std::size_t> m_random_int;
 
 	/// We need the target for evaluate solution
 	std::string const m_target;
@@ -28,7 +28,7 @@ public:
 	search_a_word(std::string const & target) :
 		m_random_char(32, 126),
 		m_random_bool(0.5),
-		m_random_int(0, target.size() - 1),
+		m_random_int(0, std::max(target.size() - 1, std::size_t(0))),
 		m_target(target)
 	{ }
 
@@ -48,7 +48,7 @@ public:
 	 */
 	unsigned int evaluate_solution(std::string const & solution)
 	{
-		int grade = 0;
+		unsigned int grade = 0;
 		for (std::size_t i = 0; i < m_target.size(); ++i)
 		{
 			if (solution[i] == m_target[i]) { ++grade; }
@@ -118,7 +118,7 @@ int main()
 		2,                                 // nb_archipelago,
 		4,                                 // nb_island_per_archipelago,
 		50,                                // nb_solution_per_island,
-		-1,                                // number_of_generation = 100,
+		100,                               // number_of_generation = 100,
 		0.7,                               // crossover_probability = 0.7,
 		0.01,                              // mutation_probability = 0.01,
 		3,                                 // nb_migration_per_island = 3,
@@ -127,9 +127,9 @@ int main()
 		10,                                // nb_generation_between_archipelago_migration = 10,
 		-1,                                // nb_same_solution_max = 20,
 		std::chrono::duration<double>(0.), // max_time = std::chrono::duration<double>(0.),
-		hnc::algo::genetic_algo::minimal_plus_log,         // log_level = no_log, minimal_log, minimal_plus_log, archipelago_log, island_log, solution_grade_log
+		hnc::algo::genetic_algo::minimal_plus_log, // log_level = no_log, minimal_log, minimal_plus_log, archipelago_log, island_log, solution_grade_log
 		1,                                 // nb_generation_between_copy_best_solution = 1
-		hnc::algo::genetic_algo::system_clock_now          // std::function<unsigned int ()> const & generate_seed = system_clock_now()
+		hnc::algo::genetic_algo::steady_clock_now // std::function<unsigned int ()> const & generate_seed = steady_clock_now()
 	);
 	// Star genetic algo
 	ga.evolve();

@@ -1,4 +1,4 @@
-// Copyright © 2013 Inria, Written by Lénaïc Bagnères, lenaic.bagneres@inria.fr
+// Copyright © 2013, 2014 Inria, Written by Lénaïc Bagnères, lenaic.bagneres@inria.fr
 
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -27,8 +27,8 @@ namespace hnc
 	 * @brief Execute a command
 	 *
 	 * @code
-	 * #include <hnc/system.hpp>
-	 * @endcode
+	   #include <hnc/system.hpp>
+	   @endcode
 	 */
 	void system(std::string const & cmd)
 	{
@@ -40,8 +40,8 @@ namespace hnc
 	 * @brief Execute a command with arguments
 	 *
 	 * @code
-	 * #include <hnc/system.hpp>
-	 * @endcode
+	   #include <hnc/system.hpp>
+	   @endcode
 	 */
 	template <class arg_t, class... args_t>
 	void system(std::string const & cmd, arg_t const & arg, args_t... args)

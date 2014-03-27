@@ -1,4 +1,4 @@
-// Copyright © 2013 Lénaïc Bagnères, hnc@singularity.fr
+// Copyright © 2013, 2014 Lénaïc Bagnères, hnc@singularity.fr
 
 // This file is part of hnc.
 
@@ -31,8 +31,8 @@ namespace hnc
 		 * @brief Replace a sequence of a container by an other sequence
 		 *
 		 * @code
-		 * #include <hnc/algo.hpp>
-		 * @endcode
+		   #include <hnc/algo.hpp>
+		   @endcode
 		 *
 		 * @param[in] c            Container
 		 * @param[in] first        Iterator on first element
@@ -92,8 +92,8 @@ namespace hnc
 		 * @brief Replace a sequence of a container by an other container
 		 *
 		 * @code
-		 * #include <hnc/algo.hpp>
-		 * @endcode
+		   #include <hnc/algo.hpp>
+		   @endcode
 		 *
 		 * @param[in] c          Container
 		 * @param[in] first      Iterator on first element

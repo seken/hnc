@@ -1,4 +1,4 @@
-// Copyright © 2013 Lénaïc Bagnères, hnc@singularity.fr
+// Copyright © 2013, 2014 Lénaïc Bagnères, hnc@singularity.fr
 
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -38,20 +38,20 @@ namespace hnc
  * This macro generate the .clone() const method which return a std::unique_ptr of the base class
  *
  * @code
- * class B
- * {
- * public:
- * 	virtual ~B() { }
- * 	hnc_generate_clone_method(B, B)
- * };
- * 
- * class D
- * {
- * public:
- * 	virtual ~D() { }
- * 	hnc_generate_clone_method(B, D)
- * };
- * @endcode
+   class B
+   {
+   public:
+   	virtual ~B() { }
+   	hnc_generate_clone_method(B, B);
+   };
+   
+   class D
+   {
+   public:
+  	virtual ~D() { }
+   	hnc_generate_clone_method(B, D);
+   };
+   @endcode
  *
  * @param[in] base_t    Type of the base class
  * @param[in] derived_t Type of the derived class
@@ -73,21 +73,21 @@ namespace hnc
 	 *
 	 * Add a clone method to the derived class
 	 * @code
-	 * class B : public hnc::cloneable<B, B>
-	 * {
-	 * public:
-	 * 	virtual ~B() { }
-	 * };
+	   class B : public hnc::cloneable<B, B>
+	   {
+	   public:
+	   	virtual ~B() { }
+	   };
 	 * @endcode
 	 *
 	 * @warning If the class have already a clone method, you must specify which one to use
 	 * @code
-	 * class D : public B, public hnc::cloneable<B, D>
-	 * {
-	 * public:
-	 * 	virtual ~D() { }
-	 * 	using hnc::cloneable<B, D>::clone();
-	 * };
+	   class D : public B, public hnc::cloneable<B, D>
+	   {
+	   public:
+	   	virtual ~D() { }
+	   	using hnc::cloneable<B, D>::clone();
+	   };
 	 * @endcode
 	 *
 	 * @note Consider hnc_generate_clone_method(base_t, derived_t) macro to generate .clone() method
@@ -112,7 +112,7 @@ namespace hnc
 namespace hnc
 {
 	/// @brief Clone the object with copy constructor
-	/// @param[in] t   An object
+	/// @param[in] v   An object
 	/// @param[in] tag std::false_type
 	/// @return a clone of the object
 	template <class T>
@@ -122,7 +122,7 @@ namespace hnc
 	}
 	
 	/// @brief Clone the object with .clone() method
-	/// @param[in] t   An object
+	/// @param[in] v   An object
 	/// @param[in] tag std::true_type
 	/// @return a clone of the object
 	template <class T>
@@ -132,7 +132,7 @@ namespace hnc
 	}
 	
 	/// @brief Clone the object
-	/// @param[in] t An object
+	/// @param[in] v An object
 	/// @return a clone of the object
 	template <class T>
 	auto clone(T const & v) -> decltype(hnc::clone(v, hnc::is_cloneable<T>()))
@@ -144,7 +144,7 @@ namespace hnc
 namespace hnc
 {
 	/// @brief Clone the object with copy constructor
-	/// @param[in] t   An object
+	/// @param[in] v   An object
 	/// @param[in] tag std::false_type
 	/// @return a clone of the object in a std::unique_ptr
 	template <class T>
@@ -154,7 +154,7 @@ namespace hnc
 	}
 	
 	/// @brief Clone the object with .clone() method
-	/// @param[in] t   An object
+	/// @param[in] v   An object
 	/// @param[in] tag std::true_type
 	/// @return a clone of the object in a std::unique_ptr
 	template <class T>
@@ -164,7 +164,7 @@ namespace hnc
 	}
 	
 	/// @brief Clone the object
-	/// @param[in] t An object
+	/// @param[in] v An object
 	/// @return a clone of the object in a std::unique_ptr
 	template <class T>
 	auto clone_to_unique_ptr(T const & v) -> decltype(hnc::clone_to_unique_ptr(v, hnc::is_cloneable<T>()))

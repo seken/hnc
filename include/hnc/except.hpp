@@ -29,8 +29,8 @@ namespace hnc
 	 * @brief Extends std::exception, std::logic_error and std::runtime_error
 	 *
 	 * @code
-	 * #include <hnc/except.hpp>
-	 * @endcode
+	   #include <hnc/except.hpp>
+	   @endcode
 	 *
 	 * std::exception @n
 	 * http://www.cplusplus.com/reference/exception/exception/ @n
@@ -46,16 +46,19 @@ namespace hnc
 	 */
 	namespace except
 	{
-		/// @brief Exception to report incomplete implementation
+		/**
+		 * @brief Exception to report incomplete implementation
+		 * 
+		 * @code
+		   #include <hnc/except.hpp>
+		   @endcode
+		 */
 		class incomplete_implementation : public std::logic_error
 		{
 		public:
 
-			/**
-			 * @brief Constructor
-			 *
-			 * @param[in] what_arg Description of the error
-			 */
+			/// @brief Constructor
+			/// @param[in] what_arg Description of the error
 			explicit incomplete_implementation(std::string const & what_arg) :
 				std::logic_error(what_arg)
 			{ }
@@ -65,27 +68,30 @@ namespace hnc
 				std::logic_error(what_arg)
 			{ }
 
-			/// Return the description of the error
+			/// @brief Return the description of the error
 			/// @return the description of the error
 			virtual char const * what() const noexcept
 			{
 				return std::logic_error::what();
 			}
 
-			/// Destructor
+			/// @brief Destructor
 			virtual ~incomplete_implementation() noexcept { }
 		};
 
-		/// @brief Exception "file not found"
+		/**
+		 * @brief Exception "file not found"
+		 * 
+		 * @code
+		   #include <hnc/except.hpp>
+		   @endcode
+		 */
 		class file_not_found : public std::runtime_error
 		{
 		public:
 
-			/**
-			 * @brief Constructor
-			 *
-			 * @param[in] what_arg Description of the error
-			 */
+			/// @brief Constructor
+			/// @param[in] what_arg Description of the error
 			explicit file_not_found(std::string const & what_arg) :
 				std::runtime_error(what_arg)
 			{ }
@@ -95,18 +101,24 @@ namespace hnc
 				std::runtime_error(what_arg)
 			{ }
 
-			/// Return the description of the error
+			/// @brief Return the description of the error
 			/// @return the description of the error
 			virtual char const * what() const noexcept
 			{
 				return std::runtime_error::what();
 			}
 
-			/// Destructor
+			/// @brief Destructor
 			virtual ~file_not_found() noexcept { }
 		};
 
-		/// @brief Exception "parse error"
+		/**
+		 * @brief Exception "parse error"
+		 * 
+		 * @code
+		   #include <hnc/except.hpp>
+		   @endcode
+		 */
 		class parse_error : public std::logic_error
 		{
 		protected:
@@ -119,11 +131,10 @@ namespace hnc
 			
 		public:
 
-			/**
-			 * @brief Constructor
-			 *
-			 * @param[in] what_arg Description of the error
-			 */
+			/// @brief Constructor
+			/// @param[in] what_arg      Description of the error
+			/// @param[in] line_number   Line number
+			/// @param[in] column_number Column number
 			explicit parse_error(std::string const & what_arg, unsigned int line_number = 0, unsigned int column_number = 0) :
 				std::logic_error(what_arg),
 				m_line_number(line_number),
@@ -137,7 +148,7 @@ namespace hnc
 				m_column_number(column_number)
 			{ }
 
-			/// Return the description of the error
+			/// @brief Return the description of the error
 			/// @return the description of the error
 			virtual char const * what() const noexcept
 			{
@@ -152,7 +163,7 @@ namespace hnc
 			/// @return the column number of the error
 			virtual unsigned int column_number() const { return m_column_number; }
 
-			/// Destructor
+			/// @brief Destructor
 			virtual ~parse_error() noexcept { }
 		};
 	}

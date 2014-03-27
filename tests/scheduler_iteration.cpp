@@ -52,7 +52,7 @@ public:
 		{
 			for (std::size_t j = 0; j < r_tab2D.size(); ++j)
 			{
-				r_tab2D[i][j] += i * j;
+				r_tab2D[i][j] += int(i * j);
 			}
 		}
 	}
@@ -72,7 +72,7 @@ int main()
 		for (std::size_t j = 0; j < tab2D_ref.size(); ++j)
 		{
 			tab2D_ref[i].resize(tab2D_ref.size());
-			tab2D_ref[i][j] += i * j;
+			tab2D_ref[i][j] += int(i * j);
 		}
 	}
 
@@ -87,7 +87,7 @@ int main()
 			{
 				for (std::size_t j = 0; j < tab2D_ref.size(); ++j)
 				{
-					tab2D[i][j] += i * j;
+					tab2D[i][j] += int(i * j);
 				}
 			}
 		};
@@ -98,7 +98,7 @@ int main()
 			{
 				for (std::size_t i = start; i < end; ++i)
 				{
-					tab2D[i][j] += i * j;
+					tab2D[i][j] += int(i * j);
 				}
 			}
 		};
@@ -203,7 +203,7 @@ int main()
 			{
 				for (j = 0; j < tab2D_ref.size(); ++j)
 				{
-					tab2D[i][j] += i * j;
+					tab2D[i][j] += int(i * j);
 				}
 			}
 		};
@@ -214,7 +214,7 @@ int main()
 			{
 				for (i = start; i < end; ++i)
 				{
-					tab2D[i][j] += i * j;
+					tab2D[i][j] += int(i * j);
 				}
 			}
 		};
@@ -324,7 +324,7 @@ int main()
 			for (std::size_t j = 0; j < tab2D_ref.size(); j += 7)
 			{
 				tab2D_ref[i].resize(tab2D_ref.size());
-				tab2D_ref[i][j] += i * j;
+				tab2D_ref[i][j] += int(i * j);
 			}
 		}
 		
@@ -339,7 +339,7 @@ int main()
 			{
 				for (j = 0; j < tab2D_ref.size(); j += 7)
 				{
-					tab2D[i][j] += i * j;
+					tab2D[i][j] += int(i * j);
 				}
 			}
 		};
@@ -350,7 +350,7 @@ int main()
 			{
 				for (i = start; i < end; i += 3)
 				{
-					tab2D[i][j] += i * j;
+					tab2D[i][j] += int(i * j);
 				}
 			}
 		};

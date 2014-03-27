@@ -1,4 +1,4 @@
-// Copyright © 2012 Lénaïc Bagnères, hnc@singularity.fr
+// Copyright © 2012, 2014 Lénaïc Bagnères, hnc@singularity.fr
 
 // This file is part of hnc.
 
@@ -19,16 +19,23 @@
 #ifndef HNC_MATH_HPP
 #define HNC_MATH_HPP
 
-#include "math/pi.hpp"
+#include "math/cartesian_product.hpp"
 
-#include "math/nth_root.hpp"
+#include "math/geometric_mean.hpp"
+
+#include "math/linear_equation.hpp"
 
 #include "math/mean.hpp"
 #include "math/median.hpp"
-#include "math/geometric_mean.hpp"
-#include "math/variance.hpp"
 
-#include "math/cartesian_product.hpp"
+#include "math/nth_root.hpp"
+
+#include "math/pi.hpp"
+
+#include "math/relational_operator.hpp"
+
+#include "math/variance.hpp"
+#include "math/variance.hpp"
 
 
 namespace hnc
@@ -37,8 +44,8 @@ namespace hnc
 	 * @brief Provides some mathematical functions
 	 *
 	 * @code
-	 * #include <hnc/math.hpp>
-	 * @endcode
+	   #include <hnc/math.hpp>
+	   @endcode
 	 */
 	namespace math
 	{

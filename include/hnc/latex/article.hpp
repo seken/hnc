@@ -1,4 +1,4 @@
-// Copyright © 2013 Inria, Written by Lénaïc Bagnères, lenaic.bagneres@inria.fr
+// Copyright © 2013, 2014 Inria, Written by Lénaïc Bagnères, lenaic.bagneres@inria.fr
 
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -13,11 +13,6 @@
 // limitations under the License.
 
 
-/**
- * @file
- * @brief Just for operator<<(std::ostream & o, hnc::latex::article const & latex_article)
- */
-
 #ifndef HNC_LATEX_ARTICLE_HPP
 #define HNC_LATEX_ARTICLE_HPP
 
@@ -31,6 +26,10 @@ namespace hnc
 	{
 		/**
 		 * @brief LaTeX article code generation
+		 * 
+		 * @code
+		   #include <hnc/latex.hpp>
+		   @endcode
 		 */
 		class article
 		{
@@ -58,11 +57,10 @@ namespace hnc
 
 		public:
 
-			/**
-			 * @brief Constructor
-			 *
-			 * 
-			 */
+			/// @brief Constructor
+			/// @param[in] title  Title
+			/// @param[in] author Author
+			/// @param[in] date   Date
 			article
 			(
 				std::string const & title,
@@ -75,23 +73,15 @@ namespace hnc
 				m_date(date)
 			{ }
 
-			/**
-			 * @brief Use package
-			 *
-			 * @param[in] package_name Name of the package
-			 *
-			 * @return the article
-			 */
+			/// @brief Use package
+			/// @param[in] package_name Name of the package
+			/// @return the article
 			article & use_package(std::string const & package_name) { m_packages.push_back(package_name); return *this; }
 
-			/**
-			 * @brief Use packages
-			 *
-			 * @param[in] package_name      Name of the package
-			 * @param[in] package_name_list Other packages
-			 *
-			 * @return the article
-			 */
+			/// @brief Use packages
+			/// @param[in] package_name      Name of the package
+			/// @param[in] package_name_list Other packages
+			/// @return the article
 			template <class... string>
 			article & use_package(std::string const & package_name, string... package_name_list)
 			{
@@ -100,28 +90,20 @@ namespace hnc
 				return *this;
 			}
 
-			/**
-			 * @brief Language = english (by default)
-			 * @return the article
-			 */
+			/// @brief Language = english (by default)
+			/// @return the article
 			article & english() { m_lang = ""; return *this; }
 
-			/**
-			 * @brief Language = french
-			 * @return the article
-			 */
+			/// @brief Language = french
+			/// @return the article
 			article & french() { m_lang = "\\usepackage[francais]{babel}" "\n"; return *this; }
 
-			/**
-			 * @brief Set the data (LaTeX code) (inside the document)
-			 * @param[in] data Data (LaTeX code in a std::string) to put inside the document
-			 */
+			/// @brief Set the data (LaTeX code) (inside the document)
+			/// @param[in] data Data (LaTeX code in a std::string) to put inside the document
 			void set_data(std::string const & data) { m_data = data; }
 
-			/**
-			 * @brief Get LaTeX code
-			 * @return the LaTeX code
-			 */
+			/// @brief Get LaTeX code
+			/// @return the LaTeX code
 			std::string latex() const
 			{
 				// Return
@@ -160,21 +142,17 @@ namespace hnc
 				return r;
 			}
 		};
+		
+		/// @brief Operator << between a std::ostream and a hnc::latex::article
+		/// @param[in,out] o             Output stream
+		/// @param[in]     latex_article A hnc::latex::article
+		/// @return the output stream
+		inline std::ostream & operator<<(std::ostream & o, hnc::latex::article const & latex_article)
+		{
+			o << latex_article.latex();
+			return o;
+		}
 	}
-}
-
-/**
- * @brief Display a hnc::latex::article
- *
- * @param[out] o             Out stream
- * @param[in]  latex_article A hnc::latex::article
- *
- * @return the out stream
- */
-std::ostream & operator<<(std::ostream & o, hnc::latex::article const & latex_article)
-{
-	o << latex_article.latex();
-	return o;
 }
 
 #endif

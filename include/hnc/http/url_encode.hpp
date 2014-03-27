@@ -1,4 +1,4 @@
-// Copyright © 2013 Inria, Written by Lénaïc Bagnères, lenaic.bagneres@inria.fr
+// Copyright © 2013, 2014 Inria, Written by Lénaïc Bagnères, lenaic.bagneres@inria.fr
 
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -30,8 +30,8 @@ namespace hnc
 		 * @brief Perform a Percent-encoding (for ASCII characters (upgrade needed)), also known as URL encoding, on std::string
 		 *
 		 * @code
-		 * #include <hnc/html.hpp>
-		 * @endcode
+		   #include <hnc/html.hpp>
+		   @endcode
 		 *
 		 * http://en.wikipedia.org/wiki/Percent-encoding
 		 * http://rosettacode.org/wiki/URL_encoding#C

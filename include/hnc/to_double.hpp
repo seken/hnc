@@ -1,4 +1,4 @@
-// Copyright © 2012 Lénaïc Bagnères, hnc@singularity.fr
+// Copyright © 2012, 2014 Lénaïc Bagnères, hnc@singularity.fr
 
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -25,8 +25,8 @@ namespace hnc
 	 * @brief Convert the input into a double
 	 *
 	 * @code
-	 * #include <hnc/to_double.hpp>
-	 * @endcode
+	   #include <hnc/to_double.hpp>
+	   @endcode
 	 * 
 	 * @param[in] in The input
 	 * 

@@ -1,4 +1,4 @@
-// Copyright © 2013 Lénaïc Bagnères, hnc@singularity.fr
+// Copyright © 2013, 2014 Lénaïc Bagnères, hnc@singularity.fr
 
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -16,12 +16,15 @@
 /**
  * @file
  * @brief Provides Boost Serialization for std (std::vector, std::list, ...)
- *
+ * 
+ * @code
+   #include <hnc/boost_serialization_std.hpp>
+   @endcode
  *
  * If you want compile without Boost.Serialization, you can define the macro
  * @code
- * #define NO_HNC_Boost_Serialization
- * @endcode
+   #define NO_HNC_Boost_Serialization
+   @endcode
  */
 
 #ifndef HNC_BOOST_SERIALIZATION_STD_HPP

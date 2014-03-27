@@ -1,4 +1,4 @@
-// Copyright © 2012,2013 Lénaïc Bagnères, hnc@singularity.fr
+// Copyright © 2012-2014 Lénaïc Bagnères, hnc@singularity.fr
 
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -27,8 +27,8 @@ namespace hnc
 	 * @brief Convert the input into a std::string
 	 *
 	 * @code
-	 * #include <hnc/to_string.hpp>
-	 * @endcode
+	   #include <hnc/to_string.hpp>
+	   @endcode
 	 * 
 	 * We use a std::ostringstream to do the conversion @n
 	 * We use full precision of the input @n
@@ -49,11 +49,13 @@ namespace hnc
 		return (o.str());
 	}
 
+	// Specialization for std::string
 	std::string to_string(std::string const & in)
 	{
 		return in;
 	}
 
+	// Specialization for char const * const
 	std::string to_string(char const * const in)
 	{
 		return std::string(in);

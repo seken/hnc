@@ -1,4 +1,4 @@
-// Copyright © 2013 Inria, Written by Lénaïc Bagnères, lenaic.bagneres@inria.fr
+// Copyright © 2013, 2014 Inria, Written by Lénaïc Bagnères, lenaic.bagneres@inria.fr
 
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -12,11 +12,6 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-
-/**
- * @file
- * @brief Just for operator<<(std::ostream & o, hnc::http::get const & http_get_request)
- */
 
 #ifndef HNC_HTTP_GET_HPP
 #define HNC_HTTP_GET_HPP
@@ -44,30 +39,30 @@ namespace hnc
 		 * @brief Build a HTTP GET request
 		 *
 		 * @code
-		 * #include <hnc/http.hpp>
-		 * @endcode
+		   #include <hnc/http.hpp>
+		   @endcode
 		 *
 		 * Exemple:
 		 * @code
-		 * // Basic
-		 * {
-		 * 	hnc::url url("www.boost.org", "/", "http");
-		 * 	hnc::http::get http_get_request(url);
-		 * 	std::vector<std::string> result = http_get_request.request();
-		 * }
-		 * // Basic with user agent
-		 * {
-		 * 	hnc::url url("www.boost.org", "/", "http");
-		 * 	hnc::http::get http_get_request(url, "user_agent");
-		 * 	std::vector<std::string> result = http_get_request.request();
-		 * }
-		 * // With parameters (?fragment=xhtml_code&output=soap12&verbose=1) and user agent (user_agent)
-		 * {
-		 * 	hnc::url url("localhost", "/w3c-validator/check", "http");
-		 * 	hnc::http::get http_get_request(url, "fragment", "xhtml_code", "output", "soap12", "verbose", 1, "user_agent");
-		 * 	std::vector<std::string> result = http_get_request.request();
-		 * }
-		 * @endcode
+		   // Basic
+		   {
+		   	hnc::url url("www.boost.org", "/", "http");
+		   	hnc::http::get http_get_request(url);
+		   	std::vector<std::string> result = http_get_request.request();
+		   }
+		   // Basic with user agent
+		   {
+		   	hnc::url url("www.boost.org", "/", "http");
+		   	hnc::http::get http_get_request(url, "user_agent");
+		   	std::vector<std::string> result = http_get_request.request();
+		   }
+		   // With parameters (?fragment=xhtml_code&output=soap12&verbose=1) and user agent (user_agent)
+		   {
+		   	hnc::url url("localhost", "/w3c-validator/check", "http");
+		   	hnc::http::get http_get_request(url, "fragment", "xhtml_code", "output", "soap12", "verbose", 1, "user_agent");
+		   	std::vector<std::string> result = http_get_request.request();
+		   }
+		   @endcode
 		 */
 		class get
 		{
@@ -84,12 +79,9 @@ namespace hnc
 
 		public:
 
-			/**
-			 * @brief Constructor
-			 *
-			 * @param[in] host_and_path A hnc::url witch contains server name and path
-			 * @param[in] user_agent    User agent http://en.wikipedia.org/wiki/User_agent http://en.wikipedia.org/wiki/User_agent#Format (empty by default)
-			 */
+			/// @brief Constructor
+			/// @param[in] host_and_path A hnc::url witch contains server name and path
+			/// @param[in] user_agent    User agent http://en.wikipedia.org/wiki/User_agent http://en.wikipedia.org/wiki/User_agent#Format (empty by default)
 			get
 			(
 				hnc::url const & host_and_path,
@@ -100,11 +92,8 @@ namespace hnc
 				m_user_agent(user_agent)
 			{ }
 
-			/**
-			 * @brief Do the HTTP request
-			 *
-			 * @todo 302 Found redirection does not work(?)
-			 */
+			/// @brief Do the HTTP request
+			/// @todo 302 Found redirection does not work(?)
 			std::vector<std::string> request() const
 			{
 				// Return
@@ -177,12 +166,9 @@ namespace hnc
 				return r;
 			}
 
-			/**
-			 * @brief Constructor
-			 *
-			 * @param[in] host_and_path                           A hnc::url witch contains server name and path
-			 * @param[in] key_and_value_parameters_and_user_agent Parameters (?key0=value0&key1=value1&key2=value2), User agent http://en.wikipedia.org/wiki/User_agent http://en.wikipedia.org/wiki/User_agent#Format (empty by default) http://en.wikipedia.org/wiki/User_agent#Format (empty by default)
-			 */
+			/// @brief Constructor
+			/// @param[in] host_and_path                           A hnc::url witch contains server name and path
+			/// @param[in] key_and_value_parameters_and_user_agent Parameters (?key0=value0&key1=value1&key2=value2), User agent http://en.wikipedia.org/wiki/User_agent http://en.wikipedia.org/wiki/User_agent#Format (empty by default) http://en.wikipedia.org/wiki/User_agent#Format (empty by default)
 			template <class... key_and_value_parameters_and_user_agent_t>
 			get
 			(
@@ -236,13 +222,10 @@ namespace hnc
 
 		private:
 
-			/**
-			 * @brief Create GET parameters (?key0=value0&key1=value1&key2=value2)
-			 *
-			 * @param[in] key                                     Key of the first parameter
-			 * @param[in] value                                   Value of the first parameter
-			 * @param[in] key_and_value_parameters_and_user_agent Other parameters and user agent
-			 */
+			/// @brief Create GET parameters (?key0=value0&key1=value1&key2=value2)
+			/// @param[in] key                                     Key of the first parameter
+			/// @param[in] value                                   Value of the first parameter
+			/// @param[in] key_and_value_parameters_and_user_agent Other parameters and user agent
 			template <class value_t, class... key_and_value_parameters_and_user_agent_t>
 			void set_parameters
 			(
@@ -261,28 +244,21 @@ namespace hnc
 				set_parameters(key_and_value_parameters_and_user_agent...);
 			}
 			
-			/**
-			 * @brief Final function to hnc::http::get::set_parameters(std::string const &,value_t const &,key_and_value_parameters_t...)
-			 *
-			 * @param[in] user_agent User agent http://en.wikipedia.org/wiki/User_agent http://en.wikipedia.org/wiki/User_agent#Format (empty by default)
-			 */
+			/// @brief Final function to hnc::http::get::set_parameters(std::string const &,value_t const &,key_and_value_parameters_t...)
+			/// @param[in] user_agent User agent http://en.wikipedia.org/wiki/User_agent http://en.wikipedia.org/wiki/User_agent#Format (empty by default)
 			void set_parameters(std::string const & user_agent = "") { m_user_agent = user_agent; }
 		};
+		
+		/// @brief Operator << between a std::ostream and a hnc::http::get
+		/// @param[in,out] o                Output stream
+		/// @param[in]     http_get_request A hnc::http::get
+		/// @return the output stream
+		inline std::ostream & operator<<(std::ostream & o, hnc::http::get const & http_get_request)
+		{
+			o << http_get_request.to_string();
+			return o;
+		}
 	}
-}
-
-/**
- * @brief Display a hnc::http::get
- *
- * @param[out] o                Out stream
- * @param[in]  http_get_request A hnc::http::get
- *
- * @return the out stream
- */
-std::ostream & operator<<(std::ostream & o, hnc::http::get const & http_get_request)
-{
-	o << http_get_request.to_string();
-	return o;
 }
 
 #endif

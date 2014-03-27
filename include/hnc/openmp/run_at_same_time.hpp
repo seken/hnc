@@ -1,4 +1,4 @@
-// Copyright © 2012 Lénaïc Bagnères, hnc@singularity.fr
+// Copyright © 2012, 2014 Lénaïc Bagnères, hnc@singularity.fr
 
 // This file is part of hnc.
 
@@ -38,15 +38,15 @@ namespace hnc
 		 * @brief Run tasks with OpenMP at same time
 		 *
 		 * @code
-		 * #include <hnc/openmp.hpp>
-		 * @endcode
+		   #include <hnc/openmp.hpp>
+		   @endcode
 		 *
 		 * Unlike hnc::openmp::run_parallel, this function ensures task are executed at the same time
 		 *
 		 * OpenMP works with preprocessor, so hnc::openmp::run_at_same_time is writen for 1, 2, 3, 4, ... functions as parameters (if not, please write the good function and send it to me(!))
 		 * @code
-		 * hnc::openmp::run_at_same_time(f0, f1, f2); //, f3, fx, ...
-		 * @endcode
+		   hnc::openmp::run_at_same_time(f0, f1, f2); //, f3, fx, ...
+		   @endcode
 		 *
 		 * @param[in,out] f0 Task (a function without parameter)
 		 * @param[in,out] f1 Another task (a function without parameter)
@@ -62,7 +62,7 @@ namespace hnc
 		void run_at_same_time(func0 & f0, func1 & f1)
 		{
 			#if defined(_OPENMP)
-			unsigned int num_thread = omp_get_max_threads();
+			int num_thread = omp_get_max_threads();
 			omp_set_num_threads(2);
 			#endif
 			#pragma omp parallel
@@ -84,7 +84,7 @@ namespace hnc
 		void run_at_same_time(func0 & f0, func1 & f1, func2 & f2)
 		{
 			#if defined(_OPENMP)
-			unsigned int num_thread = omp_get_max_threads();
+			int num_thread = omp_get_max_threads();
 			omp_set_num_threads(3);
 			#endif
 			#pragma omp parallel
@@ -108,7 +108,7 @@ namespace hnc
 		void run_at_same_time(func0 & f0, func1 & f1, func2 & f2, func3 & f3)
 		{
 			#if defined(_OPENMP)
-			unsigned int num_thread = omp_get_max_threads();
+			int num_thread = omp_get_max_threads();
 			omp_set_num_threads(4);
 			#endif
 			#pragma omp parallel
@@ -134,7 +134,7 @@ namespace hnc
 		void run_at_same_time(func0 & f0, func1 & f1, func2 & f2, func3 & f3, func4 & f4)
 		{
 			#if defined(_OPENMP)
-			unsigned int num_thread = omp_get_max_threads();
+			int num_thread = omp_get_max_threads();
 			omp_set_num_threads(5);
 			#endif
 			#pragma omp parallel
@@ -162,7 +162,7 @@ namespace hnc
 		void run_at_same_time(func0 & f0, func1 & f1, func2 & f2, func3 & f3, func4 & f4, func5 & f5)
 		{
 			#if defined(_OPENMP)
-			unsigned int num_thread = omp_get_max_threads();
+			int num_thread = omp_get_max_threads();
 			omp_set_num_threads(6);
 			#endif
 			#pragma omp parallel
@@ -192,7 +192,7 @@ namespace hnc
 		void run_at_same_time(func0 & f0, func1 & f1, func2 & f2, func3 & f3, func4 & f4, func5 & f5, func6 & f6)
 		{
 			#if defined(_OPENMP)
-			unsigned int num_thread = omp_get_max_threads();
+			int num_thread = omp_get_max_threads();
 			omp_set_num_threads(7);
 			#endif
 			#pragma omp parallel
@@ -224,7 +224,7 @@ namespace hnc
 		void run_at_same_time(func0 & f0, func1 & f1, func2 & f2, func3 & f3, func4 & f4, func5 & f5, func6 & f6, func7 & f7)
 		{
 			#if defined(_OPENMP)
-			unsigned int num_thread = omp_get_max_threads();
+			int num_thread = omp_get_max_threads();
 			omp_set_num_threads(8);
 			#endif
 			#pragma omp parallel
@@ -258,7 +258,7 @@ namespace hnc
 		void run_at_same_time(func0 & f0, func1 & f1, func2 & f2, func3 & f3, func4 & f4, func5 & f5, func6 & f6, func7 & f7, func8 & f8)
 		{
 			#if defined(_OPENMP)
-			unsigned int num_thread = omp_get_max_threads();
+			int num_thread = omp_get_max_threads();
 			omp_set_num_threads(8);
 			#endif
 			#pragma omp parallel
@@ -294,7 +294,7 @@ namespace hnc
 		void run_at_same_time(func0 & f0, func1 & f1, func2 & f2, func3 & f3, func4 & f4, func5 & f5, func6 & f6, func7 & f7, func8 & f8, func9 & f9)
 		{
 			#if defined(_OPENMP)
-			unsigned int num_thread = omp_get_max_threads();
+			int num_thread = omp_get_max_threads();
 			omp_set_num_threads(8);
 			#endif
 			#pragma omp parallel
@@ -332,7 +332,7 @@ namespace hnc
 		void run_at_same_time(func0 & f0, func1 & f1, func2 & f2, func3 & f3, func4 & f4, func5 & f5, func6 & f6, func7 & f7, func8 & f8, func9 & f9, func10 & f10)
 		{
 			#if defined(_OPENMP)
-			unsigned int num_thread = omp_get_max_threads();
+			int num_thread = omp_get_max_threads();
 			omp_set_num_threads(8);
 			#endif
 			#pragma omp parallel
@@ -372,7 +372,7 @@ namespace hnc
 		void run_at_same_time(func0 & f0, func1 & f1, func2 & f2, func3 & f3, func4 & f4, func5 & f5, func6 & f6, func7 & f7, func8 & f8, func9 & f9, func10 & f10, func11 & f11)
 		{
 			#if defined(_OPENMP)
-			unsigned int num_thread = omp_get_max_threads();
+			int num_thread = omp_get_max_threads();
 			omp_set_num_threads(8);
 			#endif
 			#pragma omp parallel
@@ -414,7 +414,7 @@ namespace hnc
 		void run_at_same_time(func0 & f0, func1 & f1, func2 & f2, func3 & f3, func4 & f4, func5 & f5, func6 & f6, func7 & f7, func8 & f8, func9 & f9, func10 & f10, func11 & f11, func12 & f12)
 		{
 			#if defined(_OPENMP)
-			unsigned int num_thread = omp_get_max_threads();
+			int num_thread = omp_get_max_threads();
 			omp_set_num_threads(8);
 			#endif
 			#pragma omp parallel
@@ -458,7 +458,7 @@ namespace hnc
 		void run_at_same_time(func0 & f0, func1 & f1, func2 & f2, func3 & f3, func4 & f4, func5 & f5, func6 & f6, func7 & f7, func8 & f8, func9 & f9, func10 & f10, func11 & f11, func12 & f12, func13 & f13)
 		{
 			#if defined(_OPENMP)
-			unsigned int num_thread = omp_get_max_threads();
+			int num_thread = omp_get_max_threads();
 			omp_set_num_threads(8);
 			#endif
 			#pragma omp parallel
@@ -504,7 +504,7 @@ namespace hnc
 		void run_at_same_time(func0 & f0, func1 & f1, func2 & f2, func3 & f3, func4 & f4, func5 & f5, func6 & f6, func7 & f7, func8 & f8, func9 & f9, func10 & f10, func11 & f11, func12 & f12, func13 & f13, func14 & f14)
 		{
 			#if defined(_OPENMP)
-			unsigned int num_thread = omp_get_max_threads();
+			int num_thread = omp_get_max_threads();
 			omp_set_num_threads(8);
 			#endif
 			#pragma omp parallel
@@ -552,7 +552,7 @@ namespace hnc
 		void run_at_same_time(func0 & f0, func1 & f1, func2 & f2, func3 & f3, func4 & f4, func5 & f5, func6 & f6, func7 & f7, func8 & f8, func9 & f9, func10 & f10, func11 & f11, func12 & f12, func13 & f13, func14 & f14, func15 & f15)
 		{
 			#if defined(_OPENMP)
-			unsigned int num_thread = omp_get_max_threads();
+			int num_thread = omp_get_max_threads();
 			omp_set_num_threads(8);
 			#endif
 			#pragma omp parallel
@@ -602,7 +602,7 @@ namespace hnc
 		void run_at_same_time(func0 & f0, func1 & f1, func2 & f2, func3 & f3, func4 & f4, func5 & f5, func6 & f6, func7 & f7, func8 & f8, func9 & f9, func10 & f10, func11 & f11, func12 & f12, func13 & f13, func14 & f14, func15 & f15, func16 & f16)
 		{
 			#if defined(_OPENMP)
-			unsigned int num_thread = omp_get_max_threads();
+			int num_thread = omp_get_max_threads();
 			omp_set_num_threads(8);
 			#endif
 			#pragma omp parallel
@@ -654,7 +654,7 @@ namespace hnc
 		void run_at_same_time(func0 & f0, func1 & f1, func2 & f2, func3 & f3, func4 & f4, func5 & f5, func6 & f6, func7 & f7, func8 & f8, func9 & f9, func10 & f10, func11 & f11, func12 & f12, func13 & f13, func14 & f14, func15 & f15, func16 & f16, func17 & f17)
 		{
 			#if defined(_OPENMP)
-			unsigned int num_thread = omp_get_max_threads();
+			int num_thread = omp_get_max_threads();
 			omp_set_num_threads(8);
 			#endif
 			#pragma omp parallel
@@ -708,7 +708,7 @@ namespace hnc
 		void run_at_same_time(func0 & f0, func1 & f1, func2 & f2, func3 & f3, func4 & f4, func5 & f5, func6 & f6, func7 & f7, func8 & f8, func9 & f9, func10 & f10, func11 & f11, func12 & f12, func13 & f13, func14 & f14, func15 & f15, func16 & f16, func17 & f17, func18 & f18)
 		{
 			#if defined(_OPENMP)
-			unsigned int num_thread = omp_get_max_threads();
+			int num_thread = omp_get_max_threads();
 			omp_set_num_threads(8);
 			#endif
 			#pragma omp parallel
@@ -764,7 +764,7 @@ namespace hnc
 		void run_at_same_time(func0 & f0, func1 & f1, func2 & f2, func3 & f3, func4 & f4, func5 & f5, func6 & f6, func7 & f7, func8 & f8, func9 & f9, func10 & f10, func11 & f11, func12 & f12, func13 & f13, func14 & f14, func15 & f15, func16 & f16, func17 & f17, func18 & f18, func19 & f19)
 		{
 			#if defined(_OPENMP)
-			unsigned int num_thread = omp_get_max_threads();
+			int num_thread = omp_get_max_threads();
 			omp_set_num_threads(8);
 			#endif
 			#pragma omp parallel
@@ -822,7 +822,7 @@ namespace hnc
 		void run_at_same_time(func0 & f0, func1 & f1, func2 & f2, func3 & f3, func4 & f4, func5 & f5, func6 & f6, func7 & f7, func8 & f8, func9 & f9, func10 & f10, func11 & f11, func12 & f12, func13 & f13, func14 & f14, func15 & f15, func16 & f16, func17 & f17, func18 & f18, func19 & f19, func20 & f20)
 		{
 			#if defined(_OPENMP)
-			unsigned int num_thread = omp_get_max_threads();
+			int num_thread = omp_get_max_threads();
 			omp_set_num_threads(8);
 			#endif
 			#pragma omp parallel
@@ -882,7 +882,7 @@ namespace hnc
 		void run_at_same_time(func0 & f0, func1 & f1, func2 & f2, func3 & f3, func4 & f4, func5 & f5, func6 & f6, func7 & f7, func8 & f8, func9 & f9, func10 & f10, func11 & f11, func12 & f12, func13 & f13, func14 & f14, func15 & f15, func16 & f16, func17 & f17, func18 & f18, func19 & f19, func20 & f20, func21 & f21)
 		{
 			#if defined(_OPENMP)
-			unsigned int num_thread = omp_get_max_threads();
+			int num_thread = omp_get_max_threads();
 			omp_set_num_threads(8);
 			#endif
 			#pragma omp parallel
@@ -944,7 +944,7 @@ namespace hnc
 		void run_at_same_time(func0 & f0, func1 & f1, func2 & f2, func3 & f3, func4 & f4, func5 & f5, func6 & f6, func7 & f7, func8 & f8, func9 & f9, func10 & f10, func11 & f11, func12 & f12, func13 & f13, func14 & f14, func15 & f15, func16 & f16, func17 & f17, func18 & f18, func19 & f19, func20 & f20, func21 & f21, func22 & f22)
 		{
 			#if defined(_OPENMP)
-			unsigned int num_thread = omp_get_max_threads();
+			int num_thread = omp_get_max_threads();
 			omp_set_num_threads(8);
 			#endif
 			#pragma omp parallel
@@ -1008,7 +1008,7 @@ namespace hnc
 		void run_at_same_time(func0 & f0, func1 & f1, func2 & f2, func3 & f3, func4 & f4, func5 & f5, func6 & f6, func7 & f7, func8 & f8, func9 & f9, func10 & f10, func11 & f11, func12 & f12, func13 & f13, func14 & f14, func15 & f15, func16 & f16, func17 & f17, func18 & f18, func19 & f19, func20 & f20, func21 & f21, func22 & f22, func23 & f23)
 		{
 			#if defined(_OPENMP)
-			unsigned int num_thread = omp_get_max_threads();
+			int num_thread = omp_get_max_threads();
 			omp_set_num_threads(8);
 			#endif
 			#pragma omp parallel
@@ -1074,7 +1074,7 @@ namespace hnc
 		void run_at_same_time(func0 & f0, func1 & f1, func2 & f2, func3 & f3, func4 & f4, func5 & f5, func6 & f6, func7 & f7, func8 & f8, func9 & f9, func10 & f10, func11 & f11, func12 & f12, func13 & f13, func14 & f14, func15 & f15, func16 & f16, func17 & f17, func18 & f18, func19 & f19, func20 & f20, func21 & f21, func22 & f22, func23 & f23, func24 & f24)
 		{
 			#if defined(_OPENMP)
-			unsigned int num_thread = omp_get_max_threads();
+			int num_thread = omp_get_max_threads();
 			omp_set_num_threads(8);
 			#endif
 			#pragma omp parallel

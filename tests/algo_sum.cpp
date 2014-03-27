@@ -91,7 +91,7 @@ int main()
 		int sumRef0 = 0;
 		int sumRef1 = 0;
 		for (int v = -42; v < 543; v += 21) { c.push_back(v); sumRef0 += v; }
-		int separator = c.size();
+		int separator = int(c.size());
 		for (int v = -485; v < 427; v += 13) { c.push_back(v); sumRef1 += v; }
 		std::cout << "Sum of partial std::vector of int:" << std::endl;
 		++nb_test;

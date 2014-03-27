@@ -1,4 +1,4 @@
-// Copyright © 2012 Inria, Written by Lénaïc Bagnères, lenaic.bagneres@inria.fr
+// Copyright © 2012, 2014 Inria, Written by Lénaïc Bagnères, lenaic.bagneres@inria.fr
 // Copyright © 2013 Lénaïc Bagnères, hnc@singularity.fr
 
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -13,11 +13,6 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-
-/**
- * @file
- * @brief Just for operator<<(std::ostream & o, hnc::args const & args)
- */
 
 #ifndef HNC_ARGS_HPP
 #define HNC_ARGS_HPP
@@ -65,8 +60,8 @@ namespace hnc
 	 * @brief Easy utilisation of (int argc, char * * argv)
 	 *
 	 * @code
-	 * #include <hnc/args.hpp>
-	 * @endcode
+	   #include <hnc/args.hpp>
+	   @endcode
 	 * 
 	 * Provides:
 	 * - automatic build of help and usage strings
@@ -82,121 +77,121 @@ namespace hnc
 	 *
 	 * Exemple:
 	 * @code
-	 * // ./program_name --opt --int 42 --ints 21 42 73 --types "this is a" tuple with 5 elements
-	 *
-	 * #include <iostream>
-	 * 
-	 * #include <hnc/args.hpp>
-	 * #include <hnc/ostream_std.hpp>
-	 * 
-	 * 
-	 * int main(int argc, char * * argv)
-	 * {
-	 * 
-	 * 	hnc::args args(argc, argv, "Description of your program", "Version & Author");
-	 * 
-	 * 	// One option without argument
-	 * 	bool arg_opt = args.add_option({"--opt", "--option"}, "One option");
-	 * 	// Option with one argument (last boolean means the option must be present, false by default)
-	 * 	int arg_int = args.add_option({"--i", "--int"}, "n", "One integer", 0, true);
-	 * 	// Option with a float (the return type depends on the 4th argument)
-	 * 	float arg_float = args.add_option({"--float"}, "n", "One float", float(0));
-	 * 	args.add_separator();
-	 * 	// Option with several same type arguments
-	 * 	auto arg_ints = args.add_option
-	 * 	(
-	 * 		{"--ints"}, {"n", "n", "n"}, "3 ints",
-	 * 		{0, 0, 0}
-	 * 	);
-	 * 	// Option with several (different type) arguments
-	 * 	auto arg_tuple = args.add_option
-	 * 	(
-	 * 		{"--types"}, {"s", "s", "s", "n", "s"}, "3 strings, 1 int, 1 string",
-	 * 		std::make_tuple(std::string(""), std::string(""), std::string(""), 0, std::string(""))
-	 * 	);
-	 * 	args.add_separator();
-	 * 	bool arg_version = args.add_option({"-v", "--version"}, "Display the version");
-	 * 	bool arg_help    = args.add_option({"-h", "--help", "-?"}, "Display this help");
-	 * 
-	 * 	// Display the args (same as help)
-	 * 	std::cout << args << std::endl;
-	 * 	// You can display: args.usage(), args.help(), args.version() too
-	 * 
-	 * 	// Display the arguments
-	 * 	std::cout << "Arguments:" << std::endl;
-	 * 	for (auto const & arg : args.raw_args())
-	 * 	{
-	 * 		std::cout << "    " << arg << std::endl;
-	 * 	}
-	 * 	std::cout << std::endl;
-	 * 
-	 * 	// Display the option given
-	 * 	std::cout << std::boolalpha;
-	 * 	std::cout << "Options:" << std::endl;
-	 * 	std::cout << "    " << "--opt   " << arg_opt << std::endl;
-	 * 	std::cout << "    " << "--int   " << arg_int << std::endl;
-	 * 	std::cout << "    " << "--float " << arg_float << std::endl;
-	 * 	std::cout << "    " << "--ints  " << arg_ints << std::endl;
-	 * 	std::cout << "    " << "--tuple " << arg_tuple << std::endl;
-	 * 	std::cout << "    " << "-v      " << arg_version << std::endl;
-	 * 	std::cout << "    " << "-h      " << arg_help << std::endl;
-	 * 	std::cout << std::endl;
-	 * 
-	 * 	// Display the errors
-	 * 	std::cout << "Errors:" << std::endl;
-	 * 	for (auto const & error : args.errors())
-	 * 	{
-	 * 		std::cout << "    " << hnc::terminal::error << error.what() << hnc::terminal::color_reset << std::endl;
-	 * 	}
-	 * 	std::cout << std::endl;
-	 * 
-	 * 	return nb_test;
-	 * }
-	 *
-	 * // Output is:
-	 *
-	 * // Usage: program_name [--opt|--option] --i|--int <n> [--ints <n> <n> <n>] [--types <s> <s> <s> <n> <s>] [-v|--version] [-h|--help|-?]
-	 * //
-	 * // Description of your program
-	 * //
-	 * // --opt, --option         One option
-	 * // --i, --int <n>          One integer
-	 * //
-	 * // --ints <n, n, n>        3 ints
-	 * // --types <s, s, s, n, s> 3 strings, 1 int, 1 string
-	 * //
-	 * // -v, --version           Display the version
-	 * // -h, --help, -?          Display this help
-	 * //
-	 * // Version & Author
-	 * //
-	 * // Arguments:
-	 * //    program_name
-	 * //     --opt
-	 * //     --int
-	 * //     42
-	 * //     --ints
-	 * //     21
-	 * //     42
-	 * //     73
-	 * //     --types
-	 * //     this is a
-	 * //     tuple
-	 * //     with
-	 * //     5
-	 * //     elements
-	 * //
-	 * // Options:
-	 * //     --opt   true
-	 * //     --int   42
-	 * //     --ints  [size = 3 | 21 42 73]
-	 * //     --tuple (this is a, tuple, with, 5, elements)
-	 * //     -v      false
-	 * //     -h      false
-	 * //
-	 * // Errors:
-	 * //
-	 * @endcode
+	   // ./program_name --opt --int 42 --ints 21 42 73 --types "this is a" tuple with 5 elements
+	   
+	   #include <iostream>
+	   
+	   #include <hnc/args.hpp>
+	   #include <hnc/ostream_std.hpp>
+	   
+	   
+	   int main(int argc, char * * argv)
+	   {
+	   
+	   	hnc::args args(argc, argv, "Description of your program", "Version & Author");
+	   
+	   	// One option without argument
+	   	bool arg_opt = args.add_option({"--opt", "--option"}, "One option");
+	   	// Option with one argument (last boolean means the option must be present, false by default)
+	   	int arg_int = args.add_option({"--i", "--int"}, "n", "One integer", 0, true);
+	   	// Option with a float (the return type depends on the 4th argument)
+	   	float arg_float = args.add_option({"--float"}, "n", "One float", float(0));
+	   	args.add_separator();
+	   	// Option with several same type arguments
+	   	auto arg_ints = args.add_option
+	   	(
+	   		{"--ints"}, {"n", "n", "n"}, "3 ints",
+	   		{0, 0, 0}
+	   	);
+	   	// Option with several (different type) arguments
+	   	auto arg_tuple = args.add_option
+	   	(
+	   		{"--types"}, {"s", "s", "s", "n", "s"}, "3 strings, 1 int, 1 string",
+	   		std::make_tuple(std::string(""), std::string(""), std::string(""), 0, std::string(""))
+	   	);
+	   	args.add_separator();
+	   	bool arg_version = args.add_option({"-v", "--version"}, "Display the version");
+	   	bool arg_help    = args.add_option({"-h", "--help", "-?"}, "Display this help");
+	   
+	   	// Display the args (same as help)
+	   	std::cout << args << std::endl;
+	   	// You can display: args.usage(), args.help(), args.version() too
+	   
+	   	// Display the arguments
+	   	std::cout << "Arguments:" << std::endl;
+	   	for (auto const & arg : args.raw_args())
+	   	{
+	   		std::cout << "    " << arg << std::endl;
+	   	}
+	   	std::cout << std::endl;
+	   
+	   	// Display the option given
+	   	std::cout << std::boolalpha;
+	   	std::cout << "Options:" << std::endl;
+	   	std::cout << "    " << "--opt   " << arg_opt << std::endl;
+	   	std::cout << "    " << "--int   " << arg_int << std::endl;
+	   	std::cout << "    " << "--float " << arg_float << std::endl;
+	   	std::cout << "    " << "--ints  " << arg_ints << std::endl;
+	   	std::cout << "    " << "--tuple " << arg_tuple << std::endl;
+	   	std::cout << "    " << "-v      " << arg_version << std::endl;
+	   	std::cout << "    " << "-h      " << arg_help << std::endl;
+	   	std::cout << std::endl;
+	   
+	   	// Display the errors
+	   	std::cout << "Errors:" << std::endl;
+	   	for (auto const & error : args.errors())
+	   	{
+	   		std::cout << "    " << hnc::terminal::error << error.what() << hnc::terminal::color_reset << std::endl;
+	   	}
+	   	std::cout << std::endl;
+	   
+	   	return nb_test;
+	   }
+	   
+	   // Output is:
+	   
+	   // Usage: program_name [--opt|--option] --i|--int <n> [--ints <n> <n> <n>] [--types <s> <s> <s> <n> <s>] [-v|--version] [-h|--help|-?]
+	   //
+	   // Description of your program
+	   //
+	   // --opt, --option         One option
+	   // --i, --int <n>          One integer
+	   //
+	   // --ints <n, n, n>        3 ints
+	   // --types <s, s, s, n, s> 3 strings, 1 int, 1 string
+	   //
+	   // -v, --version           Display the version
+	   // -h, --help, -?          Display this help
+	   //
+	   // Version & Author
+	   //
+	   // Arguments:
+	   //    program_name
+	   //     --opt
+	   //     --int
+	   //     42
+	   //     --ints
+	   //     21
+	   //     42
+	   //     73
+	   //     --types
+	   //     this is a
+	   //     tuple
+	   //     with
+	   //     5
+	   //     elements
+	   //
+	   // Options:
+	   //     --opt   true
+	   //     --int   42
+	   //     --ints  [size = 3 | 21 42 73]
+	   //     --tuple (this is a, tuple, with, 5, elements)
+	   //     -v      false
+	   //     -h      false
+	   //
+	   // Errors:
+	   //
+	   @endcode
 	 *
 	 * @warning Arguments of any option (like <n> in --option <n>) can not begin by --
 	 * @warning No safe-content conversion ! ("string" to int give 0)
@@ -227,45 +222,33 @@ namespace hnc
 		
 	public:
 
-		/**
-		 * @brief Constructor
-		 *
-		 * @param[in] args        Vector of arguments
-		 * @param[in] description What the program does
-		 * @param[in] version     Version, author, license
-		 */
+		/// @brief Constructor
+		/// @param[in] args        Vector of arguments
+		/// @param[in] description What the program does
+		/// @param[in] version     Version, author, license
 		args(std::vector<std::string> const & args, std::string const & description = "Description", std::string const & version = "Version & Author")
 		:
 			m_args(args), m_usage(""), m_description(description), m_version(version)
 		{ }
 
-		/**
-		 * @brief Constructor
-		 *
-		 * @param[in] argc        Number of arguments
-		 * @param[in] argv        Vector of arguments
-		 * @param[in] description What the program does
-		 * @param[in] version     Version, author, licence
-		 */
-		args(std::size_t const argc, char const * const * const argv, std::string const & description = "Description", std::string const & version = "Version & Author")
+		/// @brief Constructor
+		/// @param[in] argc        Number of arguments
+		/// @param[in] argv        Vector of arguments
+		/// @param[in] description What the program does
+		/// @param[in] version     Version, author, licence
+		args(int const argc, char const * const * const argv, std::string const & description = "Description", std::string const & version = "Version & Author")
 		:
-			args(std::vector<std::string>(argv, argv + argc), description, version)
+			args(std::vector<std::string>(argv, argv + std::max(argc, 0)), description, version)
 		{ }
 		
-		/**
-		 * @brief Return original (raw) arguments
-		 * @return original (raw) arguments
-		 */
+		/// @brief Return original (raw) arguments
+		/// @return original (raw) arguments
 		std::vector<std::string> const & raw_args() const { return m_args; }
 
-		/**
-		 * @brief Add option without argument
-		 *
-		 * @param[in] opts        Possible string to get this option
-		 * @param[in] description What the option does
-		 *
-		 * @return true if the option is found, else false
-		 */
+		/// @brief Add option without argument
+		/// @param[in] opts        Possible string to get this option
+		/// @param[in] description What the option does
+		/// @return true if the option is found, else false
 		bool add_option
 		(
 			std::vector<std::string> const & opts,
@@ -600,37 +583,29 @@ namespace hnc
 		)
 		{ return add_option(opts, std::vector<std::string>(opt_args), description, default_value, must_be_present); }
 
-		/**
-		 * @brief Add a separator (one line) in the help text
-		 * @param[in] line Line to display, empty string by default
-		 */
+		/// @brief Add a separator (one line) in the help text
+		/// @param[in] line Line to display, empty string by default
 		void add_separator(std::string const & line = "")
 		{
 			m_opts_args_desc.push_back(std::make_tuple(std::vector<std::string>(1, line), std::vector<std::string>(0), ""));
 		}
 
-		/**
-		 * @brief Return the errors
-		 * @return the errors
-		 */
+		/// @brief Return the errors
+		/// @return the errors
 		std::vector<std::invalid_argument> const & errors()
 		{
 			return m_errors;
 		}
 
-		/**
-		 * @brief Return the usage
-		 * @return the usage
-		 */
+		/// @brief Return the usage
+		/// @return the usage
 		std::string usage() const
 		{
 			return ("Usage: " + m_args.at(0) + " " + m_usage + "\n");
 		}
 
-		/**
-		 * @brief Return the help
-		 * @return the help
-		 */
+		/// @brief Return the help
+		/// @return the help
 		std::string help() const
 		{
 			std::string help;
@@ -719,28 +694,25 @@ namespace hnc
 			return help;
 		}
 
-		/**
-		 * @brief Return the version, author, license
-		 * @return the version, author, license
-		 */
+		/// @brief Return the version, author, license
+		/// @return the version, author, license
 		std::string version() const
 		{
 			return m_version;
 		}
 
-		/**
-		 * @brief Return the description
-		 * @return the description
-		 */
+		/// @brief Return the description
+		/// @return the description
 		std::string description() const
 		{
 			return m_description;
 		}
 
-		// Copyright © 2013 Lénaïc Bagnères, hnc@singularity.fr
 		/**
 		 * @brief Return the bash completion script
+		 * 
 		 * http://www.debian-administration.org/article/An_introduction_to_bash_completion_part_2
+		 * 
 		 * @return the description
 		 */
 		std::string bash_completion() const
@@ -821,20 +793,16 @@ namespace hnc
 			return bash_completion;
 		}
 	};
-}
-
-/**
- * @brief Display a hnc::args
- * 
- * @param[in,out] o    Out stream
- * @param[in]     args A hnc::args
- * 
- * @return the out stream
- */
-std::ostream & operator<<(std::ostream & o, hnc::args const & args)
-{
-	o << args.help();
-	return o;
+	
+	/// @brief Operator << between a std::ostream and a hnc::args
+	/// @param[in,out] o    Output stream
+	/// @param[in]     args A hnc::args
+	/// @return the output stream
+	inline std::ostream & operator<<(std::ostream & o, hnc::args const & args)
+	{
+		o << args.help();
+		return o;
+	}
 }
 
 #endif

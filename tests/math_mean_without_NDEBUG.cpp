@@ -118,7 +118,7 @@ int main()
 		std::vector<double> c;
 		double sum = 0;
 		for (double i = -412; i < 649; i += 13) { c.push_back(i); sum += i; }
-		double meanRef = double(sum) / c.size();
+		double meanRef = double(sum) / double(c.size());
 		std::cout << "Mean of std::vector of double:" << std::endl;
 		std::cout << "- Reference                 = " << meanRef << std::endl;
 		++nb_test;
@@ -132,32 +132,6 @@ int main()
 			double mean = hnc::math::mean(c.begin(), c.end());
 			std::cout << "- hnc::math::mean iterator  = " << mean << std::endl;
 			nb_test -= hnc::test::warning(mean == meanRef, "hnc::math::mean iterator == " + hnc::to_string(mean) + " instead of " + hnc::to_string(meanRef) + "\n");
-		}
-	}
-
-	{
-		std::vector<double> c;
-		std::size_t size = 0;
-		double sum0 = 0;
-		for (int i = -785; i < -42; i += 21) { c.push_back(i); sum0 += i; ++size; }
-		double meanRef0 = sum0 / size; // double(sum0) / size;
-		double sum1 = 0;
-		for (int i = 485; i < 4892; i += 42) { c.push_back(i); sum1 += i; }
-		double meanRef1 = double(sum1) / (c.size() - size);
-		std::cout << "Partial mean of std::vector of int:" << std::endl;
-		++nb_test;
-		{
-			std::cout << "- Reference                 = " << meanRef0 << std::endl;
-			double mean = hnc::math::mean(c.begin(), c.begin() + size);
-			std::cout << "- hnc::math::mean iterator  = " << mean << std::endl;
-			nb_test -= hnc::test::warning(mean == meanRef0, "hnc::math::mean iterator == " + hnc::to_string(mean) + " instead of " + hnc::to_string(meanRef0) + "\n");
-		}
-		++nb_test;
-		{
-			std::cout << "- Reference                 = " << meanRef1 << std::endl;
-			double mean = hnc::math::mean(c.begin() + size, c.end());
-			std::cout << "- hnc::math::mean iterator  = " << mean << std::endl;
-			nb_test -= hnc::test::warning(mean == meanRef1, "hnc::math::mean iterator == " + hnc::to_string(mean) + " instead of " + hnc::to_string(meanRef1) + "\n");
 		}
 	}
 

@@ -1,4 +1,4 @@
-// Copyright © 2012 Lénaïc Bagnères, hnc@singularity.fr
+// Copyright © 2012, 2014 Lénaïc Bagnères, hnc@singularity.fr
 
 // This file is part of hnc.
 
@@ -30,37 +30,37 @@ namespace hnc
 		 * @brief Return the Cartesian product
 		 *
 		 * @code
-		 * #include <hnc/math.hpp>
-		 * @endcode
+		   #include <hnc/math.hpp>
+		   @endcode
 		 *
 		 * @param[in] vector_of_values A container of container of values like std::vector of std::vector of T or std::list of std::list of T
 		 *
 		 * Exemple:
 		 * @code
-		 * // The Cartesian product of
-		 * {{1, 2, 3}, {a, b}, {I, II, III}}
-		 * // is
-		 * {
-		 * 	{1, a, I},
-		 * 	{1, a, II},
-		 * 	{1, a, III},
-		 * 	{1, b, I},
-		 * 	{1, b, II},
-		 * 	{1, b, III},
-		 * 	{2, a, I},
-		 * 	{2, a, II},
-		 * 	{2, a, III},
-		 * 	{2, b, I},
-		 * 	{2, b, II},
-		 * 	{2, b, III},
-		 * 	{3, a, I},
-		 * 	{3, a, II},
-		 * 	{3, a, III},
-		 * 	{3, b, I},
-		 * 	{3, b, II},
-		 * 	{3, b, III}
-		 * }
-		 * @endcode
+		   // The Cartesian product of
+		   {{1, 2, 3}, {a, b}, {I, II, III}}
+		   // is
+		   {
+		   	{1, a, I},
+		   	{1, a, II},
+		   	{1, a, III},
+		   	{1, b, I},
+		   	{1, b, II},
+		   	{1, b, III},
+		   	{2, a, I},
+		   	{2, a, II},
+		   	{2, a, III},
+		   	{2, b, I},
+		   	{2, b, II},
+		   	{2, b, III},
+		   	{3, a, I},
+		   	{3, a, II},
+		   	{3, a, III},
+		   	{3, b, I},
+		   	{3, b, II},
+		   	{3, b, III}
+		   }
+		   @endcode
 		 *
 		 * http://en.wikipedia.org/wiki/Cartesian_product
 		 *

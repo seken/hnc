@@ -1,4 +1,4 @@
-// Copyright © 2012 Lénaïc Bagnères, hnc@singularity.fr
+// Copyright © 2012, 2014 Lénaïc Bagnères, hnc@singularity.fr
 
 // This file is part of hnc.
 
@@ -27,8 +27,8 @@ namespace hnc
 	namespace math
 	{
 		/// Pi constante (3.141592653589793)
-		template <class T = double>
-		constexpr T pi() { return double(4.) * std::atan(double(1.)); }
+		template <class T = long double>
+		constexpr T pi() { return T(4) * std::atan(T(1)); }
 	}
 }
 

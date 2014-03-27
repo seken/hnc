@@ -1,4 +1,4 @@
-// Copyright © 2013 Lénaïc Bagnères, hnc@singularity.fr
+// Copyright © 2013, 2014 Lénaïc Bagnères, hnc@singularity.fr
 
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -24,6 +24,10 @@ namespace hnc
 {
 	/**
 	 * @brief hnc::optional of T contains the value or not
+	 * 
+	 * @code
+	   #include <hnc/optional.hpp>
+	   @endcode
 	 * 
 	 * Even if the value is not present, the value exists with the default value. @n
 	 * If you want not this, use hnc::optional_ptr of T
@@ -96,23 +100,19 @@ namespace hnc
 		/// @return a const access to the value
 		T const * operator ->() const { return &value(); }
 	};
-}
-
-/**
- * @brief Display a hnc::optional of T
- *
- * @param[in,out] o Out stream
- * @param[in]     v A hnc::optional of T
- *
- * @return the out stream
- */
-template <class T>
-std::ostream & operator << (std::ostream & o, hnc::optional<T> const & v)
-{
-	if (v) { o << "{ " << *v << " }"; }
-	else { o << "{}"; }
 	
-	return o;
+	/// @brief Operator << between a std::ostream and a hnc::optional<T>
+	/// @param[in,out] o        Output stream
+	/// @param[in]     optional A hnc::optional<T>
+	/// @return the output stream
+	template <class T>
+	std::ostream & operator << (std::ostream & o, hnc::optional<T> const & optional)
+	{
+		if (optional) { o << "{ " << *optional << " }"; }
+		else { o << "{}"; }
+		
+		return o;
+	}
 }
 
 #endif

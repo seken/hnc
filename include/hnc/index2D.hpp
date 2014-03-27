@@ -1,4 +1,4 @@
-// Copyright © 2012,2013 Lénaïc Bagnères, hnc@singularity.fr
+// Copyright © 2012-2014 Lénaïc Bagnères, hnc@singularity.fr
 
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -28,8 +28,8 @@ namespace hnc
 		 * @brief Transform a 2D index (i, j) into a index 1D (i * row_size + j)
 		 *
 		 * @code
-		 * #include <hnc/index2D.hpp>
-		 * @endcode
+		   #include <hnc/index2D.hpp>
+		   @endcode
 		 * 
 		 * @param[in] i        row number
 		 * @param[in] j        col number

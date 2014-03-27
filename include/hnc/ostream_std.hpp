@@ -1,4 +1,4 @@
-// Copyright © 2012 Lénaïc Bagnères, hnc@singularity.fr
+// Copyright © 2012, 2014 Lénaïc Bagnères, hnc@singularity.fr
 
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -13,11 +13,6 @@
 // limitations under the License.
 
 
-/**
- * @file
- * @brief Just for operator<<(std::ostream & o, container<T> const & c) and other with std
- */
-
 #ifndef HNC_OSTREAM_STD_HPP
 #define HNC_OSTREAM_STD_HPP
 
@@ -26,130 +21,109 @@
 #include <map>
 
 
-/**
- * @brief Display a container like std::vector, std::list
- *
- * @code
- * #include <hnc/ostream_std.hpp>
- * @endcode
- * 
- * To no display data, define HNC_ostream_container_no_data macro
- * To display data, define HNC_ostream_container_size macro
- *
- * @param[in,out] o Output stream
- * @param[in]     c A std container
- *
- * @return the output stream
- */
-template <class T, template <class, class Alloc = std::allocator<T>> class container>
-std::ostream & operator<<(std::ostream & o, container<T> const & c)
+namespace std
 {
-	#if defined(HNC_ostream_container_no_data)
+	/**
+	 * @brief Display a container like std::vector, std::list
+	 *
+	 * @code
+	  #include <hnc/ostream_std.hpp>
+	  @endcode
+	 *
+	 * @param[in,out] o Output stream
+	 * @param[in]     c A std container
+	 *
+	 * @return the output stream
+	 */
+	template <class T, template <class, class Alloc = std::allocator<T>> class container>
+	std::ostream & operator<<(std::ostream & o, container<T> const & c)
+	{
+		o << "{";
+			// Display data
+			for (T const & e : c)
+			{
+				if (&e != &c.front()) { o << ", "; }
+				o << e;
+			}
+		o << "}";
+		
+		// Return stream
+		return o;
+	}
 
-	// Display size
-	o << "[size = " << c.size();
-		// No data
-		o << " | ...";
-	o << "]";
-	
-	#elif defined(HNC_ostream_container_size)
-
-	// Display size
-	o << "[size = " << c.size();
-		// Display data
-		o << " |";
-		for (T const & e : c) { o << " " << e; }
-	o << "]";
-	
-	#else
-	
-	o << "{";
-		// Display data
-		for (T const & e : c)
+	/**
+	 * @brief Display a std::map
+	 *
+	 * @code
+	   #include <hnc/ostream_std.hpp>
+	   @endcode
+	 *
+	 * @param[in,out] o   Output stream
+	 * @param[in]     map A std::map
+	 *
+	 * @return the output stream
+	 */
+	template <class key_t, class value_t>
+	std::ostream & operator<<(std::ostream & o, std::map<key_t, value_t> const & map)
+	{
+		o << "{";
+		
+		for (auto key_value_it = map.begin(); key_value_it != map.end(); ++key_value_it)
 		{
-			if (&e != &c.front()) { o << ", "; }
-			o << e;
+			key_t const & key = key_value_it->first;
+			value_t const & value = key_value_it->second;
+			
+			if (key_value_it != map.begin()) { o << ", "; }
+			o << key << ": " << value;
 		}
-	o << "}";
-	
-	#endif
-	
-	// Return stream
-	return o;
-}
-
-namespace
-{
-	// Compile-time counter
-	template <std::size_t>
-	class static_int_counter { };
-
-	// Print n elements of a tuple
-	template <class tuple, std::size_t n>
-	void print_tuple(std::ostream & o, tuple const & t, static_int_counter<n>)
-	{
-		print_tuple(o, t, static_int_counter<n - 1>());
-		o << ", " << std::get<n>(t);
+		
+		o << "}";
+		
+		return o;
 	}
 
-	// Print last element of a tuple
-	template <class tuple>
-	void print_tuple(std::ostream & o, tuple const & t, static_int_counter<0>)
+	namespace
 	{
-		o << std::get<0>(t);
+		// Compile-time counter
+		template <std::size_t>
+		class static_int_counter { };
+
+		// Print n elements of a tuple
+		template <class tuple, std::size_t n>
+		void print_tuple(std::ostream & o, tuple const & t, static_int_counter<n>)
+		{
+			print_tuple(o, t, static_int_counter<n - 1>());
+			o << ", " << std::get<n>(t);
+		}
+
+		// Print last element of a tuple
+		template <class tuple>
+		void print_tuple(std::ostream & o, tuple const & t, static_int_counter<0>)
+		{
+			o << std::get<0>(t);
+		}
 	}
-}
 
-/**
- * @brief Display a std::tuple
- *
- * @code
- * #include <hnc/ostream_std.hpp>
- * @endcode
- * 
- * @param[in,out] o Output stream
- * @param[in]     t A std::tuple
- *
- * @return the output stream
- */
-template <class... T>
-std::ostream & operator<<(std::ostream & o, std::tuple<T...> const & t)
-{
-  o << "(";
-  print_tuple(o, t, static_int_counter<sizeof...(T) - 1>());
-  o << ")";
-  return o;
-}
-
-/**
- * @brief Display a std::map
- *
- * @code
- * #include <hnc/ostream_std.hpp>
- * @endcode
- *
- * @param[in,out] o   Output stream
- * @param[in]     map A std::map
- *
- * @return the output stream
- */
-template <class key_t, class value_t>
-std::ostream & operator<<(std::ostream & o, std::map<key_t, value_t> const & map)
-{
-  o << "{";
-  
-  for (auto key_value_it = map.begin(); key_value_it != map.end(); ++key_value_it)
-  {
-	  key_t const & key = key_value_it->first;
-	  value_t const & value = key_value_it->second;
-	  
-	  if (key_value_it != map.begin()) { o << ", "; }
-	  o << key << ": " << value;
-  }
-  
-  o << "}";
-  
-  return o;
+	/**
+	 * @brief Display a std::tuple
+	 *
+	 * @code
+	   #include <hnc/ostream_std.hpp>
+	   @endcode
+	 * 
+	 * @param[in,out] o Output stream
+	 * @param[in]     t A std::tuple
+	 *
+	 * @return the output stream
+	 */
+	template <class... T>
+	std::ostream & operator<<(std::ostream & o, std::tuple<T...> const & t)
+	{
+		o << "(";
+		print_tuple(o, t, static_int_counter<sizeof...(T) - 1>());
+		o << ")";
+		return o;
+	}
 }
 
 #endif

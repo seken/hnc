@@ -1,4 +1,4 @@
-// Copyright © 2012 Lénaïc Bagnères, hnc@singularity.fr
+// Copyright © 2012, 2014 Lénaïc Bagnères, hnc@singularity.fr
 
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -25,8 +25,8 @@ namespace hnc
 		 * @brief Sum of elements between two iterators
 		 *
 		 * @code
-		 * #include <hnc/algo.hpp>
-		 * @endcode
+		   #include <hnc/algo.hpp>
+		   @endcode
 		 *
 		 * @param[in] begin Iterator of first element
 		 * @param[in] end   Iterator of last element (not included)
@@ -48,8 +48,8 @@ namespace hnc
 		 * @brief Sum of elements of a container
 		 *
 		 * @code
-		 * #include <hnc/algo.hpp>
-		 * @endcode
+		   #include <hnc/algo.hpp>
+		   @endcode
 		 *
 		 * @param[in] c Container like std::vector, std::list
 		 *

@@ -1,4 +1,4 @@
-// Copyright © 2013 Lénaïc Bagnères, hnc@singularity.fr
+// Copyright © 2013, 2014 Lénaïc Bagnères, hnc@singularity.fr
 
 // This file is part of hnc.
 
@@ -30,6 +30,8 @@ namespace hnc
 {
 	namespace math
 	{
+		// TODO <hnc/tag.hpp> (?)
+		
 		// Tag dispatch
 		namespace
 		{
@@ -39,7 +41,7 @@ namespace hnc
 
 		// Floating point
 		template <class T>
-		T nth_root(T const & a, unsigned int const n, is_integer<false>)
+		T nth_root(T const & a, std::size_t const n, is_integer<false>)
 		{
 			T r = 1;
 			T delta = r;
@@ -50,7 +52,7 @@ namespace hnc
 				previous_delta = delta;
 				delta = r;
 				// Compute
-				r = (T(1) / n) * (T(n - 1) * r + (a / std::pow(r, n - 1)));
+				r = (T(1) / n) * (T(n - 1) * r + (a / T(std::pow(r, n - 1))));
 				// Get delta
 				delta -= r;
 			}
@@ -59,19 +61,19 @@ namespace hnc
 		}
 
 		// Integer
-		// Actual algorithm works only floating point, use float for internal computation
+		// Actual algorithm works only floating point, use long double for internal computation
 		template <class T>
-		T nth_root(T const & a, unsigned int const n, is_integer<true>)
+		long double nth_root(T const & a, std::size_t const n, is_integer<true>)
 		{
-			return nth_root(float(a), n, is_integer<false>());
+			return nth_root(static_cast<long double>(a), n, is_integer<false>());
 		}
 
 		/**
 		 * @brief nth root algorithm
 		 *
 		 * @code
-		 * #include <hnc/math.hpp>
-		 * @endcode
+		   #include <hnc/math.hpp>
+		   @endcode
 		 *
 		 * @param[in] a @f$ a @f$ in @f$ \sqrt[n]{a} @f$
 		 * @param[in] n @f$ n @f$ in @f$ \sqrt[n]{a} @f$
@@ -90,10 +92,12 @@ namespace hnc
 		 *
 		 * @exception std::domain_error if @f$ n \% 2 = 0 @f$ and @f$ a < 0 @f$
 		 *
+		 * @note Use std::pow
+		 *
 		 * @return the nth root
 		 */
 		template <class T>
-		T nth_root(T const & a, unsigned int const n)
+		auto nth_root(T const & a, std::size_t const n) -> decltype(hnc::math::nth_root(a, n, is_integer<std::numeric_limits<T>::is_integer>()))
 		{
 			static_assert(std::is_arithmetic<T>::value, "hnc::math::nth_root works for arithmetic types only");
 			

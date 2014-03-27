@@ -1,4 +1,4 @@
-// Copyright © 2013 Inria, Written by Lénaïc Bagnères, lenaic.bagneres@inria.fr
+// Copyright © 2013, 2014 Inria, Written by Lénaïc Bagnères, lenaic.bagneres@inria.fr
 
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -21,8 +21,13 @@
 
 namespace hnc
 {
-	
-	/// Random access iterator
+	/**
+	 * @brief Random const access iterator
+	 * 
+	 * @code
+	   #include <hnc/iterator.hpp>
+	   @endcode
+	 */
 	template <class T, class Container>
 	class const_iterator : public std::iterator<std::random_access_iterator_tag, T>
 	{
@@ -38,8 +43,11 @@ namespace hnc
 
 		/**
 		 * @brief Constructor
+		 * 
 		 * Iterator is on the first element
+		 * 
 		 * @param[in] c A Container<T>
+		 * @param[in] i Index
 		 */
 		const_iterator(Container const & c, std::size_t const i = 0) :
 			p_data(&c),
@@ -59,20 +67,16 @@ namespace hnc
 		// a++
 		// *a++
 
-		/**
-		 * @brief Pre-incrementation of the iterator
-		 * @return the iterator
-		 */
+		/// @brief Pre-incrementation of the iterator
+		/// @return the iterator
 		const_iterator & operator++()
 		{
 			m_i = std::min(m_i + 1, p_data->size());
 			return *this;
 		}
 
-		/**
-		 * @brief Post-incrementation of the iterator
-		 * @return a copy of the iterator before the incrementation
-		 */
+		/// @brief Post-incrementation of the iterator
+		/// @return a copy of the iterator before the incrementation
 		const_iterator operator++(int)
 		{
 			const_iterator copy = *this;
@@ -86,19 +90,15 @@ namespace hnc
 		// a == b
 		// a != b
 
-		/**
-		 * @brief Equality operator
-		 * @return true if operator are equals, else false
-		 */
+		/// @brief Equality operator
+		/// @return true if operator are equals, else false
 		bool operator==(const_iterator const & it) const
 		{
 			return (p_data == it.p_data && m_i == it.m_i);
 		}
 
-		/**
-		 * @brief Not equality operator
-		 * @return true if operator are not equals, else false
-		 */
+		/// @brief Not equality operator
+		/// @return true if operator are not equals, else false
 		bool operator!=(const_iterator const & it) const
 		{
 			return (! ((*this) == it));
@@ -108,19 +108,15 @@ namespace hnc
 		// *a
 		// a->m
 
-		/**
-		 * @brief Return the const element pointed by the iterator
-		 * @return the const element pointed by the iterator
-		 */
+		/// @brief Return the const element pointed by the iterator
+		/// @return the const element pointed by the iterator
 		T const & operator*() const
 		{
 			return ((*p_data)[m_i]);
 		}
 
-		/**
-		 * @brief Return the const element pointed by the iterator
-		 * @return the const element pointed by the iterator
-		 */
+		/// @brief Return the const element pointed by the iterator
+		/// @return the const element pointed by the iterator
 		T const * operator->() const
 		{
 			return (&((*p_data)[m_i]));
@@ -140,7 +136,7 @@ namespace hnc
 		// X a;
 		// X()
 
-		/// Default constructor
+		/// @brief Default constructor
 		const_iterator() : p_data(nullptr), m_i(0) { }
 
 		// Bidirectional
@@ -150,10 +146,8 @@ namespace hnc
 		// a--
 		// *a--
 
-		/**
-		 * @brief Pre-decrementation of the iterator
-		 * @return the iterator
-		 */
+		/// @brief Pre-decrementation of the iterator
+		/// @return the iterator
 		const_iterator & operator--()
 		{
 			if (m_i == 0) { m_i = p_data->size(); }
@@ -161,10 +155,8 @@ namespace hnc
 			return *this;
 		}
 
-		/**
-		 * @brief Post-decrementation of the iterator
-		 * @return a copy of the iterator before the incrementation
-		 */
+		/// @brief Post-decrementation of the iterator
+		/// @return a copy of the iterator before the incrementation
 		const_iterator operator--(int)
 		{
 			const_iterator copy = *this;
@@ -180,11 +172,9 @@ namespace hnc
 		// a - n
 		// a - b
 
-		/**
-		 * @brief Operator +
-		 * @param[in] n Number to add
-		 * @return a copy of the iterator after operation
-		 */
+		/// @brief Operator +
+		/// @param[in] n Number to add
+		/// @return a copy of the iterator after operation
 		const_iterator operator+(std::size_t const n) const
 		{
 			std::size_t i = m_i + n;
@@ -192,11 +182,9 @@ namespace hnc
 			return const_iterator(*p_data, i);
 		}
 
-		/**
-		 * @brief Operator -
-		 * @param[in] n Number to sub
-		 * @return a copy of the iterator after operation
-		 */
+		/// @brief Operator -
+		/// @param[in] n Number to sub
+		/// @return a copy of the iterator after operation
 		const_iterator operator-(std::size_t const n) const
 		{
 			std::size_t i = m_i - n;
@@ -204,14 +192,13 @@ namespace hnc
 			return const_iterator(*p_data, i);
 		}
 		
-		/**
-		 * @brief Operator -
-		 * @param[in] it Iterator
-		 * @return the difference between the iterators
-		 */
+		/// @brief Operator -
+		/// @param[in] it Iterator
+		/// @return the difference between the iterators
 		typename const_iterator::difference_type operator-(const_iterator const & it) const
 		{
-			return m_i - it.m_i;
+			using diff_t = typename const_iterator::difference_type;
+			return diff_t(m_i - it.m_i);
 		}
 
 		// Supports inequality comparisons (<, >, <= and >=) between iterators
@@ -220,48 +207,36 @@ namespace hnc
 		// a <= b
 		// a >= b
 
-		/**
-		 * @brief < operator
-		 * Compare the iterator < it
-		 * @param[in] it Iterator for comparaison
-		 * @return true the iterator < it, else false
-		 */
+		/// @brief < operator (iterator < it)
+		/// @param[in] it Iterator for comparaison
+		/// @return true the iterator < it, else false
 		bool operator<(const_iterator const & it) const
 		{
 			if (p_data != it.p_data) { return p_data < it.p_data; }
 			else { return m_i < it.m_i; }
 		}
 
-		/**
-		 * @brief > operator
-		 * Compare the iterator < it
-		 * @param[in] it Iterator for comparaison
-		 * @return true the iterator > it, else false
-		 */
+		/// @brief > operator (iterator > it)
+		/// @param[in] it Iterator for comparaison
+		/// @return true the iterator > it, else false
 		bool operator>(const_iterator const & it) const
 		{
 			if (p_data != it.p_data) { return p_data > it.p_data; }
 			else { return m_i > it.m_i; }
 		}
 
-		/**
-		 * @brief <= operator
-		 * Compare the iterator <= it
-		 * @param[in] it Iterator for comparaison
-		 * @return true the iterator <= it, else false
-		 */
+		/// @brief <= operator (iterator <= it)
+		/// @param[in] it Iterator for comparaison
+		/// @return true the iterator <= it, else false
 		bool operator<=(const_iterator const & it) const
 		{
 			if (p_data != it.p_data) { return p_data <= it.p_data; }
 			else { return m_i <= it.m_i; }
 		}
 
-		/**
-		 * @brief >= operator
-		 * Compare the iterator >= it
-		 * @param[in] it Iterator for comparaison
-		 * @return true the iterator >= it, else false
-		 */
+		/// @brief >= operator iterator >= it
+		/// @param[in] it Iterator for comparaison
+		/// @return true the iterator >= it, else false
 		bool operator>=(const_iterator const & it) const
 		{
 			if (p_data != it.p_data) { return p_data >= it.p_data; }
@@ -272,11 +247,9 @@ namespace hnc
 		// a += n
 		// a -= n
 
-		/**
-		 * @brief Operator +=
-		 * @param[in] n Number to add
-		 * @return the iterator after operation
-		 */
+		/// @brief Operator +=
+		/// @param[in] n Number to add
+		/// @return the iterator after operation
 		const_iterator & operator+=(std::size_t const n)
 		{
 			m_i += n;
@@ -284,11 +257,9 @@ namespace hnc
 			return *this;
 		}
 
-		/**
-		 * @brief Operator -=
-		 * @param[in] n Number to sub
-		 * @return the iterator after operation
-		 */
+		/// @brief Operator -=
+		/// @param[in] n Number to sub
+		/// @return the iterator after operation
 		const_iterator & operator-=(std::size_t const n)
 		{
 			m_i -= n;
@@ -299,17 +270,14 @@ namespace hnc
 		// Supports offset dereference operator ([])
 		// a[n]
 
-		/**
-		 * @brief Return the const element pointed by the iterator
-		 * @param[in] i Index to add
-		 * @return the ith const element pointed by the iterator
-		 */
+		/// @brief Return the const element pointed by the iterator
+		/// @param[in] i Index to add
+		/// @return the ith const element pointed by the iterator
 		T const & operator[](std::size_t const i) const
 		{
 			return *(*this + i);
 		}
 	};
-
 }
 
 #endif

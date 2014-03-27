@@ -64,63 +64,63 @@ namespace hnc
 	 * @brief hnc::copy_ptr is like std::unique_ptr with copy
 	 * 
 	 * @code
-	 * #include <hnc/copy_ptr.hpp>
-	 * @endcode
+	   #include <hnc/copy_ptr.hpp>
+	   @endcode
 	 * 
 	 * hnc::copy_ptr performs a deep copy; it uses hnc::clone function which uses [virtual] .clone() method if it exists @n
 	 * So, copy a hnc::copy_ptr of base class which olds a derived class object works and does what you think
 	 * 
 	 * Example:
 	 * @code
-	 * #include <iostream>
-	 * 
-	 * #include <hnc/copy_ptr.hpp>
-	 * 
-	 * class A
-	 * {
-	 * public:
-	 * 	
-	 * 	virtual ~A() { }
-	 * 	
-	 * 	hnc_generate_clone_method(A, A)
-	 * 	
-	 * 	virtual void display(std::ostream & o) const { o << "one_A"; }
-	 * };
-	 * 
-	 * class B : public A
-	 * {
-	 * public:
-	 * 	
-	 * 	virtual ~B() { }
-	 * 	
-	 * 	hnc_generate_clone_method(A, B)
-	 * 	
-	 * 	virtual void display(std::ostream & o) const override { o << "one_B"; }
-	 * };
-	 * 
-	 * std::ostream & operator<<(std::ostream & o, A const & v) { v.display(o); return o; }
-	 * 
-	 * int main()
-	 * {
-	 * 	// Default constructor
-	 * 	hnc::copy_ptr<A> p;
-	 * 	std::cout << p << std::endl; // nullptr
-	 * 	
-	 * 	// Create a A
-	 * 	p = hnc::make_copy_ptr<A>();
-	 * 	std::cout << p << std::endl; // one_A
-	 * 	
-	 * 	// Create a B
-	 * 	p = hnc::make_copy_ptr<B>();
-	 * 	std::cout << p << std::endl; // one_B
-	 * 	
-	 * 	// Copy the pointer
-	 * 	hnc::copy_ptr<A> p_copy = p;
-	 * 	std::cout << p_copy << std::endl; // one_B
-	 * 	
-	 * 	return 0;
-	 * }
-	 * @endcode
+	   #include <iostream>
+	   
+	   #include <hnc/copy_ptr.hpp>
+	   
+	   class A
+	   {
+	   public:
+	   	
+	   	virtual ~A() { }
+	   	
+	   	hnc_generate_clone_method(A, A)
+	   	
+	   	virtual void display(std::ostream & o) const { o << "one_A"; }
+	   };
+	   
+	   class B : public A
+	   {
+	   public:
+	   	
+	   	virtual ~B() { }
+	   	
+	   	hnc_generate_clone_method(A, B)
+	   	
+	   	virtual void display(std::ostream & o) const override { o << "one_B"; }
+	   };
+	   
+	   std::ostream & operator<<(std::ostream & o, A const & v) { v.display(o); return o; }
+	   
+	   int main()
+	   {
+	   	// Default constructor
+	   	hnc::copy_ptr<A> p;
+	   	std::cout << p << std::endl; // nullptr
+	   	
+	   	// Create a A
+	   	p = hnc::make_copy_ptr<A>();
+	   	std::cout << p << std::endl; // one_A
+	   	
+	   	// Create a B
+	   	p = hnc::make_copy_ptr<B>();
+	   	std::cout << p << std::endl; // one_B
+	   	
+	   	// Copy the pointer
+	   	hnc::copy_ptr<A> p_copy = p;
+	   	std::cout << p_copy << std::endl; // one_B
+	   	
+	   	return 0;
+	   }
+	   @endcode
 	 * 
 	 * @note Do not use hnc::copy_ptr:
 	 * - If you want copy a std::unique_ptr, add .clone() method to your classe and use it (see hnc_generate_clone_method and hnc::clone)
@@ -189,7 +189,7 @@ namespace hnc
 		{ }
 		
 		/// @brief Copy and move assignment
-		hnc_generate_copy_and_move_assignment(copy_ptr<T>)
+		hnc_generate_copy_and_move_assignment(copy_ptr<T>);
 		
 		/// @brief Return the stored pointer
 		/// @pre The pointer is nott nullptr
@@ -233,9 +233,29 @@ namespace hnc
 		friend hnc::copy_ptr<U> make_copy_ptr(args_list &&... args);
 	};
 	
-	/// @brief Create a hnc::copy_ptr of T
-	/// @param[in] args Arguments for T constructor
-	/// @return A hnc::copy_ptr of T
+	/// @brief Operator << between a std::ostream and a hnc::copy_ptr<T>
+	/// @param[in,out] o Output stream
+	/// @param[in]     p A hnc::copy_ptr<T>
+	/// @return the output stream
+	template <class T>
+	std::ostream & operator << (std::ostream & o, hnc::copy_ptr<T> const & p)
+	{
+		if (p) { o << *p; }
+		else { o << "nullptr"; }
+		return o;
+	}
+	
+	/**
+	 * @brief Create a hnc::copy_ptr of T
+	 * 
+	 * @code
+	   #include <hnc/copy_ptr.hpp>
+	   @endcode
+	 * 
+	 * @param[in] args Arguments for T constructor
+	 *
+	 * @return A hnc::copy_ptr of T
+	 */
 	template <class T, class... args_list>
 	hnc::copy_ptr<T> make_copy_ptr(args_list &&... args)
 	{
@@ -245,21 +265,5 @@ namespace hnc
 
 /// @brief std::swap between two hnc::copy_ptr
 hnc_overload_std_swap_with_swap_method_for_template_class(hnc::copy_ptr<T>, class T)
-
-/**
- * @brief Display a hnc::copy_ptr of T
- *
- * @param[in,out] o Out stream
- * @param[in]     p A hnc::copy_ptr of T
- *
- * @return the out stream
- */
-template <class T>
-std::ostream & operator << (std::ostream & o, hnc::copy_ptr<T> const & p)
-{
-	if (p) { o << *p; }
-	else { o << "nullptr"; }
-	return o;
-}
 
 #endif

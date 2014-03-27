@@ -1,4 +1,4 @@
-// Copyright © 2013 Lénaïc Bagnères, hnc@singularity.fr
+// Copyright © 2013, 2014 Lénaïc Bagnères, hnc@singularity.fr
 
 // This file is part of hnc.
 
@@ -35,8 +35,8 @@ namespace hnc
 		 * @brief Plot with boxes
 		 * 
 		 * @code
-		 * #include <hnc/gnuplot.hpp>
-		 * @endcode
+		   #include <hnc/gnuplot.hpp>
+		   @endcode
 		 *
 		 * http://www.manpagez.com/info/gnuplot/gnuplot-4.4.3/gnuplot_124.php#boxes
 		 */
@@ -50,7 +50,7 @@ namespace hnc
 			 * @image html hnc_gnuplot_plot_boxes_fill_pattern.png
 			 * @image latex hnc_gnuplot_plot_boxes_fill_pattern.eps
 			 */
-			enum fill_pattern
+			enum class fill_pattern : int
 			{
 				/// No fill
 				empty = 0,
@@ -69,56 +69,46 @@ namespace hnc
 				/// Fill with anti-diagonals @f$ \frac{\Pi}{3} @f$
 				anti_diagonal_v2 = 7
 			};
-
-			/**
-			 * @brief Constructor
-			 * @param[in] filename Data filename (no filename by default)
-			 * @param[in] box_width Width of the boxes (ratio) (0.73 by default)
-			 */
+			
+			/// @brief Constructor
+			/// @param[in] data_filename Data filename (no filename by default)
+			/// @param[in] box_width     Width of the boxes (ratio) (0.73 by default)
 			plot_boxes(std::string const & data_filename = "", double const box_width = 0.73) :
 				plot(data_filename)
 			{
 				// using 0:2:(1.0):xtic(1) with boxes
-				set_using(0, 2, "(" + hnc::to_string(box_width) + ")");
+				set_using(0, 2u, "(" + hnc::to_string(box_width) + ")");
 				set_x_tick_labels(1);
 				set_with("boxes fill solid 1");
 			}
 
-			/**
-			 * @brief Constructor
-			 * @param[in] box_width Width of the boxes (ratio)
-			 */
+			/// @brief Constructor
+			/// @param[in] box_width Width of the boxes (ratio)
 			plot_boxes(double const box_width) : plot_boxes("", box_width)
 			{ }
 
-			/**
-			 * @brief Fill the box
-			 * @param[in] density Fill density (between 0 and 1)
-			 * @return the plot
-			 */
+			/// @brief Fill the box
+			/// @param[in] density Fill density (between 0 and 1)
+			/// @return the plot
 			plot_boxes & fill(double const density = 1)
 			{
 				set_with("boxes fill solid " + hnc::to_string((density >= 0 && density <= 1) ? density : 1.));
 				return *this;
 			}
 
-			/**
-			 * @brief No fill the box
-			 * @return the plot
-			 */
+			/// @brief No fill the box
+			/// @return the plot
 			plot_boxes & no_fill()
 			{
 				set_with("boxes fill");
 				return *this;
 			}
 
-			/**
-			 * @brief Fill the box
-			 * @param[in] pattern A hnc::gnuplot::plot_boxes::fill_pattern
-			 * @return the plot
-			 */
+			/// @brief Fill the box
+			/// @param[in] pattern A hnc::gnuplot::plot_boxes::fill_pattern
+			/// @return the plot
 			plot_boxes & pattern(hnc::gnuplot::plot_boxes::fill_pattern const pattern)
-			{ set_with("boxes fill pattern " + hnc::to_string(pattern)); return *this; }
+			{ set_with("boxes fill pattern " + hnc::to_string(int(pattern))); return *this; }
 
 			/**
 			 * @brief Set data
@@ -126,12 +116,12 @@ namespace hnc
 			 * @param[in] data A std::map with std::string as key (x tick) and a numeric as value (y value)
 			 *
 			 * @code
-			 * std::map<std::string, int> data;
-			 * data["A"] = 1;
-			 * data["B"] = 2;
-			 * data["C"] = 5;
-			 * data["D"] = 3;
-			 * @endcode
+			   std::map<std::string, int> data;
+			   data["A"] = 1;
+			   data["B"] = 2;
+			   data["C"] = 5;
+			   data["D"] = 3;
+			   @endcode
 			 * 
 			 * @return the plot
 			 */

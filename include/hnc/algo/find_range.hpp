@@ -1,4 +1,4 @@
-// Copyright © 2013 Lénaïc Bagnères, hnc@singularity.fr
+// Copyright © 2013, 2014 Lénaïc Bagnères, hnc@singularity.fr
 
 // This file is part of hnc.
 
@@ -32,8 +32,8 @@ namespace hnc
 		 * @brief Find a sequence in an other sequence
 		 *
 		 * @code
-		 * #include <hnc/algo.hpp>
-		 * @endcode
+		   #include <hnc/algo.hpp>
+		   @endcode
 		 *
 		 * @param[in] first        Iterator on first element
 		 * @param[in] last         Iterator on last element (not included)
@@ -81,8 +81,8 @@ namespace hnc
 		 * @brief Find a sequence (a container) in an other sequence
 		 *
 		 * @code
-		 * #include <hnc/algo.hpp>
-		 * @endcode
+		   #include <hnc/algo.hpp>
+		   @endcode
 		 *
 		 * @param[in] first Iterator on first element
 		 * @param[in] last  Iterator on last element (not included)
@@ -107,11 +107,10 @@ namespace hnc
 		 * @brief Find a container in an other const container
 		 *
 		 * @code
-		 * #include <hnc/algo.hpp>
-		 * @endcode
+		   #include <hnc/algo.hpp>
+		   @endcode
 		 *
-		 * @param[in] first Iterator on first element
-		 * @param[in] last  Iterator on last element (not included)
+		 * @param[in] c Container
 		 * @param[in] values Values that we are looking for
 		 *
 		 * @return a const iterator on the first element of the finded sequence, last if not found
@@ -135,8 +134,7 @@ namespace hnc
 		 * #include <hnc/algo.hpp>
 		 * @endcode
 		 *
-		 * @param[in] first Iterator on first element
-		 * @param[in] last  Iterator on last element (not included)
+		 * @param[in] c Container
 		 * @param[in] values Values that we are looking for
 		 *
 		 * @return a iterator on the first element of the finded sequence, last if not found

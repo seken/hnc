@@ -1,4 +1,4 @@
-// Copyright © 2013 Inria, Written by Lénaïc Bagnères, lenaic.bagneres@inria.fr
+// Copyright © 2013, 2014 Inria, Written by Lénaïc Bagnères, lenaic.bagneres@inria.fr
 
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -13,15 +13,11 @@
 // limitations under the License.
 
 
-/**
- * @file
- * @brief Just for operator<<(std::ostream & o, hnc::container const & c)
- */
-
 #ifndef HNC_CONTAINER_HPP
 #define HNC_CONTAINER_HPP
 
 #include <vector>
+#include <type_traits>
 
 #include "ostream_std.hpp"
 
@@ -31,10 +27,11 @@ namespace hnc
 {
 	template <class T>
 	class container;
+	
+	// Declarate this function for hnc::container can be friend with
+	template <class T>
+	std::ostream & operator<<(std::ostream & o, hnc::container<T> const & c);
 }
-// Declarate this function for hnc::container can be friend with
-template <class T>
-std::ostream & operator<<(std::ostream & o, hnc::container<T> const & c);
 
 
 namespace hnc
@@ -44,8 +41,8 @@ namespace hnc
 	 * @brief Basic container (encapsulate std::vector)
 	 * 
 	 * @code
-	 * #include <hnc/container.hpp>
-	 * @endcode
+	   #include <hnc/container.hpp>
+	   @endcode
 	 *
 	 * hnc::container is like std::vector @n
 	 * (You can create derivated class of hnc::container)
@@ -61,76 +58,70 @@ namespace hnc
 
 		// Member types
 
-		using std::vector<T>::value_type;
+		using typename std::vector<T>::value_type;
 
-		using std::vector<T>::allocator_type;
+		using typename std::vector<T>::allocator_type;
 
-		using std::vector<T>::reference;
+		using typename std::vector<T>::reference;
 
-		using std::vector<T>::const_reference;
+		using typename std::vector<T>::const_reference;
 
-		using std::vector<T>::pointer;
+		using typename std::vector<T>::pointer;
 
-		using std::vector<T>::const_pointer;
+		using typename std::vector<T>::const_pointer;
 
-		using std::vector<T>::iterator;
+		using typename std::vector<T>::iterator;
 
-		using std::vector<T>::const_iterator;
+		using typename std::vector<T>::const_iterator;
 
-		using std::vector<T>::reverse_iterator;
+		using typename std::vector<T>::reverse_iterator;
 
-		using std::vector<T>::const_reverse_iterator;
+		using typename std::vector<T>::const_reverse_iterator;
 
-		using std::vector<T>::difference_type;
+		using typename std::vector<T>::difference_type;
 
-		using std::vector<T>::size_type;
+		using typename std::vector<T>::size_type;
 
 		// Member functions
 
-		/**
-		 * @brief Constructor with size and default value
-		 * @param[in] size          Number of element in the container
-		 * @param[in] default_value default_value for the element of the container
-		 */
+		/// @brief Constructor with size and default value
+		/// @param[in] size          Number of element in the container
+		/// @param[in] default_value default_value for the element of the container
 		explicit container(std::size_t const size = 0, T const & default_value = T()) :
 			std::vector<T>(size, default_value)
 		{ }
 
-		/**
-		 * @brief Copy constructor
-		 * @param[in] c A hnc::container<T>
-		 */
+		/// @brief Copy constructor
+		/// @param[in] c A hnc::container<T>
 		container(container<T> const & c) :
 			std::vector<T>(c.begin(), c.end())
 		{ }
 
-		/**
-		 * @brief Constructor with input iterator
-		 * @param[in] first Iterator of first element
-		 * @param[in] last  Iterator of last element (not included)
-		 */
-		template <class input_iterator>
+		/// @brief Constructor with input iterator
+		/// @param[in] first Iterator of first element
+		/// @param[in] last  Iterator of last element (not included)
+		template
+		<
+			class input_iterator,
+			class = typename std::iterator_traits<input_iterator>::iterator_category
+		>
 		container(input_iterator const & first, input_iterator const & last) :
 			std::vector<T>(first, last)
 		{ }
 
-		/**
-		 * @brief Constructor with std::vector
-		 * @param[in] v A std::vector<T>
-		 */
+		/// @brief Constructor with std::vector
+		/// @param[in] v A std::vector<T>
 		container(std::vector<T> const & v) :
 			std::vector<T>(v)
 		{ }
 
-		/**
-		 * @brief Constructor with std::initializer_list
-		 * @param[in] il A std::initializer_list<T>
-		 */
+		/// @brief Constructor with std::initializer_list
+		/// @param[in] il A std::initializer_list<T>
 		container(std::initializer_list<T> const & il) :
 			std::vector<T>(il)
 		{ }
 
-		/// Destructor
+		/// @brief Destructor
 		virtual ~container() { }
 
 		// Iterators
@@ -205,45 +196,33 @@ namespace hnc
 
 		// Operator == != < <= > >=
 
-		/**
-		 * @brief Equality test for each elements of two containers
-		 * @return true if each element of the container are equals, else false
-		 */
+		/// @brief Equality test for each elements of two containers
+		/// @return true if each element of the container are equals, else false
 		bool operator==(container<T> const & c) const
 		{ return static_cast<std::vector<T>>(*this) == static_cast<std::vector<T>>(c); }
 
-		/**
-		 * @brief Inequality test for each elements of two containers
-		 * @return true if one element of the container is not equals, else false
-		 */
+		/// @brief Inequality test for each elements of two containers
+		/// @return true if one element of the container is not equals, else false
 		bool operator!=(container<T> const & c) const
 		{ return static_cast<std::vector<T>>(*this) != static_cast<std::vector<T>>(c); }
 
-		/**
-		 * @brief < test for each elements of two containers
-		 * @return true if each element of the container are <, else false
-		 */
+		/// @brief < test for each elements of two containers
+		/// @return true if each element of the container are <, else false
 		bool operator<(container<T> const & c) const
 		{ return static_cast<std::vector<T>>(*this) < static_cast<std::vector<T>>(c); }
 
-		/**
-		 * @brief <= test for each elements of two containers
-		 * @return true if each element of the container are <=, else false
-		 */
+		/// @brief <= test for each elements of two containers
+		/// @return true if each element of the container are <=, else false
 		bool operator<=(container<T> const & c) const
 		{ return static_cast<std::vector<T>>(*this) <= static_cast<std::vector<T>>(c); }
 
-		/**
-		 * @brief > test for each elements of two containers
-		 * @return true if each element of the container are >, else false
-		 */
+		/// @brief > test for each elements of two containers
+		/// @return true if each element of the container are >, else false
 		bool operator>(container<T> const & c) const
 		{ return static_cast<std::vector<T>>(*this) > static_cast<std::vector<T>>(c); }
 
-		/**
-		 * @brief >= test for each elements of two containers
-		 * @return true if each element of the container are >=, else false
-		 */
+		/// @brief >= test for each elements of two containers
+		/// @return true if each element of the container are >=, else false
 		bool operator>=(container<T> const & c) const
 		{ return static_cast<std::vector<T>>(*this) >= static_cast<std::vector<T>>(c); }
 
@@ -252,21 +231,17 @@ namespace hnc
 		/// Declare operator << with std::ostream as a friend
 		friend std::ostream & operator<< <>(std::ostream & o, hnc::container<T> const & c);
 	};
-}
-
-/**
- * @brief Display a hnc::container
- * 
- * @param[in,out] o Out stream
- * @param[in]     c A hnc::container
- * 
- * @return the out stream
- */
-template <class T>
-std::ostream & operator<<(std::ostream & o, hnc::container<T> const & c)
-{
-	o << static_cast<std::vector<T>>(c);
-	return o;
+	
+	/// @brief Operator << between a std::ostream and a hnc::container<T>
+	/// @param[in,out] o Output stream
+	/// @param[in]     c A hnc::container<T>
+	/// @return the output stream
+	template <class T>
+	std::ostream & operator<<(std::ostream & o, hnc::container<T> const & c)
+	{
+		o << static_cast<std::vector<T>>(c);
+		return o;
+	}
 }
 
 #endif

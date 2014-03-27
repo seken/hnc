@@ -1,4 +1,4 @@
-// Copyright © 2013 Inria, Written by Lénaïc Bagnères, lenaic.bagneres@inria.fr
+// Copyright © 2013, 2014 Inria, Written by Lénaïc Bagnères, lenaic.bagneres@inria.fr
 
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -12,11 +12,6 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-
-/**
- * @file
- * @brief Just for operator<<(std::ostream & o, hnc::url const & url)
- */
 
 #ifndef HNC_URL_HPP
 #define HNC_URL_HPP
@@ -32,17 +27,17 @@ namespace hnc
 	 * @brief URL (Uniform Resource Locator)
 	 *
 	 * @code
-	 * #include <hnc/url.hpp>
-	 * @endcode
+	   #include <hnc/url.hpp>
+	   @endcode
 	 *
 	 * http://en.wikipedia.org/wiki/Uniform_resource_locator
 	 * http://www.commentcamarche.net/contents/542-url
 	 *
 	 * @code
-	 * hnc::url("serveur_name", "/path", "http", 80)                // http://serveur_name:80/path
-	 * hnc::url("serveur_name", "/path", "git", 0, "login")         // git://login@serveur_name/path
-	 * hnc::url("serveur_name", "/path", "ftp", 21, "login", "pwd") // ftp://login:pwd@serveur_name:21/path
-	 * @endcode
+	   hnc::url("serveur_name", "/path", "http", 80)                // http://serveur_name:80/path
+	   hnc::url("serveur_name", "/path", "git", 0, "login")         // git://login@serveur_name/path
+	   hnc::url("serveur_name", "/path", "ftp", 21, "login", "pwd") // ftp://login:pwd@serveur_name:21/path
+	   @endcode
 	 */
 	class url
 	{
@@ -68,16 +63,13 @@ namespace hnc
 
 	public:
 
-		/**
-		 * @brief Constructor
-		 *
-		 * @param[in] server_name Name of server (empty by default)
-		 * @param[in] path        Path of server (empty by default)
-		 * @param[in] protocol    Name of protocol (empty by default)
-		 * @param[in] port        Port (0 by default)
-		 * @param[in] user        User (login) (empty by default)
-		 * @param[in] password    Password (empty by default)
-		 */
+		/// @brief Constructor
+		/// @param[in] server_name   Name of server (empty by default)
+		/// @param[in] path          Path of server (empty by default)
+		/// @param[in] protocol_name Name of protocol (empty by default)
+		/// @param[in] port          Port (0 by default)
+		/// @param[in] user          User (login) (empty by default)
+		/// @param[in] password      Password (empty by default)
 		url
 		(
 			std::string const & server_name = "",
@@ -153,20 +145,16 @@ namespace hnc
 			return r;
 		}
 	};
-}
-
-/**
- * @brief Display a hnc::url
- *
- * @param[out] o            Out stream
- * @param[in]  html_webpage A hnc::url
- *
- * @return the out stream
- */
-std::ostream & operator<<(std::ostream & o, hnc::url const & url)
-{
-	o << url.to_string();
-	return o;
+	
+	/// @brief Operator << between a std::ostream and a hnc::url
+	/// @param[in,out] o   Output stream
+	/// @param[in]     url A hnc::url
+	/// @return the output stream
+	inline std::ostream & operator<<(std::ostream & o, hnc::url const & url)
+	{
+		o << url.to_string();
+		return o;
+	}
 }
 
 #endif

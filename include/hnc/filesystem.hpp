@@ -1,4 +1,4 @@
-// Copyright © 2013 Inria, Written by Lénaïc Bagnères, lenaic.bagneres@inria.fr
+// Copyright © 2013, 2014 Inria, Written by Lénaïc Bagnères, lenaic.bagneres@inria.fr
 
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -21,6 +21,9 @@
 #include <cstdio>
 #include <fstream>
 
+#ifdef UNIX
+  #include <unistd.h>
+#endif
 
 namespace hnc
 {
@@ -28,8 +31,8 @@ namespace hnc
 	 * @brief Basic manipulation of files and directory
 	 *
 	 * @code
-	 * #include <hnc/filesystem.hpp>
-	 * @endcode
+	   #include <hnc/filesystem.hpp>
+	   @endcode
 	 *
 	 * @image html hnc_filesystem.png
 	 * @image latex hnc_filesystem.eps
@@ -69,6 +72,10 @@ namespace hnc
 
 		/**
 		 * @brief Return the filename of a pathname
+		 * 
+		 * @code
+		   #include <hnc/filesystem.hpp>
+		   @endcode
 		 *
 		 * @param[in] pathname            Pathname
 		 * @param[in] directory_separator Directory separator char (hnc::filesystem::directory_separator::common by default)
@@ -98,6 +105,10 @@ namespace hnc
 		/**
 		 * @brief Return the dirname of a pathname (without the final directory separator)
 		 *
+		 * @code
+		   #include <hnc/filesystem.hpp>
+		   @endcode
+		 *
 		 * @param[in] pathname            Pathname
 		 * @param[in] directory_separator Directory separator char (hnc::filesystem::directory_separator::common by default)
 		 *
@@ -126,6 +137,10 @@ namespace hnc
 
 		/**
 		 * @brief Return the basename of a pathname
+		 *
+		 * @code
+		   #include <hnc/filesystem.hpp>
+		   @endcode
 		 *
 		 * @param[in] pathname            Pathname
 		 * @param[in] directory_separator Directory separator char (hnc::filesystem::directory_separator::common by default)
@@ -158,6 +173,10 @@ namespace hnc
 		/**
 		 * @brief Return the dirname and the basename of a pathname
 		 *
+		 * @code
+		   #include <hnc/filesystem.hpp>
+		   @endcode
+		 *
 		 * @param[in] pathname            Pathname
 		 * @param[in] directory_separator Directory separator char (hnc::filesystem::directory_separator::common by default)
 		 *
@@ -182,6 +201,10 @@ namespace hnc
 
 		/**
 		 * @brief Return the extension of a file (without the '.')
+		 *
+		 * @code
+		   #include <hnc/filesystem.hpp>
+		   @endcode
 		 *
 		 * @param[in] pathname            Pathname
 		 * @param[in] directory_separator Directory separator char (hnc::filesystem::directory_separator::common by default)
@@ -212,6 +235,10 @@ namespace hnc
 
 		/**
 		 * @brief Add prefix (before the basename, after the dirname)
+		 *
+		 * @code
+		   #include <hnc/filesystem.hpp>
+		   @endcode
 		 *
 		 * @param[in] pathname            Pathname
 		 * @param[in] prefix              Prefix to add
@@ -248,6 +275,10 @@ namespace hnc
 
 		/**
 		 * @brief Add suffix (after the basename, before the extension)
+		 *
+		 * @code
+		   #include <hnc/filesystem.hpp>
+		   @endcode
 		 *
 		 * @param[in] pathname            Pathname
 		 * @param[in] suffix              Suffix to add
@@ -287,6 +318,10 @@ namespace hnc
 		/**
 		 * @brief Return true if the file exists, false otherwise
 		 *
+		 * @code
+		   #include <hnc/filesystem.hpp>
+		   @endcode
+		 *
 		 * @param[in] pathname Pathname wanted
 		 *
 		 * @return true if the file exists, false otherwise
@@ -312,6 +347,10 @@ namespace hnc
 		/**
 		 * @brief Copy a file
 		 *
+		 * @code
+		   #include <hnc/filesystem.hpp>
+		   @endcode
+		 *
 		 * http://stackoverflow.com/questions/10195343/copy-a-file-in-an-sane-safe-and-efficient-way
 		 *
 		 * @param[in] source_filename      Source filename
@@ -328,6 +367,10 @@ namespace hnc
 		/**
 		 * @brief Read whole text file
 		 *
+		 * @code
+		   #include <hnc/filesystem.hpp>
+		   @endcode
+		 *
 		 * http://insanecoding.blogspot.fr/2011/11/how-to-read-in-file-in-c.html
 		 *
 		 * @param[in] filename Text filename
@@ -343,13 +386,13 @@ namespace hnc
 			{
 				// Get the size
 				f.seekg(0, std::ios::end);
-				std::string r(f.tellg(), '\0');
+				std::string r(std::size_t(f.tellg()), '\0');
 
 				// Rewind the file
 				f.seekg(0, std::ios::beg);
 
 				// Read (and close) the file
-				f.read(&r[0], r.size());
+				f.read(&r[0], std::streamsize(r.size()));
 				f.close();
 
 				// Return
@@ -367,24 +410,48 @@ namespace hnc
 		/**
 		 * @brief Return a temporary filename (with tmpnam function from cstdio)
 		 *
+		 * @code
+		   #include <hnc/filesystem.hpp>
+		   @endcode
+		 *
 		 * http://www.cplusplus.com/reference/cstdio/tmpnam/
 		 *
 		 * @return the temporary filename
 		 */
 		std::string tmp_filename()
 		{
-			// Generate filename
-			char filename_buffer[L_tmpnam];
-			std::string filename = std::tmpnam(filename_buffer);
-			// fopen and fclose file (else fstream does not work...)
-			FILE * f = std::fopen(filename.c_str(), "w");
-			std::fclose(f);
+			// mkstemp
+			#if _POSIX_VERSION
+			
+				// Generate filename
+				char filename_buffer[] = "/tmp/XXXXXXXX\0";
+				mkstemp(filename_buffer);
+				std::string const filename = filename_buffer;
+				
+			// std::tmpnam
+			#else
+				
+				// Generate filename
+				char filename_buffer[L_tmpnam];
+				std::tmpnam(filename_buffer);
+				std::string const filename = filename_buffer;
+				
+				// fopen and fclose file (else fstream does not work...)
+				FILE * f = std::fopen(filename.c_str(), "w");
+				std::fclose(f);
+				
+			#endif
+			
 			// Return
 			return filename;
 		}
 
 		/**
 		 * @brief Return a available filename based on user's proposition (no safe in multi-thread context)
+		 *
+		 * @code
+		   #include <hnc/filesystem.hpp>
+		   @endcode
 		 *
 		 * @param[in] pathname_wanted Pathname wanted
 		 * @param[in] separator       Separator between pathname wanted and number is the function generate a filename
@@ -394,25 +461,25 @@ namespace hnc
 		 */
 		std::string filename_without_overwrite
 		(
-			std::string const & pathname,
+			std::string const & pathname_wanted,
 			std::string const & separator = "_",
 			char const directory_separator = hnc::filesystem::directory_separator::common
 		)
 		{
 			// File does not exist
-			if (hnc::filesystem::file_exists(pathname) == false)
+			if (hnc::filesystem::file_exists(pathname_wanted) == false)
 			{
-				return pathname;
+				return pathname_wanted;
 			}
 			// File exists
 			else
 			{
 				// Find the next available pathname
-				std::string available_pathname = pathname;
+				std::string available_pathname = pathname_wanted;
 				unsigned int i = 0;
 				do
 				{
-					available_pathname = hnc::filesystem::add_suffix(pathname, separator + std::to_string(i), directory_separator);
+					available_pathname = hnc::filesystem::add_suffix(pathname_wanted, separator + std::to_string(i), directory_separator);
 					++i;
 				}
 				while (hnc::filesystem::file_exists(available_pathname) == true);

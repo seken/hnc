@@ -1,4 +1,4 @@
-// Copyright © 2013 Lénaïc Bagnères, hnc@singularity.fr
+// Copyright © 2013, 2014 Lénaïc Bagnères, hnc@singularity.fr
 
 // This file is part of hnc.
 
@@ -31,75 +31,75 @@ namespace hnc
 		 * @brief Gnuplot with lines
 		 *
 		 * @code
-		 * #include <hnc/gnuplot.hpp>
-		 * @endcode
+		   #include <hnc/gnuplot.hpp>
+		   @endcode
 		 *
 		 * @image html hnc_gnuplot_gnuplot_lines.png
 		 * @image latex hnc_gnuplot_gnuplot_lines.eps
 		 *
 		 * @code
-		 * std::map<std::string, int> data;
-		 * data["A"] = 1;
-		 * data["B"] = 2;
-		 * data["C"] = 5;
-		 * data["D"] = 3;
-		 * data["E"] = 4;
-		 * data["F"] = 2;
-		 * data["G"] = 1;
-		 * 
-		 * hnc::gnuplot::gnuplot_lines gp
-		 * (
-		 * 	hnc::gnuplot::output_terminal_png("hnc_gnuplot_gnuplot_lines").size(640, 480),
-		 * 	data
-		 * );
-		 * gp.plot().set_title("lines legend");
-		 * 
-		 * gp.set_title("hnc::gnuplot::gnuplot\\_lines");
-		 * gp.y_range.range(0, gp.max_data_value() + 1);
-		 * @endcode
+		   std::map<std::string, int> data;
+		   data["A"] = 1;
+		   data["B"] = 2;
+		   data["C"] = 5;
+		   data["D"] = 3;
+		   data["E"] = 4;
+		   data["F"] = 2;
+		   data["G"] = 1;
+		   
+		   hnc::gnuplot::gnuplot_lines gp
+		   (
+		   	hnc::gnuplot::output_terminal_png("hnc_gnuplot_gnuplot_lines").size(640, 480),
+		   	data
+		   );
+		   gp.plot().set_title("lines legend");
+		   
+		   gp.set_title("hnc::gnuplot::gnuplot\\_lines");
+		   gp.y_range.range(0, gp.max_data_value() + 1);
+		   @endcode
 		 *
 		 * @image html hnc_gnuplot_gnuplot_lines_with_multilines.png
 		 * @image latex hnc_gnuplot_gnuplot_lines_with_multilines.eps
 		 *
 		 * @code
-		 * std::map<std::string, int> data_0;
-		 * data_0["A"] = 1;
-		 * data_0["B"] = 2;
-		 * data_0["C"] = 5;
-		 * data_0["D"] = 3;
-		 * data_0["E"] = 4;
-		 * data_0["F"] = 2;
-		 * data_0["G"] = 1;
-		 * 
-		 * std::map<std::string, int> data_1;
-		 * data_1["A"] = 3;
-		 * data_1["B"] = 6;
-		 * data_1["C"] = 2;
-		 * data_1["D"] = 1;
-		 * data_1["E"] = 2;
-		 * data_1["F"] = 3;
-		 * data_1["G"] = 2;
-		 * 
-		 * std::map<std::string, int> data_2;
-		 * data_2["A"] = 2;
-		 * data_2["B"] = 3;
-		 * data_2["C"] = 4;
-		 * data_2["D"] = 3;
-		 * data_2["E"] = 4;
-		 * data_2["F"] = 7;
-		 * data_2["G"] = 3;
-		 * 
-		 * hnc::gnuplot::gnuplot_lines gp
-		 * (
-		 * 	hnc::gnuplot::output_terminal_png("hnc_gnuplot_gnuplot_lines_with_multilines").size(640, 480)
-		 * );
-		 * gp.add_line(data_0, "First line");
-		 * gp.add_line(data_1, "Second line");
-		 * gp.add_line(data_2, "Third line");
-		 * 
-		 * gp.set_title("hnc::gnuplot::gnuplot\\_lines\\_with\\_multilines");
-		 * gp.y_range.range(0, gp.max_data_value() + 2);
-		 * @endcode
+		   std::map<std::string, int> data_0;
+		   data_0["A"] = 1;
+		   data_0["B"] = 2;
+		   data_0["C"] = 5;
+		   data_0["D"] = 3;
+		   data_0["E"] = 4;
+		   data_0["F"] = 2;
+		   data_0["G"] = 1;
+		   
+		   std::map<std::string, int> data_1;
+		   data_1["A"] = 3;
+		   data_1["B"] = 6;
+		   data_1["C"] = 2;
+		   data_1["D"] = 1;
+		   data_1["E"] = 2;
+		   data_1["F"] = 3;
+		   data_1["G"] = 2;
+		   
+		   std::map<std::string, int> data_2;
+		   data_2["A"] = 2;
+		   data_2["B"] = 3;
+		   data_2["C"] = 4;
+		   data_2["D"] = 3;
+		   data_2["E"] = 4;
+		   data_2["F"] = 7;
+		   data_2["G"] = 3;
+		   
+		   hnc::gnuplot::gnuplot_lines gp
+		   (
+		   	hnc::gnuplot::output_terminal_png("hnc_gnuplot_gnuplot_lines_with_multilines").size(640, 480)
+		   );
+		   gp.add_line(data_0, "First line");
+		   gp.add_line(data_1, "Second line");
+		   gp.add_line(data_2, "Third line");
+		   
+		   gp.set_title("hnc::gnuplot::gnuplot\\_lines\\_with\\_multilines");
+		   gp.y_range.range(0, gp.max_data_value() + 2);
+		   @endcode
 		 */
 		class gnuplot_lines : public hnc::gnuplot::gnuplot
 		{
@@ -116,10 +116,8 @@ namespace hnc
 			
 		public:
 
-			/**
-			 * @brief Constructor
-			 * @param[in] terminal_output Terminal output hnc::gnuplot::output_terminal_pdf, hnc::gnuplot::output_terminal_svg, hnc::gnuplot::output_terminal_png
-			 */
+			/// @brief Constructor
+			/// @param[in] terminal_output Terminal output hnc::gnuplot::output_terminal_pdf, hnc::gnuplot::output_terminal_svg, hnc::gnuplot::output_terminal_png
 			template <class terminal_output_t>
 			gnuplot_lines(terminal_output_t const & terminal_output) :
 				hnc::gnuplot::gnuplot(terminal_output),
@@ -135,12 +133,12 @@ namespace hnc
 			 *
 			 * Data example:
 			 * @code
-			 * std::map<std::string, int> data;
-			 * data["A"] = 1;
-			 * data["B"] = 2;
-			 * data["C"] = 5;
-			 * data["D"] = 3;
-			 * @endcode
+			   std::map<std::string, int> data;
+			   data["A"] = 1;
+			   data["B"] = 2;
+			   data["C"] = 5;
+			   data["D"] = 3;
+			   @endcode
 			 */
 			template <class terminal_output_t, class numeric_t>
 			gnuplot_lines(terminal_output_t const & terminal_output, std::map<std::string, numeric_t> const & data) :
@@ -157,12 +155,12 @@ namespace hnc
 			 *
 			 * Data example:
 			 * @code
-			 * std::map<std::string, int> data;
-			 * data["A"] = 1;
-			 * data["B"] = 2;
-			 * data["C"] = 5;
-			 * data["D"] = 3;
-			 * @endcode
+			   std::map<std::string, int> data;
+			   data["A"] = 1;
+			   data["B"] = 2;
+			   data["C"] = 5;
+			   data["D"] = 3;
+			   @endcode
 			 */
 			template <class numeric_t>
 			void add_line(std::map<std::string, numeric_t> const & data, std::string const title = "")
@@ -189,19 +187,15 @@ namespace hnc
 				}
 			}
 
-			/**
-			 * @brief Return the first plot lines
-			 * @return the first plot lines
-			 */
+			/// @brief Return the first plot lines
+			/// @return the first plot lines
 			hnc::gnuplot::plot_lines & plot()
 			{
 				return m_plots.front();
 			}
 
-			/**
-			 * @brief Return the plots lines
-			 * @return the plots lines
-			 */
+			/// @brief Return the plots lines
+			/// @return the plots lines
 			std::vector<hnc::gnuplot::plot_lines> & plots()
 			{
 				return m_plots;

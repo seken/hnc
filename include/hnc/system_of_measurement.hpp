@@ -1,4 +1,4 @@
-// Copyright © 2013 Inria, Written by Lénaïc Bagnères, lenaic.bagneres@inria.fr
+// Copyright © 2013, 2014 Inria, Written by Lénaïc Bagnères, lenaic.bagneres@inria.fr
 
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -26,8 +26,8 @@ namespace hnc
 	 * @brief Provides some system of measurement
 	 *
 	 * @code
-	 * #include <hnc/system_of_measurement.hpp>
-	 * @endcode
+	   #include <hnc/system_of_measurement.hpp>
+	   @endcode
 	 *
 	 * @b From http://en.wikipedia.org/wiki/System_of_measurement @n
 	 * A system of measurement is a set of units which can be used to specify anything which can be measured and were historically important, regulated and defined because of trade and internal commerce. Scientifically, when later analyzed, some quantities are designated as fundamental units meaning all other needed units can be derived from them, whereas in the early and most historic eras, the units were given by fiat (see statutory law) by the ruling entities and were not necessarily well inter-related or self-consistent.

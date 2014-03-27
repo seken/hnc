@@ -1,4 +1,4 @@
-// Copyright © 2012 Lénaïc Bagnères, hnc@singularity.fr
+// Copyright © 2012, 2014 Lénaïc Bagnères, hnc@singularity.fr
 
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -62,23 +62,23 @@ namespace hnc
 	 * @brief Convert the input into a another type
 	 *
 	 * @code
-	 * #include <hnc/to_type.hpp>
-	 * @endcode
+	   #include <hnc/to_type.hpp>
+	   @endcode
 	 * 
 	 * The input is converted into the <return_t> type. @n
 	 * We use a std::stringstream to do the conversion.
 	 *
 	 * Exemple:
 	 * @code
-	 * //return_type output = hnc::to_<return_type>(input);
-	 *   int         output = hnc::to_<int>        ("420");
-	 * @endcode
+	   // return_type output = hnc::to_<return_type>(input);
+	      int         output = hnc::to_<int>        ("420");
+	   @endcode
 	 *
 	 * @warning Prefer the hnc::to_type(e) function !
 	 * @code
-	 *    int i = hnc::to_<int>("42");      // You can use hnc::to_int
-	 * double d = hnc::to_<double>("42.1"); // You can use hnc::to_double
-	 * @endcode
+	   int i = hnc::to_<int>("42"); // You can use hnc::to_int
+	   double d = hnc::to_<double>("42.1"); // You can use hnc::to_double
+	   @endcode
 	 *
 	 * @warning Avoid unsigned int
 	 *

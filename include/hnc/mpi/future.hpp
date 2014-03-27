@@ -1,4 +1,4 @@
-// Copyright © 2012 Lénaïc Bagnères, hnc@singularity.fr
+// Copyright © 2012, 2014 Lénaïc Bagnères, hnc@singularity.fr
 
 // This file is part of hnc.
 
@@ -44,8 +44,8 @@ namespace hnc
 		 * @brief Base class to send functor to a slave with a hnc::mpi::future
 		 *
 		 * @code
-		 * #include <hnc/mpi/future.hpp>
-		 * @endcode
+		   #include <hnc/mpi/future.hpp>
+		   @endcode
 		 * 
 		 * To send a function to a hnc::mpi::future slave, you need derivate this class
 		 * 
@@ -62,230 +62,230 @@ namespace hnc
 		 *
 		 * Exemple: no attribute, no return
 		 * @code
-		 * // Just a display, no return
-		 * // You need override the operator()
-		 * class remote_compute_display : public hnc::mpi::functor
-		 * {
-		 * public:
-		 * 
-		 * 	// Function
-		 * 	void operator()() override
-		 * 	{
-		 * 		std::cout << "remote_compute_display\n";
-		 * 	}
-		 * 
-		 * private:
-		 * 
-		 * 	#ifndef NO_HNC_Boost_Serialization
-		 * 
-		 * 	friend class boost::serialization::access;
-		 * 
-		 * 	template<class Archive>
-		 * 	void serialize(Archive & ar, unsigned int const) // unsigned int const version
-		 * 	{
-		 * 		ar & boost::serialization::base_object<hnc::mpi::functor>(*this);
-		 * 	}
-		 * 
-		 * 	#endif
-		 * };
-		 * 
-		 * #ifndef NO_HNC_Boost_Serialization
-		 * BOOST_CLASS_EXPORT(remote_compute_display)
-		 * #endif
-		 * @endcode
+		   // Just a display, no return
+		   // You need override the operator()
+		   class remote_compute_display : public hnc::mpi::functor
+		   {
+		   public:
+		   
+		   	// Function
+		   	void operator()() override
+		   	{
+		   		std::cout << "remote_compute_display\n";
+		   	}
+		   
+		   private:
+		   
+		   	#ifndef NO_HNC_Boost_Serialization
+		   
+		   	friend class boost::serialization::access;
+		   
+		   	template<class Archive>
+		   	void serialize(Archive & ar, unsigned int const) // unsigned int const version
+		   	{
+		   		ar & boost::serialization::base_object<hnc::mpi::functor>(*this);
+		   	}
+		   
+		   	#endif
+		   };
+		   
+		   #ifndef NO_HNC_Boost_Serialization
+		   BOOST_CLASS_EXPORT(remote_compute_display)
+		   #endif
+		   @endcode
 		 *
 		 * Exemple: no attribute, return a int
-		 * @code
-		 * // Compute a int
-		 * // You need:
-		 * //   - have result_t type
-		 * //   - override the operator()
-		 * //   - overload "result_t move_result()" to send your result with std::move
-		 * class remote_compute_int : public hnc::mpi::functor
-		 * {
-		 * public:
-		 * 
-		 * 	// Result type
-		 * 	using result_t = int;
-		 * 
-		 * private:
-		 * 
-		 * 	// Result
-		 * 	result_t r;
-		 * 
-		 * public:
-		 * 
-		 * 	// Function
-		 * 	void operator()() override
-		 * 	{
-		 * 		std::cout << "remote_compute_int\n";
-		 * 		r = 21 * 42 * 73;
-		 * 	}
-		 * 
-		 * 	// Return the result with std::move
-		 * 	result_t move_result() { return std::move(r); }
-		 * 
-		 * 	// Send the result with send_result(T)
-		 * 	void get(int const tag_result) const override { send_result(r, tag_result); }
-		 * 
-		 * private:
-		 * 
-		 * 	#ifndef NO_HNC_Boost_Serialization
-		 * 
-		 * 	friend class boost::serialization::access;
-		 * 
-		 * 	template<class Archive>
-		 * 	void serialize(Archive & ar, unsigned int const) // unsigned int const version
-		 * 	{
-		 * 		ar & boost::serialization::base_object<hnc::mpi::functor>(*this);
-		 * 		ar & r;
-		 * 	}
-		 * 
-		 * 	#endif
-		 * };
-		 * 
-		 * #ifndef NO_HNC_Boost_Serialization
-		 * BOOST_CLASS_EXPORT(remote_compute_int)
-		 * #endif
+		   @code
+		   // Compute a int
+		   // You need:
+		   //   - have result_t type
+		   //   - override the operator()
+		   //   - overload "result_t move_result()" to send your result with std::move
+		   class remote_compute_int : public hnc::mpi::functor
+		   {
+		   public:
+		   
+		   	// Result type
+		   	using result_t = int;
+		   
+		   private:
+		   
+		   	// Result
+		   	result_t r;
+		   
+		   public:
+		   
+		   	// Function
+		   	void operator()() override
+		   	{
+		   		std::cout << "remote_compute_int\n";
+		   		r = 21 * 42 * 73;
+		   	}
+		   
+		   	// Return the result with std::move
+		   	result_t move_result() { return std::move(r); }
+		   
+		   	// Send the result with send_result(T)
+		   	void get(int const tag_result) const override { send_result(r, tag_result); }
+		   
+		   private:
+		   
+		   	#ifndef NO_HNC_Boost_Serialization
+		   
+		   	friend class boost::serialization::access;
+		   
+		   	template<class Archive>
+		   	void serialize(Archive & ar, unsigned int const) // unsigned int const version
+		   	{
+		   		ar & boost::serialization::base_object<hnc::mpi::functor>(*this);
+		   		ar & r;
+		   	}
+		   
+		   	#endif
+		   };
+		   
+		   #ifndef NO_HNC_Boost_Serialization
+		   BOOST_CLASS_EXPORT(remote_compute_int)
+		   #endif
 		 * @endcode
 		 *
 		 * Exemple: one int attribute, return factorial n
 		 * @code
-		 * // Compute factorial n
-		 * // You need:
-		 * //   - have result_t type
-		 * //   - override the operator()
-		 * //   - overload "result_t move_result()" to send your result with std::move
-		 * //   - default constructor (for Boost Serialization)
-		 * class remote_compute_factorial : public hnc::mpi::functor
-		 * {
-		 * public:
-		 * 
-		 * 	// Result type
-		 * 	using result_t = int;
-		 * 
-		 * private:
-		 * 
-		 * 	// !n
-		 * 	unsigned int n;
-		 * 
-		 * 	// Result
-		 * 	result_t r;
-		 * 
-		 * public:
-		 * 
-		 * 	// Constructor take n and initizialize the result
-		 * 	remote_compute_factorial(unsigned int const n) : n(n), r(1) { }
-		 * 
-		 * 	// Function
-		 * 	void operator()() override
-		 * 	{
-		 * 		std::cout << "remote_compute_factorial " + hnc::to_string(n) + "\n";
-		 * 		for (unsigned int i = 2; i <= n; i++)
-		 * 		{
-		 * 			r *= i;
-		 * 		}
-		 * 	}
-		 * 
-		 * 	// Return the result with std::move
-		 * 	result_t move_result() { return std::move(r); }
-		 * 
-		 * 	// Send the result with send_result(T)
-		 * 	void get(int const tag_result) const override { send_result(r, tag_result); }
-		 * 
-		 * private:
-		 * 
-		 * 	#ifndef NO_HNC_Boost_Serialization
-		 * 
-		 * 	friend class boost::serialization::access;
-		 * 
-		 * 	// Boost Serialization need default constructor
-		 * 	remote_compute_factorial() : n(0), r(1) { }
-		 * 
-		 * 	template<class Archive>
-		 * 	void serialize(Archive & ar, unsigned int const) // unsigned int const version
-		 * 	{
-		 * 		ar & boost::serialization::base_object<hnc::mpi::functor>(*this);
-		 * 		ar & n;
-		 * 		ar & r;
-		 * 	}
-		 * 
-		 * 	#endif
-		 * };
-		 * 
-		 * #ifndef NO_HNC_Boost_Serialization
-		 * BOOST_CLASS_EXPORT(remote_compute_factorial)
-		 * #endif
-		 * @endcode
+		   // Compute factorial n
+		   // You need:
+		   //   - have result_t type
+		   //   - override the operator()
+		   //   - overload "result_t move_result()" to send your result with std::move
+		   //   - default constructor (for Boost Serialization)
+		   class remote_compute_factorial : public hnc::mpi::functor
+		   {
+		   public:
+		   
+		   	// Result type
+		   	using result_t = int;
+		   
+		   private:
+		   
+		   	// !n
+		   	unsigned int n;
+		   
+		   	// Result
+		   	result_t r;
+		   
+		   public:
+		   
+		   	// Constructor take n and initizialize the result
+		   	remote_compute_factorial(unsigned int const n) : n(n), r(1) { }
+		   
+		   	// Function
+		   	void operator()() override
+		   	{
+		   		std::cout << "remote_compute_factorial " + hnc::to_string(n) + "\n";
+		   		for (unsigned int i = 2; i <= n; i++)
+		   		{
+		   			r *= i;
+		   		}
+		   	}
+		   
+		   	// Return the result with std::move
+		   	result_t move_result() { return std::move(r); }
+		   
+		   	// Send the result with send_result(T)
+		   	void get(int const tag_result) const override { send_result(r, tag_result); }
+		   
+		   private:
+		   
+		   	#ifndef NO_HNC_Boost_Serialization
+		   
+		   	friend class boost::serialization::access;
+		   
+		   	// Boost Serialization need default constructor
+		   	remote_compute_factorial() : n(0), r(1) { }
+		   
+		   	template<class Archive>
+		   	void serialize(Archive & ar, unsigned int const) // unsigned int const version
+		   	{
+		   		ar & boost::serialization::base_object<hnc::mpi::functor>(*this);
+		   		ar & n;
+		   		ar & r;
+		   	}
+		   
+		   	#endif
+		   };
+		   
+		   #ifndef NO_HNC_Boost_Serialization
+		   BOOST_CLASS_EXPORT(remote_compute_factorial)
+		   #endif
+		   @endcode
 		 *
 		 * Exemple: one vector attribute, return the sum of the vector
 		 * @code
-		 * // Compute the sum of the std::vector
-		 * // You need:
-		 * //   - have result_t type
-		 * //   - override the operator()
-		 * //   - overload "result_t move_result()" to send your result with std::move
-		 * //   - default constructor (for Boost Serialization)
-		 * class remote_compute_vector_sum : public hnc::mpi::functor
-		 * {
-		 * public:
-		 * 
-		 * 	// Result type
-		 * 	using result_t = int;
-		 * 
-		 * private:
-		 * 
-		 * 	// vector
-		 * 	std::vector<int> v;
-		 * 
-		 * 	// Result
-		 * 	result_t sum;
-		 * 
-		 * public:
-		 * 
-		 * 	// Constructor take n and initizialize the result
-		 * 	remote_compute_vector_sum(std::vector<int> const & v) : v(v), sum(0) { }
-		 * 
-		 * 	// Function
-		 * 	void operator()() override
-		 * 	{
-		 * 		std::cout << "remote_compute_vector_sum " + hnc::to_string(v) + "\n";
-		 * 		for (int const e : v)
-		 * 		{
-		 * 			sum += e;
-		 * 		}
-		 * 	}
-		 * 
-		 * 	// Return the result with std::move
-		 * 	result_t move_result() { return std::move(sum); }
-		 * 
-		 * 	// Send the result with send_result(T)
-		 * 	void get(int const tag_result) const override { send_result(sum, tag_result); }
-		 * 
-		 * private:
-		 * 
-		 * 	#ifndef NO_HNC_Boost_Serialization
-		 * 
-		 * 	friend class boost::serialization::access;
-		 * 
-		 * 	// Boost Serialization need default constructor
-		 * 	remote_compute_vector_sum() : sum(0) { }
-		 * 
-		 * 	template<class Archive>
-		 * 	void serialize(Archive & ar, unsigned int const) // unsigned int const version
-		 * 	{
-		 * 		ar & boost::serialization::base_object<hnc::mpi::functor>(*this);
-		 * 		ar & v;
-		 * 		ar & sum;
-		 * 	}
-		 * 
-		 * 	#endif
-		 * };
-		 * 
-		 * #ifndef NO_HNC_Boost_Serialization
-		 * BOOST_CLASS_EXPORT(remote_compute_vector_sum)
-		 * #endif
-		 * @endcode
+		   // Compute the sum of the std::vector
+		   // You need:
+		   //   - have result_t type
+		   //   - override the operator()
+		   //   - overload "result_t move_result()" to send your result with std::move
+		   //   - default constructor (for Boost Serialization)
+		   class remote_compute_vector_sum : public hnc::mpi::functor
+		   {
+		   public:
+		   
+		   	// Result type
+		   	using result_t = int;
+		   
+		   private:
+		   
+		   	// vector
+		   	std::vector<int> v;
+		   
+		   	// Result
+		   	result_t sum;
+		   
+		   public:
+		   
+		   	// Constructor take n and initizialize the result
+		   	remote_compute_vector_sum(std::vector<int> const & v) : v(v), sum(0) { }
+		   
+		   	// Function
+		   	void operator()() override
+		   	{
+		   		std::cout << "remote_compute_vector_sum " + hnc::to_string(v) + "\n";
+		   		for (int const e : v)
+		   		{
+		   			sum += e;
+		   		}
+		   	}
+		   
+		   	// Return the result with std::move
+		   	result_t move_result() { return std::move(sum); }
+		   
+		   	// Send the result with send_result(T)
+		   	void get(int const tag_result) const override { send_result(sum, tag_result); }
+		   
+		   private:
+		   
+		   	#ifndef NO_HNC_Boost_Serialization
+		   
+		   	friend class boost::serialization::access;
+		   
+		   	// Boost Serialization need default constructor
+		   	remote_compute_vector_sum() : sum(0) { }
+		   
+		   	template<class Archive>
+		   	void serialize(Archive & ar, unsigned int const) // unsigned int const version
+		   	{
+		   		ar & boost::serialization::base_object<hnc::mpi::functor>(*this);
+		   		ar & v;
+		   		ar & sum;
+		   	}
+		   
+		   	#endif
+		   };
+		   
+		   #ifndef NO_HNC_Boost_Serialization
+		   BOOST_CLASS_EXPORT(remote_compute_vector_sum)
+		   #endif
+		   @endcode
 		 */
 		class functor
 		{
@@ -294,18 +294,16 @@ namespace hnc
 			/// Type of result (sent by get)
 			using result_t = void;
 
-			/// Destructor
+			/// @brief Destructor
 			virtual ~functor() { }
 
-			/// Operator() contains the function for the remote thread
+			/// @brief Operator() contains the function for the remote thread
 			virtual void operator()() { }
 
 			#ifndef NO_HNC_Boost_MPI
-			/**
-			 * @brief Generic function to send a result to master
-			 * @param[in] r          Send the result to the master (by Boost MPI with 1 as tag)
-			 * @param[in] tag_result MPI tag result
-			 */
+			/// @brief Generic function to send a result to master
+			/// @param[in] r          Send the result to the master (by Boost MPI with 1 as tag)
+			/// @param[in] tag_result MPI tag result
 			template <class T>
 			static void send_result(T const & r, int const tag_result)
 			{
@@ -322,8 +320,8 @@ namespace hnc
 			 * 
 			 * If you want return something:
 			 * @code
-			 * return std::move(your_result_attribute);
-			 * @endcode
+			   return std::move(your_result_attribute);
+			   @endcode
 			 * @return the result with std::move
 			 */
 			result_t move_result() { }
@@ -335,8 +333,8 @@ namespace hnc
 			 * 
 			 * If you want send the result:
 			 * @code
-			 * send_result(your_result_attribute, tag_result);
-			 * @endcode
+			   send_result(your_result_attribute, tag_result);
+			   @endcode
 			 */
 			virtual void get(int const /*tag_result*/) const { }
 
@@ -345,9 +343,6 @@ namespace hnc
 			virtual bool stop() const { return false; }
 
 		private:
-
-			/// MPI tag result
-			
 
 			#ifndef NO_HNC_Boost_Serialization
 			
@@ -363,7 +358,13 @@ namespace hnc
 
 		namespace
 		{
-			/// Final functor to end MPI environment
+			/**
+			 * @brief Final functor to end MPI environment
+			 * 
+			 * @code
+			   #include <hnc/mpi.hpp>
+			   @endcode
+			 */
 			class final_functor : public hnc::mpi::functor
 			{
 			public:
@@ -393,8 +394,8 @@ namespace hnc
 		 * @brief Provides a mechanism to access the result of remote (MPI) operations
 		 *
 		 * @code
-		 * #include <hnc/mpi/future.hpp>
-		 * @endcode
+		   #include <hnc/mpi/future.hpp>
+		   @endcode
 		 *
 		 * hnc::mpi::future take a hnc::mpi::functor and a processor id. The remote processor compute the functor. The result is available once by get method.
 		 *
@@ -403,165 +404,165 @@ namespace hnc
 		 *
 		 * You can get the number of processor
 		 * @code
-		 * boost::mpi::communicator world;
-		 * world.size();
+		   boost::mpi::communicator world;
+		   world.size();
 		 * @endcode
 		 *
 		 * Minimal exemple:
 		 * @code
-		 * #include <iostream>
-		 * 
-		 * #include <hnc/mpi/future.hpp>
-		 * 
-		 * 
-		 * // Just a display, no return
-		 * // You need override the operator()
-		 * class remote_compute_display : public hnc::mpi::functor
-		 * {
-		 * public:
-		 *
-		 * 	// Function
-		 * 	void operator()() override
-		 * 	{
-		 * 		std::cout << "remote_compute_display\n";
-		 * 	}
-		 *
-		 * private:
-		 *
-		 * 	#ifndef NO_HNC_Boost_Serialization
-		 *
-		 * 	friend class boost::serialization::access;
-		 *
-		 * 	template<class Archive>
-		 * 	void serialize(Archive & ar, unsigned int const) // unsigned int const version
-		 * 	{
-		 * 		ar & boost::serialization::base_object<hnc::mpi::functor>(*this);
-		 * 	}
-		 *
-		 * 	#endif
-		 * };
-		 *
-		 * #ifndef NO_HNC_Boost_Serialization
-		 * BOOST_CLASS_EXPORT(remote_compute_display)
-		 * #endif
-		 * 
-		 * 
-		 * #ifndef NO_HNC_Boost_MPI
-		 * int main(int argc, char * argv[])
-		 * #else
-		 * int main()
-		 * #endif
-		 * {
-		 * 	int nb_test = 0;
-		 * 
-		 * 	#ifndef NO_HNC_Boost_MPI
-		 * 	hnc_mpi_environment(env);
-		 * 	#endif
-		 * 
-		 * 	// Display on processor 1
-		 * 	remote_compute_display functor;
-		 * 	hnc::mpi::future<void> f(functor, 1);
-		 * 
-		 * 	return 0;
-		 * }
-		 * @endcode
+		   #include <iostream>
+		   
+		   #include <hnc/mpi/future.hpp>
+		   
+		   
+		   // Just a display, no return
+		   // You need override the operator()
+		   class remote_compute_display : public hnc::mpi::functor
+		   {
+		   public:
+		  
+		   	// Function
+		   	void operator()() override
+		   	{
+		   		std::cout << "remote_compute_display\n";
+		   	}
+		  
+		   private:
+		  
+		   	#ifndef NO_HNC_Boost_Serialization
+		  
+		   	friend class boost::serialization::access;
+		  
+		   	template<class Archive>
+		   	void serialize(Archive & ar, unsigned int const) // unsigned int const version
+		   	{
+		   		ar & boost::serialization::base_object<hnc::mpi::functor>(*this);
+		   	}
+		  
+		   	#endif
+		   };
+		  
+		   #ifndef NO_HNC_Boost_Serialization
+		   BOOST_CLASS_EXPORT(remote_compute_display)
+		   #endif
+		   
+		   
+		   #ifndef NO_HNC_Boost_MPI
+		   int main(int argc, char * argv[])
+		   #else
+		   int main()
+		   #endif
+		   {
+		   	int nb_test = 0;
+		   
+		   	#ifndef NO_HNC_Boost_MPI
+		   	hnc_mpi_environment(env);
+		   	#endif
+		   
+		   	// Display on processor 1
+		   	remote_compute_display functor;
+		   	hnc::mpi::future<void> f(functor, 1);
+		   
+		   	return 0;
+		   }
+		   @endcode
 		 *
 		 * Exemple: sum of a std::vector
 		 * @code
-		 * #include <iostream>
-		 * #include <vector>
-		 *
-		 * #include <hnc/mpi/future.hpp>
-		 *
-		 * 
-		 * // Compute the sum of the std::vector
-		 * // You need:
-		 * //   - have result_t type
-		 * //   - override the operator()
-		 * //   - overload "result_t move_result()" to send your result with std::move
-		 * //   - default constructor (for Boost Serialization)
-		 * class remote_compute_vector_sum : public hnc::mpi::functor
-		 * {
-		 * public:
-		 *
-		 * 	// Result type
-		 * 	using result_t = int;
-		 *
-		 * private:
-		 *
-		 * 	// vector
-		 * 	std::vector<int> v;
-		 *
-		 * 	// Result
-		 * 	result_t sum;
-		 *
-		 * public:
-		 *
-		 * 	// Constructor take n and initizialize the result
-		 * 	remote_compute_vector_sum(std::vector<int> const & v) : v(v), sum(0) { }
-		 *
-		 * 	// Function
-		 * 	void operator()() override
-		 * 	{
-		 * 		std::cout << "remote_compute_vector_sum " + hnc::to_string(v) + "\n";
-		 * 		for (int const e : v)
-		 * 		{
-		 * 			sum += e;
-		 * 		}
-		 * 	}
-		 *
-		 * 	// Return the result with std::move
-		 * 	result_t move_result() { return std::move(sum); }
-		 *
-		 * 	// Send the result with send_result(T)
-		 * 	void get(int const tag_result) const override { send_result(sum, tag_result); }
-		 *
-		 * private:
-		 *
-		 * 	#ifndef NO_HNC_Boost_Serialization
-		 *
-		 * 	friend class boost::serialization::access;
-		 *
-		 * 	// Boost Serialization need default constructor
-		 * 	remote_compute_vector_sum() : sum(0) { }
-		 *
-		 * 	template<class Archive>
-		 * 	void serialize(Archive & ar, unsigned int const) // unsigned int const version
-		 * 	{
-		 * 		ar & boost::serialization::base_object<hnc::mpi::functor>(*this);
-		 * 		ar & v;
-		 * 		ar & sum;
-		 * 	}
-		 *
-		 * 	#endif
-		 * };
-		 *
-		 * #ifndef NO_HNC_Boost_Serialization
-		 * BOOST_CLASS_EXPORT(remote_compute_vector_sum)
-		 * #endif
-		 *
-		 *
-		 * #ifndef NO_HNC_Boost_MPI
-		 * int main(int argc, char * argv[])
-		 * #else
-		 * int main()
-		 * #endif
-		 * {
-		 * 	int nb_test = 0;
-		 *
-		 * 	#ifndef NO_HNC_Boost_MPI
-		 * 	hnc_mpi_environment(env);
-		 * 	#endif
-		 *
-		 * 	// Compute the sum of the vector on processor 1
-		 * 	remote_compute_vector_sum functor({21, 11, 5, 3, 1, 1});
-		 * 	hnc::mpi::future<int> f(functor, 1);
-		 * 	int sum = f.get();
-		 * 	std::cout << "Sum = " << sum << std::endl;
-		 *
-		 * 	return 0;
-		 * }
-		 * @endcode
+		   #include <iostream>
+		   #include <vector>
+		  
+		   #include <hnc/mpi/future.hpp>
+		  
+		   
+		   // Compute the sum of the std::vector
+		   // You need:
+		   //   - have result_t type
+		   //   - override the operator()
+		   //   - overload "result_t move_result()" to send your result with std::move
+		   //   - default constructor (for Boost Serialization)
+		   class remote_compute_vector_sum : public hnc::mpi::functor
+		   {
+		   public:
+		  
+		   	// Result type
+		   	using result_t = int;
+		  
+		   private:
+		  
+		   	// vector
+		   	std::vector<int> v;
+		  
+		   	// Result
+		   	result_t sum;
+		  
+		   public:
+		  
+		   	// Constructor take n and initizialize the result
+		   	remote_compute_vector_sum(std::vector<int> const & v) : v(v), sum(0) { }
+		  
+		   	// Function
+		   	void operator()() override
+		   	{
+		   		std::cout << "remote_compute_vector_sum " + hnc::to_string(v) + "\n";
+		   		for (int const e : v)
+		   		{
+		   			sum += e;
+		   		}
+		   	}
+		  
+		   	// Return the result with std::move
+		   	result_t move_result() { return std::move(sum); }
+		  
+		   	// Send the result with send_result(T)
+		   	void get(int const tag_result) const override { send_result(sum, tag_result); }
+		  
+		   private:
+		  
+		   	#ifndef NO_HNC_Boost_Serialization
+		  
+		   	friend class boost::serialization::access;
+		  
+		   	// Boost Serialization need default constructor
+		   	remote_compute_vector_sum() : sum(0) { }
+		  
+		   	template<class Archive>
+		   	void serialize(Archive & ar, unsigned int const) // unsigned int const version
+		   	{
+		   		ar & boost::serialization::base_object<hnc::mpi::functor>(*this);
+		   		ar & v;
+		   		ar & sum;
+		   	}
+		  
+		   	#endif
+		   };
+		  
+		   #ifndef NO_HNC_Boost_Serialization
+		   BOOST_CLASS_EXPORT(remote_compute_vector_sum)
+		   #endif
+		  
+		  
+		   #ifndef NO_HNC_Boost_MPI
+		   int main(int argc, char * argv[])
+		   #else
+		   int main()
+		   #endif
+		   {
+		   	int nb_test = 0;
+		  
+		   	#ifndef NO_HNC_Boost_MPI
+		   	hnc_mpi_environment(env);
+		   	#endif
+		  
+		   	// Compute the sum of the vector on processor 1
+		   	remote_compute_vector_sum functor({21, 11, 5, 3, 1, 1});
+		   	hnc::mpi::future<int> f(functor, 1);
+		   	int sum = f.get();
+		   	std::cout << "Sum = " << sum << std::endl;
+		  
+		   	return 0;
+		   }
+		   @endcode
 		 *
 		 * @note If you use processor 0 (master), the computation is made in a std::future.
 		 *
@@ -580,7 +581,7 @@ namespace hnc
 			#endif
 
 			/// Rank of slave
-			std::size_t const m_id_proc;
+			int const m_id_proc;
 
 			/// Bool to know if the result is already getted
 			bool m_done;
@@ -595,13 +596,11 @@ namespace hnc
 
 			#ifndef NO_HNC_Boost_MPI
 
-			/**
-			 * @brief Constructor
-			 * @param[in,out] f       Functor objet derived of hnc::mpi::functor
-			 * @param[in]     id_proc Id (rank) of the process (id_proc % number of process is used)
-			 */
+			/// @brief Constructor
+			/// @param[in,out] f       Functor objet derived of hnc::mpi::functor
+			/// @param[in]     id_proc Id (rank) of the process (id_proc % number of process is used)
 			template <class F>
-			future(F & f, std::size_t const id_proc) : m_id_proc(id_proc % m_world.size()), m_done(false)
+			future(F & f, int const id_proc) : m_id_proc(id_proc % m_world.size()), m_done(false)
 			{
 				static_assert(std::is_same<typename F::result_t, result_t>::value, "hnc::mpi::future creation fails: in \"hnc::mpi::future<result_t> f(Func, 1);\", Func::result_t and result_t must be the same");
 				static_assert(std::is_same<decltype(f.move_result()), result_t>::value, "hnc::mpi::future creation fails: in \"hnc::mpi::future<result_t> f(Func, 1);\", Return type of f.move_result() and result_t must be the same");
@@ -624,7 +623,7 @@ namespace hnc
 			#else
 			
 			template <class F>
-			future(F & f, std::size_t const /*id_proc*/) : m_id_proc(0), m_done(false)
+			future(F & f, int const /*id_proc*/) : m_id_proc(0), m_done(false)
 			{
 				// Copy paste
 				static_assert(std::is_same<typename F::result_t, result_t>::value, "hnc::mpi::future creation fails: in \"hnc::mpi::future<result_t> f(Func, 1);\", Func::result_t and result_t must be the same");
@@ -635,12 +634,10 @@ namespace hnc
 
 			#endif
 
-			/**
-			 * @brief Return the result with std::move
-			 * @post the result can be get once time only
-			 * @exception std::logic_error if NDEBUG is not defined and multiple get function call
-			 * @return the result with std::move
-			 */
+			/// @brief Return the result with std::move
+			/// @post the result can be get once time only
+			/// @exception std::logic_error if NDEBUG is not defined and multiple get function call
+			/// @return the result with std::move
 			result_t get();
 
 		private:
@@ -657,7 +654,7 @@ namespace hnc
 		template <class result_t>
 		result_t future<result_t>::get()
 		{
-			result_t r;
+			result_t r{};
 			// Get result
 			if (!m_done)
 			{
@@ -692,43 +689,43 @@ namespace hnc
 		 * @brief Create the MPI environment to use hnc::mpi::future
 		 *
 		 * @code
-		 * #include <hnc/mpi/future.hpp>
-		 * @endcode
+		   #include <hnc/mpi/future.hpp>
+		   @endcode
 		 *
 		 * After the creation of the MPI environment, only the master (rank 0) must continue.@n
 		 * You can use this code
 		 * @code
-		 * #ifndef NO_HNC_Boost_MPI
-		 * hnc::mpi::environment env(argc, argv);
-		 * {
-		 * 	boost::mpi::communicator world;
-		 * 	if (world.rank() != 0)
-		 * 	{
-		 * 		return 0;
-		 * 	}
-		 * }
+		   #ifndef NO_HNC_Boost_MPI
+		   hnc::mpi::environment env(argc, argv);
+		   {
+		   	boost::mpi::communicator world;
+		   	if (world.rank() != 0)
+		   	{
+		   		return 0;
+		   	}
+		   }
 		 * #endif
 		 * @endcode
 		 * or this macro
 		 * @code
-		 * #ifndef NO_HNC_Boost_MPI
-		 * hnc_mpi_environment(env);
-		 * #endif
+		   #ifndef NO_HNC_Boost_MPI
+		   hnc_mpi_environment(env);
+		   #endif
 		 * @endcode
 		 * 
 		 * @note You need catch argc and argv in main function
 		 * @code
-		 * int main(int argc, char * argv[])
-		 * @endcode
+		   int main(int argc, char * argv[])
+		   @endcode
 		 * 
 		 * @note If you do not use argv or argv and you take care about warning, you can use
 		 * @code
-		 * #ifndef NO_HNC_Boost_MPI
-		 * int main(int argc, char * argv[])
-		 * #else
-		 * int main()
-		 * #endif
-		 * @endcode
+		   #ifndef NO_HNC_Boost_MPI
+		   int main(int argc, char * argv[])
+		   #else
+		   int main()
+		   #endif
+		   @endcode
 		 */
 		class environment
 		{

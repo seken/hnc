@@ -30,9 +30,14 @@ cmake_minimum_required(VERSION 2.6)
 	endif()
 
 # User's settings - General C++ Flags
-	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra -std=c++11 -pedantic -fopenmp")
+	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra -Wconversion -Wsign-conversion -std=c++11 -pedantic -fopenmp")
 
-	
+# Unix
+if (UNIX)
+	add_definitions("-DUNIX")
+endif()
+
+
 # Boost MPI
 	message(STATUS "---")
 	find_package(Boost COMPONENTS mpi serialization)
@@ -137,7 +142,7 @@ cmake_minimum_required(VERSION 2.6)
 		add_custom_target(
 			doc
 			${DOXYGEN_EXECUTABLE}
-			WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/include/hnc"
+			WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/include"
 			COMMENT "Generating API documentation with Doxygen" VERBATIM
 		)
 	else()
@@ -297,6 +302,8 @@ cmake_minimum_required(VERSION 2.6)
 	message(STATUS "                 # If you need root access:")
 	message(STATUS "                 #     sudo make install")
 	message(STATUS "                 #     su -c \"make install\"")
-	message(STATUS "    make doc     # To generate the Doxygen")
+	if (DOXYGEN_FOUND)
+		message(STATUS "    make doc     # To generate the Doxygen")
+	endif()
 
 	message(STATUS "---")

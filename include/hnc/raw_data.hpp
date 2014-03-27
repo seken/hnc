@@ -1,4 +1,4 @@
-// Copyright © 2013 Inria, Written by Lénaïc Bagnères, lenaic.bagneres@inria.fr
+// Copyright © 2013, 2014 Inria, Written by Lénaïc Bagnères, lenaic.bagneres@inria.fr
 // Copyright © 2013 Lénaïc Bagnères, hnc@singularity.fr
 
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,11 +14,6 @@
 // limitations under the License.
 
 
-/**
- * @file
- * @brief Just for operator<<(std::ostream & o, hnc::raw_data const & c)
- */
-
 #ifndef HNC_RAW_DATA_HPP
 #define HNC_RAW_DATA_HPP
 
@@ -32,11 +27,11 @@ namespace hnc
 {
 	template <std::size_t N>
 	class raw_data;
+	
+	// Declarate this function for hnc::raw_data can be friend with
+	template <std::size_t N>
+	std::ostream & operator<<(std::ostream & o, hnc::raw_data<N> const & c);
 }
-// Declarate this function for hnc::raw_data can be friend with
-template <std::size_t N>
-std::ostream & operator<<(std::ostream & o, hnc::raw_data<N> const & c);
-
 
 namespace hnc
 {
@@ -44,8 +39,8 @@ namespace hnc
 	 * @brief Raw data is an encapsulation of std::array of unsigned char (with hexidecimal as display)
 	 * 
 	 * @code
-	 * #include <hnc/raw_data.hpp>
-	 * @endcode
+	   #include <hnc/raw_data.hpp>
+	   @endcode
 	 *
 	 * hnc::raw_data is an std::array<unsigned char, N>
 	 *
@@ -57,17 +52,17 @@ namespace hnc
 	public:
 		
 		// Member types
-		using std::array<unsigned char, N>::value_type;
-		using std::array<unsigned char, N>::reference;
-		using std::array<unsigned char, N>::const_reference;
-		using std::array<unsigned char, N>::pointer;
-		using std::array<unsigned char, N>::const_pointer;
-		using std::array<unsigned char, N>::iterator;
-		using std::array<unsigned char, N>::const_iterator;
-		using std::array<unsigned char, N>::reverse_iterator;
-		using std::array<unsigned char, N>::const_reverse_iterator;
-		using std::array<unsigned char, N>::size_type;
-		using std::array<unsigned char, N>::difference_type;
+		using typename std::array<unsigned char, N>::value_type;
+		using typename std::array<unsigned char, N>::reference;
+		using typename std::array<unsigned char, N>::const_reference;
+		using typename std::array<unsigned char, N>::pointer;
+		using typename std::array<unsigned char, N>::const_pointer;
+		using typename std::array<unsigned char, N>::iterator;
+		using typename std::array<unsigned char, N>::const_iterator;
+		using typename std::array<unsigned char, N>::reverse_iterator;
+		using typename std::array<unsigned char, N>::const_reverse_iterator;
+		using typename std::array<unsigned char, N>::size_type;
+		using typename std::array<unsigned char, N>::difference_type;
 		
 		// Iterators
 		using std::array<unsigned char, N>::begin;
@@ -98,45 +93,33 @@ namespace hnc
 
 		// Operator == != < <= > >=
 
-		/**
-		 * @brief Equality test for each elements of two raw_data
-		 * @return true if each element of the raw_data are equals, else false
-		 */
+		/// @brief Equality test for each elements of two raw_data
+		/// @return true if each element of the raw_data are equals, else false
 		bool operator==(raw_data<N> const & c) const
 		{ return static_cast<std::array<unsigned char, N>>(*this) == static_cast<std::array<unsigned char, N>>(c); }
 
-		/**
-		 * @brief Inequality test for each elements of two raw_data
-		 * @return true if one element of the raw_data is not equals, else false
-		 */
+		/// @brief Inequality test for each elements of two raw_data
+		/// @return true if one element of the raw_data is not equals, else false
 		bool operator!=(raw_data<N> const & c) const
 		{ return static_cast<std::array<unsigned char, N>>(*this) != static_cast<std::array<unsigned char, N>>(c); }
 
-		/**
-		 * @brief < test for each elements of two raw_data
-		 * @return true if each element of the raw_data are <, else false
-		 */
+		/// @brief < test for each elements of two raw_data
+		/// @return true if each element of the raw_data are <, else false
 		bool operator<(raw_data<N> const & c) const
 		{ return static_cast<std::array<unsigned char, N>>(*this) < static_cast<std::array<unsigned char, N>>(c); }
 
-		/**
-		 * @brief <= test for each elements of two raw_data
-		 * @return true if each element of the raw_data are <=, else false
-		 */
+		/// @brief <= test for each elements of two raw_data
+		/// @return true if each element of the raw_data are <=, else false
 		bool operator<=(raw_data<N> const & c) const
 		{ return static_cast<std::array<unsigned char, N>>(*this) <= static_cast<std::array<unsigned char, N>>(c); }
 
-		/**
-		 * @brief > test for each elements of two raw_data
-		 * @return true if each element of the raw_data are >, else false
-		 */
+		/// @brief > test for each elements of two raw_data
+		/// @return true if each element of the raw_data are >, else false
 		bool operator>(raw_data<N> const & c) const
 		{ return static_cast<std::array<unsigned char, N>>(*this) > static_cast<std::array<unsigned char, N>>(c); }
 
-		/**
-		 * @brief >= test for each elements of two raw_data
-		 * @return true if each element of the raw_data are >=, else false
-		 */
+		/// @brief >= test for each elements of two raw_data
+		/// @return true if each element of the raw_data are >=, else false
 		bool operator>=(raw_data<N> const & c) const
 		{ return static_cast<std::array<unsigned char, N>>(*this) >= static_cast<std::array<unsigned char, N>>(c); }
 
@@ -145,24 +128,20 @@ namespace hnc
 		/// Declare operator << with std::ostream as a friend
 		friend std::ostream & operator<< <>(std::ostream & o, hnc::raw_data<N> const & c);
 	};
-}
-
-/**
- * @brief Display a hnc::raw_data
- *
- * @param[in,out] o Out stream
- * @param[in]     c A raw_data
- *
- * @return the out stream
- */
-template <std::size_t N>
-std::ostream & operator<<(std::ostream & o, hnc::raw_data<N> const & c)
-{
-	for (std::size_t i = 0; i < N; ++i)
+	
+	/// @brief Operator << between a std::ostream and a hnc::raw_data<N>
+	/// @param[in,out] o Output stream
+	/// @param[in]     c A hnc::raw_data<N>
+	/// @return the output stream
+	template <std::size_t N>
+	std::ostream & operator<<(std::ostream & o, hnc::raw_data<N> const & c)
 	{
-		o << std::hex << std::setw(2) << std::setfill('0') << static_cast<int>(c[i]);
+		for (std::size_t i = 0; i < N; ++i)
+		{
+			o << std::hex << std::setw(2) << std::setfill('0') << static_cast<int>(c[i]);
+		}
+		return o;
 	}
-	return o;
 }
 
 #endif

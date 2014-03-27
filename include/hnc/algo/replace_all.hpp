@@ -1,4 +1,4 @@
-// Copyright © 2013 Lénaïc Bagnères, hnc@singularity.fr
+// Copyright © 2013, 2014 Lénaïc Bagnères, hnc@singularity.fr
 
 // This file is part of hnc.
 
@@ -34,8 +34,8 @@ namespace hnc
 		 * @brief Replace all values by others between two iterators
 		 *
 		 * @code
-		 * #include <hnc/algo.hpp>
-		 * @endcode
+		   #include <hnc/algo.hpp>
+		   @endcode
 		 *
 		 * @param[in] c          Container like std::vector, std::list
 		 * @param[in] first      Iterator of first element
@@ -66,17 +66,17 @@ namespace hnc
 				difference_type distance_begin_it = std::distance(c.begin(), it);
 				difference_type distance_it_last = std::distance(it, last);
 				// Replace
-				hnc::algo::replace_range(c, it, std::next(it, old_values.size()), new_values.begin(), new_values.end());
+				hnc::algo::replace_range(c, it, std::next(it, std::ptrdiff_t(old_values.size())), new_values.begin(), new_values.end());
 				// Resume and advance iterators
 				if (old_values.size() < new_values.size())
 				{
-					it = std::next(c.begin(), distance_begin_it + new_values.size() - old_values.size() + 1);
+					it = std::next(c.begin(), distance_begin_it + std::ptrdiff_t(new_values.size()) - std::ptrdiff_t(old_values.size()) + 1);
 					last = std::next(it, distance_it_last - 1);
 				}
 				else if (old_values.size() > new_values.size())
 				{
 					it = std::next(c.begin(), distance_begin_it);
-					last = std::next(it, distance_it_last - (old_values.size() - new_values.size()));
+					last = std::next(it, distance_it_last - std::ptrdiff_t(old_values.size() - new_values.size()));
 				}
 				else // Same size
 				{
@@ -93,8 +93,8 @@ namespace hnc
 		 * @brief Replace all values by others in a container
 		 *
 		 * @code
-		 * #include <hnc/algo.hpp>
-		 * @endcode
+		   #include <hnc/algo.hpp>
+		   @endcode
 		 *
 		 * @param[in,out] c          Container like std::vector, std::list
 		 * @param[in]     old_values Container with values to be replaced
@@ -115,8 +115,8 @@ namespace hnc
 		 * @brief Replace all values by others in a container
 		 *
 		 * @code
-		 * #include <hnc/algo.hpp>
-		 * @endcode
+		   #include <hnc/algo.hpp>
+		   @endcode
 		 *
 		 * @param[in] c          Container like std::vector, std::list
 		 * @param[in] old_values Container with values to be replaced

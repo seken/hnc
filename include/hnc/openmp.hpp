@@ -1,4 +1,4 @@
-// Copyright © 2012,2013 Lénaïc Bagnères, hnc@singularity.fr
+// Copyright © 2012-2014 Lénaïc Bagnères, hnc@singularity.fr
 
 // This file is part of hnc.
 
@@ -30,8 +30,8 @@ namespace hnc
 	 * @brief hnc OpenMP functions
 	 *
 	 * @code
-	 * #include <hnc/openmp.hpp>
-	 * @endcode
+	   #include <hnc/openmp.hpp>
+	   @endcode
 	 *
 	 * TODO What is OpenMP ?
 	 * 

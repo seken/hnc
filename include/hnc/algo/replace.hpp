@@ -1,4 +1,4 @@
-// Copyright © 2013 Lénaïc Bagnères, hnc@singularity.fr
+// Copyright © 2013, 2014 Lénaïc Bagnères, hnc@singularity.fr
 
 // This file is part of hnc.
 
@@ -34,8 +34,8 @@ namespace hnc
 		 * @brief Replace the first values by others between two iterators
 		 *
 		 * @code
-		 * #include <hnc/algo.hpp>
-		 * @endcode
+		   #include <hnc/algo.hpp>
+		   @endcode
 		 *
 		 * @param[in] c          Container like std::vector, std::list
 		 * @param[in] first      Iterator of first element
@@ -61,7 +61,7 @@ namespace hnc
 			// Replace
 			if (it != last)
 			{
-				hnc::algo::replace_range(c, it, std::next(it, old_values.size()), new_values.begin(), new_values.end());
+				hnc::algo::replace_range(c, it, std::next(it, std::ptrdiff_t(old_values.size())), new_values.begin(), new_values.end());
 			}
 			// Return
 			return c;
@@ -71,8 +71,8 @@ namespace hnc
 		 * @brief Replace the first values by others in a container
 		 *
 		 * @code
-		 * #include <hnc/algo.hpp>
-		 * @endcode
+		   #include <hnc/algo.hpp>
+		   @endcode
 		 *
 		 * @param[in,out] c          Container like std::vector, std::list
 		 * @param[in]     old_values Container with values to be replaced
@@ -92,8 +92,8 @@ namespace hnc
 		 * @brief Replace the first values by others in a container
 		 *
 		 * @code
-		 * #include <hnc/algo.hpp>
-		 * @endcode
+		   #include <hnc/algo.hpp>
+		   @endcode
 		 *
 		 * @param[in] c          Container like std::vector, std::list
 		 * @param[in] old_values Container with values to be replaced

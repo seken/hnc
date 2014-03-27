@@ -1,4 +1,4 @@
-// Copyright © 2012 Lénaïc Bagnères, hnc@singularity.fr
+// Copyright © 2012, 2014 Lénaïc Bagnères, hnc@singularity.fr
 
 // This file is part of hnc.
 
@@ -35,8 +35,8 @@ namespace hnc
 		 * @brief Median between two iterators
 		 *
 		 * @code
-		 * #include <hnc/math.hpp>
-		 * @endcode
+		   #include <hnc/math.hpp>
+		   @endcode
 		 * 
 		 * If size of the container is odd:
 		 * - return a copy of the n/2 element
@@ -57,14 +57,14 @@ namespace hnc
 		typename std::iterator_traits<input_iterator>::value_type median(input_iterator const & begin, input_iterator const & end)
 		{
 			// Get size
-			auto size = std::distance(begin, end);
+			auto const size = std::distance(begin, end);
 			
 			#ifndef NDEBUG
 				hnc::hassert(size > 0, std::length_error("hnc::math::median, Can not compute the median of empty container"));
 			#endif
 				
 			// Do a partial sort copy
-			std::vector<typename std::iterator_traits<input_iterator>::value_type> partial_sort(size/2 + 1);
+			std::vector<typename std::iterator_traits<input_iterator>::value_type> partial_sort(std::size_t(size / 2 + 1));
 			std::partial_sort_copy(begin, end, partial_sort.begin(), partial_sort.end());
 			
 			// Odd
@@ -83,8 +83,8 @@ namespace hnc
 		 * @brief Median of a container
 		 *
 		 * @code
-		 * #include <hnc/math.hpp>
-		 * @endcode
+		   #include <hnc/math.hpp>
+		   @endcode
 		 * 
 		 * If size of the container is odd:
 		 * - return a copy of the n/2 element

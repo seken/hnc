@@ -101,7 +101,7 @@ unsigned int test_const_it(const_random_iterator a)
 
 	if ((a + 2) != (a + 4 - 2)) { ++nb_test_fail; }
 
-	if (b != (b + (a - a))) { ++nb_test_fail; }
+	if (b != (b + std::size_t(a - a))) { ++nb_test_fail; }
 	
 	// Supports inequality comparisons (<, >, <= and >=) between iterators
 	// a < b
@@ -168,28 +168,28 @@ int main()
 
 	{
 		hnc::container<int> c({0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21});
-		nb_test += test_it(hnc::iterator<int, hnc::container<int>>(c, 9));
+		nb_test += int(test_it(hnc::iterator<int, hnc::container<int>>(c, 9)));
 		hnc::test::warning(nb_test == 0, "After hnc::iterator, " + hnc::to_string(nb_test) + " test fail!\n");
 		std::cout << std::endl;
 	}
 
 	{
 		hnc::container<int> c({0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21});
-		nb_test += test_const_it(hnc::const_iterator<int, hnc::container<int>>(c, 9));
+		nb_test += int(test_const_it(hnc::const_iterator<int, hnc::container<int>>(c, 9)));
 		hnc::test::warning(nb_test == 0, "After hnc::const_iterator, " + hnc::to_string(nb_test) + " test fail!\n");
 		std::cout << std::endl;
 	}
 
 	{
 		hnc::container<int> c({0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21});
-		nb_test += test_it(hnc::reverse_iterator<int, hnc::container<int>>(c, 9));
+		nb_test += int(test_it(hnc::reverse_iterator<int, hnc::container<int>>(c, 9)));
 		hnc::test::warning(nb_test == 0, "After hnc::reverse_iterator, " + hnc::to_string(nb_test) + " test fail!\n");
 		std::cout << std::endl;
 	}
 
 	{
 		hnc::container<int> c({0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21});
-		nb_test += test_const_it(hnc::const_reverse_iterator<int, hnc::container<int>>(c, 9));
+		nb_test += int(test_const_it(hnc::const_reverse_iterator<int, hnc::container<int>>(c, 9)));
 		hnc::test::warning(nb_test == 0, "After hnc::const_reverse_iterator, " + hnc::to_string(nb_test) + " test fail!\n");
 		std::cout << std::endl;
 	}

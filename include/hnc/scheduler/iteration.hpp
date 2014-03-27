@@ -1,4 +1,4 @@
-// Copyright © 2012,2013 Inria, Written by Lénaïc Bagnères, lenaic.bagneres@inria.fr
+// Copyright © 2012-2014 Inria, Written by Lénaïc Bagnères, lenaic.bagneres@inria.fr
 
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -30,8 +30,8 @@ namespace hnc
 		 * @brief Excute different versions of for loop. Split iterations, benchmark versions and select the version with last min time. No useless computing, no rollback.
 		 *
 		 * @code
-		 * #include <hnc/scheduler.hpp>
-		 * @endcode
+		   #include <hnc/scheduler.hpp>
+		   @endcode
 		 *
 		 * You have:
 		 * - a number of iterations (betwwen start and end with a step)
@@ -45,81 +45,81 @@ namespace hnc
 		 * 
 		 * Example with classic function:
 		 * @code
-		 * int func_value = 0;
-		 * 
-		 * void func0(int const & start, int const & end)
-		 * {
-		 * 	for (int i = start; i < end; ++i)
-		 * 	{
-		 * 		++func_value;
-		 * 	}
-		 * }
-		 *
-		 * void func1(int const & start, int const & end)
-		 * {
-		 * 	for (int i = start; i < end; ++i)
-		 * 	{
-		 * 		++func_value;
-		 * 	}
-		 * }
-		 * 
-		 * int main()
-		 * {
-		 * 	// Compute
-		 * 	hnc::scheduler::iteration(0, 42, {func0, func1});
-		 * 
-		 * 	// func_value value is 42
-		 * 
-		 * 	return 0;
-		 * }
-		 * @endcode
+		   int func_value = 0;
+		   
+		   void func0(int const & start, int const & end)
+		   {
+		   	for (int i = start; i < end; ++i)
+		   	{
+		   		++func_value;
+		   	}
+		   }
+		  
+		   void func1(int const & start, int const & end)
+		   {
+		   	for (int i = start; i < end; ++i)
+		   	{
+		   		++func_value;
+		   	}
+		   }
+		   
+		   int main()
+		   {
+		   	// Compute
+		   	hnc::scheduler::iteration(0, 42, {func0, func1});
+		   
+		   	// func_value value is 42
+		   
+		   	return 0;
+		   }
+		   @endcode
 		 *
 		 * Example with functor object and lambda :
 		 * @code
-		 * class fonctor
-		 * {
-		 * public:
-		 * 	fonctor(std::vector<std::vector<int>> & tab2D) : r_tab2D(tab2D) { }
-		 * 
-		 * 	void operator()(std::size_t const & start, std::size_t const & end)
-		 * 	{
-		 * 		for (std::size_t i = start; i < end; ++i)
-		 * 		{
-		 * 			for (std::size_t j = 0; j < r_tab2D.size(); ++j)
-		 * 			{
-		 * 				r_tab2D[i][j] += i * j;
-		 * 			}
-		 * 		}
-		 * 	}
-		 * 
-		 * private:
-		 * 	std::vector<std::vector<int>> & r_tab2D;
-		 * };
-		 * 
-		 * int main()
-		 * {
-		 * 	std::size_t const N = 200;
-		 * 
-		 * 	// A 2D array [N][N]
-		 * 	std::vector<std::vector<int>> tab2D(N, std::vector<int>(N, 0));
-		 * 	
-		 * 	auto lambda = [&](std::size_t const & start, std::size_t const & end) -> void
-		 * 	{
-		 * 		for (j = 0; j < tab2D.size(); j += 7)
-		 * 		{
-		 * 			for (i = start; i < end; ++i)
-		 * 			{
-		 * 				tab2D[i][j] += i * j;
-		 * 			}
-		 * 		}
-		 * 	};
-		 * 
-		 * 	// Compute
-		 * 	hnc::scheduler::iteration(std::size_t(0), N, {fonctor(tab2D), lambda});
-		 * 	
-		 * 	return 0;
-		 * }
-		 * @endcode
+		   class fonctor
+		   {
+		   public:
+		   	fonctor(std::vector<std::vector<int>> & tab2D) : r_tab2D(tab2D) { }
+		   
+		   	void operator()(std::size_t const & start, std::size_t const & end)
+		   	{
+		   		for (std::size_t i = start; i < end; ++i)
+		   		{
+		   			for (std::size_t j = 0; j < r_tab2D.size(); ++j)
+		   			{
+		   				r_tab2D[i][j] += i * j;
+		   			}
+		   		}
+		   	}
+		   
+		   private:
+		   	std::vector<std::vector<int>> & r_tab2D;
+		   };
+		   
+		   int main()
+		   {
+		   	std::size_t const N = 200;
+		   
+		   	// A 2D array [N][N]
+		   	std::vector<std::vector<int>> tab2D(N, std::vector<int>(N, 0));
+		   	
+		   	auto lambda = [&](std::size_t const & start, std::size_t const & end) -> void
+		   	{
+		   		for (j = 0; j < tab2D.size(); j += 7)
+		   		{
+		   			for (i = start; i < end; ++i)
+		   			{
+		   				tab2D[i][j] += i * j;
+		   			}
+		   		}
+		   	};
+		   
+		   	// Compute
+		   	hnc::scheduler::iteration(std::size_t(0), N, {fonctor(tab2D), lambda});
+		   	
+		   	return 0;
+		   }
+		   @endcode
 		 * 
 		 * @param[in] start         First iteration
 		 * @param[in] end           Last iteration
@@ -154,36 +154,36 @@ namespace hnc
 			while (start < end)
 			{
 				// Index of the best version
-				double best_time = std::numeric_limits<double>::max();
+				auto best_time = std::numeric_limits<std::chrono::steady_clock::duration::rep>::max();
 				std::size_t best_version = 0;
 				
 				// Samples
 				for (std::size_t i = 0; i < versions.size() && start < end; ++i)
 				{
 					// Compute
-					auto time_start = std::chrono::high_resolution_clock::now();
+					auto time_start = std::chrono::steady_clock::now();
 					{
-						versions[i](start, std::min(it_t(start + nb_it_sample * step), end));
+						versions[i](start, std::min(it_t(start) + it_t(nb_it_sample) * it_t(step), end));
 					}
-					auto time_end = std::chrono::high_resolution_clock::now();
+					auto time_end = std::chrono::steady_clock::now();
 					// Save best version
-					double const time = (time_end - time_start).count();
+					auto const time = (time_end - time_start).count();
 					if (time < best_time)
 					{
 						best_time = time;
 						best_version = i;
 					}
 					// Next iterations
-					start += nb_it_sample * step;
+					start += it_t(nb_it_sample) * it_t(step);
 				}
 
 				// Compute
 				if (start < end)
 				{
 					// Compute
-					versions[best_version](start, std::min(it_t(start + nb_it_compute * step), end));
+					versions[best_version](start, std::min(it_t(start) + it_t(nb_it_compute) * it_t(step), end));
 					// Next iterations
-					start += nb_it_compute * step;
+					start += it_t(nb_it_compute) * it_t(step);
 				}
 			}
 		}

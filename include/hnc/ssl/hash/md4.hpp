@@ -1,4 +1,4 @@
-// Copyright © 2013 Lénaïc Bagnères, hnc@singularity.fr
+// Copyright © 2013, 2014 Lénaïc Bagnères, hnc@singularity.fr
 
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -42,6 +42,10 @@ namespace hnc
 			#ifndef NO_HNC_SSL
 			/**
 			 * @brief Computhe the md4
+			 *
+			 * @code
+			   #include <hnc/ssl.hpp>
+			   @endcode
 			 *
 			 * @param[in] s A std::string
 			 *

@@ -51,7 +51,7 @@ namespace hnc
 		 * @return the standard deviation
 		 */
 		template <class forward_iterator>
-		typename std::iterator_traits<forward_iterator>::value_type standard_deviation(forward_iterator begin, forward_iterator const & end)
+		auto standard_deviation(forward_iterator begin, forward_iterator const & end) -> decltype(std::sqrt(*begin))
 		{
 			return std::sqrt(hnc::math::variance(begin, end));
 		}
@@ -78,7 +78,7 @@ namespace hnc
 		 * @return the standard deviation
 		 */
 		template <class T, template <class, class Alloc = std::allocator<T>> class Container>
-		T standard_deviation(Container<T> const & c)
+		auto standard_deviation(Container<T> const & c) -> decltype(std::sqrt(c.front()))
 		{ return hnc::math::standard_deviation(c.begin(), c.end()); }
 	}
 }

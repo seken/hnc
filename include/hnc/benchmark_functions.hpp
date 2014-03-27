@@ -1,4 +1,4 @@
-// Copyright © 2012,2013 Lénaïc Bagnères, hnc@singularity.fr
+// Copyright © 2012-2014 Lénaïc Bagnères, hnc@singularity.fr
 
 // This file is part of hnc.
 
@@ -32,6 +32,10 @@ namespace hnc
 {
 	/**
 	 * @brief Performs a benchmark with some functions
+	 * 
+	 * @code
+	   #include <hnc/benchmark_functions.hpp>
+	   @endcode
 	 *
 	 * User give a vector of functions. hnc::benchmark_functions performs benchmarks and output:
 	 * - raw times in a hnc::benchmark
@@ -47,59 +51,59 @@ namespace hnc
 	 *
 	 * Example:
 	 * @code
-	 * // #include <hnc/benchmark_functions.hpp>
-	 * // #include <hnc/sleep.hpp>
-	 * // #include <hnc/system.hpp>
-	 * 
-	 * auto benchmark_functions = hnc::benchmark_functions
-	 * (
-	 * 	{
-	 * 		{ []() -> void { hnc::sleep::ms(20); }, "v0" },
-	 * 		{ []() -> void { hnc::sleep::ms(40); }, "v1" },
-	 * 		{ []() -> void { hnc::sleep::ms(60); }, "v2" },
-	 * 		{ []() -> void { hnc::sleep::ms(80); }, "v3" },
-	 * 		{ []() -> void { hnc::sleep::ms(30); }, "v4" },
-	 * 		{ []() -> void { hnc::sleep::ms(50); }, "v5" },
-	 * 		{ []() -> void { hnc::sleep::ms(60); }, "v6" }
-	 * 	},
-	 * 	"Title",
-	 * 	"hnc_benchmark_functions_gnuplot",
-	 * 	3
-	 * );
-	 * hnc::benchmark const & benchmark = std::get<0>(benchmark_functions);
-	 * hnc::gnuplot::gnuplot_boxes & gnuplot = std::get<1>(benchmark_functions);
-	 * hnc::tabular const & tabular = std::get<2>(benchmark_functions);
-	 * 
-	 * // Bench
-	 * std::cout << benchmark << std::endl;
-	 * std::cout << std::endl;
-	 * 
-	 * // Gnuplot
-	 * std::cout << gnuplot.script() << std::endl;
-	 * std::cout << gnuplot.data().at(0).second << std::endl;
-	 * std::cout << std::endl;
-	 * gnuplot.write_script_in_file();
-	 * gnuplot.write_data_in_file();
-	 * hnc::system("gnuplot", gnuplot.script_filename());
-	 * 
-	 * // Tabular
-	 * std::cout << tabular << std::endl;
-	 * std::cout << std::endl;
-	 * @endcode
-	 *
-	 * Gnuplot:
-	 * \image html hnc_benchmark_functions_gnuplot.png
-	 * \image latex hnc_benchmark_functions_gnuplot.eps
-	 *
-	 * Tabular:
-	 * @code
-	 * // Title
-	 * // ---------------------------------------------------------------------------------------------------
-	 * // | v0          | v1          | v2          | v3          | v4          | v5          | v6          |
-	 * // ---------------------------------------------------------------------------------------------------
-	 * // | 0.020067159 | 0.040065594 | 0.060067431 | 0.080070083 | 0.030068953 | 0.050067764 | 0.060067917 |
-	 * // ---------------------------------------------------------------------------------------------------
-	 * @endcode
+	   // #include <hnc/benchmark_functions.hpp>
+	   // #include <hnc/sleep.hpp>
+	   // #include <hnc/system.hpp>
+	   
+	   auto benchmark_functions = hnc::benchmark_functions
+	   (
+	   	{
+	   		{ []() -> void { hnc::sleep::ms(20); }, "v0" },
+	   		{ []() -> void { hnc::sleep::ms(40); }, "v1" },
+	   		{ []() -> void { hnc::sleep::ms(60); }, "v2" },
+	   		{ []() -> void { hnc::sleep::ms(80); }, "v3" },
+	   		{ []() -> void { hnc::sleep::ms(30); }, "v4" },
+	   		{ []() -> void { hnc::sleep::ms(50); }, "v5" },
+	   		{ []() -> void { hnc::sleep::ms(60); }, "v6" }
+	   	},
+	   	"Title",
+	   	"hnc_benchmark_functions_gnuplot",
+	   	3
+	   );
+	   hnc::benchmark const & benchmark = std::get<0>(benchmark_functions);
+	   hnc::gnuplot::gnuplot_boxes & gnuplot = std::get<1>(benchmark_functions);
+	   hnc::tabular const & tabular = std::get<2>(benchmark_functions);
+	   
+	   // Bench
+	   std::cout << benchmark << std::endl;
+	   std::cout << std::endl;
+	   
+	   // Gnuplot
+	   std::cout << gnuplot.script() << std::endl;
+	   std::cout << gnuplot.data().at(0).second << std::endl;
+	   std::cout << std::endl;
+	   gnuplot.write_script_in_file();
+	   gnuplot.write_data_in_file();
+	   hnc::system("gnuplot", gnuplot.script_filename());
+	   
+	   // Tabular
+	   std::cout << tabular << std::endl;
+	   std::cout << std::endl;
+	   @endcode
+	   
+	   Gnuplot:
+	   \image html hnc_benchmark_functions_gnuplot.png
+	   \image latex hnc_benchmark_functions_gnuplot.eps
+	   
+	   Tabular:
+	   @code
+	   // Title
+	   // ---------------------------------------------------------------------------------------------------
+	   // | v0          | v1          | v2          | v3          | v4          | v5          | v6          |
+	   // ---------------------------------------------------------------------------------------------------
+	   // | 0.020067159 | 0.040065594 | 0.060067431 | 0.080070083 | 0.030068953 | 0.050067764 | 0.060067917 |
+	   // ---------------------------------------------------------------------------------------------------
+	   @endcode
 	 * 
 	 * @return the benchmark with all times, the gnuplot and the tabular with the median times 
 	 */

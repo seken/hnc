@@ -82,7 +82,13 @@
  */
 
 
-/// @brief hnc is a little (but useful) C++11 header-only
+/**
+ * @brief hnc is a little (but useful) C++11 header-only
+ * 
+ * @code
+   #include <hnc/hnc.hpp>
+   @endcode
+ */
 namespace hnc
 {
 	/// Version of hnc

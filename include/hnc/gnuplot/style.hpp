@@ -1,4 +1,4 @@
-// Copyright © 2013 Lénaïc Bagnères, hnc@singularity.fr
+// Copyright © 2013, 2014 Lénaïc Bagnères, hnc@singularity.fr
 
 // This file is part of hnc.
 
@@ -15,11 +15,6 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with hnc. If not, see <http://www.gnu.org/licenses/>
 
-
-/**
- * @file
- * @brief Just for std::ostream & operator<<(std::ostream & o, hnc::gnuplot::style const & style)
- */
 
 #ifndef HNC_GNUPLOT_STYLE_HPP
 #define HNC_GNUPLOT_STYLE_HPP
@@ -38,8 +33,8 @@ namespace hnc
 		 * @brief The commands ‘set style data‘ and ‘set style function‘ change the default plotting style for subsequent ‘plot‘ and ‘splot‘ commands
 		 * 
 		 * @code
-		 * #include <hnc/gnuplot.hpp>
-		 * @endcode
+		   #include <hnc/gnuplot.hpp>
+		   @endcode
 		 *
 		 * http://gnuplot.sourceforge.net/docs_4.2/node231.html
 		 *
@@ -57,7 +52,12 @@ namespace hnc
 		 *
 		 * @return the out stream
 		 */
-		std::ostream & operator<<(std::ostream & o, hnc::gnuplot::style const & /*style*/)
+		
+		/// @brief Operator << between a std::ostream and a hnc::gnuplot::style
+		/// @param[in,out] o     Output stream
+		/// @param[in]     style A hnc::gnuplot::style
+		/// @return the output stream
+		inline std::ostream & operator<<(std::ostream & o, hnc::gnuplot::style const & /*style*/)
 		{
 			return o;
 		}

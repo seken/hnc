@@ -1,4 +1,4 @@
-// Copyright © 2012 Lénaïc Bagnères, hnc@singularity.fr
+// Copyright © 2012, 2014 Lénaïc Bagnères, hnc@singularity.fr
 
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -32,8 +32,8 @@ namespace hnc
 		 * @brief Display a warning what message into the output flux if the expression is false
 		 *
 		 * @code
-		 * #include <hnc/test.hpp>
-		 * @endcode
+		   #include <hnc/test.hpp>
+		   @endcode
 		 * 
 		 * If the expression is false:
 		 * - we display the what message with hnc::terminal::warning into the output flux
@@ -70,8 +70,8 @@ namespace hnc
 		 * \brief Display the what message as an error into the output flux and send a exception if the expression is false
 		 *
 		 * @code
-		 * #include <hnc/test.hpp>
-		 * @endcode
+		   #include <hnc/test.hpp>
+		   @endcode
 		 * 
 		 * If the expression is false:
 		 * - we display the what message with hnc::terminal::error into the output flux

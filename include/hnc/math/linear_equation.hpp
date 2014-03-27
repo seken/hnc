@@ -97,9 +97,42 @@ namespace hnc
 			{ }
 		};
 		
+		/// @brief Operator == between two hnc::math::linear_equation<T>
+		/// @param[in] linear_equation_0 A hnc::math::linear_equation<T>
+		/// @param[in] linear_equation_1 A hnc::math::linear_equation<T>
+		/// @return true if the hnc::math::linear_equation<T> are equal, false otherwise
+		template <class T>
+		bool operator==(hnc::math::linear_equation<T> const & linear_equation_0, hnc::math::linear_equation<T> const & linear_equation_1)
+		{
+			if (&linear_equation_0 == &linear_equation_1)
+			{
+				return true;
+			}
+			else
+			{
+				return
+				(
+					linear_equation_0.unknown_variables_coeff == linear_equation_1.unknown_variables_coeff &&
+					linear_equation_0.parameters_coeff == linear_equation_1.parameters_coeff &&
+					linear_equation_0.constant == linear_equation_1.constant &&
+					linear_equation_0.relational_operator == linear_equation_1.relational_operator
+				);
+			}
+		}
+		
+		/// @brief Operator != between two hnc::math::linear_equation<T>
+		/// @param[in] linear_equation_0 A hnc::math::linear_equation<T>
+		/// @param[in] linear_equation_1 A hnc::math::linear_equation<T>
+		/// @return true if the hnc::math::linear_equation<T> are not equal, false otherwise
+		template <class T>
+		bool operator!=(hnc::math::linear_equation<T> const & linear_equation_0, hnc::math::linear_equation<T> const & linear_equation_1)
+		{
+			return ! (linear_equation_0 != linear_equation_1);
+		}
+		
 		/// @brief Operator << between a std::ostream and a hnc::math::linear_equation<T>
-		/// @param[out] o  Output stream
-		/// @param[in]  eq A hnc::math::linear_equation<T>
+		/// @param[in,out] o               Output stream
+		/// @param[in]     linear_equation A hnc::math::linear_equation<T>
 		/// @return the output stream
 		template <class T>
 		std::ostream & operator<<(std::ostream & o, hnc::math::linear_equation<T> const & linear_equation)

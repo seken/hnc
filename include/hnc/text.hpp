@@ -1,4 +1,4 @@
-// Copyright © 2013 Inria, Written by Lénaïc Bagnères, lenaic.bagneres@inria.fr
+// Copyright © 2013, 2014 Inria, Written by Lénaïc Bagnères, lenaic.bagneres@inria.fr
 
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -32,13 +32,17 @@ namespace hnc
 	 * @brief Text manipulation
 	 *
 	 * @code
-	 * #include <hnc/text.hpp>
-	 * @endcode
+	   #include <hnc/text.hpp>
+	   @endcode
 	 */
 	namespace text
 	{
 		/**
 		 * @brief String to vector of lines
+		 * 
+		 * @code
+		   #include <hnc/text.hpp>
+		   @endcode
 		 * 
 		 * @param[in] text  Text in a a std::string
 		 * @param[in] delim Line separator ('\\n' by default)
@@ -70,47 +74,51 @@ namespace hnc
 		/**
 		 * @brief Return the vector of differences to compare texts
 		 * 
+		 * @code
+		   #include <hnc/text.hpp>
+		   @endcode
+		 * 
 		 * The vector of diffrences is a vector of hnc::text::diff_tag
 		 * 
 		 * @code
-		 * // Original texts
-		 * std::vector<std::string> const text0 = {"lorem ", "ipsum, ", "dolor ", "sit, ", "amet, ", "consectetur, ", "adipisci ", "elit, ", "sed ", "eius ", "mod ", "tempor ", "incidunt, ", "ut ", "labore ", "et ", "dolore ", "magna ", "aliqua"};
-		 * std::vector<std::string> const text1 = {"dolorem ", "ipsum, ", "quia ", "dolor ", "sit, ", "amet, ", "consectetur, ", "adipisci ", "velit, ", "sed ", "quia non ", "numquam ", "eius ", "modi ", "tempora ", "incidunt, ", "ut ", "labore ", "et ", "dolore ", "magnam ", "aliquam"};
-		 * 
-		 * // Compute the diff
-		 * auto diff = hnc::text::diff(text0, text1);
-		 * 
-		 * // Display the diff
-		 * hnc::text::display_diff(text0, text1, diff);
-		 * // -               | + dolorem 
-		 * // + lorem         | - 
-		 * // = ipsum,        | = ipsum, 
-		 * // -               | + quia 
-		 * // = dolor         | = dolor 
-		 * // = sit,          | = sit, 
-		 * // = amet,         | = amet, 
-		 * // = consectetur,  | = consectetur, 
-		 * // = adipisci      | = adipisci 
-		 * // -               | + velit, 
-		 * // + elit,         | - 
-		 * // = sed           | = sed 
-		 * // -               | + quia non 
-		 * // -               | + numquam 
-		 * // = eius          | = eius 
-		 * // -               | + modi 
-		 * // -               | + tempora 
-		 * // + mod           | - 
-		 * // + tempor        | - 
-		 * // = incidunt,     | = incidunt, 
-		 * // = ut            | = ut 
-		 * // = labore        | = labore 
-		 * // = et            | = et 
-		 * // = dolore        | = dolore 
-		 * // -               | + magnam 
-		 * // -               | + aliquam
-		 * // + magna         | - 
-		 * // + aliqua        | -
-		 * @endcode
+		   // Original texts
+		   std::vector<std::string> const text0 = {"lorem ", "ipsum, ", "dolor ", "sit, ", "amet, ", "consectetur, ", "adipisci ", "elit, ", "sed ", "eius ", "mod ", "tempor ", "incidunt, ", "ut ", "labore ", "et ", "dolore ", "magna ", "aliqua"};
+		   std::vector<std::string> const text1 = {"dolorem ", "ipsum, ", "quia ", "dolor ", "sit, ", "amet, ", "consectetur, ", "adipisci ", "velit, ", "sed ", "quia non ", "numquam ", "eius ", "modi ", "tempora ", "incidunt, ", "ut ", "labore ", "et ", "dolore ", "magnam ", "aliquam"};
+		   
+		   // Compute the diff
+		   auto diff = hnc::text::diff(text0, text1);
+		   
+		   // Display the diff
+		   hnc::text::display_diff(text0, text1, diff);
+		   // -               | + dolorem 
+		   // + lorem         | - 
+		   // = ipsum,        | = ipsum, 
+		   // -               | + quia 
+		   // = dolor         | = dolor 
+		   // = sit,          | = sit, 
+		   // = amet,         | = amet, 
+		   // = consectetur,  | = consectetur, 
+		   // = adipisci      | = adipisci 
+		   // -               | + velit, 
+		   // + elit,         | - 
+		   // = sed           | = sed 
+		   // -               | + quia non 
+		   // -               | + numquam 
+		   // = eius          | = eius 
+		   // -               | + modi 
+		   // -               | + tempora 
+		   // + mod           | - 
+		   // + tempor        | - 
+		   // = incidunt,     | = incidunt, 
+		   // = ut            | = ut 
+		   // = labore        | = labore 
+		   // = et            | = et 
+		   // = dolore        | = dolore 
+		   // -               | + magnam 
+		   // -               | + aliquam
+		   // + magna         | - 
+		   // + aliqua        | -
+		   @endcode
 		 * 
 		 * @param[in] text0 First text
 		 * @param[in] text1 Second text
@@ -158,8 +166,8 @@ namespace hnc
 			
 			// Read the array
 			{
-				long long int i = array.nb_row() - 1;
-				long long int j = array.nb_col() - 1;
+				std::size_t i = array.nb_row() - 1;
+				std::size_t j = array.nb_col() - 1;
 				
 				while (i != 0 && j != 0)
 				{
@@ -196,6 +204,10 @@ namespace hnc
 		
 		/**
 		 * @brief Display a vector of differences with compared texts
+		 * 
+		 * @code
+		   #include <hnc/text.hpp>
+		   @endcode
 		 * 
 		 * The vector of difference is computed by hnc::text::diff
 		 * 
@@ -301,6 +313,10 @@ namespace hnc
 		
 		/**
 		 * @brief Display a vector of differences with compared texts
+		 * 
+		 * @code
+		   #include <hnc/text.hpp>
+		   @endcode
 		 * 
 		 * The vector of difference is computed by hnc::text::diff
 		 * 

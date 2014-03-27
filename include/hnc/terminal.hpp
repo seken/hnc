@@ -1,4 +1,4 @@
-// Copyright © 2012 Lénaïc Bagnères, hnc@singularity.fr
+// Copyright © 2012, 2014 Lénaïc Bagnères, hnc@singularity.fr
 
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -28,21 +28,42 @@ namespace hnc
 	 * @brief Control the terminal (clear, delete current line, colors)
 	 *
 	 * @code
-	 * #include <hnc/terminal.hpp>
-	 * @endcode
+	   #include <hnc/terminal.hpp>
+	   @endcode
 	 *
 	 * @note bold + color = light color
 	 * @warning hnc::terminal::color::reset, hnc::terminal::background_color::reset and hnc::terminal::bold_end are the same: they reset color and bold text
 	 */
 	namespace terminal
 	{
-		/// String to clear terminal
-		std::string const clear_string = "\033[H\033[2J";
-		/// Clear the terminal
-		void clear() { std::cout << hnc::terminal::clear_string; }
-
-		/// @brief Font color
-		namespace color
+		/**
+		 * @brief Return the string to clear terminal
+		 * 
+		 * @code
+		   #include <hnc/terminal.hpp>
+		   @endcode
+		   
+		   @return the string to clear terminal
+		 */
+		inline std::string clear_string() { return "\033[H\033[2J"; }
+		
+		/**
+		 * @brief Clear the terminal
+		 * 
+		 * @code
+		   #include <hnc/terminal.hpp>
+		   @endcode
+		 */
+		void clear() { std::cout << hnc::terminal::clear_string(); }
+		
+		/**
+		 * @brief Font color
+		 * 
+		 * @code
+		   #include <hnc/terminal.hpp>
+		   @endcode
+		 */
+		namespace color // TODO inline function
 		{
 			std::string const reset         = "\033[0m";  ///< Color by default
 			std::string const black         = "\033[30m"; ///< Color black
@@ -60,9 +81,15 @@ namespace hnc
 			std::string const light_cyan    = "\033[1;36m"; ///< Color light cyan
 			std::string const white         = "\033[37m"; ///< Color white
 		}
-
-		/// @brief Background color
-		namespace background_color
+		
+		/**
+		 * @brief Background color
+		 * 
+		 * @code
+		   #include <hnc/terminal.hpp>
+		   @endcode
+		 */
+		namespace background_color // TODO inline function
 		{
 			std::string const reset   = "\033[0m";  ///< Color by default
 			std::string const black   = "\033[40m"; ///< Color black
@@ -103,10 +130,16 @@ namespace hnc
 
 		/**
 		 * @brief String to erase the end of the current line in terminal
+		 * 
+		 * @code
+		   #include <hnc/terminal.hpp>
+		   @endcode
+		 *
 		 * @param[in] nb_char number of chars to delete (1 char by default)
+		 *
 		 * @return the good chars to delete the line
 		 */
-		std::string back_string(unsigned int const nb_char = 1)
+		inline std::string back_string(unsigned int const nb_char = 1)
 		{
 			// http://www.termsys.demon.co.uk/vtansi.htm
 			// <ESC>[1K - Erases from the current cursor position to the start of the current line
@@ -115,21 +148,33 @@ namespace hnc
 			r += "\033[" + hnc::to_string(nb_char) + "D";
 			return r;
 		}
+		
 		/**
 		 * @brief Erase the end of the current line in the terminal
+		 * 
+		 * @code
+		   #include <hnc/terminal.hpp>
+		   @endcode
+		 *
 		 * @param[in] nb_char number of chars to delete (1 char by default)
 		 */
-		void back(unsigned int const nb_char = 1)
+		inline void back(unsigned int const nb_char = 1)
 		{
 			std::cout << hnc::terminal::back_string(nb_char);
 		}
 
 		/**
 		 * @brief String to erase lines in terminal
+		 * 
+		 * @code
+		   #include <hnc/terminal.hpp>
+		   @endcode
+		 *
 		 * @param[in] nb_line number of lines to delete (1 by default)
+		 * 
 		 * @return the good chars to delete lines
 		 */
-		std::string delete_line_string(unsigned int const nb_line = 1)
+		inline std::string delete_line_string(unsigned int const nb_line = 1)
 		{
 			std::string r = "";
 			// Delete line by line to erase data
@@ -142,11 +187,17 @@ namespace hnc
 			// Return
 			return r;
 		}
+		
 		/**
 		 * @brief Erase lines in the terminal
+		 * 
+		 * @code
+		   #include <hnc/terminal.hpp>
+		   @endcode
+		 *
 		 * @param[in] nb_line number of lines to delete (1 by default)
 		 */
-		void delete_line(unsigned int const nb_line = 1)
+		inline void delete_line(unsigned int const nb_line = 1)
 		{
 			std::cout << hnc::terminal::delete_line_string(nb_line);
 		}

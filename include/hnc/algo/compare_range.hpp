@@ -1,4 +1,4 @@
-// Copyright © 2013 Lénaïc Bagnères, hnc@singularity.fr
+// Copyright © 2013, 2014 Lénaïc Bagnères, hnc@singularity.fr
 
 // This file is part of hnc.
 
@@ -30,14 +30,14 @@ namespace hnc
 		 * @brief Compare two sequences
 		 *
 		 * @code
-		 * #include <hnc/algo.hpp>
-		 * @endcode
+		   #include <hnc/algo.hpp>
+		   @endcode
 		 *
-		 * @param[in] first0 Iterator on first element of the first container
-		 * @param[in] last0  Iterator on last element of the first container (not included)
-		 * @param[in] first1 Iterator on first element of the second container
-		 * @param[in] last1  Iterator on last element (upper bound) of the second container (not included)
-		 * @param[in] comp   Function to compare two elements
+		 * @param[in] first0            Iterator on first element of the first container
+		 * @param[in] last0             Iterator on last element of the first container (not included)
+		 * @param[in] first1            Iterator on first element of the second container
+		 * @param[in] last1_upper_bound Iterator on last element (upper bound) of the second container (not included)
+		 * @param[in] comp              Function to compare two elements
 		 *
 		 * @return true if all comparisons return true, false otherwise
 		 *
@@ -74,13 +74,13 @@ namespace hnc
 		 * @brief Compare (equality with ==) two sequences
 		 *
 		 * @code
-		 * #include <hnc/algo.hpp>
-		 * @endcode
+		   #include <hnc/algo.hpp>
+		   @endcode
 		 *
-		 * @param[in] first0 Iterator on first element of the first container
-		 * @param[in] last0  Iterator on last element of the first container (not included)
-		 * @param[in] first1 Iterator on first element of the second container
-		 * @param[in] last1  Iterator on last element (upper bound) of the second container (not included)
+		 * @param[in] first0            Iterator on first element of the first container
+		 * @param[in] last0             Iterator on last element of the first container (not included)
+		 * @param[in] first1            Iterator on first element of the second container
+		 * @param[in] last1_upper_bound Iterator on last element (upper bound) of the second container (not included)
 		 *
 		 * @return true if all comparisons return true, false otherwise
 		 *

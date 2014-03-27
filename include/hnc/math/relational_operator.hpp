@@ -26,6 +26,10 @@ namespace hnc
 		/**
 		 * @brief Relational operators for equation
 		 * 
+		 * @code
+		   #include <hnc/math.hpp>
+		   @endcode
+		 * 
 		 * @f$==@f$ equal_to @n
 		 * @f$!=@f$ not_equal_to @n
 		 * @f$>@f$ greater_than @n

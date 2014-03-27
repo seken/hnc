@@ -381,6 +381,26 @@ int main()
 
 	std::cout << std::endl;
 
+	// Tmp filename & remove
+
+	for (unsigned int i = 0; i < 10; ++i)
+	{
+		nb_test += 2;
+		std::string const r = hnc::filesystem::tmp_filename();
+		std::cout << "Tmp filename = \"" << r << "\"" << std::endl;
+		{
+			std::fstream f(r);
+			nb_test -= hnc::test::warning(f.is_open() == true, "hnc::filesystem::tmp_filename fails\n");
+		}
+		hnc::filesystem::remove(r);
+		{
+			std::fstream f(r);
+			nb_test -= hnc::test::warning(f.is_open() == false, "hnc::filesystem::remove fails\n");
+		}
+	}
+
+	std::cout << std::endl;
+
 	// read_file
 
 	++nb_test;
@@ -427,26 +447,6 @@ int main()
 		// Remove
 		hnc::filesystem::remove(src_filename);
 		hnc::filesystem::remove(dest_filename);
-	}
-
-	std::cout << std::endl;
-
-	// Tmp filename & remove
-
-	for (unsigned int i = 0; i < 10; ++i)
-	{
-		nb_test += 2;
-		std::string const r = hnc::filesystem::tmp_filename();
-		std::cout << "Tmp filename = \"" << r << "\"" << std::endl;
-		{
-			std::fstream f(r);
-			nb_test -= hnc::test::warning(f.is_open() == true, "hnc::filesystem::tmp_filename fails\n");
-		}
-		hnc::filesystem::remove(r);
-		{
-			std::fstream f(r);
-			nb_test -= hnc::test::warning(f.is_open() == false, "hnc::filesystem::remove fails\n");
-		}
 	}
 
 	std::cout << std::endl;

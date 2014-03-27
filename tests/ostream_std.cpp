@@ -29,7 +29,7 @@ int main()
 
 	{
 		std::vector<int> c(10);
-		for (std::size_t i = 0; i < c.size(); ++i) { c[i] = i * 10; }
+		for (std::size_t i = 0; i < c.size(); ++i) { c[i] = int(i) * 10; }
 		std::cout << "Display a vector of int" << std::endl;
 		std::cout << c << std::endl;
 	}
@@ -47,7 +47,7 @@ int main()
 		for (std::size_t i = 0; i < c.size(); ++i)
 		{
 			for (std::size_t j = 0; j < c[i].size(); ++j)
-			{ c[i][j] = (i + j) * 10; }
+			{ c[i][j] = int(i + j) * 10; }
 		}
 		std::cout << "Display a vector of vector of int" << std::endl;
 		std::cout << c << std::endl;
@@ -59,7 +59,7 @@ int main()
 		for (std::size_t i = 0; i < c.size(); ++i)
 		{
 			for (std::size_t j = 0; j < c[i].size(); ++j)
-			{ c[i][j] = (i + j) * 10; }
+			{ c[i][j] = int(i + j) * 10; }
 		}
 		std::cout << "Display a tuple" << std::endl;
 		std::cout << std::make_tuple("One tuple of", 3, "elements") << std::endl;

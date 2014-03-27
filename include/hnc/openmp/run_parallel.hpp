@@ -1,4 +1,4 @@
-// Copyright © 2012 Lénaïc Bagnères, hnc@singularity.fr
+// Copyright © 2012, 2014 Lénaïc Bagnères, hnc@singularity.fr
 
 // This file is part of hnc.
 
@@ -34,13 +34,13 @@ namespace hnc
 		 * @brief Run tasks with OpenMP
 		 *
 		 * @code
-		 * #include <hnc/openmp.hpp>
-		 * @endcode
+		   #include <hnc/openmp.hpp>
+		   @endcode
 		 *
 		 * OpenMP works with preprocessor, so hnc::openmp::run_parallel is writen for 1, 2, 3, 4, ... functions as parameters (if not, please write the good function and send it to me(!))
 		 * @code
-		 * hnc::openmp::run_parallel(f0, f1, f2); //, f3, fx, ...
-		 * @endcode
+		   hnc::openmp::run_parallel(f0, f1, f2); //, f3, fx, ...
+		   @endcode
 		 *
 		 * @param[in,out] f0 Task (a function without parameter)
 		 * @param[in,out] f1 Another task (a function without parameter)

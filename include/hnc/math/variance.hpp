@@ -1,4 +1,4 @@
-// Copyright © 2012 Lénaïc Bagnères, hnc@singularity.fr
+// Copyright © 2012, 2014 Lénaïc Bagnères, hnc@singularity.fr
 
 // This file is part of hnc.
 
@@ -32,8 +32,8 @@ namespace hnc
 		 * @brief Compute variance between two iterators
 		 *
 		 * @code
-		 * #include <hnc/math.hpp>
-		 * @endcode
+		   #include <hnc/math.hpp>
+		   @endcode
 		 * 
 		 * @f$ \text{variance}(X) = \mathbb{E}[(X - \mathbb{E}(X))^2] @f$ @n
 		 * with @f$ \mathbb{E} @f$ the expected value, the mean is this case @n
@@ -61,7 +61,7 @@ namespace hnc
 				return_t tmp = return_t(*it) - mean; // tmp = X - E(X)
 				variance += tmp * tmp;
 			}
-			variance /= std::distance(begin, end);
+			variance /= return_t(std::distance(begin, end));
 			return variance;
 		}
 
@@ -69,8 +69,8 @@ namespace hnc
 		 * @brief Compute variance of a container
 		 *
 		 * @code
-		 * #include <hnc/math.hpp>
-		 * @endcode
+		   #include <hnc/math.hpp>
+		   @endcode
 		 * 
 		 * Variance of a container like std::vector, std::list @n
 		 * @f$ \text{variance}(X) = \mathbb{E}[(X - \mathbb{E}(X))^2] @f$ @n

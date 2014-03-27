@@ -1,4 +1,4 @@
-// Copyright © 2013 Inria, Written by Lénaïc Bagnères, lenaic.bagneres@inria.fr
+// Copyright © 2013, 2014 Inria, Written by Lénaïc Bagnères, lenaic.bagneres@inria.fr
 
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -29,6 +29,10 @@ namespace hnc
 	/**
 	 * @brief Minimal encapsulation of OpenSSL library
 	 *
+	 * @code
+	   #include <hnc/ssl.hpp>
+	   @endcode
+	 *
 	 * @b From @b Wikipedia http://en.wikipedia.org/wiki/OpenSSL
 	 * OpenSSL is an open-source implementation of the SSL and TLS protocols. The core library, written in the C programming language, implements the basic cryptographic functions and provides various utility functions. Wrappers allowing the use of the OpenSSL library in a variety of computer languages are available.
 	 * Versions are available for most Unix-like operating systems (including Solaris, Linux, Mac OS X and the various open source BSD operating systems), OpenVMS and Microsoft Windows
@@ -46,34 +50,34 @@ namespace hnc
 	 * To use hnc::ssl, you need OpenSSL @n
 	 * You can add this in your CMakeLists.txt
 	 * @code
-	 * find_package(OpenSSL REQUIRED)
-	 * if (OPENSSL_FOUND)
-	 * 	message(STATUS "OpenSSL found :) ${OPENSSL_LIBRARIES}")
-	 * else()
-	 * 	message(STATUS "OpenSSL not found :(")
-	 * endif()
-	 *
-	 * # ...
-	 *
-	 * # Create the executable
-	 * add_executable(your_exe your_exe.cpp)
-	 * target_link_libraries(your_exe ${OPENSSL_LIBRARIES})
-	 * @endcode
+	   find_package(OpenSSL REQUIRED)
+	   if (OPENSSL_FOUND)
+	   	message(STATUS "OpenSSL found :) ${OPENSSL_LIBRARIES}")
+	   else()
+	   	message(STATUS "OpenSSL not found :(")
+	   endif()
+	  
+	   # ...
+	  
+	   # Create the executable
+	   add_executable(your_exe your_exe.cpp)
+	   target_link_libraries(your_exe ${OPENSSL_LIBRARIES})
+	   @endcode
 	 *
 	 * For quick test, if you use GCC from the command line and Boost is installed, you can link directly with:
 	 * @code
-	 * -lssl -lcrypto
-	 * @endcode
+	   -lssl -lcrypto
+	   @endcode
 	 *
 	 * On Debian GNU/Linux distribution you can install the package:
 	 * @code
-	 * libssl-dev
-	 * @endcode
+	   libssl-dev
+	   @endcode
 	 *
 	 * If you want compile without OpenSSL, you can define the macro
 	 * @code
-	 * #define NO_HNC_SSL
-	 * @endcode
+	   #define NO_HNC_SSL
+	   @endcode
 	 */
 	namespace ssl
 	{
@@ -81,6 +85,10 @@ namespace hnc
 
 		/**
 		 * @brief Ciphers (AES, Blowfish, Camellia, SEED, CAST-128, DES, IDEA, RC2, RC4, RC5, Triple DES, GOST 28147-89)
+		 * 
+		 * @code
+		   #include <hnc/ssl.hpp>
+		   @endcode
 		 */
 		namespace cipher
 		{
@@ -89,6 +97,10 @@ namespace hnc
 
 		/**
 		 * @brief Cryptographic hash functions (MD5, MD2, SHA-1, SHA-2, RIPEMD-160, MDC-2, GOST R 34.11-94)
+		 * 
+		 * @code
+		   #include <hnc/ssl.hpp>
+		   @endcode
 		 */
 		namespace hash
 		{
@@ -97,6 +109,10 @@ namespace hnc
 
 		/**
 		 * @brief Public-key cryptography (RSA, DSA, Diffie–Hellman key exchange, Elliptic curve, GOST R 34.10-2001)
+		 * 
+		 * @code
+		   #include <hnc/ssl.hpp>
+		   @endcode
 		 */
 		namespace public_key
 		{

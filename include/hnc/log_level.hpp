@@ -1,4 +1,4 @@
-// Copyright © 2012 Lénaïc Bagnères, hnc@singularity.fr
+// Copyright © 2012, 2014 Lénaïc Bagnères, hnc@singularity.fr
 
 // This file is part of hnc.
 
@@ -38,8 +38,8 @@ namespace hnc
 	 * @brief Do output if log level <= log level max
 	 *
 	 * @code
-	 * #include <hnc/log_level.hpp>
-	 * @endcode
+	   #include <hnc/log_level.hpp>
+	   @endcode
 	 * 
 	 * How it works?
 	 *
@@ -51,9 +51,9 @@ namespace hnc
 	 *
 	 * An example:
 	 * @code
-	 * hnc::out(0, 0) << "Output" << std::endl;
-	 * hnc::out(0, 1) << "No output" << std::endl;
-	 * @endcode
+	   hnc::out(0, 0) << "Output" << std::endl;
+	   hnc::out(0, 1) << "No output" << std::endl;
+	   @endcode
 	 *
 	 * @param[in]  log_level_max Log level max
 	 * @param[in]  log_level     Data's log level

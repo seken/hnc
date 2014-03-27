@@ -1,4 +1,4 @@
-// Copyright © 2013 Lénaïc Bagnères, hnc@singularity.fr
+// Copyright © 2013, 2014 Lénaïc Bagnères, hnc@singularity.fr
 
 // This file is part of hnc.
 
@@ -15,11 +15,6 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with hnc. If not, see <http://www.gnu.org/licenses/>
 
-
-/**
- * @file
- * @brief Just for operator<<(std::ostream & o, hnc::algo::genetic_algo::solution_grade<solution_t, grade_t> const & solution)
- */
 
 #ifndef HNC_ALGO_GENETIC_ALGO_HPP
 #define HNC_ALGO_GENETIC_ALGO_HPP
@@ -39,7 +34,13 @@ namespace hnc
 {
 	namespace algo
 	{
-		/// Genetic algorithm namespace
+		/**
+		 * @brief Genetic algorithm namespace
+		 * 
+		 * @code
+		   #include <hnc/algo.hpp>
+		   @endcode
+		 */
 		namespace genetic_algo
 		{
 			/// Typedef for archipelago
@@ -63,39 +64,46 @@ namespace hnc
 					/// Grade
 					grade_t grade;
 
-					/**
-					 * @brief Constructor
-					 * @param solution The solution
-					 * @param grade The grade
-					 */
+					/// @brief Constructor
+					/// @param solution The solution
+					/// @param grade The grade
 					solution_grade(solution_t const & solution = solution_t(), grade_t const & grade = grade_t()) :
 						solution(solution), grade(grade)
 					{ }
 
-					/**
-					 * @brief To sort solutions
-					 * @param solution_grade An other solution
-					 * @return true if my solution's grade >= solution's grade
-					 */
+					/// @brief To sort solutions
+					/// @param[in] solution An other solution
+					/// @return true if my solution's grade >= solution's grade
 					bool operator<(solution_grade const & solution) const
 					{
 						return (solution.grade < grade);
 					}
 			};
-
-			/// @brief Return std::chrono::system_clock::now().time_since_epoch().count() as a unsigned int
-			/// @return std::chrono::system_clock::now().time_since_epoch().count() as a unsigned int
-			unsigned int system_clock_now() { return std::chrono::system_clock::now().time_since_epoch().count(); }
+			
+			/// @brief Operator << between a std::ostream and a hnc::algo::genetic_algo::solution_grade<solution_t, grade_t>
+			/// @param[in,out] o        Output stream
+			/// @param[in]     solution A hnc::algo::genetic_algo::solution_grade<solution_t, grade_t>
+			/// @return the output stream
+			template <class solution_t, class grade_t>
+			std::ostream & operator<<(std::ostream & o, hnc::algo::genetic_algo::solution_grade<solution_t, grade_t> const & solution)
+			{
+				o << "(" << solution.solution << ", " << solution.grade << ")";
+				return o;
+			}
+			
+			/// @brief Return std::chrono::steady_clock::now().time_since_epoch().count() as a unsigned int
+			/// @return std::chrono::steady_clock::now().time_since_epoch().count() as a unsigned int
+			unsigned int steady_clock_now() { return static_cast<unsigned int>(std::chrono::steady_clock::now().time_since_epoch().count()); }
 
 			/// Log levels
 			enum log_level_t {no_log, minimal_log, minimal_plus_log, archipelago_log, island_log, solution_grade_log};
 
 			/**
-			 * Genetic algorithm
+			 * @brief Genetic algorithm
 			 *
 			 * @code
-			 * #include <hnc/algo.hpp>
-			 * @endcode
+			   #include <hnc/algo.hpp>
+			   @endcode
 			 * 
 			 * TODO
 			 */
@@ -118,7 +126,7 @@ namespace hnc
 				std::vector<archipelago<island<solution_grade<solution_t, grade_t>>>> m_solutions_grades;
 
 				/// Distibution to choose if we do a crossover and a mutation
-				std::uniform_real_distribution<float> m_random_float;
+				std::uniform_real_distribution<double> m_random_double;
 
 				/// Distibution to choose a solution form an island
 				std::vector<archipelago<random_distribution_t>> m_random_solution_index;
@@ -127,16 +135,16 @@ namespace hnc
 				std::vector<random_engine_t> m_random_engines;
 
 				/// Number of generations
-				int m_number_of_generation;
+				unsigned int m_number_of_generation;
 
 				/// Number of generations max
-				int const m_number_of_generation_max;
+				unsigned int const m_number_of_generation_max;
 
 				/// Probability have a crossover
-				float const m_crossover_probability;
+				double const m_crossover_probability;
 
 				/// Probability have a mutation
-				float const m_mutation_probability;
+				double const m_mutation_probability;
 
 				/// Number of generations to do between a island migration
 				unsigned int const m_nb_generation_between_island_migration;
@@ -173,33 +181,31 @@ namespace hnc
 
 			public:
 
-				/**
-				 * @brief Constructor
-				 * @param[in] evolve_functions                            Class contains generate_solution, evaluate_solution, crossover, mutation and stop fonctions
-				 * @param[in] nb_archipelago                              Number of archipelagos
-				 * @param[in] nb_island_per_archipelago                   Number of islands per archipelago
-				 * @param[in] nb_solution_per_island                      Number of solutions per island
-				 * @param[in] number_of_generation                        Number of max generations (-1 if no stop with the number of generations)
-				 * @param[in] crossover_probability                       Probability a solution have to do a crossover
-				 * @param[in] mutation_probability                        Probability a solution have to do a mutation
-				 * @param[in] nb_migration_per_island                     Number of solutions migrate during the migration between islands
-				 * @param[in] nb_migration_per_archipelago                Number of solutions migrate during the migration between archipelagos
-				 * @param[in] nb_generation_between_island_migration      Number of generations between two migration between islands
-				 * @param[in] nb_generation_between_archipelago_migration Number of generations between two migration between archipelagos
-				 * @param[in] nb_same_solution_max                        Number of time the best solution can be the same (-1 if no stop)
-				 * @param[in] max_time                                    After this time (in seconds), genetic algorithm stops (0. if no stop)
-				 * @param[in] log_level                                   Log level (no_log, minimal_log, minimal_plus_log, archipelago_log, island_log, solution_grade_log)
-				 * @param[in] nb_generation_between_copy_best_solution    Number of generation between copy best solution for external acces during computing (-1 if no copy)
-				 * @param[in] generate_seed                               Function to generate seed
-				 */
+				/// @brief Constructor
+				/// @param[in] evolve_functions                            Class contains generate_solution, evaluate_solution, crossover, mutation and stop fonctions
+				/// @param[in] nb_archipelago                              Number of archipelagos
+				/// @param[in] nb_island_per_archipelago                   Number of islands per archipelago
+				/// @param[in] nb_solution_per_island                      Number of solutions per island
+				/// @param[in] number_of_generation                        Number of max generations (0 if no stop with the number of generations)
+				/// @param[in] crossover_probability                       Probability a solution have to do a crossover
+				/// @param[in] mutation_probability                        Probability a solution have to do a mutation
+				/// @param[in] nb_migration_per_island                     Number of solutions migrate during the migration between islands
+				/// @param[in] nb_migration_per_archipelago                Number of solutions migrate during the migration between archipelagos
+				/// @param[in] nb_generation_between_island_migration      Number of generations between two migration between islands
+				/// @param[in] nb_generation_between_archipelago_migration Number of generations between two migration between archipelagos
+				/// @param[in] nb_same_solution_max                        Number of time the best solution can be the same (-1 if no stop)
+				/// @param[in] max_time                                    After this time (in seconds), genetic algorithm stops (0. if no stop)
+				/// @param[in] log_level                                   Log level (no_log, minimal_log, minimal_plus_log, archipelago_log, island_log, solution_grade_log)
+				/// @param[in] nb_generation_between_copy_best_solution    Number of generation between copy best solution for external acces during computing (-1 if no copy)
+				/// @param[in] generate_seed                               Function to generate seed
 				genetic_algo(
 					T & evolve_functions,
 					std::size_t const nb_archipelago,
 					std::size_t const nb_island_per_archipelago,
 					std::size_t const nb_solution_per_island,
-					int const number_of_generation = 100,
-					float const crossover_probability = 0.7,
-					float const mutation_probability = 0.01,
+					unsigned int const number_of_generation = 100,
+					double const crossover_probability = 0.7,
+					double const mutation_probability = 0.01,
 					std::size_t const nb_migration_per_island = 3,
 					std::size_t const nb_migration_per_archipelago = 2,
 					unsigned int const nb_generation_between_island_migration = 5,
@@ -208,11 +214,11 @@ namespace hnc
 					std::chrono::duration<double> const max_time = std::chrono::duration<double>(0.),
 					log_level_t const log_level = no_log,
 					unsigned int const nb_generation_between_copy_best_solution = 1,
-					std::function<unsigned int ()> const & generate_seed = system_clock_now
+					std::function<unsigned int ()> const & generate_seed = steady_clock_now
 				) :
 					m_evolve_functions(evolve_functions),
 					m_solutions_grades(nb_archipelago, archipelago<island<solution_grade<solution_t, grade_t>>>(nb_island_per_archipelago, island<solution_grade<solution_t, grade_t>>(nb_solution_per_island))),
-					m_random_float(0., 1.),
+					m_random_double(0., 1.),
 					m_random_solution_index(nb_archipelago, archipelago<random_distribution_t>(nb_island_per_archipelago)),
 					m_random_engines(1, random_engine_t(generate_seed())),
 					m_number_of_generation(1),
@@ -269,7 +275,7 @@ namespace hnc
 					}
 				}
 
-				/// Solve the problem
+				/// @brief Solve the problem
 				void evolve()
 				{
 					hnc::out(m_log_level, minimal_log) << "Evolve genetic algorithm" << std::endl;
@@ -286,7 +292,7 @@ namespace hnc
 					while
 					(
 						// Number of generations
-						(m_number_of_generation_max <= -1 || m_number_of_generation <= m_number_of_generation_max) &&
+						(m_number_of_generation_max == 0 || m_number_of_generation <= m_number_of_generation_max) &&
 						// Time
 						(m_max_time <= std::chrono::duration<double>(0.) || m_max_time >= m_time_elapsed) &&
 						// The best solution is the same
@@ -352,19 +358,19 @@ namespace hnc
 
 				/// @brief Return the number of generations
 				/// @return the number of generations
-				int number_of_generation() const { return m_number_of_generation; }
+				unsigned int number_of_generation() const { return m_number_of_generation; }
 
 				/// @brief Return the number of generations max
 				/// @return the nNumber of generations max
-				int number_of_generation_max() const { return m_number_of_generation_max; }
+				unsigned int number_of_generation_max() const { return m_number_of_generation_max; }
 
 				/// @brief Return the probability have a crossover
 				/// @return the probability have a crossover
-				float crossover_probability() const { return m_crossover_probability; }
+				double crossover_probability() const { return m_crossover_probability; }
 
 				/// @brief Return the probability have a mutation
 				/// @return the probability have a mutation
-				float mutation_probability() const { return m_mutation_probability; }
+				double mutation_probability() const { return m_mutation_probability; }
 
 				/// @brief Return the number of generations to do between a island migration
 				/// @return the number of generations to do between a island migration
@@ -396,7 +402,7 @@ namespace hnc
 
 			private:
 
-				/// Crossover & mutation
+				/// @brief Crossover & mutation
 				void crossover_and_mutation()
 				{
 					hnc::out(m_log_level, minimal_plus_log) << "  " << "+ Crossover & mutation" << std::endl;
@@ -417,7 +423,7 @@ namespace hnc
 							// To stock new generation
 							hnc::algo::genetic_algo::island<solution_grade<solution_t, grade_t>> new_generation;
 							// We can estimate the size with crossover and mutation probabilities
-							new_generation.reserve((m_crossover_probability + m_mutation_probability + 0.1) * m_solutions_grades[archipelago][island].size());
+							new_generation.reserve(std::size_t((m_crossover_probability + m_mutation_probability + 0.1) * m_solutions_grades[archipelago][island].size()));
 
 							std::size_t nb_solution = m_solutions_grades[archipelago][island].size();
 
@@ -425,7 +431,7 @@ namespace hnc
 							for (auto & solution : m_solutions_grades[archipelago][island])
 							{
 								// Do a crossover ?
-								if (m_random_float(m_random_engines[0]) <= m_crossover_probability)
+								if (m_random_double(m_random_engines[0]) <= m_crossover_probability)
 								{
 									auto const & random_solution = m_solutions_grades[archipelago][island][random_solution_index(m_random_engines[0])];
 									if (solution.solution != random_solution.solution)
@@ -438,7 +444,7 @@ namespace hnc
 								}
 
 								// Do a mutation ?
-								if (m_random_float(m_random_engines[0]) <= m_mutation_probability)
+								if (m_random_double(m_random_engines[0]) <= m_mutation_probability)
 								{
 									auto new_solution = m_evolve_functions.mutation(solution.solution, m_random_engines[0]);
 									new_generation.push_back(solution_grade<solution_t, grade_t>(new_solution, m_evolve_functions.evaluate_solution(new_solution)));
@@ -468,7 +474,7 @@ namespace hnc
 					}
 				}
 
-				/// Migration between islands
+				/// @brief Migration between islands
 				void migration_between_islands()
 				{
 					hnc::out(m_log_level, minimal_plus_log) << "  " << "+ Migration between islands" << std::endl;
@@ -496,7 +502,7 @@ namespace hnc
 					}
 				}
 
-				/// Migration between archipelagos
+				/// @brief Migration between archipelagos
 				void migration_between_archipelagos()
 				{
 					hnc::out(m_log_level, minimal_plus_log) << "  " << "+ Migration between archipelagos" << std::endl;
@@ -543,20 +549,6 @@ namespace hnc
 			};
 		}
 	}
-}
-
-
-/**
- * Display a hnc::algo::genetic_algo::solution_grade<solution_t, grade_t>
- * @param o        Out stream
- * @param solution A solution
- * @return the out stream
- */
-template <class solution_t, class grade_t>
-std::ostream & operator<<(std::ostream & o, hnc::algo::genetic_algo::solution_grade<solution_t, grade_t> const & solution)
-{
-	o << "(" << solution.solution << ", " << solution.grade << ")";
-	return o;
 }
 
 #endif

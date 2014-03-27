@@ -1,4 +1,4 @@
-// Copyright © 2013 Lénaïc Bagnères, hnc@singularity.fr
+// Copyright © 2013, 2014 Lénaïc Bagnères, hnc@singularity.fr
 
 // This file is part of hnc.
 
@@ -29,8 +29,8 @@ namespace hnc
 	 * @brief MPI (Message Passing Interface) functions
 	 *
 	 * @code
-	 * #include <hnc/mpi.hpp>
-	 * @endcode
+	   #include <hnc/mpi.hpp>
+	   @endcode
 	 *
 	 * With MPI you can write distributed program to:
 	 * - increase performances
@@ -42,57 +42,57 @@ namespace hnc
 	 * To use MPI code, you need Boost.MPI and Boost.Serialization @n
 	 * You can add this in your CMakeLists.txt
 	 * @code
-	 * find_package(Boost COMPONENTS mpi serialization)
-	 * if (Boost_FOUND)
-	 * 	# Boost.MPI and Boost.Serialization
-	 * 	set(boost_mpi_serialization "${Boost_LIBRARIES}")
-	 * 	message(STATUS "Boost.MPI and Boost.Serialization found :) ${boost_mpi_serialization}")
-	 * 	# MPI compiler
-	 * 	find_program(MPICXX_COMPILER NAMES mpic++ mpicxx mpiCC mpicc)
-	 * 	if (MPICXX_COMPILER)
-	 * 		# Change the compiler
-	 * 		message(STATUS "MPI C++ compiler found = ${MPICXX_COMPILER}")
-	 * 		set(CMAKE_CXX_COMPILER ${MPICXX_COMPILER})
-	 * 	else()
-	 * 		message(STATUS "MPI C++ compiler not found :(")
-	 * 	endif()
-	 * 	# MPI run
-	 * 	find_program(MPIRUN_EXE NAMES mpirun)
-	 * 	if (MPIRUN_EXE)
-	 * 		message(STATUS "mpirun executable found = ${MPIRUN_EXE}")
-	 * 	else()
-	 * 		message(STATUS "mpirun executable not found :(")
-	 * 	endif()
-	 * else()
-	 * 	message(STATUS "Boost.MPI and Boost.Serialization not found :(")
-	 * endif()
-	 * 
-	 * # ...
-	 *
-	 * # Create the executable
-	 * add_executable(your_exe your_exe.cpp)
-	 * target_link_libraries(your_exe ${boost_mpi_serialization})
-	 * @endcode
+	   find_package(Boost COMPONENTS mpi serialization)
+	   if (Boost_FOUND)
+	   	# Boost.MPI and Boost.Serialization
+	   	set(boost_mpi_serialization "${Boost_LIBRARIES}")
+	   	message(STATUS "Boost.MPI and Boost.Serialization found :) ${boost_mpi_serialization}")
+	   	# MPI compiler
+	   	find_program(MPICXX_COMPILER NAMES mpic++ mpicxx mpiCC mpicc)
+	   	if (MPICXX_COMPILER)
+	   		# Change the compiler
+	   		message(STATUS "MPI C++ compiler found = ${MPICXX_COMPILER}")
+	   		set(CMAKE_CXX_COMPILER ${MPICXX_COMPILER})
+	   	else()
+	   		message(STATUS "MPI C++ compiler not found :(")
+	   	endif()
+	   	# MPI run
+	   	find_program(MPIRUN_EXE NAMES mpirun)
+	   	if (MPIRUN_EXE)
+	   		message(STATUS "mpirun executable found = ${MPIRUN_EXE}")
+	   	else()
+	   		message(STATUS "mpirun executable not found :(")
+	   	endif()
+	   else()
+	   	message(STATUS "Boost.MPI and Boost.Serialization not found :(")
+	   endif()
+	   
+	   # ...
+	  
+	   # Create the executable
+	   add_executable(your_exe your_exe.cpp)
+	   target_link_libraries(your_exe ${boost_mpi_serialization})
+	   @endcode
 	 * 
 	 * For quick test, if you use GCC from the command line and Boost is installed, you can link directly with:
 	 * @code
-	 * -lboost_mpi -lboost_serialization
-	 * @endcode
+	   -lboost_mpi -lboost_serialization
+	   @endcode
 	 *
 	 * On Debian GNU/Linux distribution you can install the packages:
 	 * @code
-	 * openmpi-bin openmpi-dev libboost-serialization-dev libboost-mpi-dev
-	 * @endcode
+	   openmpi-bin openmpi-dev libboost-serialization-dev libboost-mpi-dev
+	   @endcode
 	 *
 	 * To run a program with MPI, run your program with:
 	 * @code
-	 * mpirun -np number_of_processors your_exe
-	 * @endcode
+	   mpirun -np number_of_processors your_exe
+	   @endcode
 	 * 
 	 * If you want compile without Boost.MPI, you can define the macro
 	 * @code
-	 * #define NO_HNC_Boost_MPI
-	 * @endcode
+	   #define NO_HNC_Boost_MPI
+	   @endcode
 	 */
 	namespace mpi
 	{

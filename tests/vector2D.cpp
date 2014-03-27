@@ -33,7 +33,7 @@ int main()
 		{
 			for (std::size_t col = 0; col < ref.nb_col(); ++col)
 			{
-				ref(row, col) = i++;
+				ref(row, col) = int(i++);
 			}
 		}
 	}
@@ -1015,8 +1015,8 @@ int main()
 			{
 				for (int col = int(v.nb_col() - 1); col > 0; --col)
 				{
-					v(row, col) = ++i;
-					std::cout << v(row, col) << " ";
+					v(std::size_t(row), std::size_t(col)) = (unsigned int)(++i);
+					std::cout << v(std::size_t(row), std::size_t(col)) << " ";
 				}
 			}
 			std::cout << std::endl;
@@ -1060,9 +1060,9 @@ int main()
 			{
 				for (int col = int(v.nb_col() - 1); col > 0; --col)
 				{
-					std::cout << v(row, col) << " ";
+					std::cout << v(std::size_t(row), std::size_t(col)) << " ";
 					++nb_test;
-					nb_test -= hnc::test::warning(v(row, col) == ++i, "read access for range loop fail\n");
+					nb_test -= hnc::test::warning(v(std::size_t(row), std::size_t(col)) == ++i, "read access for range loop fail\n");
 				}
 			}
 			std::cout << std::endl;

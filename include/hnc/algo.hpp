@@ -1,4 +1,4 @@
-// Copyright © 2013 Lénaïc Bagnères, hnc@singularity.fr
+// Copyright © 2013, 2014 Lénaïc Bagnères, hnc@singularity.fr
 
 // This file is part of hnc.
 
@@ -20,22 +20,29 @@
 #define HNC_ALGO_HPP
 
 
-#include "algo/sum.hpp"
-
-#include "algo/split.hpp"
+#include "algo/compare_range.hpp"
+#include "algo/find_range.hpp"
 
 #include "algo/genetic_algo.hpp"
 
-#include "algo/compare_range.hpp"
-#include "algo/find_range.hpp"
 #include "algo/replace_range.hpp"
 #include "algo/replace.hpp"
 #include "algo/replace_all.hpp"
 
+#include "algo/split.hpp"
+
+#include "algo/sum.hpp"
+
 
 namespace hnc
 {
-	/// @brief Generic algorithms
+	/**
+	 * @brief Generic algorithms
+	 * 
+	 * @code
+	   #include <hnc/algo.hpp>
+	   @endcode
+	 */
 	namespace algo
 	{
 		// For Doxygen only

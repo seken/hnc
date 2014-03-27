@@ -1,4 +1,4 @@
-// Copyright © 2013 Lénaïc Bagnères, hnc@singularity.fr
+// Copyright © 2013, 2014 Lénaïc Bagnères, hnc@singularity.fr
 
 // This file is part of hnc.
 
@@ -15,11 +15,6 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with hnc. If not, see <http://www.gnu.org/licenses/>
 
-
-/**
- * @file
- * @brief Just for std::ostream & operator<<(std::ostream & o, hnc::gnuplot::x_range const & x_range) and y_range
- */
 
 #ifndef HNC_GNUPLOT_X_RANGE_HPP
 #define HNC_GNUPLOT_X_RANGE_HPP
@@ -38,8 +33,8 @@ namespace hnc
 		 * @brief Synxtax for xrange (and yrange, zrange, x2range, y2range, cbrange, rrange, trange, urange, vrrange)
 		 * 
 		 * @code
-		 * #include <hnc/gnuplot.hpp>
-		 * @endcode
+		   #include <hnc/gnuplot.hpp>
+		   @endcode
 		 * 
 		 * @b From http://gnuplot.sourceforge.net/docs_4.2/node294.html
 		 * - In 2-d, xrange and yrange determine the extent of the axes, trange determines the range of the parametric variable in parametric mode or the range of the angle in polar mode. Similarly in parametric 3-d, xrange, yrange, and zrange govern the axes and urange and vrange govern the parametric variables
@@ -63,21 +58,17 @@ namespace hnc
 
 		public:
 
-			/**
-			 * @brief Constructor
-			 * @param[in] axis_name Name of the axis (x, y, z, x2, y2, cb, r, t, u, vr)
-			 */
+			/// @brief Constructor
+			/// @param[in] axis_name Name of the axis (x, y, z, x2, y2, cb, r, t, u, vr)
 			axis_range(std::string const & axis_name) : m_axis_name(axis_name) { }
 
-			/// Destructor
+			/// @brief Destructor
 			virtual ~axis_range() = 0;
 
-			/**
-			 * @brief Set the range
-			 * @param[in] min Minimum value
-			 * @param[in] max Maximum value
-			 * @return the axis_range
-			 */
+			/// @brief Set the range
+			/// @param[in] min Minimum value
+			/// @param[in] max Maximum value
+			/// @return the axis_range
 			axis_range & range(double const min, double const max)
 			{
 				m_range = "set " + m_axis_name + "range [" + hnc::to_string(min) + ":" + hnc::to_string(max) + "] ";
@@ -129,15 +120,25 @@ namespace hnc
 				return m_range + m_reverse + m_writeback + "\n";
 			}
 		};
-
+		
 		inline hnc::gnuplot::axis_range::~axis_range() { }
-
+		
+		/// @brief Operator << between a std::ostream and a hnc::gnuplot::axis_range
+		/// @param[in,out] o          Output stream
+		/// @param[in]     axis_range A hnc::gnuplot::axis_range
+		/// @return the output stream
+		inline std::ostream & operator<<(std::ostream & o, hnc::gnuplot::axis_range const & axis_range)
+		{
+			o << axis_range.to_string();
+			return o;
+		}
+		
 		/**
 		 * @brief Synxtax for xrange
 		 * 
 		 * @code
-		 * #include <hnc/gnuplot.hpp>
-		 * @endcode
+		   #include <hnc/gnuplot.hpp>
+		   @endcode
 		 *
 		 * http://gnuplot.sourceforge.net/docs_4.2/node294.html
 		 */
@@ -153,8 +154,8 @@ namespace hnc
 		 * @brief Synxtax for yrange
 		 *
 		 * @code
-		 * #include <hnc/gnuplot.hpp>
-		 * @endcode
+		   #include <hnc/gnuplot.hpp>
+		   @endcode
 		 *
 		 * http://gnuplot.sourceforge.net/docs_4.2/node294.html
 		 */
@@ -170,8 +171,8 @@ namespace hnc
 		 * @brief Synxtax for zrange
 		 *
 		 * @code
-		 * #include <hnc/gnuplot.hpp>
-		 * @endcode
+		   #include <hnc/gnuplot.hpp>
+		   @endcode
 		 *
 		 * http://gnuplot.sourceforge.net/docs_4.2/node294.html
 		 */
@@ -187,8 +188,8 @@ namespace hnc
 		 * @brief Synxtax for x2range
 		 *
 		 * @code
-		 * #include <hnc/gnuplot.hpp>
-		 * @endcode
+		   #include <hnc/gnuplot.hpp>
+		   @endcode
 		 *
 		 * http://gnuplot.sourceforge.net/docs_4.2/node294.html
 		 */
@@ -204,8 +205,8 @@ namespace hnc
 		 * @brief Synxtax for y2range
 		 *
 		 * @code
-		 * #include <hnc/gnuplot.hpp>
-		 * @endcode
+		   #include <hnc/gnuplot.hpp>
+		   @endcode
 		 *
 		 * http://gnuplot.sourceforge.net/docs_4.2/node294.html
 		 */
@@ -221,8 +222,8 @@ namespace hnc
 		 * @brief Synxtax for cbrange
 		 *
 		 * @code
-		 * #include <hnc/gnuplot.hpp>
-		 * @endcode
+		   #include <hnc/gnuplot.hpp>
+		   @endcode
 		 *
 		 * http://gnuplot.sourceforge.net/docs_4.2/node294.html
 		 */
@@ -238,8 +239,8 @@ namespace hnc
 		 * @brief Synxtax for rrange
 		 *
 		 * @code
-		 * #include <hnc/gnuplot.hpp>
-		 * @endcode
+		   #include <hnc/gnuplot.hpp>
+		   @endcode
 		 *
 		 * http://gnuplot.sourceforge.net/docs_4.2/node294.html
 		 */
@@ -255,8 +256,8 @@ namespace hnc
 		 * @brief Synxtax for trange
 		 *
 		 * @code
-		 * #include <hnc/gnuplot.hpp>
-		 * @endcode
+		   #include <hnc/gnuplot.hpp>
+		   @endcode
 		 *
 		 * http://gnuplot.sourceforge.net/docs_4.2/node294.html
 		 */
@@ -272,8 +273,8 @@ namespace hnc
 		 * @brief Synxtax for urange
 		 *
 		 * @code
-		 * #include <hnc/gnuplot.hpp>
-		 * @endcode
+		   #include <hnc/gnuplot.hpp>
+		   @endcode
 		 *
 		 * http://gnuplot.sourceforge.net/docs_4.2/node294.html
 		 */
@@ -289,8 +290,8 @@ namespace hnc
 		 * @brief Synxtax for vrrange
 		 *
 		 * @code
-		 * #include <hnc/gnuplot.hpp>
-		 * @endcode
+		   #include <hnc/gnuplot.hpp>
+		   @endcode
 		 *
 		 * http://gnuplot.sourceforge.net/docs_4.2/node294.html
 		 */
@@ -302,20 +303,6 @@ namespace hnc
 			vr_range() : hnc::gnuplot::axis_range("vr") { }
 		};
 	}
-}
-
-/**
- * @brief Display a hnc::gnuplot::axis_range
- *
- * @param[out] o          Out stream
- * @param[in]  axis_range A hnc::gnuplot::axis_range
- *
- * @return the out stream
- */
-std::ostream & operator<<(std::ostream & o, hnc::gnuplot::axis_range const & axis_range)
-{
-	o << axis_range.to_string();
-	return o;
 }
 
 #endif

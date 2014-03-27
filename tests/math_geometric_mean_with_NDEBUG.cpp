@@ -136,8 +136,8 @@ int main()
 	std::cout << std::endl;
 
 	{
-		std::vector<float> c({4, 1, 1.f/32});
-		float ref = 0.5;
+		std::vector<float> c({4.f, 1.f, 1.f / 32.f});
+		float ref = 0.5f;
 		std::cout << "Geometric mean of std::vector of {4, 1, 1.f/32}:" << std::endl;
 		std::cout << "- Reference                           = " << ref << std::endl;
 		++nb_test;
@@ -156,8 +156,8 @@ int main()
 	std::cout << std::endl;
 
 	{
-		std::list<float> c({1, 1000});
-		float ref = 31.62278;
+		std::list<float> c({1.f, 1000.f});
+		float ref = 31.62278f;
 		std::cout << "Geometric mean of std::list of {1, 1000}:" << std::endl;
 		std::cout << "- Reference                           = " << ref << std::endl;
 		++nb_test;
@@ -176,8 +176,8 @@ int main()
 	std::cout << std::endl;
 
 	{
-		std::vector<float> c({10, 0.1f});
-		float ref = 1;
+		std::vector<float> c({10.f, 0.1f});
+		float ref = 1.f;
 		std::cout << "Geometric mean of std::vector of {10, 0.1f}:" << std::endl;
 		std::cout << "- Reference                           = " << ref << std::endl;
 		++nb_test;
@@ -298,8 +298,8 @@ int main()
 
 	// 0.00506 0.001059 0.001058 0.001057 0.001056 0.001057 0.001056 0.001057 0.001057 0.001056 0.001056
 	{
-		std::vector<float> c({0.00506, 0.001059, 0.001058, 0.001057, 0.001056, 0.001057, 0.001056, 0.001057, 0.001057, 0.001056, 0.001056});
-		float ref = 0.001218604; // 0.001218603789285642
+		std::vector<float> c({0.00506f, 0.001059f, 0.001058f, 0.001057f, 0.001056f, 0.001057f, 0.001056f, 0.001057f, 0.001057f, 0.001056f, 0.001056f});
+		float ref = 0.001218604f; // 0.001218603789285642
 		std::cout << "Geometric mean of std::vector of {0.00506, 0.001059, 0.001058, 0.001057, 0.001056, 0.001057, 0.001056, 0.001057, 0.001057, 0.001056, 0.001056}:" << std::endl;
 		std::cout << "- Reference                           = " << ref << std::endl;
 		++nb_test;

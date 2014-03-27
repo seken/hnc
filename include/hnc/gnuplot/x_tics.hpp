@@ -1,4 +1,4 @@
-// Copyright © 2013 Lénaïc Bagnères, hnc@singularity.fr
+// Copyright © 2013, 2014 Lénaïc Bagnères, hnc@singularity.fr
 
 // This file is part of hnc.
 
@@ -15,11 +15,6 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with hnc. If not, see <http://www.gnu.org/licenses/>
 
-
-/**
- * @file
- * @brief Just for std::ostream & operator<<(std::ostream & o, hnc::gnuplot::x_tics const & x_tics) and y_tics
- */
 
 #ifndef HNC_GNUPLOT_X_TICS_HPP
 #define HNC_GNUPLOT_X_TICS_HPP
@@ -39,8 +34,8 @@ namespace hnc
 		 * @brief Synxtax for xtics (and ytics, ztics, x2tics, y2tics)
 		 * 
 		 * @code
-		 * #include <hnc/gnuplot.hpp>
-		 * @endcode
+		   #include <hnc/gnuplot.hpp>
+		   @endcode
 		 * 
 		 * @b From http://gnuplot.sourceforge.net/docs_4.2/node295.html
 		 * Fine control of the major (labelled) tics on the x axis is possible with the set xtics command. The tics may be turned off with the unset xtics command, and may be turned on (the default state) with set xtics. Similar commands control the major tics on the y, z, x2 and y2 axes.
@@ -75,13 +70,11 @@ namespace hnc
 
 		public:
 
-			/**
-			 * @brief Constructor
-			 * @param[in] axis_name Name of the axis (x, y, z, x2, y2)
-			 */
+			/// @brief Constructor
+			/// @param[in] axis_name Name of the axis (x, y, z, x2, y2)
 			axis_tics(std::string const & axis_name) : m_axis_name(axis_name) { }
 
-			/// Destructor
+			/// @brief Destructor
 			virtual ~axis_tics() = 0;
 
 			// axis or border
@@ -359,38 +352,27 @@ namespace hnc
 
 			// font
 
-			/**
-			 * @brief Change the font (by font name)
-			 *
-			 * @param[in] font_name Name of the font
-			 *
-			 * @return the axis_tics
-			 */
+			/// @brief Change the font (by font name)
+			/// @param[in] font_name Name of the font
+			/// @return the axis_tics
 			axis_tics & font(std::string const & font_name)
 			{
 				m_font = "font \"" + font_name + "\"";
 				return *this;
 			}
 
-			/**
-			 * @brief Change the font (by font name) and the size
-			 *
-			 * @param[in] font_name Name of the font
-			 * @param[in] font_size Size of the font
-			 *
-			 * @return the axis_tics
-			 */
+			/// @brief Change the font (by font name) and the size
+			/// @param[in] font_name Name of the font
+			/// @param[in] font_size Size of the font
+			/// @return the axis_tics
 			axis_tics & font(std::string const & font_name, unsigned int const font_size)
 			{
 				m_font = "font \"" + font_name + "," + hnc::to_string(font_size) + "\"";
 				return *this;
 			}
 
-			/**
-			 * @brief Default font
-			 *
-			 * @return the axis_tics
-			 */
+			/// @brief Default font
+			/// @return the axis_tics
 			axis_tics & font_default()
 			{
 				m_font = "";
@@ -399,10 +381,8 @@ namespace hnc
 
 			// to_string
 			
-			/**
-			 * @brief Return the axis tics (for a Gnuplot script)
-			 * @return the axis tics (for a Gnuplot script)
-			 */
+			/// @brief Return the axis tics (for a Gnuplot script)
+			/// @return the axis tics (for a Gnuplot script)
 			std::string to_string() const
 			{
 				std::string r;
@@ -420,15 +400,25 @@ namespace hnc
 				return r;
 			}
 		};
-
+		
 		inline hnc::gnuplot::axis_tics::~axis_tics() { }
-
+		
+		/// @brief Operator << between a std::ostream and a hnc::gnuplot::axis_tics
+		/// @param[in,out] o         Output stream
+		/// @param[in]     axis_tics A hnc::gnuplot::axis_tics
+		/// @return the output stream
+		inline std::ostream & operator<<(std::ostream & o, hnc::gnuplot::axis_tics const & axis_tics)
+		{
+			o << axis_tics.to_string();
+			return o;
+		}
+		
 		/**
 		 * @brief Synxtax for xtics
 		 * 
 		 * @code
-		 * #include <hnc/gnuplot.hpp>
-		 * @endcode
+		   #include <hnc/gnuplot.hpp>
+		   @endcode
 		 *
 		 * http://gnuplot.sourceforge.net/docs_4.2/node295.html
 		 */
@@ -444,8 +434,8 @@ namespace hnc
 		 * @brief Synxtax for ytics
 		 *
 		 * @code
-		 * #include <hnc/gnuplot.hpp>
-		 * @endcode
+		   #include <hnc/gnuplot.hpp>
+		   @endcode
 		 *
 		 * http://gnuplot.sourceforge.net/docs_4.2/node295.html
 		 */
@@ -461,8 +451,8 @@ namespace hnc
 		 * @brief Synxtax for ztics
 		 *
 		 * @code
-		 * #include <hnc/gnuplot.hpp>
-		 * @endcode
+		   #include <hnc/gnuplot.hpp>
+		   @endcode
 		 *
 		 * http://gnuplot.sourceforge.net/docs_4.2/node295.html
 		 */
@@ -478,8 +468,8 @@ namespace hnc
 		 * @brief Synxtax for x2tics
 		 *
 		 * @code
-		 * #include <hnc/gnuplot.hpp>
-		 * @endcode
+		   #include <hnc/gnuplot.hpp>
+		   @endcode
 		 *
 		 * http://gnuplot.sourceforge.net/docs_4.2/node295.html
 		 */
@@ -495,8 +485,8 @@ namespace hnc
 		 * @brief Synxtax for y2tics
 		 *
 		 * @code
-		 * #include <hnc/gnuplot.hpp>
-		 * @endcode
+		   #include <hnc/gnuplot.hpp>
+		   @endcode
 		 *
 		 * http://gnuplot.sourceforge.net/docs_4.2/node295.html
 		 */
@@ -508,20 +498,6 @@ namespace hnc
 			y2_tics() : hnc::gnuplot::axis_tics("y2") { }
 		};
 	}
-}
-
-/**
- * @brief Display a hnc::gnuplot::axis_tics
- *
- * @param[out] o         Out stream
- * @param[in]  axis_tics A hnc::gnuplot::axis_tics
- *
- * @return the out stream
- */
-std::ostream & operator<<(std::ostream & o, hnc::gnuplot::axis_tics const & axis_tics)
-{
-	o << axis_tics.to_string();
-	return o;
 }
 
 #endif

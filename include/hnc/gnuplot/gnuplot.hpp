@@ -1,4 +1,4 @@
-// Copyright © 2012,2013 Lénaïc Bagnères, hnc@singularity.fr
+// Copyright © 2012-2014 Lénaïc Bagnères, hnc@singularity.fr
 
 // This file is part of hnc.
 
@@ -42,8 +42,8 @@ namespace hnc
 		 * @brief Interface for Gnuplot class
 		 *
 		 * @code
-		 * #include <hnc/gnuplot.hpp>
-		 * @endcode
+		   #include <hnc/gnuplot.hpp>
+		   @endcode
 		 * 
 		 * Provides some functions to get and set script and data
 		 *
@@ -56,35 +56,35 @@ namespace hnc
 		 * - data in the output_filename.data file
 		 *
 		 * @code
-		 * // hnc::gnuplot::gnuplot_daughter_class gp(...);
-		 * 
-		 * // Set titles and data and ...
-		 *
-		 * // Write in files
-		 * gp.write_script_in_file();
-		 * gp.write_data_in_file();
-		 * 
-		 * // Script
-		 * std::cout << "# Script filename = " << gp.script_filename() << std::endl;
-		 * std::cout << gp.script() << std::endl;
-		 *
-		 * // Data
-		 * for (std::pair<std::string, std::string> const & data : gp.data())
-		 * {
-		 * 	std::string const & data_filename = data.first;
-		 * 	std::string const & data_value = data.second;
-		 * 	std::cout << "# Data filename = " << data_filename << std::endl;
-		 * 	std::cout << data_value << std::endl;
-		 * }
-		 * 
-		 * // Plot (run gnuplot) (#include <hnc/system.hpp>)
-		 * hnc::system("gnuplot", gp.script_filename());
-		 * @endcode
+		   // hnc::gnuplot::gnuplot_daughter_class gp(...);
+		   
+		   // Set titles and data and ...
+		  
+		   // Write in files
+		   gp.write_script_in_file();
+		   gp.write_data_in_file();
+		  
+		   // Script
+		   std::cout << "# Script filename = " << gp.script_filename() << std::endl;
+		   std::cout << gp.script() << std::endl;
+		  
+		   // Data
+		   for (std::pair<std::string, std::string> const & data : gp.data())
+		   {
+		   	std::string const & data_filename = data.first;
+		   	std::string const & data_value = data.second;
+		   	std::cout << "# Data filename = " << data_filename << std::endl;
+		   	std::cout << data_value << std::endl;
+		   }
+		   
+		   // Plot (run gnuplot) (#include <hnc/system.hpp>)
+		   hnc::system("gnuplot", gp.script_filename());
+		   @endcode
 		 *
 		 * You can run in a terminal:
 		 * @code
-		 * # gnuplot output_filename.gnuplot
-		 * @endcode
+		   $ gnuplot output_filename.gnuplot
+		   @endcode
 		 */
 		class gnuplot
 		{
@@ -144,23 +144,19 @@ namespace hnc
 			
 		public:
 
-			/**
-			 * @brief Constructor
-			 * @param[in] terminal_output Terminal output hnc::gnuplot::output_terminal_pdf, hnc::gnuplot::output_terminal_svg, hnc::gnuplot::output_terminal_png
-			 */
+			/// @brief Constructor
+			/// @param[in] terminal_output Terminal output hnc::gnuplot::output_terminal_pdf, hnc::gnuplot::output_terminal_svg, hnc::gnuplot::output_terminal_png
 			template <class terminal_output_t>
 			gnuplot(terminal_output_t const & terminal_output)
 			{
 				set_terminal_output(terminal_output);
 			}
 
-			/// Destructor
+			/// @brief Destructor
 			virtual ~gnuplot() = 0;
 
-			/**
-			 * @brief Set the terminal output
-			 * @param[in] terminal_output Terminal output hnc::gnuplot::output_terminal_pdf, hnc::gnuplot::output_terminal_svg, hnc::gnuplot::output_terminal_png
-			 */
+			/// @brief Set the terminal output
+			/// @param[in] terminal_output Terminal output hnc::gnuplot::output_terminal_pdf, hnc::gnuplot::output_terminal_svg, hnc::gnuplot::output_terminal_png
 			template <class terminal_output_t>
 			void set_terminal_output(terminal_output_t const & terminal_output)
 			{
@@ -171,10 +167,8 @@ namespace hnc
 
 			// Script & data in file
 
-			/**
-			 * @brief Write the script in the script_filename() file
-			 * @return true if the file has been writen, false otherwise
-			 */
+			/// @brief Write the script in the script_filename() file
+			/// @return true if the file has been writen, false otherwise
 			bool write_script_in_file() /*const*/
 			{
 				std::ofstream f(script_filename());
@@ -186,10 +180,8 @@ namespace hnc
 				return true;
 			}
 
-			/**
-			 * @brief Write all data in the data_filename() file
-			 * @return true if the file has been writen, false otherwise
-			 */
+			/// @brief Write all data in the data_filename() file
+			/// @return true if the file has been writen, false otherwise
 			bool write_data_in_file() /*const*/
 			{
 				bool r = true;
@@ -212,10 +204,8 @@ namespace hnc
 
 			// Script & data
 
-			/**
-			 * @brief Return the script
-			 * @return the script
-			 */
+			/// @brief Return the script
+			/// @return the script
 			virtual std::string script() /*const*/
 			{
 				std::string script;
@@ -282,16 +272,12 @@ namespace hnc
 				return data;
 			}
 
-			/**
-			 * @brief Return the minimum data value
-			 * @return the minimum data value
-			 */
+			/// @brief Return the minimum data value
+			/// @return the minimum data value
 			virtual double min_data_value() const = 0;
 
-			/**
-			 * @brief Return the maximum data value
-			 * @return the maximum data value
-			 */
+			/// @brief Return the maximum data value
+			/// @return the maximum data value
 			virtual double max_data_value() const = 0;
 
 			// Filename

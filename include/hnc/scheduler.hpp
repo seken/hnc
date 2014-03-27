@@ -1,4 +1,4 @@
-// Copyright © 2012 Lénaïc Bagnères, hnc@singularity.fr
+// Copyright © 2012, 2014 Lénaïc Bagnères, hnc@singularity.fr
 
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -21,7 +21,13 @@
 
 namespace hnc
 {
-	/// @brief Task scheduling
+	/**
+	 * @brief Task scheduling
+	 * 
+	 * @code
+	   #include <hnc/scheduler.hpp>
+	   @endcode
+	 */
 	namespace scheduler
 	{
 		// For Doxygen only

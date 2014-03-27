@@ -1,4 +1,4 @@
-// Copyright © 2013 Lénaïc Bagnères, hnc@singularity.fr
+// Copyright © 2013, 2014 Lénaïc Bagnères, hnc@singularity.fr
 
 // This file is part of hnc.
 
@@ -31,33 +31,33 @@ namespace hnc
 		 * @brief Gnuplot with boxes
 		 *
 		 * @code
-		 * #include <hnc/gnuplot.hpp>
-		 * @endcode
+		   #include <hnc/gnuplot.hpp>
+		   @endcode
 		 *
 		 * @image html hnc_gnuplot_gnuplot_boxes.png
 		 * @image latex hnc_gnuplot_gnuplot_boxes.eps
 		 *
 		 * @code
-		 * std::map<std::string, int> data;
-		 * data["A"] = 1;
-		 * data["B"] = 2;
-		 * data["C"] = 5;
-		 * data["D"] = 3;
-		 * data["E"] = 4;
-		 * data["F"] = 2;
-		 * data["G"] = 1;
-		 * 
-		 * hnc::gnuplot::gnuplot_boxes gp
-		 * (
-		 * 	hnc::gnuplot::output_terminal_png("hnc_gnuplot_gnuplot_boxes").size(640, 480),
-		 * 	data
-		 * );
-		 * gp.plot().fill();
-		 * gp.plot().set_title("boxes legend");
-		 * 
-		 * gp.set_title("hnc::gnuplot::gnuplot\\_boxes");
-		 * gp.y_range.range(0, gp.max_data_value() + 1);
-		 * @endcode
+		   std::map<std::string, int> data;
+		   data["A"] = 1;
+		   data["B"] = 2;
+		   data["C"] = 5;
+		   data["D"] = 3;
+		   data["E"] = 4;
+		   data["F"] = 2;
+		   data["G"] = 1;
+		   
+		   hnc::gnuplot::gnuplot_boxes gp
+		   (
+		   	hnc::gnuplot::output_terminal_png("hnc_gnuplot_gnuplot_boxes").size(640, 480),
+		   	data
+		   );
+		   gp.plot().fill();
+		   gp.plot().set_title("boxes legend");
+		   
+		   gp.set_title("hnc::gnuplot::gnuplot\\_boxes");
+		   gp.y_range.range(0, gp.max_data_value() + 1);
+		   @endcode
 		 */
 		class gnuplot_boxes : public hnc::gnuplot::gnuplot
 		{
@@ -82,11 +82,11 @@ namespace hnc
 			 *
 			 * Data example:
 			 * @code
-			 * std::map<std::string, int> data;
-			 * data["A"] = 1;
-			 * data["B"] = 2;
-			 * data["C"] = 5;
-			 * data["D"] = 3;
+			   std::map<std::string, int> data;
+			   data["A"] = 1;
+			   data["B"] = 2;
+			   data["C"] = 5;
+			   data["D"] = 3;
 			 * @endcode
 			 */
 			template <class terminal_output_t, class numeric_t>
@@ -123,10 +123,8 @@ namespace hnc
 				}
 			}
 
-			/**
-			 * @brief Return the plot boxes
-			 * @return the plot boxes
-			 */
+			/// @brief Return the plot boxes
+			/// @return the plot boxes
 			hnc::gnuplot::plot_boxes & plot()
 			{
 				return m_plot;

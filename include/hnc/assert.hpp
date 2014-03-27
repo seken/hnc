@@ -1,4 +1,4 @@
-// Copyright © 2012 Lénaïc Bagnères, hnc@singularity.fr
+// Copyright © 2012, 2014 Lénaïc Bagnères, hnc@singularity.fr
 
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -26,18 +26,18 @@ namespace hnc
 	 * @brief Throws the exception if the expression is false
 	 *
 	 * @code
-	 * #include <hnc/assert.hpp>
-	 * @endcode
+	   #include <hnc/assert.hpp>
+	   @endcode
 	 * 
 	 * If the expression if false, throws the exception @n
 	 * Else, do nothing
 	 *
 	 * You can combine with NDEBUG macro
 	 * @code
-	 * #ifndef NDEBUG
-	 * hnc::hassert(1 == 1, std::logic_error("1 is not equal 1 !"));
-	 * #endif
-	 * @endcode
+	   #ifndef NDEBUG
+	   hnc::hassert(1 == 1, std::logic_error("1 is not equal 1 !"));
+	   #endif
+	   @endcode
 	 *
 	 * @param[in] expression The test (a bool)
 	 * @param[in] e          A exception if the test is false
@@ -52,18 +52,18 @@ namespace hnc
 	 * @brief Throws the logic_error exception with what message if the expression is false
 	 *
 	 * @code
-	 * #include <hnc/assert.hpp>
-	 * @endcode
+	   #include <hnc/assert.hpp>
+	   @endcode
 	 * 
 	 * If the expression if false, throws the logic_error exception with what message @n
 	 * Else, do nothing
 	 *
 	 * You can combine with NDEBUG macro
 	 * @code
-	 * #ifndef NDEBUG
-	 * hnc::hassert(1 == 1, "1 is not equal 1 !");
-	 * #endif
-	 * @endcode
+	   #ifndef NDEBUG
+	   hnc::hassert(1 == 1, "1 is not equal 1 !");
+	   #endif
+	   @endcode
 	 *
 	 * @param[in] expression Test (a bool)
 	 * @param[in] what       Message if the test is false

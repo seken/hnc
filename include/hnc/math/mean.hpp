@@ -1,4 +1,4 @@
-// Copyright © 2012 Lénaïc Bagnères, hnc@singularity.fr
+// Copyright © 2012, 2014 Lénaïc Bagnères, hnc@singularity.fr
 
 // This file is part of hnc.
 
@@ -34,8 +34,8 @@ namespace hnc
 		 * @brief Arithmetic mean between two iterators
 		 *
 		 * @code
-		 * #include <hnc/math.hpp>
-		 * @endcode
+		   #include <hnc/math.hpp>
+		   @endcode
 		 * 
 		 * @f$ \text{mean}(X) = \frac{\sum_{i=0}^{n-1}{x_i}}{|X|} @f$ @n
 		 * with @f$ X @f$ a vector with the elements between the two iterators @n
@@ -56,19 +56,20 @@ namespace hnc
 		template <class forward_iterator>
 		typename std::iterator_traits<forward_iterator>::value_type mean(forward_iterator const & begin, forward_iterator const & end)
 		{
-			auto size = std::distance(begin, end);
+			auto const size = std::distance(begin, end);
 			#ifndef NDEBUG
 				hnc::hassert(size > 0, std::length_error("hnc::math::mean, Can not compute the mean of empty container"));
 			#endif
-			return (hnc::algo::sum(begin, end) / size);
+			auto const sum = hnc::algo::sum(begin, end);
+			return (sum / decltype(sum)(size));
 		}
 
 		/**
 		 * @brief Arithmetic mean of a container
 		 *
 		 * @code
-		 * #include <hnc/math.hpp>
-		 * @endcode
+		   #include <hnc/math.hpp>
+		   @endcode
 		 * 
 		 * @f$ \text{mean}(X) = \frac{\sum_{i=0}^{n-1}{x_i}}{|X|} @f$ @n
 		 * with @f$ X @f$ the container @n
@@ -91,7 +92,7 @@ namespace hnc
 			#ifndef NDEBUG
 				hnc::hassert(c.size() > 0, std::length_error("hnc::math::mean, Can not compute the mean of empty container"));
 			#endif
-			return (hnc::algo::sum(c) / c.size());
+			return hnc::math::mean(c.begin(), c.end());
 		}
 	}
 }

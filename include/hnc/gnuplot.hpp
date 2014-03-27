@@ -1,4 +1,4 @@
-// Copyright © 2012 Lénaïc Bagnères, hnc@singularity.fr
+// Copyright © 2012, 2014 Lénaïc Bagnères, hnc@singularity.fr
 
 // This file is part of hnc.
 
@@ -30,8 +30,8 @@ namespace hnc
 	 * @brief To create some Gnuplot script and data
 	 *
 	 * @code
-	 * #include <hnc/gnuplot.hpp>
-	 * @endcode
+	   #include <hnc/gnuplot.hpp>
+	   @endcode
 	 *
 	 * 2D Gnuplot hnc::gnuplot::gnuplot :
 	 * - Histogram hnc::gnuplot::gnuplot_boxes

@@ -25,59 +25,59 @@ namespace hnc
 	 * @brief hnc::value_ptr<T> is like a T with inclusion polymorphism
 	 * 
 	 * @code
-	 * #include <hnc/value_ptr.hpp>
-	 * @endcode
+	   #include <hnc/value_ptr.hpp>
+	   @endcode
 	 * 
 	 * hnc::value_ptr performs a deep copy; it uses hnc::clone function which uses [virtual] .clone() method if it exists @n
 	 * So, copy a hnc::value_ptr of base class which olds a derived class object works and does what you think
 	 * 
 	 * Example:
 	 * @code
-	 * #include <iostream>
-	 * 
-	 * #include <hnc/value_ptr.hpp>
-	 * 
-	 * class A
-	 * {
-	 * public:
-	 * 	
-	 * 	virtual ~A() { }
-	 * 	
-	 * 	hnc_generate_clone_method(A, A)
-	 * 	
-	 * 	virtual void display(std::ostream & o) const { o << "one_A"; }
-	 * };
-	 * 
-	 * class B : public A
-	 * {
-	 * public:
-	 * 	
-	 * 	virtual ~B() { }
-	 * 	
-	 * 	hnc_generate_clone_method(A, B)
-	 * 	
-	 * 	virtual void display(std::ostream & o) const override { o << "one_B"; }
-	 * };
-	 * 
-	 * std::ostream & operator<<(std::ostream & o, A const & v) { v.display(o); return o; }
-	 * 
-	 * int main()
-	 * {
-	 * 	// Create a A
-	 * 	hnc::value_ptr<A> a = A();
-	 * 	std::cout << a << std::endl; // one_A
-	 * 	
-	 * 	// Create a B
-	 * 	hnc::value_ptr<A> b = B();
-	 * 	std::cout << b << std::endl; // one_B
-	 * 	
-	 * 	// Copy
-	 * 	hnc::value_ptr<A> c = b;
-	 * 	std::cout << c << std::endl; // one_B
-	 * 	
-	 * 	return 0;
-	 * }
-	 * @endcode
+	   #include <iostream>
+	   
+	   #include <hnc/value_ptr.hpp>
+	   
+	   class A
+	   {
+	   public:
+	   	
+	   	virtual ~A() { }
+	   	
+	   	hnc_generate_clone_method(A, A)
+	   	
+	   	virtual void display(std::ostream & o) const { o << "one_A"; }
+	   };
+	   
+	   class B : public A
+	   {
+	   public:
+	   	
+	   	virtual ~B() { }
+	   	
+	   	hnc_generate_clone_method(A, B)
+	   	
+	   	virtual void display(std::ostream & o) const override { o << "one_B"; }
+	   };
+	   
+	   std::ostream & operator<<(std::ostream & o, A const & v) { v.display(o); return o; }
+	   
+	   int main()
+	   {
+	   	// Create a A
+	   	hnc::value_ptr<A> a = A();
+	   	std::cout << a << std::endl; // one_A
+	   	
+	   	// Create a B
+	   	hnc::value_ptr<A> b = B();
+	   	std::cout << b << std::endl; // one_B
+	   	
+	   	// Copy
+	   	hnc::value_ptr<A> c = b;
+	   	std::cout << c << std::endl; // one_B
+	   	
+	   	return 0;
+	   }
+	   @endcode
 	 */
 	template <class T>
 	class value_ptr : private hnc::copy_ptr<T>
@@ -115,14 +115,10 @@ namespace hnc
 		using hnc::copy_ptr<T>::operator->;
 	};
 
-	/**
-	 * @brief Equality operator between two hnc::value_ptr<T>
-	 *
-	 * @param[in] v0 An hnc::value_ptr<T>
-	 * @param[in] v1 An hnc::value_ptr<T>
-	 *
-	 * @return true if hnc::value_ptr<T> are equals, false otherwise
-	 */
+	/// @brief Equality operator between two hnc::value_ptr<T>
+	/// @param[in] v0 An hnc::value_ptr<T>
+	/// @param[in] v1 An hnc::value_ptr<T>
+	/// @return true if hnc::value_ptr<T> are equals, false otherwise
 	template <class T>
 	bool operator==(hnc::value_ptr<T> const & v0, hnc::value_ptr<T> const & v1)
 	{
@@ -130,37 +126,29 @@ namespace hnc
 		else { return (*v0 == *v1); }
 	}
 
-	/**
-	 * @brief Inequality operator between two hnc::value_ptr<T>
-	 *
-	 * @param[in] v0 An hnc::value_ptr<T>
-	 * @param[in] v1 An hnc::value_ptr<T>
-	 *
-	 * @return true if hnc::value_ptr<T> are not equals, false otherwise
-	 */
+	/// @brief Inequality operator between two hnc::value_ptr<T>
+	/// @param[in] v0 An hnc::value_ptr<T>
+	/// @param[in] v1 An hnc::value_ptr<T>
+	/// @return true if hnc::value_ptr<T> are not equals, false otherwise
 	template <class T>
 	bool operator!=(hnc::value_ptr<T> const & v0, hnc::value_ptr<T> const & v1)
 	{
 		return (!(v0 == v1));
 	}
+	
+	/// @brief Operator << between a std::ostream and a hnc::value_ptr<T>
+	/// @param[in,out] o     Output stream
+	/// @param[in]     value A hnc::value_ptr<T>
+	/// @return the output stream
+	template <class T>
+	std::ostream & operator<<(std::ostream & o, hnc::value_ptr<T> const & value)
+	{
+		o << *value;
+		return o;
+	}
 }
 
 /// @brief std::swap between two hnc::value_ptr
 hnc_overload_std_swap_with_swap_method_for_template_class(hnc::value_ptr<T>, class T)
-
-/**
- * @brief Display a hnc::value_ptr<T>
- *
- * @param[in,out] o     Out stream
- * @param[in]     value A hnc::value_ptr<T>
- *
- * @return the out stream
- */
-template <class T>
-std::ostream & operator<<(std::ostream & o, hnc::value_ptr<T> const & value)
-{
-	o << *value;
-	return o;
-}
 
 #endif

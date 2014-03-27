@@ -1,4 +1,4 @@
-// Copyright © 2013 Lénaïc Bagnères, hnc@singularity.fr
+// Copyright © 2013, 2014 Lénaïc Bagnères, hnc@singularity.fr
 
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -36,6 +36,10 @@ namespace hnc
 
 /**
  * @brief Generate copy and move assignement (operator=) with copy and swap idiom
+ * 
+ * @code
+   #include <hnc/copy_and_swap.hpp>
+   @endcode
  *
  * If the copy and move assignement is not automatically generated, you can generate them if copy and move constructor and .swap(T &) method exist
  *
@@ -44,25 +48,25 @@ namespace hnc
  *
  * Example:
  * @code
- * class A
- * {
- * public:
- * 	
- * 	int v;
- * 	
- * 	A(int const v = 0) : v(v) { }
- * 	
- * 	A(A const & a) : v(a.v) { }
- * 	
- * 	A(A && a) : v(a.v) { a.v = 0; }
- * 	
- * 	hnc_generate_copy_and_move_assignment(A)
- * 	
- * 	void swap(A & a) { std::swap(v, a.v); }
- * };
- * 
- * hnc_overload_std_swap_with_swap_method_for_class(A)
- * @endcode
+   class A
+   {
+   public:
+   	
+   	int v;
+   	
+   	A(int const v = 0) : v(v) { }
+   	
+   	A(A const & a) : v(a.v) { }
+   	
+   	A(A && a) : v(a.v) { a.v = 0; }
+   	
+   	hnc_generate_copy_and_move_assignment(A)
+   	
+   	void swap(A & a) { std::swap(v, a.v); }
+   };
+   
+   hnc_overload_std_swap_with_swap_method_for_class(A)
+   @endcode
  *
  * @note For base class, consider hnc_generate_virtual_copy_and_move_assignment
  */
@@ -84,6 +88,10 @@ namespace hnc
 /**
  * @brief Generate virtual (for base class) copy and move assignement (operator=) with copy and swap idiom
  *
+ * @code
+   #include <hnc/copy_and_swap.hpp>
+   @endcode
+ *
  * If the copy and move assignement is not automatically generated, you can generate them if copy and move constructor and .swap(T &) method exist
  *
  * @pre copy and move constructor exist
@@ -91,27 +99,27 @@ namespace hnc
  *
  * Example:
  * @code
- * class A
- * {
- * public:
- * 	
- * 	int v;
- * 	
- * 	A(int const v = 0) : v(v) { }
- * 	
- * 	A(A const & a) : v(a.v) { }
- * 	
- * 	A(A && a) : v(a.v) { a.v = 0; }
- * 	
- * 	virtual ~A() { }
- * 	
- * 	hnc_generate_virtual_copy_and_move_assignment(A)
- * 	
- * 	void swap(A & a) { std::swap(v, a.v); }
- * };
- * 
- * hnc_overload_std_swap_with_swap_method_for_class(A)
- * @endcode
+   class A
+   {
+   public:
+   	
+   	int v;
+   	
+   	A(int const v = 0) : v(v) { }
+   	
+   	A(A const & a) : v(a.v) { }
+   	
+   	A(A && a) : v(a.v) { a.v = 0; }
+   	
+   	virtual ~A() { }
+   	
+   	hnc_generate_virtual_copy_and_move_assignment(A)
+   	
+   	void swap(A & a) { std::swap(v, a.v); }
+   };
+   
+   hnc_overload_std_swap_with_swap_method_for_class(A)
+   @endcode
  *
  * @note For no base class, consider hnc_generate_copy_and_move_assignment
  */
@@ -133,21 +141,25 @@ namespace hnc
 /**
  * @brief Overload std::swap function with .swap(T &) method
  * 
+ * @code
+   #include <hnc/copy_and_swap.hpp>
+   @endcode
+ *
  * @param[in] T Class name
  *
  * Example:
  * @code
- * class A
- * {
- * public:
- * 	
- * 	int v;
- * 	
- * 	void swap(A & a) { std::swap(v, a.v); }
- * };
- * 
- * hnc_overload_std_swap_with_swap_method_for_class(A)
- * @endcode
+   class A
+   {
+   public:
+   	
+   	int v;
+   	
+   	void swap(A & a) { std::swap(v, a.v); }
+   };
+   
+   hnc_overload_std_swap_with_swap_method_for_class(A)
+   @endcode
  * 
  * @note Use hnc_overload_std_swap_with_swap_method_for_template_class if your class has template arguments
  */
@@ -163,23 +175,27 @@ namespace std \
 /**
  * @brief Overload std::swap function with .swap(T &) method
  * 
+ * @code
+   #include <hnc/copy_and_swap.hpp>
+   @endcode
+ *
  * @param[in] T                          Class name
  * @param[in] template_types_declaration Template types declarations (class T, class U, ...)
  *
  * Example:
  * @code
- * template <class T>
- * class A
- * {
- * public:
- * 	
- * 	T v;
- * 	
- * 	void swap(A<T> & a) { std::swap(v, a.v); }
- * };
- * 
- * hnc_overload_std_swap_with_swap_method_for_template_class(A<T>, class T)
- * @endcode
+   template <class T>
+   class A
+   {
+   public:
+   	
+   	T v;
+   	
+   	void swap(A<T> & a) { std::swap(v, a.v); }
+   };
+   
+   hnc_overload_std_swap_with_swap_method_for_template_class(A<T>, class T)
+   @endcode
  * 
  * @note Use hnc_overload_std_swap_with_swap_method_for_class if your class does not have template arguments
  */

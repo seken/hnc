@@ -1,4 +1,4 @@
-// Copyright © 2013 Lénaïc Bagnères, hnc@singularity.fr
+// Copyright © 2013, 2014 Lénaïc Bagnères, hnc@singularity.fr
 
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -26,29 +26,34 @@ namespace hnc
 	/**
 	 * @brief Type for SFINAE
 	 *
+	 * @code
+	   #include <hnc/sfinae.hpp>
+	   @endcode
+	 * 
 	 * http://en.wikipedia.org/wiki/Substitution_failure_is_not_an_error
 	 *
 	 * In a partial template specialization, you can check if the type is valid:
 	 * @code
-	 * template <class T, typename hnc::this_type<your_type>::is_valid>
-	 * class
-	 * {
-	 * 	// ...
-	 * };
-	 * @endcode
+	   template <class T, typename hnc::this_type<your_type>::is_valid>
+	   class
+	   {
+	   	// ...
+	   };
+	   @endcode
 	 * 
 	 * For example (see hnc/clone.hpp), you can check is a type has the .clone() method:
 	 * @code
-	 * // Valid fonctor (return false) for all types
-	 * template <class T, class sfinae_valid_type = void>
-	 * class is_cloneable : public std::false_type
-	 * { };
-	 * 
-	 * // This partial template specialization fonctor (return true) is created only if
-	 * // the type "decltype(std::declval<T&>().clone())" is valid i.e. T::clone() exists
-	 * template <class T>
-	 * class is_cloneable<T, typename hnc::this_type<decltype(std::declval<T&>().clone())>::is_valid> : public std::true_type
-	 * { };
+	   // Valid fonctor (return false) for all types
+	   template <class T, class sfinae_valid_type = void>
+	   class is_cloneable : public std::false_type
+	   { };
+	   
+	   // This partial template specialization fonctor (return true) is created only if
+	   // the type "decltype(std::declval<T&>().clone())" is valid i.e. T::clone() exists
+	   template <class T>
+	   class is_cloneable<T, typename hnc::this_type<decltype(std::declval<T&>().clone())>::is_valid> : public std::true_type
+	   { };
+	   @endcode
 	 */
 	template <class>
 	class this_type
