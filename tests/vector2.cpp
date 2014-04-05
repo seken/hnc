@@ -41,7 +41,15 @@ int main()
 	{
 		hnc::vector2<unsigned int> v(1, 2);
 		std::cout << v << std::endl;
-		nb_test -= hnc::test::warning(v.x == static_cast<unsigned int>(1) && v.y == static_cast<unsigned int>(2), "hnc::vector2 " + hnc::to_string(v) + " fails\n");
+		nb_test -= hnc::test::warning(v.x == 1u && v.y == 2u, "hnc::vector2 " + hnc::to_string(v) + " fails\n");
+	}
+
+	++nb_test;
+	{
+		hnc::vector2<unsigned int> v;
+		v = {21, 42};
+		std::cout << v << std::endl;
+		nb_test -= hnc::test::warning(v.x == 21u && v.y == 42u, "hnc::vector2 " + hnc::to_string(v) + " fails\n");
 	}
 
 	++nb_test;

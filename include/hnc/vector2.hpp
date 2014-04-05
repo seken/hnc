@@ -38,11 +38,14 @@ namespace hnc
 
 		/// y
 		T y;
+		
+		/// @brief Default constructor
+		vector2() : x(), y() { }
 
-		/// @brief Constructor
+		/// @brief Constructor 
 		/// @param[in] x x
 		/// @param[in] y y
-		explicit vector2<T>(T const & x = T(), T const & y = T()) :
+		vector2<T>(T const & x, T const & y) :
 			x(x), y(y)
 		{ }
 
@@ -62,7 +65,7 @@ namespace hnc
 	/// @param[in]     vector2 A hnc::vector2<T>
 	/// @return the output stream
 	template <class T>
-	std::ostream & operator << (std::ostream & o, hnc::vector2<T> const & vector2)
+	std::ostream & operator<<(std::ostream & o, hnc::vector2<T> const & vector2)
 	{
 		o << "{ " << vector2.x << ", " << vector2.y << " }";
 		return o;
