@@ -329,7 +329,7 @@ namespace hnc
 		bool file_exists(std::string const & pathname)
 		{
 			std::ifstream f(pathname);
-			return f;
+			return bool(f);
 		}
 
 		/**
