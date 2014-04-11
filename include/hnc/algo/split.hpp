@@ -23,6 +23,8 @@
 #include <iterator>
 #include <vector>
 
+#include "../unused.hpp"
+
 
 namespace hnc
 {
@@ -46,12 +48,14 @@ namespace hnc
 		template <class container, class return_container_t = std::vector<container>>
 		return_container_t split
 		(
-			container const & /*c*/,
+			container const & c,
 			typename container::const_iterator first, typename container::const_iterator const & last,
 			typename container::value_type const & delimiter,
 			return_container_t return_container = return_container_t()
 		)
 		{
+			hnc_unused(c);
+			
 			using const_iterator_t = typename container::const_iterator;
 			const_iterator_t it_0 = first;
 			const_iterator_t it_1 = last;

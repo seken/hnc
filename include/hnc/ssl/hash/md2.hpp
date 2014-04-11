@@ -20,6 +20,7 @@
 
 #include "../../raw_data.hpp"
 #include "../../test.hpp"
+#include "../../unused.hpp"
 
 
 namespace hnc
@@ -44,8 +45,9 @@ namespace hnc
 			 *
 			 * @return the md2 of std::string in a hnc::raw_data
 			 */
-			md2_raw_data md2(std::string const & /*s*/)
+			md2_raw_data md2(std::string const & s)
 			{
+				hnc_unused(s);
 				hnc::test::warning(false, "hnc::ssl::hash::md2 is not supported, OpenSSL md2 is deprecated and removed in Debian\n");
 				return md2_raw_data();
 			}

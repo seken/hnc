@@ -193,7 +193,7 @@ namespace hnc
 	   //
 	   @endcode
 	 *
-	 * @warning Arguments of any option (like <n> in --option <n>) can not begin by --
+	 * @warning Arguments of any option (like \<n\> in --option \<n\>) can not begin by --
 	 * @warning No safe-content conversion ! ("string" to int give 0)
 	 *
 	 * @note Consider Boost.Program_options

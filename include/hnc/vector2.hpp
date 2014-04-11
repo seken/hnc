@@ -18,6 +18,8 @@
 
 #include <iostream>
 
+#include "unused.hpp"
+
 
 namespace hnc
 {
@@ -48,12 +50,23 @@ namespace hnc
 		vector2<T>(T const & x, T const & y) :
 			x(x), y(y)
 		{ }
-
+		
+		/// @brief Serialize with archive
+		/// @param[in,out] archive Archive
+		/// @param[in]     version Version
+		template <class archive_t>
+		void serialize(archive_t & archive, unsigned int const version = 0)
+		{
+			hnc_unused(version);
+			archive & x;
+			archive & y;
+		}
+		
 		/// @brief Equality operator
 		/// @param[in] v A hnc::vector2
 		/// @return true if hnc::vector2 have same values, false otherwise
 		bool operator==(vector2 const & v) const { return (x == v.x && y == v.y); }
-
+		
 		/// @brief Inequality operator
 		/// @param[in] v A hnc::vector2
 		/// @return true if hnc::vector2 have different values, false otherwise

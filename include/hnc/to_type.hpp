@@ -65,7 +65,7 @@ namespace hnc
 	   #include <hnc/to_type.hpp>
 	   @endcode
 	 * 
-	 * The input is converted into the <return_t> type. @n
+	 * The input is converted into the return_t type. @n
 	 * We use a std::stringstream to do the conversion.
 	 *
 	 * Exemple:
@@ -92,10 +92,10 @@ namespace hnc
 	 *
 	 * @param[in] in The input
 	 *
-	 * Specialization for:
-	 * - <return_t> is std::string
+	 * Specialization when:
+	 * - return_t is std::string
 	 *
-	 * @return the converted input into a <return_t>
+	 * @return the converted input into a return_t
 	 */
 	template <class return_t, class T>
 	return_t to_(T const & in)

@@ -28,6 +28,7 @@
 #endif
 
 #include "../boost_serialization_std.hpp"
+#include "../unused.hpp"
 
 
 namespace hnc
@@ -312,7 +313,10 @@ namespace hnc
 			}
 			#else
 			template <class T>
-			static void send_result(T const & /*r*/, int const /*tag_result*/) { }
+			static void send_result(T const & /*r*/, int const tag_result)
+			{
+				hnc_unused(tag_result);
+			}
 			#endif
 
 			/**
@@ -336,7 +340,10 @@ namespace hnc
 			   send_result(your_result_attribute, tag_result);
 			   @endcode
 			 */
-			virtual void get(int const /*tag_result*/) const { }
+			virtual void get(int const tag_result) const
+			{
+				hnc_unused(tag_result);
+			}
 
 			/// @brief Return true if shutdown the node after execute the function
 			/// @return true if shutdown the node after execute the function

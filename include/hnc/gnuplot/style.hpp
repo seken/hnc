@@ -22,6 +22,8 @@
 #include <string>
 #include <vector>
 
+#include "../unused.hpp"
+
 
 namespace hnc
 {
@@ -57,8 +59,9 @@ namespace hnc
 		/// @param[in,out] o     Output stream
 		/// @param[in]     style A hnc::gnuplot::style
 		/// @return the output stream
-		inline std::ostream & operator<<(std::ostream & o, hnc::gnuplot::style const & /*style*/)
+		inline std::ostream & operator<<(std::ostream & o, hnc::gnuplot::style const & style)
 		{
+			hnc_unused(style);
 			return o;
 		}
 	}

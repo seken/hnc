@@ -17,6 +17,7 @@
 #define HNC_CLONE_HPP
 
 #include "sfinae.hpp"
+#include "unused.hpp"
 
 
 namespace hnc
@@ -116,8 +117,9 @@ namespace hnc
 	/// @param[in] tag std::false_type
 	/// @return a clone of the object
 	template <class T>
-	T clone(T const & v, std::false_type const /*tag*/)
+	T clone(T const & v, std::false_type const tag)
 	{
+		hnc_unused(tag);
 		return T(v);
 	}
 	
@@ -126,8 +128,9 @@ namespace hnc
 	/// @param[in] tag std::true_type
 	/// @return a clone of the object
 	template <class T>
-	auto clone(T const & v, std::true_type const /*tag*/) -> decltype(v.clone())
+	auto clone(T const & v, std::true_type const tag) -> decltype(v.clone())
 	{
+		hnc_unused(tag);
 		return v.clone();
 	}
 	
@@ -148,8 +151,9 @@ namespace hnc
 	/// @param[in] tag std::false_type
 	/// @return a clone of the object in a std::unique_ptr
 	template <class T>
-	std::unique_ptr<T> clone_to_unique_ptr(T const & v, std::false_type const /*tag*/)
+	std::unique_ptr<T> clone_to_unique_ptr(T const & v, std::false_type const tag)
 	{
+		hnc_unused(tag);
 		return std::unique_ptr<T>(new T(v));
 	}
 	
@@ -158,8 +162,9 @@ namespace hnc
 	/// @param[in] tag std::true_type
 	/// @return a clone of the object in a std::unique_ptr
 	template <class T>
-	auto clone_to_unique_ptr(T const & v, std::true_type const /*tag*/) -> decltype(v.clone())
+	auto clone_to_unique_ptr(T const & v, std::true_type const tag) -> decltype(v.clone())
 	{
+		hnc_unused(tag);
 		return v.clone();
 	}
 	
