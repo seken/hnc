@@ -31,7 +31,7 @@ int main()
 		std::string const v = "Compute md2";
 		hnc::ssl::hash::md2_raw_data r = hnc::ssl::hash::md2(v);
 		std::cout << "md2 of \"" << v << "\" = " << r << std::endl;
-		#ifndef NO_HNC_SSL
+		#ifndef hnc_no_openssl
 		nb_test -= hnc::test::warning(r == hnc::ssl::hash::md2_raw_data(), "hnc::ssl::hash::md2 fails\n");
 		#else
 		nb_test -= hnc::test::warning(r == hnc::ssl::hash::md2_raw_data(), "hnc::ssl::hash::md2 fails\n");

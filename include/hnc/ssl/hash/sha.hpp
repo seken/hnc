@@ -19,7 +19,7 @@
 
 #include <string>
 
-#ifndef NO_HNC_SSL
+#ifndef hnc_no_openssl
 #include <openssl/sha.h>
 #endif
 
@@ -33,14 +33,14 @@ namespace hnc
 	{
 		namespace hash
 		{
-			#ifndef NO_HNC_SSL
+			#ifndef hnc_no_openssl
 			/// sha raw data type
 			using sha_raw_data = hnc::raw_data<SHA_DIGEST_LENGTH>;
 			#else
 			using sha_raw_data = hnc::raw_data<1>;
 			#endif
 			
-			#ifndef NO_HNC_SSL
+			#ifndef hnc_no_openssl
 			/**
 			 * @brief Computhe the sha
 			 *
@@ -50,7 +50,7 @@ namespace hnc
 			 *
 			 * @param[in] s A std::string
 			 *
-			 * @note If NO_HNC_SSL is defined, the function returns default raw_data and displays a warning message
+			 * @note If hnc_no_openssl is defined, the function returns default raw_data and displays a warning message
 			 *
 			 * @return the sha of std::string in a hnc::raw_data
 			 */
@@ -70,19 +70,19 @@ namespace hnc
 			#else
 			sha_raw_data sha(std::string const & /*s*/)
 			{
-				hnc::test::warning(false, "hnc::ssl::hash::sha is not supported, please install OpenSSL and recompile this program without NO_HNC_SSL define\n");
+				hnc::test::warning(false, "hnc::ssl::hash::sha is not supported, please install OpenSSL and recompile this program without hnc_no_openssl define\n");
 				return sha_raw_data();
 			}
 			#endif
 
-			#ifndef NO_HNC_SSL
+			#ifndef hnc_no_openssl
 			/// sha1 raw data type
 			using sha1_raw_data = hnc::raw_data<SHA_DIGEST_LENGTH>;
 			#else
 			using sha1_raw_data = hnc::raw_data<1>;
 			#endif
 
-			#ifndef NO_HNC_SSL
+			#ifndef hnc_no_openssl
 			/**
 			 * @brief Computhe the sha1
 			 *
@@ -92,7 +92,7 @@ namespace hnc
 			 *
 			 * @param[in] s A std::string
 			 *
-			 * @note If NO_HNC_SSL is defined, the function returns default raw_data and displays a warning message
+			 * @note If hnc_no_openssl is defined, the function returns default raw_data and displays a warning message
 			 *
 			 * @return the sha1 of std::string in a hnc::raw_data
 			 */
@@ -107,19 +107,19 @@ namespace hnc
 			#else
 			sha1_raw_data sha1(std::string const & /*s*/)
 			{
-				hnc::test::warning(false, "hnc::ssl::hash::sha1 is not supported, please install OpenSSL and recompile this program without NO_HNC_SSL define\n");
+				hnc::test::warning(false, "hnc::ssl::hash::sha1 is not supported, please install OpenSSL and recompile this program without hnc_no_openssl define\n");
 				return sha1_raw_data();
 			}
 			#endif
 
-			#ifndef NO_HNC_SSL
+			#ifndef hnc_no_openssl
 			/// sha224 raw data type
 			using sha224_raw_data = hnc::raw_data<SHA224_DIGEST_LENGTH>;
 			#else
 			using sha224_raw_data = hnc::raw_data<1>;
 			#endif
 
-			#ifndef NO_HNC_SSL
+			#ifndef hnc_no_openssl
 			/**
 			 * @brief Computhe the sha224
 			 *
@@ -129,7 +129,7 @@ namespace hnc
 			 *
 			 * @param[in] s A std::string
 			 *
-			 * @note If NO_HNC_SSL is defined, the function returns default raw_data and displays a warning message
+			 * @note If hnc_no_openssl is defined, the function returns default raw_data and displays a warning message
 			 *
 			 * @return the sha224 of std::string in a hnc::raw_data
 			 */
@@ -144,19 +144,19 @@ namespace hnc
 			#else
 			sha224_raw_data sha224(std::string const & /*s*/)
 			{
-				hnc::test::warning(false, "hnc::ssl::hash::sha224 is not supported, please install OpenSSL and recompile this program without NO_HNC_SSL define\n");
+				hnc::test::warning(false, "hnc::ssl::hash::sha224 is not supported, please install OpenSSL and recompile this program without hnc_no_openssl define\n");
 				return sha224_raw_data();
 			}
 			#endif
 
-			#ifndef NO_HNC_SSL
+			#ifndef hnc_no_openssl
 			/// sha256 raw data type
 			using sha256_raw_data = hnc::raw_data<SHA256_DIGEST_LENGTH>;
 			#else
 			using sha256_raw_data = hnc::raw_data<1>;
 			#endif
 
-			#ifndef NO_HNC_SSL
+			#ifndef hnc_no_openssl
 			/**
 			 * @brief Computhe the sha256
 			 *
@@ -166,7 +166,7 @@ namespace hnc
 			 *
 			 * @param[in] s A std::string
 			 *
-			 * @note If NO_HNC_SSL is defined, the function returns default raw_data and displays a warning message
+			 * @note If hnc_no_openssl is defined, the function returns default raw_data and displays a warning message
 			 *
 			 * @return the sha256 of std::string in a hnc::raw_data
 			 */
@@ -186,19 +186,19 @@ namespace hnc
 			#else
 			sha256_raw_data sha256(std::string const & /*s*/)
 			{
-				hnc::test::warning(false, "hnc::ssl::hash::sha256 is not supported, please install OpenSSL and recompile this program without NO_HNC_SSL define\n");
+				hnc::test::warning(false, "hnc::ssl::hash::sha256 is not supported, please install OpenSSL and recompile this program without hnc_no_openssl define\n");
 				return sha256_raw_data();
 			}
 			#endif
 
-			#ifndef NO_HNC_SSL
+			#ifndef hnc_no_openssl
 			/// sha384 raw data type
 			using sha384_raw_data = hnc::raw_data<SHA384_DIGEST_LENGTH>;
 			#else
 			using sha384_raw_data = hnc::raw_data<1>;
 			#endif
 
-			#ifndef NO_HNC_SSL
+			#ifndef hnc_no_openssl
 			/**
 			 * @brief Computhe the sha384
 			 *
@@ -208,7 +208,7 @@ namespace hnc
 			 *
 			 * @param[in] s A std::string
 			 *
-			 * @note If NO_HNC_SSL is defined, the function returns default raw_data and displays a warning message
+			 * @note If hnc_no_openssl is defined, the function returns default raw_data and displays a warning message
 			 *
 			 * @return the sha384 of std::string in a hnc::raw_data
 			 */
@@ -223,19 +223,19 @@ namespace hnc
 			#else
 			sha384_raw_data sha384(std::string const & /*s*/)
 			{
-				hnc::test::warning(false, "hnc::ssl::hash::sha384 is not supported, please install OpenSSL and recompile this program without NO_HNC_SSL define\n");
+				hnc::test::warning(false, "hnc::ssl::hash::sha384 is not supported, please install OpenSSL and recompile this program without hnc_no_openssl define\n");
 				return sha384_raw_data();
 			}
 			#endif
 			
-			#ifndef NO_HNC_SSL
+			#ifndef hnc_no_openssl
 			/// sha512 raw data type
 			using sha512_raw_data = hnc::raw_data<SHA512_DIGEST_LENGTH>;
 			#else
 			using sha512_raw_data = hnc::raw_data<1>;
 			#endif
 			
-			#ifndef NO_HNC_SSL
+			#ifndef hnc_no_openssl
 			/**
 			 * @brief Computhe the sha512
 			 *
@@ -245,7 +245,7 @@ namespace hnc
 			 *
 			 * @param[in] s A std::string
 			 *
-			 * @note If NO_HNC_SSL is defined, the function returns default raw_data and displays a warning message
+			 * @note If hnc_no_openssl is defined, the function returns default raw_data and displays a warning message
 			 * 
 			 * @return the sha512 of std::string in a hnc::raw_data
 			 */
@@ -265,7 +265,7 @@ namespace hnc
 			#else
 			sha512_raw_data sha512(std::string const & /*s*/)
 			{
-				hnc::test::warning(false, "hnc::ssl::hash::sha512 is not supported, please install OpenSSL and recompile this program without NO_HNC_SSL define\n");
+				hnc::test::warning(false, "hnc::ssl::hash::sha512 is not supported, please install OpenSSL and recompile this program without hnc_no_openssl define\n");
 				return sha512_raw_data();
 			}
 			#endif

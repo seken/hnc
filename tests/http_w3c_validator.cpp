@@ -84,7 +84,7 @@ int main()
 			std::cout << hnc::terminal::info << xhtml_code << hnc::terminal::reset << std::endl;
 			hnc::http::w3c_validator r(xhtml_code);
 			std::cout << r << std::endl;
-			#ifndef NO_HNC_Boost_Asio
+			#ifndef hnc_no_boost_asio
 				nb_test -= hnc::test::warning(r.validity(), "hnc::http::w3c_validator fails\n");
 			#else
 				--nb_test;
@@ -97,7 +97,7 @@ int main()
 			std::cout << hnc::terminal::info << xhtml_code_error << hnc::terminal::reset << std::endl;
 			hnc::http::w3c_validator r(xhtml_code_error);
 			std::cout << r << std::endl;
-			#ifndef NO_HNC_Boost_Asio
+			#ifndef hnc_no_boost_asio
 				nb_test -= hnc::test::warning(r.validity() == false, "hnc::http::w3c_validator fails\n");
 			#else
 				--nb_test;
@@ -110,7 +110,7 @@ int main()
 			std::cout << hnc::terminal::info << html_code_warning << hnc::terminal::reset << std::endl;
 			hnc::http::w3c_validator r(html_code_warning);
 			std::cout << r << std::endl;
-			#ifndef NO_HNC_Boost_Asio
+			#ifndef hnc_no_boost_asio
 				nb_test -= hnc::test::warning(r.validity() && r.warnings().size() >= 1, "hnc::http::w3c_validator fails\n");
 			#else
 				--nb_test;
@@ -149,7 +149,7 @@ int main()
 			std::cout << hnc::terminal::info << xhtml_code << hnc::terminal::reset << std::endl;
 			hnc::http::w3c_validator r(xhtml_code);
 			std::cout << r << std::endl;
-			#ifndef NO_HNC_Boost_Asio
+			#ifndef hnc_no_boost_asio
 				nb_test -= hnc::test::warning(r.validity(), "hnc::http::w3c_validator fails\n");
 			#else
 				--nb_test;
@@ -162,7 +162,7 @@ int main()
 			std::cout << hnc::terminal::info << xhtml_code_error << hnc::terminal::reset << std::endl;
 			hnc::http::w3c_validator r(xhtml_code_error);
 			std::cout << r << std::endl;
-			#ifndef NO_HNC_Boost_Asio
+			#ifndef hnc_no_boost_asio
 				nb_test -= hnc::test::warning(r.validity() == false, "hnc::http::w3c_validator fails\n");
 			#else
 				--nb_test;
@@ -175,7 +175,7 @@ int main()
 			std::cout << hnc::terminal::info << html_code_warning << hnc::terminal::reset << std::endl;
 			hnc::http::w3c_validator r(html_code_warning);
 			std::cout << r << std::endl;
-			#ifndef NO_HNC_Boost_Asio
+			#ifndef hnc_no_boost_asio
 				nb_test -= hnc::test::warning(r.validity() && r.warnings().size() >= 1, "hnc::http::w3c_validator fails\n");
 			#else
 				--nb_test;

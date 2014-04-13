@@ -76,7 +76,7 @@ namespace hnc
 	 *
 	 * If you want compile without OpenSSL, you can define the macro
 	 * @code
-	   #define NO_HNC_SSL
+	   #define hnc_no_openssl
 	   @endcode
 	 */
 	namespace ssl

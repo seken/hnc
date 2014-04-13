@@ -36,7 +36,7 @@ public:
 
 private:
 
-	#ifndef NO_HNC_Boost_Serialization
+	#ifndef hnc_no_boost_serialization
 
 	friend class boost::serialization::access;
 
@@ -49,7 +49,7 @@ private:
 	#endif
 };
 
-#ifndef NO_HNC_Boost_Serialization
+#ifndef hnc_no_boost_serialization
 BOOST_CLASS_EXPORT(remote_compute_display)
 #endif
 
@@ -88,7 +88,7 @@ public:
 
 private:
 
-	#ifndef NO_HNC_Boost_Serialization
+	#ifndef hnc_no_boost_serialization
 
 	friend class boost::serialization::access;
 
@@ -102,7 +102,7 @@ private:
 	#endif
 };
 
-#ifndef NO_HNC_Boost_Serialization
+#ifndef hnc_no_boost_serialization
 BOOST_CLASS_EXPORT(remote_compute_int)
 #endif
 
@@ -151,7 +151,7 @@ public:
 
 private:
 
-	#ifndef NO_HNC_Boost_Serialization
+	#ifndef hnc_no_boost_serialization
 
 	friend class boost::serialization::access;
 
@@ -169,7 +169,7 @@ private:
 	#endif
 };
 
-#ifndef NO_HNC_Boost_Serialization
+#ifndef hnc_no_boost_serialization
 BOOST_CLASS_EXPORT(remote_compute_factorial)
 #endif
 
@@ -218,7 +218,7 @@ public:
 
 private:
 
-	#ifndef NO_HNC_Boost_Serialization
+	#ifndef hnc_no_boost_serialization
 
 	friend class boost::serialization::access;
 
@@ -236,12 +236,12 @@ private:
 	#endif
 };
 
-#ifndef NO_HNC_Boost_Serialization
+#ifndef hnc_no_boost_serialization
 BOOST_CLASS_EXPORT(remote_compute_vector_sum)
 #endif
 
 
-#ifndef NO_HNC_Boost_MPI
+#ifndef hnc_no_boost_mpi
 int main(int argc, char * argv[])
 #else
 int main()
@@ -249,7 +249,7 @@ int main()
 {
 	int nb_test = 0;
 
-	#ifndef NO_HNC_Boost_MPI
+	#ifndef hnc_no_boost_mpi
 	hnc_mpi_environment(env);
 	#endif
 

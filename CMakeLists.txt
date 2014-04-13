@@ -1,4 +1,4 @@
-# Copyright © 2012 Lénaïc Bagnères, hnc@singularity.fr
+# Copyright © 2012-2014 Lénaïc Bagnères, hnc@singularity.fr
 
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -16,15 +16,16 @@
 cmake_minimum_required(VERSION 2.6)
 
 
-# User's settings - C++ Flags
-	
-# 	set(release "TRUE")
-	set(release "FALSE")
+# Release / Debug flags
 
-	# Release
-	if (release)
-		set(CMAKE_CXX_FLAGS "-O3 -DNDEBUG -march=native -fomit-frame-pointer -ffast-math")
-	# Debug # valgrind --show-reachable=yes --leak-check=full -v exe
+	if (RELEASE STREQUAL "FALSE" OR RELEASE STREQUAL "DEBUG")
+		set(RELEASE "FALSE")
+	else()
+		set(RELEASE "TRUE")
+	endif()
+
+	if (RELEASE)
+		set(CMAKE_CXX_FLAGS "-O3 -DNDEBUG -march=native -ffast-math")
 	else()
 		set(CMAKE_CXX_FLAGS "-O0 -g3")
 	endif()
@@ -32,101 +33,53 @@ cmake_minimum_required(VERSION 2.6)
 # User's settings - General C++ Flags
 	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra -Wconversion -Wsign-conversion -std=c++11 -pedantic -fopenmp")
 
+
+# Get local directory where .cmake are
+	set(FIND_PACKAGE_LOCAL_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
+
 # Unix
-if (UNIX)
-	add_definitions("-DUNIX")
-endif()
-
-
-# Boost MPI
 	message(STATUS "---")
-	find_package(Boost COMPONENTS mpi serialization)
-	if (Boost_FOUND)
-		# Boost.MPI and Boost.Serialization
-		set(boost_mpi_serialization "${Boost_LIBRARIES}")
-		message(STATUS "Boost.MPI and Boost.Serialization found =) ${boost_mpi_serialization}")
-		# MPI compiler
-		find_program(MPICXX_COMPILER NAMES mpic++ mpicxx mpiCC mpicc)
-		if (MPICXX_COMPILER)
-			# Change the compiler
-			message(STATUS "MPI C++ compiler found =) ${MPICXX_COMPILER}")
-			set(CMAKE_CXX_COMPILER ${MPICXX_COMPILER})
-		else()
-			message(STATUS "MPI C++ compiler not found :(")
-		endif()
-		# mpirun
-		find_program(mpirun_exe NAMES mpirun)
-		if (mpirun_exe)
-			message(STATUS "mpirun executable found =) ${mpirun_exe}")
-		else()
-			message(STATUS "mpirun executable not found :(")
-		endif()
-	else()
-		message(STATUS "Boost.MPI and Boost.Serialization not found :(")
+	find_package(hnc_unix PATHS "${FIND_PACKAGE_LOCAL_PATH}")
+	if (HNC_UNIX_FOUND)
+		add_definitions("-D${HNC_UNIX_MACRO}")
 	endif()
 
-
-# Boost System
+# Boost.Serialization
 	message(STATUS "---")
-	find_package(Boost COMPONENTS system)
-	if (Boost_FOUND)
-		set(boost_system "${Boost_LIBRARIES}")
-		foreach(lib ${boost_mpi_serialization})
-			string(REPLACE "${lib}" "" boost_system ${boost_system})
-		endforeach()
-		message(STATUS "Boost.System found =) ${boost_system}")
-	else()
-		message(STATUS "Boost.System not found :(")
+	find_package(hnc_boost_serialization PATHS "${FIND_PACKAGE_LOCAL_PATH}")
+
+# Boost.System
+	message(STATUS "---")
+	find_package(hnc_boost_system PATHS "${FIND_PACKAGE_LOCAL_PATH}")
+
+# Boost.MPI
+	message(STATUS "---")
+	find_package(hnc_boost_mpi PATHS "${FIND_PACKAGE_LOCAL_PATH}")
+
+# MPI C++ Compiler
+	message(STATUS "---")
+	find_package(hnc_compiler_mpi_cpp PATHS "${FIND_PACKAGE_LOCAL_PATH}")
+	if (HNC_COMPILER_MPI_CPP)
+		set(CMAKE_CXX_COMPILER "${HNC_COMPILER_MPI_CPP}")
 	endif()
 
-
-# Boost Asio
+# Boost.Asio
 	message(STATUS "---")
-	if (boost_system)
-		find_file(boost_asio "boost/asio.hpp")
-		if (boost_asio)
-			message (STATUS "Boost.Asio found =) ${boost_asio}")
-		else()
-			message(STATUS "Boost.Asio not found :( (header boost/asio.hpp not found)")
-		endif()
-	else()
-		message(STATUS "Boost.Asio needs Boost.System :(")
-	endif()
-
+	find_package(hnc_boost_asio PATHS "${FIND_PACKAGE_LOCAL_PATH}")
 
 # OpenSSL
 	message(STATUS "---")
-	find_package(OpenSSL)
-	if (OPENSSL_FOUND)
-		message(STATUS "OpenSSL found =) ${OPENSSL_LIBRARIES}")
-	else()
-		message(STATUS "OpenSSL not found :(")
-	endif()
+	find_package(hnc_openssl PATHS "${FIND_PACKAGE_LOCAL_PATH}")
 
-
-# Gnuplot
+# Gnuplot executable
 	message(STATUS "---")
-	find_program(Gnuplot_exe NAMES gnuplot)
-	if (Gnuplot_exe)
-		message(STATUS "gnuplot executable found =) ${Gnuplot_exe}")
-	else()
-		message(STATUS "gnuplot executable not found :(")
-	endif()
+	find_package(hnc_gnuplot_exe PATHS "${FIND_PACKAGE_LOCAL_PATH}")
 
-
-# LaTeX
+# pdflatex executable
 	message(STATUS "---")
-	find_program(pdflatex_exe NAMES pdflatex)
-	if (pdflatex_exe)
-		message(STATUS "pdflatex executable found =) ${pdflatex_exe}")
-	else()
-		message(STATUS "pdflatex executable not found :(")
-	endif()
+	find_package(hnc_pdflatex_exe PATHS "${FIND_PACKAGE_LOCAL_PATH}")
 
-
-# Include directories (to use #include <> instead of #include "")
-
-	# hnc
+# hnc
 	message(STATUS "---")
 	set(hnc_INCLUDE "./include")
 	message(STATUS "Include hnc = ${hnc_INCLUDE}")
@@ -134,13 +87,12 @@ endif()
 
 
 # Build hnc doxygen
-
 	message(STATUS "---")
 	find_package(Doxygen)
 	if(DOXYGEN_FOUND)
-		message(STATUS "Doxygen found =)")
+		message(STATUS "Doxygen found =) ${DOXYGEN_EXECUTABLE}")
 		add_custom_target(
-			doc
+			doxygen
 			${DOXYGEN_EXECUTABLE}
 			WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/include"
 			COMMENT "Generating API documentation with Doxygen" VERBATIM
@@ -151,31 +103,26 @@ endif()
 
 
 # Compiler log
-
 	message(STATUS "---")
 	message(STATUS "C++ compiler = ${CMAKE_CXX_COMPILER}")
-	if (release)
-		message(STATUS "Mode Release")
+	if (RELEASE)
+		message(STATUS "Release mode")
 	else()
-		message(STATUS "Mode Debug")
+		message(STATUS "Debug mode")
 	endif()
 	message(STATUS "C++ flags    = ${CMAKE_CXX_FLAGS}")
 
 
 # Executables & tests
-
 	enable_testing()
-
 	message(STATUS "---")
 
 	# Tests
-
 	file(
 		GLOB_RECURSE
 		tests
 		tests/*.cpp
 	)
-
 	foreach(test_source ${tests})
 	
 		# Get test name and source
@@ -188,18 +135,18 @@ endif()
 		if ("${test_name}" MATCHES ".*test__.*mpi.*")
 		
 			# with Boost.MPI
-			if (boost_mpi_serialization AND MPICXX_COMPILER)
+			if (HNC_BOOST_SERIALIZATION_FOUND AND HNC_BOOST_MPI_FOUND AND HNC_COMPILER_MPI_CPP)
 				add_executable(${test_name} "${test_source}")
-				target_link_libraries(${test_name} ${boost_mpi_serialization})
+				target_link_libraries(${test_name} ${HNC_BOOST_MPI_LIBRARY} ${HNC_BOOST_SERIALIZATION_LIBRARY})
 				add_test(${test_name} ${test_name})
 			endif()
-			if (mpirun_exe)
-				add_test("${test_name}_with_mpirun_np_4" "${mpirun_exe}" "-np" "4" "${test_name}")
+			if (HNC_COMPILER_MPI_CPP)
+				add_test("${test_name}_with_mpirun_np_4" "${HNC_MPIRUN_EXE}" "-np" "4" "${test_name}")
 			endif()
 			
 			# without
 			add_executable("${test_name}_without_mpi" "${test_source}")
-			set_target_properties("${test_name}_without_mpi" PROPERTIES COMPILE_FLAGS "-DNO_HNC_Boost_Serialization -DNO_HNC_Boost_MPI")
+			set_target_properties("${test_name}_without_mpi" PROPERTIES COMPILE_FLAGS "-D${HNC_NO_BOOST_SERIALIZATION_MACRO} -D${HNC_NO_BOOST_MPI_MACRO}")
 			message(STATUS "Add test ${test_name}_without_mpi")
 			add_test("${test_name}_without_mpi" "${test_name}_without_mpi")
 			
@@ -207,15 +154,15 @@ endif()
 		elseif ("${test_name}" MATCHES ".*test__ssl.*")
 		
 			# With OpenSSL
-			if (OPENSSL_FOUND)
+			if (HNC_OPENSSL_FOUND)
 				add_executable(${test_name} "${test_source}")
-				target_link_libraries(${test_name} ${OPENSSL_LIBRARIES})
+				target_link_libraries(${test_name} ${HNC_OPENSSL_LIBRARY})
 				add_test(${test_name} "${test_name}")
 			endif()
 			
 			# Without OpenSSL
 			add_executable("${test_name}_without_ssl" "${test_source}")
-			set_target_properties("${test_name}_without_ssl" PROPERTIES COMPILE_FLAGS "-DNO_HNC_SSL")
+			set_target_properties("${test_name}_without_ssl" PROPERTIES COMPILE_FLAGS "-D${HNC_NO_OPENSSL_MACRO}")
 			message(STATUS "Add test ${test_name}_without_ssl")
 			add_test("${test_name}_without_ssl" "${test_name}_without_ssl")
 			
@@ -223,15 +170,15 @@ endif()
 		elseif (("${test_name}" STREQUAL "test__http") OR ("${test_name}" STREQUAL "test__http_get") OR ("${test_name}" STREQUAL "test__http_w3c_validator") OR ("${test_name}" STREQUAL "test__html_head") OR ("${test_name}" STREQUAL "test__html_webpage") OR ("${test_name}" MATCHES "test__tabular.*"))
 		
 			# With Boost.Asio
-			if (boost_asio)
+			if (HNC_BOOST_ASIO_FOUND)
 				add_executable(${test_name} "${test_source}")
-				target_link_libraries(${test_name} ${boost_system})
+				target_link_libraries(${test_name} ${HNC_BOOST_SYSTEM_LIBRARY})
 				add_test(${test_name} "${test_name}")
 			endif()
 			
 			# Without Boost.Asio
 			add_executable("${test_name}_without_boost_asio" "${test_source}")
-			set_target_properties("${test_name}_without_boost_asio" PROPERTIES COMPILE_FLAGS "-DNO_HNC_Boost_Asio")
+			set_target_properties("${test_name}_without_boost_asio" PROPERTIES COMPILE_FLAGS "-D${HNC_NO_BOOST_ASIO_MACRO}")
 			message(STATUS "Add test ${test_name}_without_boost_asio")
 			add_test("${test_name}_without_boost_asio" "${test_name}_without_boost_asio")
 			
@@ -262,21 +209,21 @@ endif()
 		
 		# Add a Gnuplot check
 		if ("${test_name}" MATCHES ".*test__gnuplot_gnuplot_.*")
-			if (Gnuplot_exe)
+			if (HNC_GNUPLOT_EXE)
 				string(REPLACE "test__" "hnc_" gnuplot_script ${test_name})
 				string(REPLACE "${gnuplot_script}" "${gnuplot_script}.png.gnuplot" gnuplot_script ${gnuplot_script})
 				message(STATUS "Add test gnuplot ${gnuplot_script}")
-				add_test("${test_name}_gnuplot" "${Gnuplot_exe}" "${gnuplot_script}")
+				add_test("${test_name}_gnuplot" "${HNC_GNUPLOT_EXE}" "${gnuplot_script}")
 			endif()
 		endif()
 		
 		# Add a LaTeX check
 		if (("${test_name}" MATCHES ".*test__latex_.*") OR ("${test_name}" MATCHES "test__tabular.*"))
-			if (pdflatex_exe)
+			if (HNC_PDFLATEX_EXE)
 				string(REPLACE "test__" "hnc_" latex_document ${test_name})
 				string(REPLACE "${latex_document}" "${latex_document}.tex" latex_document ${latex_document})
 				message(STATUS "Add test pdflatex ${latex_document}")
-				add_test("${test_name}_pdflatex" "${pdflatex_exe}" "-interaction=nonstopmode" "${latex_document}")
+				add_test("${test_name}_pdflatex" "${HNC_PDFLATEX_EXE}" "-interaction=nonstopmode" "${latex_document}")
 			endif()
 		endif()
 		
@@ -284,7 +231,6 @@ endif()
 
 
 # Install
-
 	install(DIRECTORY include/ DESTINATION include FILES_MATCHING PATTERN "*.hpp")
 	install(FILES hnc-config.cmake DESTINATION lib/hnc)
 	if (IS_DIRECTORY doc/doxygen)
@@ -293,7 +239,6 @@ endif()
 
 
 # Little help
-
 	message(STATUS "---")
 	message(STATUS "You can execute:")
 	message(STATUS "    make         # To compile hnc tests")
@@ -303,7 +248,7 @@ endif()
 	message(STATUS "                 #     sudo make install")
 	message(STATUS "                 #     su -c \"make install\"")
 	if (DOXYGEN_FOUND)
-		message(STATUS "    make doc     # To generate the Doxygen")
+		message(STATUS "    make doxygen # To generate the Doxygen")
 	endif()
 
 	message(STATUS "---")

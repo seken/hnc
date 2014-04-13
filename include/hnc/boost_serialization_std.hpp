@@ -23,7 +23,7 @@
  *
  * If you want compile without Boost.Serialization, you can define the macro
  * @code
-   #define NO_HNC_Boost_Serialization
+   #define hnc_no_boost_serialization
    @endcode
  */
 
@@ -31,7 +31,7 @@
 #define HNC_BOOST_SERIALIZATION_STD_HPP
 
 
-#ifndef NO_HNC_Boost_Serialization
+#ifndef hnc_no_boost_serialization
 
 	#include <boost/serialization/export.hpp>
 	

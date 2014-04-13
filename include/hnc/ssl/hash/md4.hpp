@@ -18,7 +18,7 @@
 
 #include <string>
 
-#ifndef NO_HNC_SSL
+#ifndef hnc_no_openssl
 #include <openssl/md4.h>
 #endif
 
@@ -32,14 +32,14 @@ namespace hnc
 	{
 		namespace hash
 		{
-			#ifndef NO_HNC_SSL
+			#ifndef hnc_no_openssl
 			/// md4 raw data type
 			using md4_raw_data = hnc::raw_data<MD4_DIGEST_LENGTH>;
 			#else
 			using md4_raw_data = hnc::raw_data<1>;
 			#endif
 
-			#ifndef NO_HNC_SSL
+			#ifndef hnc_no_openssl
 			/**
 			 * @brief Computhe the md4
 			 *
@@ -49,7 +49,7 @@ namespace hnc
 			 *
 			 * @param[in] s A std::string
 			 *
-			 * @note If NO_HNC_SSL is defined, the function returns default raw_data and displays a warning message
+			 * @note If hnc_no_openssl is defined, the function returns default raw_data and displays a warning message
 			 *
 			 * @return the md4 of std::string in a hnc::raw_data
 			 */
@@ -69,7 +69,7 @@ namespace hnc
 			#else
 			md4_raw_data md4(std::string const & /*s*/)
 			{
-				hnc::test::warning(false, "hnc::ssl::hash::md4 is not supported, please install OpenSSL and recompile this program without NO_HNC_SSL define\n");
+				hnc::test::warning(false, "hnc::ssl::hash::md4 is not supported, please install OpenSSL and recompile this program without hnc_no_openssl define\n");
 				return md4_raw_data();
 			}
 			#endif

@@ -21,8 +21,8 @@
 #include <cstdio>
 #include <fstream>
 
-#ifdef UNIX
-  #include <unistd.h>
+#ifdef hnc_unix
+	#include <unistd.h>
 #endif
 
 namespace hnc

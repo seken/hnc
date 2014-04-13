@@ -41,7 +41,7 @@ namespace hnc
 			 *
 			 * @param[in] s A std::string
 			 *
-			 * @note If NO_HNC_SSL is defined, the function returns default raw_data and displays a warning message
+			 * @note If hnc_no_openssl is defined, the function returns default raw_data and displays a warning message
 			 *
 			 * @return the md2 of std::string in a hnc::raw_data
 			 */

@@ -35,7 +35,7 @@ int main()
 		hnc::http::w3c_validator r(page);
 		std::cout << r << std::endl;
 
-		#ifndef NO_HNC_Boost_Asio
+		#ifndef hnc_no_boost_asio
 			nb_test -= hnc::test::warning(r.validity(), "hnc::http::w3c_validator fails\n");
 		#else
 			--nb_test;

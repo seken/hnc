@@ -91,7 +91,7 @@ namespace hnc
 	 * 
 	 * If you want compile without Boost.MPI, you can define the macro
 	 * @code
-	   #define NO_HNC_Boost_MPI
+	   #define hnc_no_boost_mpi
 	   @endcode
 	 */
 	namespace mpi

@@ -20,7 +20,7 @@
 #include <vector>
 #include <algorithm>
 
-#ifndef NO_HNC_Boost_Asio
+#ifndef hnc_no_boost_asio
 #include <boost/asio.hpp>
 #endif
 
@@ -100,7 +100,7 @@ namespace hnc
 				std::vector<std::string> r;
 
 				// Boost.Asio for TCP/IP communication
-				#ifndef NO_HNC_Boost_Asio
+				#ifndef hnc_no_boost_asio
 				
 					// Connexion
 					boost::asio::ip::tcp::iostream http_stream(host(), "http");
@@ -158,7 +158,7 @@ namespace hnc
 				// No Boost.Asio
 				#else
 				
-					hnc::test::warning(false, "Boost.Asio is not supported, please install Boost.Asio (and Boost.System) and recompile this program without NO_HNC_Boost_Asio define\n");
+					hnc::test::warning(false, "Boost.Asio is not supported, please install Boost.Asio (and Boost.System) and recompile this program without hnc_no_boost_asio define\n");
 					
 				#endif
 

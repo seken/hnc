@@ -23,7 +23,7 @@
 #include <future>
 #include <stdexcept>
 
-#ifndef NO_HNC_Boost_MPI
+#ifndef hnc_no_boost_mpi
 	#include <boost/mpi.hpp>
 #endif
 
@@ -59,7 +59,7 @@ namespace hnc
 		 * - have "void operator()() override" function (contains the computation)
 		 * You must BOOST_CLASS_EXPORT your class
 		 *
-		 * @note You can use the NO_HNC_Boost_Serialization define if you want compile without Boost Serialization (and without Boost MPI)
+		 * @note You can use the hnc_no_boost_serialization define if you want compile without Boost Serialization (and without Boost MPI)
 		 *
 		 * Exemple: no attribute, no return
 		 * @code
@@ -77,7 +77,7 @@ namespace hnc
 		   
 		   private:
 		   
-		   	#ifndef NO_HNC_Boost_Serialization
+		   	#ifndef hnc_no_boost_serialization
 		   
 		   	friend class boost::serialization::access;
 		   
@@ -90,7 +90,7 @@ namespace hnc
 		   	#endif
 		   };
 		   
-		   #ifndef NO_HNC_Boost_Serialization
+		   #ifndef hnc_no_boost_serialization
 		   BOOST_CLASS_EXPORT(remote_compute_display)
 		   #endif
 		   @endcode
@@ -131,7 +131,7 @@ namespace hnc
 		   
 		   private:
 		   
-		   	#ifndef NO_HNC_Boost_Serialization
+		   	#ifndef hnc_no_boost_serialization
 		   
 		   	friend class boost::serialization::access;
 		   
@@ -145,7 +145,7 @@ namespace hnc
 		   	#endif
 		   };
 		   
-		   #ifndef NO_HNC_Boost_Serialization
+		   #ifndef hnc_no_boost_serialization
 		   BOOST_CLASS_EXPORT(remote_compute_int)
 		   #endif
 		 * @endcode
@@ -196,7 +196,7 @@ namespace hnc
 		   
 		   private:
 		   
-		   	#ifndef NO_HNC_Boost_Serialization
+		   	#ifndef hnc_no_boost_serialization
 		   
 		   	friend class boost::serialization::access;
 		   
@@ -214,7 +214,7 @@ namespace hnc
 		   	#endif
 		   };
 		   
-		   #ifndef NO_HNC_Boost_Serialization
+		   #ifndef hnc_no_boost_serialization
 		   BOOST_CLASS_EXPORT(remote_compute_factorial)
 		   #endif
 		   @endcode
@@ -265,7 +265,7 @@ namespace hnc
 		   
 		   private:
 		   
-		   	#ifndef NO_HNC_Boost_Serialization
+		   	#ifndef hnc_no_boost_serialization
 		   
 		   	friend class boost::serialization::access;
 		   
@@ -283,7 +283,7 @@ namespace hnc
 		   	#endif
 		   };
 		   
-		   #ifndef NO_HNC_Boost_Serialization
+		   #ifndef hnc_no_boost_serialization
 		   BOOST_CLASS_EXPORT(remote_compute_vector_sum)
 		   #endif
 		   @endcode
@@ -301,7 +301,7 @@ namespace hnc
 			/// @brief Operator() contains the function for the remote thread
 			virtual void operator()() { }
 
-			#ifndef NO_HNC_Boost_MPI
+			#ifndef hnc_no_boost_mpi
 			/// @brief Generic function to send a result to master
 			/// @param[in] r          Send the result to the master (by Boost MPI with 1 as tag)
 			/// @param[in] tag_result MPI tag result
@@ -351,7 +351,7 @@ namespace hnc
 
 		private:
 
-			#ifndef NO_HNC_Boost_Serialization
+			#ifndef hnc_no_boost_serialization
 			
 			/// Boost serialization access
 			friend class boost::serialization::access;
@@ -381,7 +381,7 @@ namespace hnc
 
 			private:
 
-				#ifndef NO_HNC_Boost_Serialization
+				#ifndef hnc_no_boost_serialization
 
 				/// Boost serialization access
 				friend class boost::serialization::access;
@@ -436,7 +436,7 @@ namespace hnc
 		  
 		   private:
 		  
-		   	#ifndef NO_HNC_Boost_Serialization
+		   	#ifndef hnc_no_boost_serialization
 		  
 		   	friend class boost::serialization::access;
 		  
@@ -449,12 +449,12 @@ namespace hnc
 		   	#endif
 		   };
 		  
-		   #ifndef NO_HNC_Boost_Serialization
+		   #ifndef hnc_no_boost_serialization
 		   BOOST_CLASS_EXPORT(remote_compute_display)
 		   #endif
 		   
 		   
-		   #ifndef NO_HNC_Boost_MPI
+		   #ifndef hnc_no_boost_mpi
 		   int main(int argc, char * argv[])
 		   #else
 		   int main()
@@ -462,7 +462,7 @@ namespace hnc
 		   {
 		   	int nb_test = 0;
 		   
-		   	#ifndef NO_HNC_Boost_MPI
+		   	#ifndef hnc_no_boost_mpi
 		   	hnc_mpi_environment(env);
 		   	#endif
 		   
@@ -526,7 +526,7 @@ namespace hnc
 		  
 		   private:
 		  
-		   	#ifndef NO_HNC_Boost_Serialization
+		   	#ifndef hnc_no_boost_serialization
 		  
 		   	friend class boost::serialization::access;
 		  
@@ -544,12 +544,12 @@ namespace hnc
 		   	#endif
 		   };
 		  
-		   #ifndef NO_HNC_Boost_Serialization
+		   #ifndef hnc_no_boost_serialization
 		   BOOST_CLASS_EXPORT(remote_compute_vector_sum)
 		   #endif
 		  
 		  
-		   #ifndef NO_HNC_Boost_MPI
+		   #ifndef hnc_no_boost_mpi
 		   int main(int argc, char * argv[])
 		   #else
 		   int main()
@@ -557,7 +557,7 @@ namespace hnc
 		   {
 		   	int nb_test = 0;
 		  
-		   	#ifndef NO_HNC_Boost_MPI
+		   	#ifndef hnc_no_boost_mpi
 		   	hnc_mpi_environment(env);
 		   	#endif
 		  
@@ -573,14 +573,14 @@ namespace hnc
 		 *
 		 * @note If you use processor 0 (master), the computation is made in a std::future.
 		 *
-		 * @note If you compile with NO_HNC_Boost_MPI define, your code use std::future and you have a multi-thread program instead of a multi-processor program.
+		 * @note If you compile with hnc_no_boost_mpi define, your code use std::future and you have a multi-thread program instead of a multi-processor program.
 		 */
 		template <class result_t>
 		class future
 		{
 		private:
 
-			#ifndef NO_HNC_Boost_MPI
+			#ifndef hnc_no_boost_mpi
 			
 			/// Boost communicator
 			boost::mpi::communicator m_world;
@@ -601,7 +601,7 @@ namespace hnc
 
 		public:
 
-			#ifndef NO_HNC_Boost_MPI
+			#ifndef hnc_no_boost_mpi
 
 			/// @brief Constructor
 			/// @param[in,out] f       Functor objet derived of hnc::mpi::functor
@@ -670,7 +670,7 @@ namespace hnc
 				{
 					r = m_future_master.get();
 				}
-				#ifndef NO_HNC_Boost_MPI
+				#ifndef hnc_no_boost_mpi
 				// Slave
 				else
 				{
@@ -702,7 +702,7 @@ namespace hnc
 		 * After the creation of the MPI environment, only the master (rank 0) must continue.@n
 		 * You can use this code
 		 * @code
-		   #ifndef NO_HNC_Boost_MPI
+		   #ifndef hnc_no_boost_mpi
 		   hnc::mpi::environment env(argc, argv);
 		   {
 		   	boost::mpi::communicator world;
@@ -715,7 +715,7 @@ namespace hnc
 		 * @endcode
 		 * or this macro
 		 * @code
-		   #ifndef NO_HNC_Boost_MPI
+		   #ifndef hnc_no_boost_mpi
 		   hnc_mpi_environment(env);
 		   #endif
 		 * @endcode
@@ -727,7 +727,7 @@ namespace hnc
 		 * 
 		 * @note If you do not use argv or argv and you take care about warning, you can use
 		 * @code
-		   #ifndef NO_HNC_Boost_MPI
+		   #ifndef hnc_no_boost_mpi
 		   int main(int argc, char * argv[])
 		   #else
 		   int main()
@@ -737,7 +737,7 @@ namespace hnc
 		class environment
 		{
 
-		#ifndef NO_HNC_Boost_MPI
+		#ifndef hnc_no_boost_mpi
 			
 		public:
 
@@ -811,11 +811,11 @@ namespace hnc
 	}
 }
 
-#ifndef NO_HNC_Boost_Serialization
+#ifndef hnc_no_boost_serialization
 BOOST_CLASS_EXPORT(hnc::mpi::functor)
 #endif
 
-#ifndef NO_HNC_Boost_Serialization
+#ifndef hnc_no_boost_serialization
 BOOST_CLASS_EXPORT(hnc::mpi::final_functor)
 #endif
 

@@ -31,7 +31,7 @@ int main()
 		std::string const v = "Compute md4";
 		hnc::ssl::hash::md4_raw_data r = hnc::ssl::hash::md4(v);
 		std::cout << "md4 of \"" << v << "\" = " << r << std::endl;
-		#ifndef NO_HNC_SSL
+		#ifndef hnc_no_openssl
 		nb_test -= hnc::test::warning(hnc::to_string(r) == "eb7bf78d690e331ae59373004fa253f4", "hnc::ssl::hash::md4 fails\n");
 		#else
 		nb_test -= hnc::test::warning(r == hnc::ssl::hash::md4_raw_data(), "hnc::ssl::hash::md4 fails\n");

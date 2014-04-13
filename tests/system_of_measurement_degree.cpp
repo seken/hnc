@@ -78,7 +78,7 @@ int main()
 	nb_test += 3;
 	{
 		std::cout << "Constructor with hnc::radian" << std::endl;
-		hnc::radian<double> angle_radian(3.14159); std::cout << angle_radian << " (" << angle_radian.degree_value() << "°)" << std::endl;
+		hnc::radian<double> angle_radian(1.42); std::cout << angle_radian << " (" << angle_radian.degree_value() << "°)" << std::endl;
 		hnc::degree<double> angle_degree(angle_radian); std::cout << angle_degree << " (" << angle_degree.radian_value() << "r)" << std::endl;
 		nb_test -= hnc::test::warning(angle_degree.value() == angle_radian.degree_value(), "hnc::degree fails\n");
 		nb_test -= hnc::test::warning(angle_degree.radian_value() == angle_radian.value(), "hnc::degree fails\n");

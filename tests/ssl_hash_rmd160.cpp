@@ -31,7 +31,7 @@ int main()
 		std::string const v = "Compute rmd160";
 		hnc::ssl::hash::rmd160_raw_data r = hnc::ssl::hash::rmd160(v);
 		std::cout << "rmd160 of \"" << v << "\" = " << r << std::endl;
-		#ifndef NO_HNC_SSL
+		#ifndef hnc_no_openssl
 		nb_test -= hnc::test::warning(hnc::to_string(r) == "344fba566d913cd611c1e66098e4e5fe0a998ed5", "hnc::ssl::hash::rmd160 fails\n");
 		#else
 		nb_test -= hnc::test::warning(r == hnc::ssl::hash::rmd160_raw_data(), "hnc::ssl::hash::rmd160 fails\n");

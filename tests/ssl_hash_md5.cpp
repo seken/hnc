@@ -31,7 +31,7 @@ int main()
 		std::string const v = "Compute md5";
 		hnc::ssl::hash::md5_raw_data r = hnc::ssl::hash::md5(v);
 		std::cout << "md5 of \"" << v << "\" = " << r << std::endl;
-		#ifndef NO_HNC_SSL
+		#ifndef hnc_no_openssl
 		nb_test -= hnc::test::warning(hnc::to_string(r) == "a1d93510e969cf5ea83c8827728da77e", "hnc::ssl::hash::md5 fails\n");
 		#else
 		nb_test -= hnc::test::warning(r == hnc::ssl::hash::md5_raw_data(), "hnc::ssl::hash::md5 fails\n");

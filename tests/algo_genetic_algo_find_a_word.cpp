@@ -118,7 +118,7 @@ int main()
 		2,                                 // nb_archipelago,
 		4,                                 // nb_island_per_archipelago,
 		50,                                // nb_solution_per_island,
-		100,                               // number_of_generation = 100,
+		0,                                 // number_of_generation = 100,
 		0.7,                               // crossover_probability = 0.7,
 		0.01,                              // mutation_probability = 0.01,
 		3,                                 // nb_migration_per_island = 3,

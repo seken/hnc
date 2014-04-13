@@ -44,7 +44,7 @@ mkdir build
 cd build
 cmake .. #-DCMAKE_INSTALL_PREFIX=/path/to/install/hnc
 make
-# make doc
+# make doxygen
 # make test
 make install # su -c "make install" # sudo make install
  

@@ -460,6 +460,7 @@ int main()
 		nb_test -= hnc::test::warning(same_value, "vector2D add_row_after does not work\n");
 	}
 
+	#ifndef NDEBUG
 	++nb_test;
 	{
 		hnc::vector2D<int> v(ref);
@@ -474,7 +475,9 @@ int main()
 		}
 		nb_test -= hnc::test::warning(except, "vector2D add_row_before (invalid id row) does not work\n");
 	}
+	#endif
 
+	#ifndef NDEBUG
 	++nb_test;
 	{
 		hnc::vector2D<int> v(ref);
@@ -489,6 +492,7 @@ int main()
 		}
 		nb_test -= hnc::test::warning(except, "vector2D add_row_before (invalid id row) does not work\n");
 	}
+	#endif
 
 	// Check add column
 
@@ -625,6 +629,7 @@ int main()
 		nb_test -= hnc::test::warning(same_value, "vector2D add_col_before does not work\n");
 	}
 
+	#ifndef NDEBUG
 	++nb_test;
 	{
 		hnc::vector2D<int> v(ref);
@@ -639,7 +644,9 @@ int main()
 		}
 		nb_test -= hnc::test::warning(except, "vector2D add_col_before (invalid id col) does not work\n");
 	}
+	#endif
 
+	#ifndef NDEBUG
 	++nb_test;
 	{
 		hnc::vector2D<int> v(ref);
@@ -654,6 +661,7 @@ int main()
 		}
 		nb_test -= hnc::test::warning(except, "vector2D add_col_before (invalid id col) does not work\n");
 	}
+	#endif
 
 	// Check remove line
 
@@ -714,6 +722,7 @@ int main()
 		nb_test -= hnc::test::warning(same_value, "vector2D remove_line does not work\n");
 	}
 
+	#ifndef NDEBUG
 	++nb_test;
 	{
 		hnc::vector2D<int> v(ref);
@@ -729,6 +738,7 @@ int main()
 		}
 		nb_test -= hnc::test::warning(except, "vector2D remove_line (invalid id line) does not work\n");
 	}
+	#endif
 
 	// Check remove column
 
@@ -789,6 +799,7 @@ int main()
 		nb_test -= hnc::test::warning(same_value, "vector2D remove_column does not work\n");
 	}
 
+	#ifndef NDEBUG
 	++nb_test;
 	{
 		hnc::vector2D<int> v(ref);
@@ -804,6 +815,7 @@ int main()
 		}
 		nb_test -= hnc::test::warning(except, "vector2D remove_column (invalid id line) does not work\n");
 	}
+	#endif
 
 	// Check iterators
 
