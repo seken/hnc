@@ -47,6 +47,9 @@ cmake_minimum_required(VERSION 2.6)
 # Boost.Serialization
 	message(STATUS "---")
 	find_package(hnc_boost_serialization PATHS "${FIND_PACKAGE_LOCAL_PATH}")
+	if (NOT HNC_BOOST_SERIALIZATION_FOUND)
+		add_definitions("-D${HNC_NO_BOOST_SERIALIZATION_MACRO}")
+	endif()
 
 # Boost.System
 	message(STATUS "---")
@@ -55,6 +58,9 @@ cmake_minimum_required(VERSION 2.6)
 # Boost.MPI
 	message(STATUS "---")
 	find_package(hnc_boost_mpi PATHS "${FIND_PACKAGE_LOCAL_PATH}")
+	if (NOT HNC_BOOST_MPI_FOUND)
+		add_definitions("-D${HNC_NO_BOOST_MPI_MACRO}")
+	endif()
 
 # MPI C++ Compiler
 	message(STATUS "---")
@@ -66,10 +72,16 @@ cmake_minimum_required(VERSION 2.6)
 # Boost.Asio
 	message(STATUS "---")
 	find_package(hnc_boost_asio PATHS "${FIND_PACKAGE_LOCAL_PATH}")
+	if (NOT HNC_BOOST_ASIO_FOUND)
+		add_definitions("-D${HNC_NO_BOOST_ASIO_MACRO}")
+	endif()
 
 # OpenSSL
 	message(STATUS "---")
 	find_package(hnc_openssl PATHS "${FIND_PACKAGE_LOCAL_PATH}")
+	if (NOT HNC_OPENSSL_FOUND)
+		add_definitions("-D${HNC_NO_OPENSSL_MACRO}")
+	endif()
 
 # Gnuplot executable
 	message(STATUS "---")
