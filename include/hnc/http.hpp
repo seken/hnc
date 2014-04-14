@@ -30,6 +30,37 @@ namespace hnc
 	 * @code
 	   #include <hnc/http.hpp>
 	   @endcode
+	 *
+	 * To use hnc::http, you need Boost.Asio and Boost.System @n
+	 * You can add this in your CMakeLists.txt
+	 * @code
+	   find_package(hnc REQUIRED)
+	  
+	   # ...
+	  
+	   # Create the executable
+	   add_executable(your_exe your_exe.cpp)
+	   target_link_libraries(your_exe ${HNC_BOOST_SYSTEM_LIBRARY})
+	   @endcode
+	 *
+	 * For quick test, if you use GCC from the command line and Boost is installed, you can link directly with:
+	 * @code
+	   -lboost_system
+	   @endcode
+	 *
+	 * On Debian GNU/Linux distribution you can install the packages:
+	 * @code
+	   libboost-system-dev libboost-asio-dev
+	   @endcode
+	 *
+	 * If you want compile without Boost.Asio, you can define the macro
+	 * @code
+	   #define hnc_no_boost_asio
+	   @endcode
+	 * or use CMake variable
+	 * @code
+	   add_definition("-D${HNC_NO_BOOST_ASIO_MACRO}")
+	   @endcode
 	 */
 	namespace http
 	{

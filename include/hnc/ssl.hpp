@@ -50,18 +50,13 @@ namespace hnc
 	 * To use hnc::ssl, you need OpenSSL @n
 	 * You can add this in your CMakeLists.txt
 	 * @code
-	   find_package(OpenSSL REQUIRED)
-	   if (OPENSSL_FOUND)
-	   	message(STATUS "OpenSSL found :) ${OPENSSL_LIBRARIES}")
-	   else()
-	   	message(STATUS "OpenSSL not found :(")
-	   endif()
+	   find_package(hnc REQUIRED)
 	  
 	   # ...
 	  
 	   # Create the executable
 	   add_executable(your_exe your_exe.cpp)
-	   target_link_libraries(your_exe ${OPENSSL_LIBRARIES})
+	   target_link_libraries(your_exe ${HNC_OPENSSL_LIBRARY})
 	   @endcode
 	 *
 	 * For quick test, if you use GCC from the command line and Boost is installed, you can link directly with:
@@ -77,6 +72,10 @@ namespace hnc
 	 * If you want compile without OpenSSL, you can define the macro
 	 * @code
 	   #define hnc_no_openssl
+	   @endcode
+	 * or use CMake variable
+	 * @code
+	   add_definition("-D${HNC_NO_OPENSSL_MACRO}")
 	   @endcode
 	 */
 	namespace ssl

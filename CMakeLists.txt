@@ -231,8 +231,20 @@ cmake_minimum_required(VERSION 2.6)
 
 
 # Install
+	# .hpp
 	install(DIRECTORY include/ DESTINATION include FILES_MATCHING PATTERN "*.hpp")
-	install(FILES hnc-config.cmake DESTINATION lib/hnc)
+	# .cmake
+	install(FILES cmake/hnc-config.cmake DESTINATION lib/hnc)
+	install(FILES cmake/hnc_boost_asio-config.cmake DESTINATION lib/hnc_boost_asio)
+	install(FILES cmake/hnc_boost_mpi-config.cmake DESTINATION lib/hnc_boost_mpi)
+	install(FILES cmake/hnc_boost_serialization-config.cmake DESTINATION lib/hnc_boost_serialization)
+	install(FILES cmake/hnc_boost_system-config.cmake DESTINATION lib/hnc_boost_system)
+	install(FILES cmake/hnc_compiler_mpi_cpp-config.cmake DESTINATION lib/hnc_compiler_mpi_cpp)
+	install(FILES cmake/hnc_gnuplot_exe-config.cmake DESTINATION lib/hnc_gnuplot_exe)
+	install(FILES cmake/hnc_openssl-config.cmake DESTINATION lib/hnc_openssl)
+	install(FILES cmake/hnc_pdflatex_exe-config.cmake DESTINATION lib/hnc_pdflatex_exe)
+	install(FILES cmake/hnc_unix-config.cmake DESTINATION lib/hnc_unix)
+	# Doxygen
 	if (IS_DIRECTORY doc/doxygen)
 		install(DIRECTORY doc/doxygen DESTINATION share/hnc)
 	endif()
