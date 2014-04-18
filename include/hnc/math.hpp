@@ -20,6 +20,7 @@
 #define HNC_MATH_HPP
 
 #include "math/cartesian_product.hpp"
+#include "math/combination.hpp"
 
 #include "math/geometric_mean.hpp"
 
@@ -34,7 +35,7 @@
 
 #include "math/relational_operator.hpp"
 
-#include "math/variance.hpp"
+#include "math/standard_deviation.hpp"
 #include "math/variance.hpp"
 
 
