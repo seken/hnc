@@ -35,21 +35,21 @@ namespace hnc
 	{
 		// Compile-time counter
 		template <std::size_t>
-		class static_int_counter { };
+		class static_int_counter_args { };
 
 		// Container to tuple
 		// Read the tuple and affect the * iterator to the tuple with type conversion
 		template <class iterator, class tuple, std::size_t n>
-		void container_to_tuple(iterator const & it, tuple & t, static_int_counter<n>)
+		void container_to_tuple(iterator const & it, tuple & t, static_int_counter_args<n>)
 		{
-			container_to_tuple(it, t, static_int_counter<n - 1>());
+			container_to_tuple(it, t, static_int_counter_args<n - 1>());
 			using element_t = typename std::tuple_element<n, tuple>::type;
 			std::get<n>(t) = hnc::to_<element_t>(*(it + n));
 		}
 
 		// Container to tuple, Last element
 		template <class iterator, class tuple>
-		void container_to_tuple(iterator const & it, tuple & t, static_int_counter<0>)
+		void container_to_tuple(iterator const & it, tuple & t, static_int_counter_args<0>)
 		{
 			using element_t = typename std::tuple_element<0, tuple>::type;
 			std::get<0>(t) = hnc::to_<element_t>(*it);
@@ -548,7 +548,7 @@ namespace hnc
 					{
 						std::tuple<T...> r = default_value;
 						// Vector to tuple
-						container_to_tuple(first_arg, r, static_int_counter<sizeof...(T) - 1>());
+						container_to_tuple(first_arg, r, static_int_counter_args<sizeof...(T) - 1>());
 						// Return
 						return r;
 					}
