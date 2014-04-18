@@ -34,7 +34,7 @@
 void validate(int & nb_test, hnc::tabular const & tabular)
 {
 	// Basename
-	std::string const basename = "hnc_tabular_" + hnc::algo::replace_all(tabular.title(), " "_s, "_"_s);
+	std::string const basename = "hnc_tabular_" + hnc::algo::replace_all_copy(tabular.title(), " "_s, "_"_s);
 
 	// Txt
 

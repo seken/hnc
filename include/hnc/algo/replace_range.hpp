@@ -34,11 +34,11 @@ namespace hnc
 		   #include <hnc/algo.hpp>
 		   @endcode
 		 *
-		 * @param[in] c            Container
-		 * @param[in] first        Iterator on first element
-		 * @param[in] last         Iterator on last element (not included)
-		 * @param[in] values_first Iterator on first element of the values
-		 * @param[in] values_last  Iterator on last element (of the values (not included)
+		 * @param[in,out] c            Container
+		 * @param[in]     first        Iterator on first element
+		 * @param[in]     last         Iterator on last element (not included)
+		 * @param[in]     values_first Iterator on first element of the values
+		 * @param[in]     values_last  Iterator on last element (of the values (not included)
 		 *
 		 * @warning Iterators of the container can became invalid (if insert or remove values)
 		 *
@@ -95,10 +95,10 @@ namespace hnc
 		   #include <hnc/algo.hpp>
 		   @endcode
 		 *
-		 * @param[in] c          Container
-		 * @param[in] first      Iterator on first element
-		 * @param[in] last       Iterator on last element (not included)
-		 * @param[in] new_values New values
+		 * @param[in,out] c          Container
+		 * @param[in]     first      Iterator on first element
+		 * @param[in]     last       Iterator on last element (not included)
+		 * @param[in]     new_values New values
 		 *
 		 * @warning Iterators of the container can became invalid (if insert or remove values)
 		 *
