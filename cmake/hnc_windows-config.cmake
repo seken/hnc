@@ -24,6 +24,8 @@ if (WIN32 OR WIN64)
 	set(HNC_WINDOWS_FOUND "TRUE")
 	set(HNC_WINDOWS_MACRO "hnc_windows")
 	
+	add_definitions("-D${HNC_WINDOWS_MACRO}")
+	
 	message(STATUS "Platform is Windows :(")
 	
 else()

@@ -40,16 +40,10 @@ cmake_minimum_required(VERSION 2.6)
 # Unix
 	message(STATUS "---")
 	find_package(hnc_unix PATHS "${FIND_PACKAGE_LOCAL_PATH}")
-	if (HNC_UNIX_FOUND)
-		add_definitions("-D${HNC_UNIX_MACRO}")
-	endif()
 
 # Windows
 	message(STATUS "---")
 	find_package(hnc_windows PATHS "${FIND_PACKAGE_LOCAL_PATH}")
-	if (HNC_WINDOWS_FOUND)
-		add_definitions("-D${HNC_WINDOWS_MACRO}")
-	endif()
 
 # Boost.Serialization
 	message(STATUS "---")

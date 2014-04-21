@@ -24,6 +24,8 @@ if (UNIX)
 	set(HNC_UNIX_FOUND "TRUE")
 	set(HNC_UNIX_MACRO "hnc_unix")
 	
+	add_definitions("-D${HNC_UNIX_MACRO}")
+	
 	message(STATUS "Platform is UNIX")
 	
 else()
