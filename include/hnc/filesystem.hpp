@@ -21,8 +21,18 @@
 #include <cstdio>
 #include <fstream>
 
+#include "except.hpp"
+
 #ifdef hnc_unix
 	#include <unistd.h>
+	#include <sys/stat.h>
+	#include <sys/types.h>
+	#include <pwd.h>
+#endif
+
+#ifdef hnc_windows
+	#include <Windows.h>
+	#include <Shlobj.h>
 #endif
 
 namespace hnc
@@ -486,6 +496,79 @@ namespace hnc
 				// Return
 				return available_pathname;
 			}
+		}
+
+		/**
+		 * @brief Create a directory
+		 *
+		 * @code
+		   #include <hnc/filesystem.hpp>
+		   @endcode
+		 *
+		 * @param[in] path Path of the directory
+		 *
+		 * @return true if directory is created, false otherwise
+		 */
+		bool create_directory(std::string const & path)
+		{
+			#if _POSIX_VERSION
+			
+				// http://linux.die.net/man/3/mkdir
+				int const status = mkdir(path.c_str(), S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH);
+				return (status == 0);
+				
+			#elif hnc_windows
+				
+				// http://stackoverflow.com/questions/8931196/createdirectory-windows-api-usage-in-c
+				// http://msdn.microsoft.com/en-us/library/windows/desktop/aa363855%28v=vs.85%29.aspx
+				auto const r = CreateDirectory(path.c_str(), NULL);
+				return bool(r);
+				
+			#else
+				
+				throw hnc::except::incomplete_implementation("hnc::filesystem::create_directory is not implemented on your platform, please write a bug report or send a mail https://gitorious.org/hnc");
+				
+			#endif
+		}
+
+		/**
+		 * @brief Get home directory
+		 *
+		 * @code
+		   #include <hnc/filesystem.hpp>
+		   @endcode
+		 *
+		 * @return the home directory
+		 */
+		std::string home()
+		{
+			#if _POSIX_VERSION
+			
+				struct passwd const * const pw = getpwuid(getuid());
+				return pw->pw_dir;
+				
+			#elif hnc_windows
+				
+				// http://stackoverflow.com/questions/9542611/how-to-get-the-current-users-home-directory-in-windows
+				// http://msdn.microsoft.com/en-us/library/windows/desktop/bb762181.aspx
+				wchar_t path_wchar[MAX_PATH];
+				SHGetFolderPathW(NULL, CSIDL_PROFILE, NULL, 0, path_wchar);
+				
+				// http://www.cplusplus.com/forum/general/39766/
+				char path_char[MAX_PATH * 8];
+				char char_def = ' ';
+				WideCharToMultiByte(CP_ACP, 0, path_wchar, -1, path_char, 260, &char_def, NULL);
+				
+				return path_char;
+				
+			#else
+				
+				char const * const r = std::getenv("HOME");
+				if (r != nullptr) { return r; }
+				
+				throw hnc::except::incomplete_implementation("hnc::filesystem::home is not implemented on your platform, please write a bug report or send a mail https://gitorious.org/hnc");
+				
+			#endif
 		}
 	}
 }

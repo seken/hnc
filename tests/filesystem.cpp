@@ -494,6 +494,23 @@ int main()
 
 	std::cout << std::endl;
 
+	++nb_test;
+	{
+		std::string const path = hnc::filesystem::filename_without_overwrite(hnc::filesystem::tmp_filename());
+		std::cout << "Create directory " << path << std::endl;
+		bool const r = hnc::filesystem::create_directory(path);
+		{ std::ofstream f(path + "/hnc_tmp"); }
+		nb_test -= hnc::test::warning(r && hnc::filesystem::file_exists(path + "/hnc_tmp"), "hnc::filesystem::create_directory fails\n");
+	}
+
+	std::cout << std::endl;
+
+	{
+		std::cout << "home directory = " << hnc::filesystem::home() << std::endl;
+	}
+
+	std::cout << std::endl;
+
 	hnc::test::warning(nb_test == 0, "hnc::filesystem: " + hnc::to_string(nb_test) + " test fail!\n");
 
 	return nb_test;
