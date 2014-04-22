@@ -431,7 +431,7 @@ namespace hnc
 		std::string tmp_filename()
 		{
 			// mkstemp
-			#if _POSIX_VERSION
+			#ifdef hnc_unix
 			
 				// Generate filename
 				char filename_buffer[] = "/tmp/XXXXXXXX\0";
@@ -511,7 +511,7 @@ namespace hnc
 		 */
 		bool create_directory(std::string const & path)
 		{
-			#if _POSIX_VERSION
+			#ifdef hnc_unix
 			
 				// http://linux.die.net/man/3/mkdir
 				int const status = mkdir(path.c_str(), S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH);
@@ -542,7 +542,7 @@ namespace hnc
 		 */
 		std::string home()
 		{
-			#if _POSIX_VERSION
+			#ifdef hnc_unix
 			
 				struct passwd const * const pw = getpwuid(getuid());
 				return pw->pw_dir;
