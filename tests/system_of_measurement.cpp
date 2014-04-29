@@ -20,7 +20,7 @@
 
 int main()
 {
-	std::cout << "Just test system_of_measurement.hpp include" << std::endl;
+	std::cout << "Just test hnc/ system_of_measurement.hpp include" << std::endl;
 
 	return 0;
 }

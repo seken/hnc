@@ -23,7 +23,7 @@
 
 int main()
 {
-	std::cout << "Just test mpi.hpp include" << std::endl;
+	std::cout << "Just test hnc/ mpi.hpp include" << std::endl;
 
 	return 0;
 }

@@ -29,7 +29,7 @@ int main()
 	
 	int nb_test = 0;
 
-	std::cout << "Just test gnuplot/gnuplot.hpp include" << std::endl;
+	std::cout << "Just test hnc/ gnuplot/gnuplot.hpp include" << std::endl;
 
 	hnc::test::warning(nb_test == 0, "hnc::gnuplot::gnuplot: " + hnc::to_string(nb_test) + " test fail!\n");
 

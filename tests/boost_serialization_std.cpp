@@ -23,7 +23,7 @@
 
 int main()
 {
-	std::cout << "Just test boost_serialization_std.hpp include" << std::endl;
+	std::cout << "Just test hnc/boost_serialization_std.hpp include" << std::endl;
 
 	return 0;
 }

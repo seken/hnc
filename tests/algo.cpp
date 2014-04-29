@@ -23,7 +23,7 @@
 
 int main()
 {
-	std::cout << "Just test algo.hpp include" << std::endl;
+	std::cout << "Just test hnc/algo.hpp include" << std::endl;
 
 	return 0;
 }

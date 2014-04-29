@@ -20,7 +20,7 @@
 
 int main()
 {
-	std::cout << "Just test scheduler.hpp include" << std::endl;
+	std::cout << "Just test hnc/ scheduler.hpp include" << std::endl;
 
 	return 0;
 }
