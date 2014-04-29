@@ -27,17 +27,17 @@ namespace hnc
 	namespace scheduler
 	{
 		/**
-		 * @brief Excute different versions of for loop. Split iterations, benchmark versions and select the version with last min time. No useless computing, no rollback.
+		 * @brief Excute different versions of for loop. Split iterations, benchmark versions and select the version with the min time. No useless computing, no rollback.
 		 *
 		 * @code
 		   #include <hnc/scheduler.hpp>
 		   @endcode
 		 *
 		 * You have:
-		 * - a number of iterations (betwwen start and end with a step)
+		 * - a number of iterations (betwwen first and last with a step)
 		 * - different versions of the same computing (per iteration)
 		 *
-		 * You do not know the best version. Worse, the best version is not the same in all contexts (the best version depends on another computing in the computer).
+		 * You do not know the best version. Worse, the best version is not the same in all contexts (the best version deplasts on another computing in the computer).
 		 *
 		 * This function take the number of iterations, several versions and do this until there are no iteration anymore:
 		 * 1. execute all versions on few iterations (sample)
@@ -47,17 +47,17 @@ namespace hnc
 		 * @code
 		   int func_value = 0;
 		   
-		   void func0(int const & start, int const & end)
+		   void func0(int const & first, int const & last)
 		   {
-		   	for (int i = start; i < end; ++i)
+		   	for (int i = first; i < last; ++i)
 		   	{
 		   		++func_value;
 		   	}
 		   }
 		  
-		   void func1(int const & start, int const & end)
+		   void func1(int const & first, int const & last)
 		   {
-		   	for (int i = start; i < end; ++i)
+		   	for (int i = first; i < last; ++i)
 		   	{
 		   		++func_value;
 		   	}
@@ -81,9 +81,9 @@ namespace hnc
 		   public:
 		   	fonctor(std::vector<std::vector<int>> & tab2D) : r_tab2D(tab2D) { }
 		   
-		   	void operator()(std::size_t const & start, std::size_t const & end)
+		   	void operator()(std::size_t const & first, std::size_t const & last)
 		   	{
-		   		for (std::size_t i = start; i < end; ++i)
+		   		for (std::size_t i = first; i < last; ++i)
 		   		{
 		   			for (std::size_t j = 0; j < r_tab2D.size(); ++j)
 		   			{
@@ -103,11 +103,11 @@ namespace hnc
 		   	// A 2D array [N][N]
 		   	std::vector<std::vector<int>> tab2D(N, std::vector<int>(N, 0));
 		   	
-		   	auto lambda = [&](std::size_t const & start, std::size_t const & end) -> void
+		   	auto lambda = [&](std::size_t const & first, std::size_t const & last) -> void
 		   	{
 		   		for (j = 0; j < tab2D.size(); j += 7)
 		   		{
-		   			for (i = start; i < end; ++i)
+		   			for (i = first; i < last; ++i)
 		   			{
 		   				tab2D[i][j] += i * j;
 		   			}
@@ -121,9 +121,9 @@ namespace hnc
 		   }
 		   @endcode
 		 * 
-		 * @param[in] start         First iteration
-		 * @param[in] end           Last iteration
-		 * @param[in] versions      Functions with a start and a end and with the same computing
+		 * @param[in] first         First iteration
+		 * @param[in] last          Last iteration (not included)
+		 * @param[in] versions      Functions with a first and a last and with the same computing
 		 * @param[in] nb_it_sample  Number of iterations for sample phases
 		 * @param[in] nb_it_compute Number of iterations for compute phases
 		 * @param[in] step          Incrementation in the loop (1 by default)
@@ -143,47 +143,49 @@ namespace hnc
 		template <class it_t, class incr_t = std::size_t>
 		inline void iteration
 		(
-			it_t start,
-			it_t const & end,
+			it_t first,
+			it_t const & last,
 			std::vector<std::function<void(it_t const &, it_t const &)>> const & versions,
 			it_t const & nb_it_sample = 2 * 4 * 6,
 			it_t const & nb_it_compute = (2 * 4 * 6) * 10,
 			incr_t const & step = 1
 		)
 		{
-			while (start < end)
+			while (first < last)
 			{
 				// Index of the best version
 				auto best_time = std::numeric_limits<std::chrono::steady_clock::duration::rep>::max();
 				std::size_t best_version = 0;
 				
 				// Samples
-				for (std::size_t i = 0; i < versions.size() && start < end; ++i)
+				for (std::size_t i = 0; i < versions.size() && first < last; ++i)
 				{
 					// Compute
-					auto time_start = std::chrono::steady_clock::now();
+					auto time_first = std::chrono::steady_clock::now();
 					{
-						versions[i](start, std::min(it_t(start) + it_t(nb_it_sample) * it_t(step), end));
+						versions[i](first, std::min(it_t(first) + it_t(nb_it_sample) * it_t(step), last));
 					}
-					auto time_end = std::chrono::steady_clock::now();
+					auto time_last = std::chrono::steady_clock::now();
+					
 					// Save best version
-					auto const time = (time_end - time_start).count();
+					auto const time = (time_last - time_first).count();
 					if (time < best_time)
 					{
 						best_time = time;
 						best_version = i;
 					}
+					
 					// Next iterations
-					start += it_t(nb_it_sample) * it_t(step);
+					first += it_t(nb_it_sample) * it_t(step);
 				}
 
 				// Compute
-				if (start < end)
+				if (first < last)
 				{
 					// Compute
-					versions[best_version](start, std::min(it_t(start) + it_t(nb_it_compute) * it_t(step), end));
+					versions[best_version](first, std::min(it_t(first) + it_t(nb_it_compute) * it_t(step), last));
 					// Next iterations
-					start += it_t(nb_it_compute) * it_t(step);
+					first += it_t(nb_it_compute) * it_t(step);
 				}
 			}
 		}
