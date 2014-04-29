@@ -18,6 +18,8 @@
 
 #include <iostream>
 
+#include "serialization.hpp"
+
 
 namespace hnc
 {
@@ -49,7 +51,9 @@ namespace hnc
 		explicit vector3<T>(T const & x = T(), T const & y = T(), T const & z = T()) :
 			x(x), y(y), z(z)
 		{ }
-
+		
+		hnc_generate_serialize_method(x, y, z)
+		
 		/// @brief Equality operator
 		/// @param[in] v A hnc::vector3
 		/// @return true if hnc::vector3 have same values

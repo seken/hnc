@@ -18,7 +18,7 @@
 
 #include <iostream>
 
-#include "unused.hpp"
+#include "serialization.hpp"
 
 
 namespace hnc
@@ -51,16 +51,7 @@ namespace hnc
 			x(x), y(y)
 		{ }
 		
-		/// @brief Serialize with archive
-		/// @param[in,out] archive Archive
-		/// @param[in]     version Version
-		template <class archive_t>
-		void serialize(archive_t & archive, unsigned int const version = 0)
-		{
-			hnc_unused(version);
-			archive & x;
-			archive & y;
-		}
+		hnc_generate_serialize_method(x, y)
 		
 		/// @brief Equality operator
 		/// @param[in] v A hnc::vector2

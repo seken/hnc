@@ -43,14 +43,14 @@ namespace hnc
    {
    public:
    	virtual ~B() { }
-   	hnc_generate_clone_method(B, B);
+   	hnc_generate_clone_method(B, B)
    };
    
    class D
    {
    public:
   	virtual ~D() { }
-   	hnc_generate_clone_method(B, D);
+   	hnc_generate_clone_method(B, D)
    };
    @endcode
  *
