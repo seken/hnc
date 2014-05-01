@@ -20,6 +20,7 @@
 #include <vector>
 #include <algorithm>
 #include <initializer_list>
+#include <functional>
 
 
 namespace hnc
