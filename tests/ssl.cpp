@@ -20,7 +20,7 @@
 
 int main()
 {
-	std::cout << "Just test hnc/ ssl.hpp include" << std::endl;
+	std::cout << "Just test hnc/ssl.hpp include" << std::endl;
 
 	return 0;
 }

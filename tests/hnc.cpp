@@ -20,7 +20,7 @@
 
 int main()
 {
-	std::cout << "Just test hnc/ hnc.hpp include" << std::endl;
+	std::cout << "Just test hnc/hnc.hpp include" << std::endl;
 	std::cout << "hnc version  = " << hnc::version() << std::endl;
 	std::cout << "hnc codename = " << hnc::codename() << std::endl;
 
