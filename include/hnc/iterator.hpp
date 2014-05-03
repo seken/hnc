@@ -1,4 +1,4 @@
-// Copyright © 2013 Inria, Written by Lénaïc Bagnères, lenaic.bagneres@inria.fr
+// Copyright © 2013, 2014 Inria, Written by Lénaïc Bagnères, lenaic.bagneres@inria.fr
 
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -16,14 +16,9 @@
 #ifndef HNC_ITERATOR_HPP
 #define HNC_ITERATOR_HPP
 
-
 #include "iterator/const_iterator.hpp"
-
 #include "iterator/iterator.hpp"
-
 #include "iterator/const_reverse_iterator.hpp"
-
 #include "iterator/reverse_iterator.hpp"
-
 
 #endif
