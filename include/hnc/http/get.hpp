@@ -169,11 +169,11 @@ namespace hnc
 			/// @brief Constructor
 			/// @param[in] host_and_path                           A hnc::url witch contains server name and path
 			/// @param[in] key_and_value_parameters_and_user_agent Parameters (?key0=value0&key1=value1&key2=value2), User agent http://en.wikipedia.org/wiki/User_agent http://en.wikipedia.org/wiki/User_agent#Format (empty by default) http://en.wikipedia.org/wiki/User_agent#Format (empty by default)
-			template <class... key_and_value_parameters_and_user_agent_t>
+			template <class ... key_and_value_parameters_and_user_agent_t>
 			get
 			(
 				hnc::url const & host_and_path,
-				key_and_value_parameters_and_user_agent_t... key_and_value_parameters_and_user_agent
+				key_and_value_parameters_and_user_agent_t ... key_and_value_parameters_and_user_agent
 			) :
 				m_host_and_path(host_and_path)
 			{
@@ -226,12 +226,12 @@ namespace hnc
 			/// @param[in] key                                     Key of the first parameter
 			/// @param[in] value                                   Value of the first parameter
 			/// @param[in] key_and_value_parameters_and_user_agent Other parameters and user agent
-			template <class value_t, class... key_and_value_parameters_and_user_agent_t>
+			template <class value_t, class ... key_and_value_parameters_and_user_agent_t>
 			void set_parameters
 			(
 				std::string const & key,
 				value_t const & value,
-				key_and_value_parameters_and_user_agent_t... key_and_value_parameters_and_user_agent)
+				key_and_value_parameters_and_user_agent_t ... key_and_value_parameters_and_user_agent)
 			{
 				// ? or &
 				if (m_parameters.empty()) { m_parameters += "?"; }

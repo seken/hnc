@@ -171,17 +171,17 @@ namespace hnc
 	
 	/// @brief Wrapper to display std::tuple with std::ostream
 	/// @note See hnc::ostreamable
-	template <class... T>
+	template <class ... T>
 	class ostreamable_tuple_t
 	{
 	public:
 		
 		/// Raw object
-		std::tuple<T...> const & tuple;
+		std::tuple<T ...> const & tuple;
 		
 		/// @brief Constructor from std::tuple
 		/// @param[in] tuple A tuple
-		ostreamable_tuple_t(std::tuple<T...> const & tuple) : tuple(tuple) { }
+		ostreamable_tuple_t(std::tuple<T ...> const & tuple) : tuple(tuple) { }
 	};
 	
 	/**
@@ -193,10 +193,10 @@ namespace hnc
 	   std::cout << hnc::ostreamable(t) << std::endl; // (string, 21, 42, 73, c, 3.14)
 	   @endcode
 	 */
-	template <class... T>
-	hnc::ostreamable_tuple_t<T...> ostreamable(std::tuple<T...> const & tuple)
+	template <class ... T>
+	hnc::ostreamable_tuple_t<T ...> ostreamable(std::tuple<T ...> const & tuple)
 	{
-		return hnc::ostreamable_tuple_t<T...>(tuple);
+		return hnc::ostreamable_tuple_t<T ...>(tuple);
 	}
 	
 	namespace
@@ -224,11 +224,11 @@ namespace hnc
 			o << std::get<0>(tuple);
 		}
 
-		/// @brief Print a std::tuple<T...>
+		/// @brief Print a std::tuple<T ...>
 		/// @param[in,out] o     Output stream
-		/// @param[in]     tuple A std::tuple<T...>
-		template <class... T>
-		void print_tuple(std::ostream & o, std::tuple<T...> const & tuple)
+		/// @param[in]     tuple A std::tuple<T ...>
+		template <class ... T>
+		void print_tuple(std::ostream & o, std::tuple<T ...> const & tuple)
 		{
 			o << "(";
 			hnc::print_tuple(o, tuple, static_int_counter_ostreamable<sizeof...(T) - 1>());
@@ -236,12 +236,12 @@ namespace hnc
 		}
 	}
 	
-	/// @brief Operator << between a std::ostream and a hnc::ostreamable_tuple_t<T...>
+	/// @brief Operator << between a std::ostream and a hnc::ostreamable_tuple_t<T ...>
 	/// @param[in,out] o           Output stream
-	/// @param[in]     ostreamable A hnc::ostreamable_tuple_t<T...>
+	/// @param[in]     ostreamable A hnc::ostreamable_tuple_t<T ...>
 	/// @return the output stream
-	template <class... T>
-	std::ostream & operator<<(std::ostream & o, hnc::ostreamable_tuple_t<T...> const & ostreamable)
+	template <class ... T>
+	std::ostream & operator<<(std::ostream & o, hnc::ostreamable_tuple_t<T ...> const & ostreamable)
 	{
 		hnc::print_tuple(o, ostreamable.tuple);
 		return o;

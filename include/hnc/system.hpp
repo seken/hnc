@@ -47,8 +47,8 @@ namespace hnc
 	 *
 	 * @return a implementation-defined value (it is generally expected to be the status code returned by the called command, if supported)
 	 */
-	template <class arg_t, class... args_t>
-	int system(std::string const & cmd, arg_t const & arg, args_t... args)
+	template <class arg_t, class ... args_t>
+	int system(std::string const & cmd, arg_t const & arg, args_t ... args)
 	{
 		return hnc::system(cmd + " \"" + hnc::to_string(arg) + "\"", args...);
 	}

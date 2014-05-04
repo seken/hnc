@@ -51,7 +51,7 @@ namespace hnc
 	 * @param[in]     t       A T
 	 * @param[in]     args    Variadic template arguments list
 	 */
-	template <class archive_t, class T, class... args_t>
+	template <class archive_t, class T, class ... args_t>
 	void serialize(archive_t & archive, unsigned int const version, T const & t, args_t const & ... args)
 	{
 		archive & t;
@@ -70,7 +70,7 @@ namespace hnc
 	 * @param[out]    t       A T
 	 * @param[out]    args    Variadic template arguments list
 	 */
-	template <class archive_t, class T, class... args_t>
+	template <class archive_t, class T, class ... args_t>
 	void serialize(archive_t & archive, unsigned int const version, T & t, args_t & ... args)
 	{
 		archive & t;

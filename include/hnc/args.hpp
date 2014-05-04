@@ -487,13 +487,13 @@ namespace hnc
 		 *
 		 * @return argument value if the option and its argument is found, else the default value
 		 */
-		template <class... T>
-		std::tuple<T...> add_option
+		template <class ... T>
+		std::tuple<T ...> add_option
 		(
 			std::vector<std::string> const & opts,
 			std::vector<std::string> const & opt_args,
 			std::string const & description,
-			std::tuple<T...> const & default_value,
+			std::tuple<T ...> const & default_value,
 			bool const must_be_present = false
 		)
 		{
@@ -546,7 +546,7 @@ namespace hnc
 					// Vector to tuple
 					if (!error)
 					{
-						std::tuple<T...> r = default_value;
+						std::tuple<T ...> r = default_value;
 						// Vector to tuple
 						container_to_tuple(first_arg, r, static_int_counter_args<sizeof...(T) - 1>());
 						// Return
@@ -571,14 +571,14 @@ namespace hnc
 			return default_value;
 		}
 
-		/// @copydoc hnc::args::add_option(std::vector<std::string> const &,std::vector<std::string> const &,std::string const &,std::tuple<T...> const &,bool const)
-		template <class... T>
-		std::tuple<T...> add_option
+		/// @copydoc hnc::args::add_option(std::vector<std::string> const &,std::vector<std::string> const &,std::string const &,std::tuple<T ...> const &,bool const)
+		template <class ... T>
+		std::tuple<T ...> add_option
 		(
 			std::vector<std::string> const & opts,
 			std::initializer_list<std::string> const & opt_args,
 			std::string const & description,
-			std::tuple<T...> const & default_value,
+			std::tuple<T ...> const & default_value,
 			bool const must_be_present = false
 		)
 		{ return add_option(opts, std::vector<std::string>(opt_args), description, default_value, must_be_present); }

@@ -66,12 +66,12 @@ namespace std
 		return o;
 	}
 	
-	/// @brief Operator << between a std::ostream and a std::tuple<T...>
+	/// @brief Operator << between a std::ostream and a std::tuple<T ...>
 	/// @param[in,out] o     Output stream
-	/// @param[in]     tuple A std::tuple<T...>
+	/// @param[in]     tuple A std::tuple<T ...>
 	/// @return the output stream
-	template <class... T>
-	std::ostream & operator<<(std::ostream & o, std::tuple<T...> const & tuple)
+	template <class ... T>
+	std::ostream & operator<<(std::ostream & o, std::tuple<T ...> const & tuple)
 	{
 		hnc::print_tuple(o, tuple);
 		return o;

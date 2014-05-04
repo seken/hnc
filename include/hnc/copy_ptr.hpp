@@ -229,8 +229,8 @@ namespace hnc
 	public:
 		
 		/// @brief hnc::make_copy_ptr function is friend with class hnc::copy_ptr
-		template <class U, class... args_list>
-		friend hnc::copy_ptr<U> make_copy_ptr(args_list &&... args);
+		template <class U, class ... args_list>
+		friend hnc::copy_ptr<U> make_copy_ptr(args_list && ... args);
 	};
 	
 	/// @brief Operator << between a std::ostream and a hnc::copy_ptr<T>
@@ -256,10 +256,10 @@ namespace hnc
 	 *
 	 * @return A hnc::copy_ptr of T
 	 */
-	template <class T, class... args_list>
-	hnc::copy_ptr<T> make_copy_ptr(args_list &&... args)
+	template <class T, class ... args_list>
+	hnc::copy_ptr<T> make_copy_ptr(args_list && ... args)
 	{
-		return hnc::copy_ptr<T>(new T(args...));
+		return hnc::copy_ptr<T>(new T(args ...));
 	}
 }
 

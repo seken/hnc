@@ -82,8 +82,8 @@ namespace hnc
 			/// @param[in] package_name      Name of the package
 			/// @param[in] package_name_list Other packages
 			/// @return the article
-			template <class... string>
-			article & use_package(std::string const & package_name, string... package_name_list)
+			template <class ... string>
+			article & use_package(std::string const & package_name, string ... package_name_list)
 			{
 				use_package(package_name);
 				use_package(package_name_list...);

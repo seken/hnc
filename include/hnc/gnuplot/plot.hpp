@@ -142,8 +142,8 @@ namespace hnc
 			/// @param[in] i First column id to get data
 			/// @param[in] l Rest of column ids to get data and controls
 			/// @return the plot
-			template <class... ids_column_and_controls_list>
-			plot & set_using(unsigned int const i, ids_column_and_controls_list... l)
+			template <class ... ids_column_and_controls_list>
+			plot & set_using(unsigned int const i, ids_column_and_controls_list ... l)
 			{
 				m_using = "using " + hnc::to_string(i) + using_list_to_string("", l...);
 				return *this;
@@ -153,8 +153,8 @@ namespace hnc
 			/// @param[in] c A control for using
 			/// @param[in] l Rest of column ids to get data and controls
 			/// @return the plot
-			template <class... ids_column_and_controls_list>
-			plot & set_using(std::string const & c, ids_column_and_controls_list... l)
+			template <class ... ids_column_and_controls_list>
+			plot & set_using(std::string const & c, ids_column_and_controls_list ... l)
 			{
 				m_using = "using " + c + using_list_to_string("", l...);
 				return *this;
@@ -181,8 +181,8 @@ namespace hnc
 			/// @param[in] i One column id to get data
 			/// @param[in] l Rest of column ids to get data and controls
 			/// @return the string for using
-			template <class... ids_column_and_controls_list>
-			std::string using_list_to_string(std::string const & s, unsigned int const i, ids_column_and_controls_list... l)
+			template <class ... ids_column_and_controls_list>
+			std::string using_list_to_string(std::string const & s, unsigned int const i, ids_column_and_controls_list ... l)
 			{
 				return using_list_to_string(s + ":" + hnc::to_string(i), l...);
 			}
@@ -192,8 +192,8 @@ namespace hnc
 			/// @param[in] c A control for using
 			/// @param[in] l Rest of column ids to get data and controls
 			/// @return the string for using
-			template <class... ids_column_and_controls_list>
-			std::string using_list_to_string(std::string const & s, std::string const & c, ids_column_and_controls_list... l)
+			template <class ... ids_column_and_controls_list>
+			std::string using_list_to_string(std::string const & s, std::string const & c, ids_column_and_controls_list ... l)
 			{
 				return using_list_to_string(s + ":" + c, l...);
 			}
