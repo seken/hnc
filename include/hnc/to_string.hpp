@@ -19,34 +19,75 @@
 #include <string>
 #include <sstream>
 #include <limits>
+#include <iomanip>
+#include <ios>
 
 
 namespace hnc
 {
 	/**
-	 * @brief Convert the input into a std::string
+	 * @brief Convert the input into a std::string with a std::ostringstream
 	 *
 	 * @code
 	   #include <hnc/to_string.hpp>
 	   @endcode
-	 * 
-	 * We use a std::ostringstream to do the conversion @n
-	 * We use full precision of the input @n
 	 *
 	 * @param[in] in The input
+	 * @param[in] o  A std::ostringstream
 	 *
 	 * @return the converted input into a std::string
 	 */
-	template <class T>
-	std::string to_string(T const & in)
+	template <class T, class ... iomanip_list_t>
+	std::string to_string(T const & in, std::ostringstream & o)
+	{
+		// Fill the stream
+		o << in;
+		
+		// Output the stream in string
+		return (o.str());
+	}
+	
+	/**
+	 * @brief Convert the input into a std::string with a std::ostringstream and iomanip
+	 *
+	 * @code
+	   #include <hnc/to_string.hpp>
+	   @endcode
+	 *
+	 * @param[in] in       The input
+	 * @param[in] o        A std::ostringstream
+	 * @param[in] iomanip  A iomanip (like std::boolalpha, std::hex)
+	 * @param[in] iomanips Others iomanip
+	 *
+	 * @return the converted input into a std::string
+	 */
+	template <class T, class iomanip_t, class ... iomanips_t>
+	std::string to_string(T const & in, std::ostringstream & o, iomanip_t const & iomanip, iomanips_t const & ... iomanips)
+	{
+		o << iomanip;
+		return hnc::to_string(in, o, iomanips...);
+	}
+	
+	/**
+	 * @brief Convert the input into a std::string with iomanip
+	 *
+	 * @code
+	   #include <hnc/to_string.hpp>
+	   @endcode
+	 *
+	 * @param[in] in       The input
+	 * @param[in] iomanips Some iomanip (like std::boolalpha, std::hex)
+	 *
+	 * @return the converted input into a std::string
+	 */
+	template <class T, class ... iomanips_t>
+	std::string to_string(T const & in, iomanips_t const & ... iomanips)
 	{
 		// Declare a stream
 		std::ostringstream o;
-		o.precision(std::numeric_limits<T>::digits10 + 1);
-		// Fill the stream
-		o << in;
-		// Output the stream in string
-		return (o.str());
+		o << std::setprecision(std::numeric_limits<T>::digits10 + 1);
+		
+		return hnc::to_string(in, o, iomanips...);
 	}
 
 	// Specialization for std::string
