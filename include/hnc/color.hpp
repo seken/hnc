@@ -106,8 +106,8 @@ namespace hnc
 	}
 	
 	/// @brief Operator << between a std::ostream and a hnc::color
-	/// @param[in,out] o    Output stream
-	/// @param[in]     uint8 A hnc::color
+	/// @param[in,out] o     Output stream
+	/// @param[in]     color A hnc::color
 	/// @return the output stream
 	inline std::ostream & operator<<(std::ostream & o, hnc::color const & color)
 	{
