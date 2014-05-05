@@ -18,6 +18,7 @@
 
 #include <iostream>
 #include <stdexcept>
+#include <climits>
 
 #include "../serialization.hpp"
 
@@ -49,6 +50,10 @@ namespace hnc
 		/// @brief Constructor from unsigned char
 		/// @param[in] i Integer between 0 and 255
 		uint8(unsigned char const i = 0) : i(i) { }
+		
+		/// @brief Constructor from unsigned int
+		/// @param[in] i Integer between 0 and 255
+		uint8(unsigned int const i) : i(static_cast<unsigned char>(i)) { }
 		
 		/// @brief Constructor from int
 		/// @param[in] i Integer between 0 and 255
@@ -253,7 +258,9 @@ namespace hnc
 	/// @return the output stream
 	inline std::istream & operator>>(std::istream & i, hnc::uint8 & uint8)
 	{
-		i >> uint8.i;
+		int tmp;
+		i >> tmp;
+		uint8 = tmp;
 		return i;
 	}
 }

@@ -14,7 +14,7 @@
 
 
 #include <iostream>
-#include <iterator>
+#include <sstream>
 
 #include <hnc/int.hpp>
 #include <hnc/test.hpp>
@@ -171,6 +171,19 @@ int test_int()
 				++nb_test;
 				std::cout << "i = " << i << " | h = " << h << " | s = " << s.i << std::endl;
 			}
+		}
+	}
+	
+	// >>
+	{
+		hnc_int_t h;
+		std::istringstream i("42");
+		i >> h;
+		
+		if (h != 42)
+		{
+			++nb_test;
+			std::cout << "from std::istringstream i(\"42\") fails: h = " << h << std::endl;
 		}
 	}
 	

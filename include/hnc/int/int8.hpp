@@ -18,6 +18,7 @@
 
 #include <iostream>
 #include <stdexcept>
+#include <climits>
 
 #include "../serialization.hpp"
 
@@ -253,7 +254,9 @@ namespace hnc
 	/// @return the output stream
 	inline std::istream & operator>>(std::istream & i, hnc::int8 & int8)
 	{
-		i >> int8.i;
+		int tmp;
+		i >> tmp;
+		int8 = tmp;
 		return i;
 	}
 }
