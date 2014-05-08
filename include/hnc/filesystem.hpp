@@ -20,6 +20,7 @@
 #include <algorithm>
 #include <cstdio>
 #include <fstream>
+#include <vector>
 
 #include "except.hpp"
 
@@ -28,6 +29,7 @@
 	#include <sys/stat.h>
 	#include <sys/types.h>
 	#include <pwd.h>
+	#include <dirent.h>
 #endif
 
 #ifdef hnc_windows
@@ -499,6 +501,8 @@ namespace hnc
 			}
 		}
 		
+		// file, directory
+		
 		/**
 		 * @brief Test if path is a file
 		 *
@@ -561,6 +565,70 @@ namespace hnc
 			#else
 				
 				throw hnc::except::incomplete_implementation("hnc::filesystem::is_a_directory is not implemented on your platform, please write a bug report or send a mail https://gitorious.org/hnc");
+				
+			#endif
+		}
+		
+		/**
+		 * @brief List all files and directories of a directory
+		 *
+		 * @code
+		   #include <hnc/filesystem.hpp>
+		   @endcode
+		 *
+		 * @param[in] path Path of the directory
+		 *
+		 * @return the list of files and directories
+		 */
+		std::vector<std::string> read_directory(std::string const & path)
+		{
+			#ifdef hnc_unix
+				
+				std::vector<std::string> r;
+				
+				// http://stackoverflow.com/questions/612097/how-can-i-get-a-list-of-files-in-a-directory-using-c-or-c
+				
+				DIR * dir = opendir(path.c_str());
+				
+				if (dir != nullptr)
+				{
+					struct dirent * ent = nullptr;
+					
+					while ((ent = readdir(dir)) != nullptr)
+					{
+						r.emplace_back(ent->d_name);
+					}
+					
+					closedir(dir);
+				}
+				
+				return r;
+				
+			#elif hnc_windows
+				
+				std::vector<std::string> r;
+				
+				// http://stackoverflow.com/questions/612097/how-can-i-get-a-list-of-files-in-a-directory-using-c-or-c
+				
+				WIN32_FIND_DATA FindFileData;
+				HANDLE hFind = FindFirstFile(path.c_str(), &FindFileData);
+				
+				while (hFind != INVALID_HANDLE_VALUE)
+				{
+					r.emplace_back(FindFileData.cFileName);
+					
+					if (!FindNextFile(hFind, &FindFileData))
+					{
+						FindClose(hFind);
+						hFind = INVALID_HANDLE_VALUE;
+					}
+				}
+				
+				return r;
+				
+			#else
+				
+				throw hnc::except::incomplete_implementation("hnc::filesystem::read_directory is not implemented on your platform, please write a bug report or send a mail https://gitorious.org/hnc");
 				
 			#endif
 		}

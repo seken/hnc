@@ -18,6 +18,7 @@
 #include <string>
 
 #include <hnc/filesystem.hpp>
+#include <hnc/ostream_std.hpp>
 #include <hnc/test.hpp>
 #include <hnc/to_string.hpp>
 
@@ -78,7 +79,6 @@ int main()
 		std::cout << "Filename of \"" << s << "\" is \"" << r << "\"" << std::endl;
 		nb_test -= hnc::test::warning(r == "f", "hnc::filesystem::filename fails\n");
 	}
-
 	std::cout << std::endl;
 
 	// Dirname
@@ -122,7 +122,6 @@ int main()
 		std::cout << "Dirname of \"" << s << "\" is \"" << r << "\"" << std::endl;
 		nb_test -= hnc::test::warning(r == "", "hnc::filesystem::dirname fails\n");
 	}
-
 	std::cout << std::endl;
 
 	// Basename
@@ -182,7 +181,6 @@ int main()
 		std::cout << "Basename of \"" << s << "\" is \"" << r << "\"" << std::endl;
 		nb_test -= hnc::test::warning(r == "f", "hnc::filesystem::basename fails\n");
 	}
-
 	std::cout << std::endl;
 
 	// Dirname and Basename
@@ -226,7 +224,6 @@ int main()
 		std::cout << "Dirname and Basename of \"" << s << "\" is \"" << r << "\"" << std::endl;
 		nb_test -= hnc::test::warning(r == "f", "hnc::filesystem::dir_and_basename fails\n");
 	}
-
 	std::cout << std::endl;
 
 	// Extension
@@ -310,7 +307,6 @@ int main()
 		std::cout << "Extension of \"" << s << "\" is \"" << r << "\"" << std::endl;
 		nb_test -= hnc::test::warning(r == "", "hnc::filesystem::extension fails\n");
 	}
-
 	std::cout << std::endl;
 
 	// Add prefix and suffix
@@ -378,7 +374,6 @@ int main()
 		std::cout << "Add suffix: \"" << s << "\" become \"" << r << "\"" << std::endl;
 		nb_test -= hnc::test::warning(r == "file_suffix", "hnc::filesystem::add_suffix fails\n");
 	}
-
 	std::cout << std::endl;
 
 	// Tmp filename & remove
@@ -398,7 +393,6 @@ int main()
 			nb_test -= hnc::test::warning(f.is_open() == false, "hnc::filesystem::remove fails\n");
 		}
 	}
-
 	std::cout << std::endl;
 
 	// read_file
@@ -421,7 +415,6 @@ int main()
 		// Remove
 		hnc::filesystem::remove(filename);
 	}
-
 	std::cout << std::endl;
 
 	// copy_file
@@ -448,7 +441,6 @@ int main()
 		hnc::filesystem::remove(src_filename);
 		hnc::filesystem::remove(dest_filename);
 	}
-
 	std::cout << std::endl;
 
 	// File exists & filename_without_overwrite
@@ -468,7 +460,6 @@ int main()
 		std::cout << "File \"" << r << "\" must not exist" << std::endl;
 		nb_test -= hnc::test::warning(hnc::filesystem::file_exists(r) == false, "hnc::filesystem::file_exists fails\n");
 	}
-
 	std::cout << std::endl;
 
 	++nb_test;
@@ -491,7 +482,6 @@ int main()
 		hnc::filesystem::remove(f0);
 		hnc::filesystem::remove(n0);
 	}
-
 	std::cout << std::endl;
 
 	nb_test += 5;
@@ -506,13 +496,18 @@ int main()
 		nb_test -= hnc::test::warning(r && hnc::filesystem::is_a_directory(path + "/hnc_tmp") == false, "hnc::filesystem::is_a_directory fails\n");
 		nb_test -= hnc::test::warning(r && hnc::filesystem::is_a_file(path + "/hnc_tmp"), "hnc::filesystem::is_a_file fails\n");
 	}
-
 	std::cout << std::endl;
 
 	{
 		std::cout << "home directory = " << hnc::filesystem::home() << std::endl;
+		std::cout << hnc::filesystem::read_directory(hnc::filesystem::home()) << std::endl;
 	}
+	std::cout << std::endl;
 
+	{
+		std::cout << ". = " << std::endl;
+		std::cout << hnc::filesystem::read_directory(".") << std::endl;
+	}
 	std::cout << std::endl;
 
 	hnc::test::warning(nb_test == 0, "hnc::filesystem: " + hnc::to_string(nb_test) + " test fail!\n");
