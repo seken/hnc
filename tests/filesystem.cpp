@@ -494,13 +494,17 @@ int main()
 
 	std::cout << std::endl;
 
-	++nb_test;
+	nb_test += 5;
 	{
 		std::string const path = hnc::filesystem::filename_without_overwrite(hnc::filesystem::tmp_filename());
 		std::cout << "Create directory " << path << std::endl;
 		bool const r = hnc::filesystem::create_directory(path);
 		{ std::ofstream f(path + "/hnc_tmp"); }
 		nb_test -= hnc::test::warning(r && hnc::filesystem::file_exists(path + "/hnc_tmp"), "hnc::filesystem::create_directory fails\n");
+		nb_test -= hnc::test::warning(r && hnc::filesystem::is_a_directory(path), "hnc::filesystem::is_a_directory fails\n");
+		nb_test -= hnc::test::warning(r && hnc::filesystem::is_a_file(path) == false, "hnc::filesystem::is_a_file fails\n");
+		nb_test -= hnc::test::warning(r && hnc::filesystem::is_a_directory(path + "/hnc_tmp") == false, "hnc::filesystem::is_a_directory fails\n");
+		nb_test -= hnc::test::warning(r && hnc::filesystem::is_a_file(path + "/hnc_tmp"), "hnc::filesystem::is_a_file fails\n");
 	}
 
 	std::cout << std::endl;

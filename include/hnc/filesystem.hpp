@@ -33,6 +33,7 @@
 #ifdef hnc_windows
 	#include <Windows.h>
 	#include <Shlobj.h>
+	#include <Shlwapi.h>
 #endif
 
 namespace hnc
@@ -497,7 +498,73 @@ namespace hnc
 				return available_pathname;
 			}
 		}
-
+		
+		/**
+		 * @brief Test if path is a file
+		 *
+		 * @code
+		   #include <hnc/filesystem.hpp>
+		   @endcode
+		 *
+		 * @param[in] path Path of the supposed file
+		 *
+		 * @return true if the path is a file, false otherwise
+		 */
+		bool is_a_file(std::string const & path)
+		{
+			#ifdef hnc_unix
+				
+				struct stat s;
+				stat(path.c_str(), &s);
+				
+				if ((s.st_mode & S_IFMT) == S_IFREG) { return true; }
+				else { return false; }
+				
+			#elif hnc_windows
+				
+				// http://msdn.microsoft.com/en-us/library/bb773621%28VS.85%29.aspx
+				return (PathIsDirectory(path.c_str()) == false);
+				
+			#else
+				
+				throw hnc::except::incomplete_implementation("hnc::filesystem::is_a_file is not implemented on your platform, please write a bug report or send a mail https://gitorious.org/hnc");
+				
+			#endif
+		}
+		
+		/**
+		 * @brief Test if path is a directory
+		 *
+		 * @code
+		   #include <hnc/filesystem.hpp>
+		   @endcode
+		 *
+		 * @param[in] path Path of the supposed directory
+		 *
+		 * @return true if the path is a directory, false otherwise
+		 */
+		bool is_a_directory(std::string const & path)
+		{
+			#ifdef hnc_unix
+				
+				struct stat s;
+				stat(path.c_str(), &s);
+				
+				if ((s.st_mode & S_IFMT) == S_IFDIR) { return true; }
+				else { return false; }
+				
+			#elif hnc_windows
+				
+				// http://msdn.microsoft.com/en-us/library/bb773621%28VS.85%29.aspx
+				return PathIsDirectory(path.c_str());
+				
+			#else
+				
+				throw hnc::except::incomplete_implementation("hnc::filesystem::is_a_directory is not implemented on your platform, please write a bug report or send a mail https://gitorious.org/hnc");
+				
+			#endif
+		}
+		
 		/**
 		 * @brief Create a directory
 		 *
