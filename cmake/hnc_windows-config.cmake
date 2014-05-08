@@ -27,6 +27,8 @@ if (WIN32 OR WIN64)
 	
 	add_definitions("-D${HNC_WINDOWS_MACRO}")
 	
+	link_libraries(shlwapi)
+	
 	message(STATUS "Platform is Windows :(")
 	
 else()
