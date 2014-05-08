@@ -39,58 +39,43 @@ cmake_minimum_required(VERSION 2.6)
 
 # Unix
 	message(STATUS "---")
-	find_package(hnc_unix PATHS "${FIND_PACKAGE_LOCAL_PATH}")
+	find_package(hnc_unix PATHS "${FIND_PACKAGE_LOCAL_PATH}" NO_DEFAULT_PATH)
 
 # Windows
 	message(STATUS "---")
-	find_package(hnc_windows PATHS "${FIND_PACKAGE_LOCAL_PATH}")
+	find_package(hnc_windows PATHS "${FIND_PACKAGE_LOCAL_PATH}" NO_DEFAULT_PATH)
 
 # Boost.Serialization
 	message(STATUS "---")
-	find_package(hnc_boost_serialization PATHS "${FIND_PACKAGE_LOCAL_PATH}")
-	if (NOT HNC_BOOST_SERIALIZATION_FOUND)
-		add_definitions("-D${HNC_NO_BOOST_SERIALIZATION_MACRO}")
-	endif()
+	find_package(hnc_boost_serialization PATHS "${FIND_PACKAGE_LOCAL_PATH}" NO_DEFAULT_PATH)
 
 # Boost.System
 	message(STATUS "---")
-	find_package(hnc_boost_system PATHS "${FIND_PACKAGE_LOCAL_PATH}")
+	find_package(hnc_boost_system PATHS "${FIND_PACKAGE_LOCAL_PATH}" NO_DEFAULT_PATH)
 
 # Boost.MPI
 	message(STATUS "---")
-	find_package(hnc_boost_mpi PATHS "${FIND_PACKAGE_LOCAL_PATH}")
-	if (NOT HNC_BOOST_MPI_FOUND)
-		add_definitions("-D${HNC_NO_BOOST_MPI_MACRO}")
-	endif()
+	find_package(hnc_boost_mpi PATHS "${FIND_PACKAGE_LOCAL_PATH}" NO_DEFAULT_PATH)
 
 # MPI C++ Compiler
 	message(STATUS "---")
-	find_package(hnc_compiler_mpi_cpp PATHS "${FIND_PACKAGE_LOCAL_PATH}")
-	if (HNC_COMPILER_MPI_CPP)
-		set(CMAKE_CXX_COMPILER "${HNC_COMPILER_MPI_CPP}")
-	endif()
+	find_package(hnc_compiler_mpi_cpp PATHS "${FIND_PACKAGE_LOCAL_PATH}" NO_DEFAULT_PATH)
 
 # Boost.Asio
 	message(STATUS "---")
-	find_package(hnc_boost_asio PATHS "${FIND_PACKAGE_LOCAL_PATH}")
-	if (NOT HNC_BOOST_ASIO_FOUND)
-		add_definitions("-D${HNC_NO_BOOST_ASIO_MACRO}")
-	endif()
+	find_package(hnc_boost_asio PATHS "${FIND_PACKAGE_LOCAL_PATH}" NO_DEFAULT_PATH)
 
 # OpenSSL
 	message(STATUS "---")
-	find_package(hnc_openssl PATHS "${FIND_PACKAGE_LOCAL_PATH}")
-	if (NOT HNC_OPENSSL_FOUND)
-		add_definitions("-D${HNC_NO_OPENSSL_MACRO}")
-	endif()
+	find_package(hnc_openssl PATHS "${FIND_PACKAGE_LOCAL_PATH}" NO_DEFAULT_PATH)
 
 # Gnuplot executable
 	message(STATUS "---")
-	find_package(hnc_gnuplot_exe PATHS "${FIND_PACKAGE_LOCAL_PATH}")
+	find_package(hnc_gnuplot_exe PATHS "${FIND_PACKAGE_LOCAL_PATH}" NO_DEFAULT_PATH)
 
 # pdflatex executable
 	message(STATUS "---")
-	find_package(hnc_pdflatex_exe PATHS "${FIND_PACKAGE_LOCAL_PATH}")
+	find_package(hnc_pdflatex_exe PATHS "${FIND_PACKAGE_LOCAL_PATH}" NO_DEFAULT_PATH)
 
 # hnc
 	message(STATUS "---")

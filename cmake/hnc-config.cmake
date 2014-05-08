@@ -37,7 +37,6 @@ else()
 	
 endif()
 
-
 find_package(hnc_boost_asio)
 
 find_package(hnc_boost_mpi)

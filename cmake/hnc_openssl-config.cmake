@@ -24,6 +24,8 @@
 
 find_package(OpenSSL)
 
+set(HNC_NO_OPENSSL_MACRO "hnc_no_openssl")
+
 if (OPENSSL_FOUND)
 	
 	set(HNC_OPENSSL_FOUND "TRUE")
@@ -35,8 +37,8 @@ else()
 	
 	set(HNC_OPENSSL_FOUND "FALSE")
 	
+	add_definitions("-D${HNC_NO_OPENSSL_MACRO}")
+	
 	message(STATUS "Library OpenSSL not found :(")
 	
 endif()
-
-set(HNC_NO_OPENSSL_MACRO "hnc_no_openssl")

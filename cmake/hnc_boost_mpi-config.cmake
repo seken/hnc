@@ -24,6 +24,8 @@
 
 find_package(Boost COMPONENTS mpi)
 
+set(HNC_NO_BOOST_MPI_MACRO "hnc_no_boost_mpi")
+
 if (Boost_FOUND)
 	
 	set(HNC_BOOST_MPI_FOUND "TRUE")
@@ -35,8 +37,8 @@ else()
 	
 	set(HNC_BOOST_MPI_FOUND "FALSE")
 	
+	add_definitions("-D${HNC_NO_BOOST_MPI_MACRO}")
+	
 	message(STATUS "Library Boost.MPI not found :(")
 	
 endif()
-
-set(HNC_NO_BOOST_MPI_MACRO "hnc_no_boost_mpi")

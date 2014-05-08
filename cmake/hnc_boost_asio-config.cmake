@@ -23,6 +23,8 @@
 
 find_file(HNC_BOOST_ASIO_INCLUDE_DIR "boost/asio.hpp")
 
+set(HNC_NO_BOOST_ASIO_MACRO "hnc_no_boost_asio")
+
 if (HNC_BOOST_ASIO_INCLUDE_DIR)
 	
 	set(HNC_BOOST_ASIO_FOUND "TRUE")
@@ -33,8 +35,8 @@ else()
 	
 	set(HNC_BOOST_ASIO_FOUND "FALSE")
 	
+	add_definitions("-D${HNC_NO_BOOST_ASIO_MACRO}")
+	
 	message(STATUS "Library Boost.Asio not found :(")
 	
 endif()
-
-set(HNC_NO_BOOST_ASIO_MACRO "hnc_no_boost_asio")

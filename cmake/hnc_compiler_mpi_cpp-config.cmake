@@ -23,6 +23,10 @@ find_program(HNC_COMPILER_MPI_CPP NAMES mpic++ mpicxx mpiCC mpicc)
 
 if (HNC_COMPILER_MPI_CPP)
 	
+	if (HNC_COMPILER_MPI_CPP)
+		set(CMAKE_CXX_COMPILER "${HNC_COMPILER_MPI_CPP}")
+	endif()
+	
 	message(STATUS "MPI C++ Compiler found =) ${HNC_COMPILER_MPI_CPP}")
 	
 else()

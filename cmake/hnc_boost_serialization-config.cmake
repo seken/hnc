@@ -24,6 +24,8 @@
 
 find_package(Boost COMPONENTS serialization)
 
+set(HNC_NO_BOOST_SERIALIZATION_MACRO "hnc_no_boost_serialization")
+
 if (Boost_FOUND)
 	
 	set(HNC_BOOST_SERIALIZATION_FOUND "TRUE")
@@ -35,8 +37,8 @@ else()
 	
 	set(HNC_BOOST_SERIALIZATION_FOUND "FALSE")
 	
+	add_definitions("-D${HNC_NO_BOOST_SERIALIZATION_MACRO}")
+	
 	message(STATUS "Library Boost.Serialization not found :(")
 	
 endif()
-
-set(HNC_NO_BOOST_SERIALIZATION_MACRO "hnc_no_boost_serialization")

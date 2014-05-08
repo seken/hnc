@@ -19,10 +19,12 @@
 # HNC_BOOST_SYSTEM_INCLUDE_DIR - The Boost.Sytem include directory
 # HNC_BOOST_SYSTEM_LIBRARY     - Library needed to use Boost.Sytem
 
-# HNC_NO_BOOST_SYSTE_MACRO    - System has not Boost.System library
+# HNC_NO_BOOST_SYSTEM_MACRO    - System has not Boost.System library
 
 
 find_package(Boost COMPONENTS system)
+
+set(HNC_NO_BOOST_SYSTEM_MACRO "hnc_no_boost_system")
 
 if (Boost_FOUND)
 	
@@ -35,8 +37,8 @@ else()
 	
 	set(HNC_BOOST_SYSTEM_FOUND "FALSE")
 	
+	add_definitions("-D${HNC_NO_BOOST_SYSTEM_MACRO}")
+	
 	message(STATUS "Library Boost.Sytem not found :(")
 	
 endif()
-
-set(HNC_NO_BOOST_SYSTE_MACRO "hnc_no_boost_system")
