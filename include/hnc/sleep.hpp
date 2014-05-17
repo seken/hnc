@@ -23,7 +23,7 @@
 namespace hnc
 {
 	/**
-	 * @brief Sleep function with different units
+	 * @brief Sleep functions with different units
 	 *
 	 * @code
 	   #include <hnc/sleep.hpp>
@@ -31,44 +31,86 @@ namespace hnc
 	 */
 	namespace sleep
 	{
-		/// @brief Sleep h hours
-		/// @param[in] h hours
-		void h(unsigned int const h)
+		/**
+		 * @brief Sleep h hours
+		 * 
+		   @code
+		   	#include <hnc/time.hpp>
+		   @endcode
+		 * 
+		 * @param[in] h Number of hours to sleep
+		 */
+		inline void h(unsigned int const h)
 		{
 			std::this_thread::sleep_for(std::chrono::hours(h));
 		}
-
-		/// @brief Sleep m minutes
-		/// @param[in] m minutes
-		void min(unsigned int const m)
+		
+		/**
+		 * @brief Sleep m minutes
+		 * 
+		   @code
+		   	#include <hnc/time.hpp>
+		   @endcode
+		 * 
+		 * @param[in] h Number of minutes to sleep
+		 */
+		inline void min(unsigned int const m)
 		{
 			std::this_thread::sleep_for(std::chrono::minutes(m));
 		}
-
-		/// @brief Sleep s seconds
-		/// @param[in] s seconds
-		void s(unsigned int const s)
+		
+		/**
+		 * @brief Sleep s seconds
+		 * 
+		   @code
+		   	#include <hnc/time.hpp>
+		   @endcode
+		 * 
+		 * @param[in] h Number of seconds to sleep
+		 */
+		inline void s(unsigned int const s)
 		{
 			std::this_thread::sleep_for(std::chrono::seconds(s));
 		}
-
-		/// @brief Sleep ms milliseconds
-		/// @param[in] ms milliseconds
-		void ms(unsigned int const ms)
+		
+		/**
+		 * @brief Sleep ms milliseconds
+		 * 
+		   @code
+		   	#include <hnc/time.hpp>
+		   @endcode
+		 * 
+		 * @param[in] h Number of milliseconds to sleep
+		 */
+		inline void ms(unsigned int const ms)
 		{
 			std::this_thread::sleep_for(std::chrono::milliseconds(ms));
 		}
-
-		/// @brief Sleep us microseconds
-		/// @param[in] us microseconds
-		void us(unsigned int const us)
+		
+		/**
+		 * @brief Sleep us microseconds
+		 * 
+		   @code
+		   	#include <hnc/time.hpp>
+		   @endcode
+		 * 
+		 * @param[in] h Number of microseconds to sleep
+		 */
+		inline void us(unsigned int const us)
 		{
 			std::this_thread::sleep_for(std::chrono::microseconds(us));
 		}
-
-		/// @brief Sleep ns nanoseconds
-		/// @param[in] ns nanoseconds
-		void ns(unsigned int const ns)
+		
+		/**
+		 * @brief Sleep ns nanoseconds
+		 * 
+		   @code
+		   	#include <hnc/time.hpp>
+		   @endcode
+		 * 
+		 * @param[in] h Number of nanoseconds to sleep
+		 */
+		inline void ns(unsigned int const ns)
 		{
 			std::this_thread::sleep_for(std::chrono::nanoseconds(ns));
 		}
