@@ -18,6 +18,8 @@
 
 #include <string>
 
+#include "algo/replace_all.hpp"
+
 
 /**
  * @brief std::string literal
@@ -40,12 +42,44 @@ namespace hnc
 	 * @brief Functions on string
 	 *
 	 * @code
-	   #include <hnc/string.hpp>
+	   	#include <hnc/string.hpp>
 	   @endcode
 	 */
 	namespace string
 	{
-		// For Doxygen only
+		/**
+		 * @brief Remove multiple (extra) whitespaces
+		 * 
+		 * @code
+		   	#include <hnc/string.hpp>
+		   @endcode
+		 * 
+		 * @param[in,out] string A std::string
+		 */
+		inline void remove_multiple_whitespaces(std::string & string)
+		{
+			std::string tmp = string;
+			hnc::algo::replace_all(tmp, "\t"_s, " "_s);
+			while (hnc::algo::replace_all(tmp, "  "_s, " "_s) != string) { string = tmp; }
+		}
+		
+		/**
+		 * @brief Return the string without multiple (extra) whitespaces
+		 * 
+		 * @code
+		   	#include <hnc/string.hpp>
+		   @endcode
+		 * 
+		 * @param[in] string A std::string
+		 * 
+		 * @return string without multiple whitespaces
+		 */
+		inline std::string remove_multiple_whitespaces_copy(std::string const & string)
+		{
+			std::string copy = string;
+			hnc::string::remove_multiple_whitespaces(copy);
+			return copy;
+		}
 	}
 }
 
