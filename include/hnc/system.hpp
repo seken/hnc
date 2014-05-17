@@ -32,7 +32,7 @@ namespace hnc
 	 *
 	 * @return a implementation-defined value (it is generally expected to be the status code returned by the called command, if supported)
 	 */
-	int system(std::string const & cmd)
+	inline int system(std::string const & cmd)
 	{
 		// Run the command
 		return std::system(cmd.c_str());
