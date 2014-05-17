@@ -13,26 +13,26 @@
 # limitations under the License.
 
 
-# Determine if platform is UNIX or not
+# Determine if platform is Linux or not
 
-# HNC_UNIX_FOUND - Platform is UNIX
-# HNC_UNIX_MACRO - Macro to define
+# HNC_LINUX_FOUND - Platform is Linux
+# HNC_LINUX_MACRO - Macro to define
 
 
-set(HNC_UNIX_MACRO "hnc_unix")
+set(HNC_LINUX_MACRO "hnc_linux")
 
-if (UNIX)
+if ("${CMAKE_SYSTEM_NAME}" MATCHES ".*Linux.*")
 	
-	set(HNC_UNIX_FOUND "TRUE")
+	set(HNC_LINUX_FOUND "TRUE")
 	
-	add_definitions("-D${HNC_UNIX_MACRO}")
+	add_definitions("-D${HNC_LINUX_MACRO}")
 	
-	message(STATUS "Platform is UNIX")
+	message(STATUS "Platform is Linux")
 	
 else()
 	
-	set(HNC_UNIX_FOUND "FALSE")
+	set(HNC_LINUX_FOUND "FALSE")
 	
-	message(STATUS "Platform is not UNIX")
+	message(STATUS "Platform is not Linux")
 	
 endif()

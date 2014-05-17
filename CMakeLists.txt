@@ -37,9 +37,13 @@ cmake_minimum_required(VERSION 2.6)
 # Get local directory where .cmake are
 	set(FIND_PACKAGE_LOCAL_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 
-# Unix
+# UNIX
 	message(STATUS "---")
 	find_package(hnc_unix PATHS "${FIND_PACKAGE_LOCAL_PATH}" NO_DEFAULT_PATH)
+
+# Linux
+	message(STATUS "---")
+	find_package(hnc_linux PATHS "${FIND_PACKAGE_LOCAL_PATH}" NO_DEFAULT_PATH)
 
 # Windows
 	message(STATUS "---")
@@ -239,9 +243,11 @@ cmake_minimum_required(VERSION 2.6)
 	install(FILES cmake/hnc_boost_system-config.cmake DESTINATION lib/hnc_boost_system)
 	install(FILES cmake/hnc_compiler_mpi_cpp-config.cmake DESTINATION lib/hnc_compiler_mpi_cpp)
 	install(FILES cmake/hnc_gnuplot_exe-config.cmake DESTINATION lib/hnc_gnuplot_exe)
+	install(FILES cmake/hnc_linux-config.cmake DESTINATION lib/hnc_linux)
 	install(FILES cmake/hnc_openssl-config.cmake DESTINATION lib/hnc_openssl)
 	install(FILES cmake/hnc_pdflatex_exe-config.cmake DESTINATION lib/hnc_pdflatex_exe)
 	install(FILES cmake/hnc_unix-config.cmake DESTINATION lib/hnc_unix)
+	install(FILES cmake/hnc_windows-config.cmake DESTINATION lib/hnc_windows)
 	# Doxygen
 	if (IS_DIRECTORY doc/doxygen)
 		install(DIRECTORY doc/doxygen DESTINATION share/hnc)

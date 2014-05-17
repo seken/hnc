@@ -13,7 +13,7 @@
 # limitations under the License.
 
 
-# Determine if WINDOWS platform or not
+# Determine if platform is WINDOWS or not
 
 # HNC_WINDOWS_FOUND - Platform is WINDOWS
 # HNC_WINDOWS_MACRO - Macro to define
