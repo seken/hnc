@@ -68,6 +68,12 @@ namespace hnc
 				// http://msdn.microsoft.com/en-us/library/windows/desktop/ms724833%28v=vs.85%29.aspx
 				
 				OSVERSIONINFOEX infos;
+				ZeroMemory(&infos, sizeof(OSVERSIONINFOEX));
+				infos.dwOSVersionInfoSize = sizeof(OSVERSIONINFOEX);
+				GetVersionEx((OSVERSIONINFO *)(&infos));
+				
+				SYSTEM_INFO infos_sys;
+				GetSystemInfo(&infos_sys); 
 				
 				if (infos.dwMajorVersion == 6 && infos.dwMinorVersion == 3 && infos.wProductType == VER_NT_WORKSTATION)
 				{
@@ -113,7 +119,7 @@ namespace hnc
 				{
 					return "Windows Server 2003";
 				}
-				else if (infos.dwMajorVersion == 5 && infos.dwMinorVersion == 2 &&  OSVERSIONINFOEX.wProductType == VER_NT_WORKSTATION && SYSTEM_INFO.wProcessorArchitecture == PROCESSOR_ARCHITECTURE_AMD64)
+				else if (infos.dwMajorVersion == 5 && infos.dwMinorVersion == 2 &&  infos.wProductType == VER_NT_WORKSTATION && infos_sys.wProcessorArchitecture == PROCESSOR_ARCHITECTURE_AMD64)
 				{
 					return "Windows XP Professional x64 Edition";
 				}
