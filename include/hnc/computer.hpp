@@ -218,7 +218,10 @@ namespace hnc
 					
 					sysctlbyname("machdep.cpu.brand_string", &buffer, &buffer_size, NULL, 0);
 					
-					return buffer;
+					std::string processor_name = buffer;
+					hnc::string::remove_multiple_whitespaces(processor_name);
+					
+					return processor_name;
 				
 				#endif
 				
