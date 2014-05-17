@@ -212,8 +212,8 @@ namespace hnc
 				
 				#ifndef hnc_linux
 				
-					std::size_t const buffer_size = 512;
-					char buffer[buffer_size];
+					char buffer[512];
+					std::size_t buffer_size = sizeof(buffer) / sizeof(char);
 					std::fill(buffer, buffer + buffer_size, '\0');
 					
 					sysctlbyname("machdep.cpu.brand_string", &buffer, &buffer_size, NULL, 0);
