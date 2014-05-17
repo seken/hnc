@@ -500,13 +500,21 @@ int main()
 
 	{
 		std::cout << "home directory = " << hnc::filesystem::home() << std::endl;
-		std::cout << hnc::filesystem::read_directory(hnc::filesystem::home()) << std::endl;
+		auto const filenames = hnc::filesystem::read_directory(hnc::filesystem::home());
+		for (auto const & filename : filenames)
+		{
+			std::cout << filename << " (is exe = " << std::boolalpha << hnc::filesystem::is_executable(hnc::filesystem::home() + "/" + filename) << ")" << std::endl;
+		}
 	}
 	std::cout << std::endl;
 
 	{
 		std::cout << ". = " << std::endl;
-		std::cout << hnc::filesystem::read_directory(".") << std::endl;
+		auto const filenames = hnc::filesystem::read_directory(".");
+		for (auto const & filename : filenames)
+		{
+			std::cout << filename << " (is exe = " << std::boolalpha << hnc::filesystem::is_executable("./" + filename) << ")" << std::endl;
+		}
 	}
 	std::cout << std::endl;
 

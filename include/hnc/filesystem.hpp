@@ -570,6 +570,34 @@ namespace hnc
 		}
 		
 		/**
+		 * @brief Test if path is executable
+		 *
+		 * @code
+		   #include <hnc/filesystem.hpp>
+		   @endcode
+		 *
+		 * @param[in] path Path
+		 *
+		 * @return true if the path is executable, false otherwise
+		 */
+		bool is_executable(std::string const & path)
+		{
+			#ifdef hnc_unix
+				
+				return (access(path.c_str(), X_OK) == 0);
+				
+			#elif hnc_windows
+				
+				throw hnc::except::incomplete_implementation("hnc::filesystem::is_executable is not implemented on your platform, please write a bug report or send a mail https://gitorious.org/hnc");
+				
+			#else
+				
+				throw hnc::except::incomplete_implementation("hnc::filesystem::is_executable is not implemented on your platform, please write a bug report or send a mail https://gitorious.org/hnc");
+				
+			#endif
+		}
+		
+		/**
 		 * @brief List all files and directories of a directory
 		 *
 		 * @code
