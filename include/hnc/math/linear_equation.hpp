@@ -85,10 +85,10 @@ namespace hnc
 			/// @param[in] relational_operator     Relational operator (hnc::math::relational_operator::equal_to by default)
 			linear_equation
 			(
-				std::vector<T> unknown_variables_coeff = std::vector<T>(),
-				std::vector<T> parameters_coeff = std::vector<T>(),
-				T constant = T(0),
-				hnc::math::relational_operator relational_operator = hnc::math::relational_operator::equal_to
+				std::vector<T> const & unknown_variables_coeff = std::vector<T>(),
+				std::vector<T> const & parameters_coeff = std::vector<T>(),
+				T const constant = T(0),
+				hnc::math::relational_operator const relational_operator = hnc::math::relational_operator::equal_to
 			) :
 				unknown_variables_coeff(unknown_variables_coeff),
 				parameters_coeff(parameters_coeff),

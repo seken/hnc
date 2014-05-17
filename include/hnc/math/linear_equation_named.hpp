@@ -103,32 +103,34 @@ namespace hnc
 			/// @param[in] relational_operator     Relational operator (hnc::math::relational_operator::equal_to by default)
 			linear_equation_named
 			(
-				std::vector<T> unknown_variables_coeff = std::vector<T>(),
-				std::vector<std::string> unknown_variables_name = std::vector<std::string>(),
-				std::vector<T> parameters_coeff = std::vector<T>(),
-				std::vector<std::string> parameters_name = std::vector<std::string>(),
-				T constant = T(0),
-				hnc::math::relational_operator relational_operator = hnc::math::relational_operator::equal_to
+				std::vector<T> const & unknown_variables_coeff = std::vector<T>(),
+				std::vector<std::string> const & unknown_variables_name = std::vector<std::string>(),
+				std::vector<T> const & parameters_coeff = std::vector<T>(),
+				std::vector<std::string> const & parameters_name = std::vector<std::string>(),
+				T const constant = T(0),
+				hnc::math::relational_operator const relational_operator = hnc::math::relational_operator::equal_to
 			) :
+				m_linear_equation(unknown_variables_coeff, parameters_coeff, constant, relational_operator),
 				m_unknown_variables_name(unknown_variables_name),
 				m_parameters_name(parameters_name)
-			{ 
-				m_linear_equation = hnc::math::linear_equation<T>(unknown_variables_coeff, parameters_coeff, constant, relational_operator);
-			}
+			{ }
 			
-			/// @return a hnc::math::linear_equation<T>
+			/// @brief Return the linear equation
+			/// @return the linear equation
 			hnc::math::linear_equation<T> const & linear_equation() const { return m_linear_equation; }
 			
-			/// @return m_unknown_variables_name
+			/// @brief Return the names of unknown variables
+			/// @return the names of unknown variables
 			std::vector<std::string> const & unknown_variables_name() const { return m_unknown_variables_name; }
 			
-			/// @return m_parameters_name
+			/// @brief Return the names of parameters
+			/// @return the names of the parameters
 			std::vector<std::string> const & parameters_name() const { return m_parameters_name; }
 		};
 		
 		/// @brief Operator << between a std::ostream and a hnc::math::linear_equation_named<T>
-		/// @param[out] o  Output stream
-		/// @param[in]  eq A hnc::math::linear_equation_named<T>
+		/// @param[in,out] o  Output stream
+		/// @param[in]     eq A hnc::math::linear_equation_named<T>
 		/// @return the output stream
 		template <class T>
 		std::ostream & operator<<(std::ostream & o, hnc::math::linear_equation_named<T> const & linear_equation_named)
@@ -212,36 +214,36 @@ namespace hnc
 		}
 		
 		/// @brief Operator >> between a std::istream and a hnc::math::linear_equation_named<T>
-		/// @param[out] i  Input stream
-		/// @param[in]  eq A hnc::math::linear_equation_named<T>
+		/// @param[in,out] i  Input stream
+		/// @param[in]     eq A hnc::math::linear_equation_named<T>
 		/// @return the input stream
 		template <class T>
 		std::istream & operator>>(std::istream & i, hnc::math::linear_equation_named<T> & eq)
 		{
 			// Tmp variables for get from istream
-			T coeff;					// Tmp coeff
-			std::string name;			// Tmp name
+			T coeff = T(0);
+			std::string name;
 			
-			std::vector<T> unknown_variables_coeff = std::vector<T>();						// hnc::math::linear_equation<T>::unknown_variables_coeff
-			std::vector<std::string> unknown_variables_name = std::vector<std::string>();	// hnc::math::linear_equation_named<T>::unknown_variables_name
-			std::vector<T> parameters_coeff = std::vector<T>();								// hnc::math::linear_equation<T>::parameters_coeff
-			std::vector<std::string> parameters_name = std::vector<std::string>();			// hnc::math::linear_equation_named<T>::parameters_name
-			hnc::math::relational_operator relational_operator;								// hnc::math::linear_equation<T>::relational_operator
-			T constant = T(0);																// hnc::math::linear_equation<T>::constant
+			std::vector<T> unknown_variables_coeff;
+			std::vector<std::string> unknown_variables_name;
+			std::vector<T> parameters_coeff;
+			std::vector<std::string> parameters_name;
+			hnc::math::relational_operator relational_operator = hnc::math::relational_operator::equal_to;
+			T constant = T(0);
 			
 			while (i.good())
 			{
 				// Extract character
-				char c = i.peek();
+				char c = char(i.peek());
 				
 				// Ignore spaces
-				while (c == ' ') { i.get(c); c = i.peek();}
+				while (c == ' ') { i.get(c); c = char(i.peek());}
 				
 				// Check operator
 				if (c == '+' || c == '-' || c == '/' || c == '*') 
 				{ 
 					// Coeff
-					i.get(c); c = i.peek(); while (c == ' ') { i.get(c); c = i.peek(); }
+					i.get(c); c = char(i.peek()); while (c == ' ') { i.get(c); c = char(i.peek()); }
 					
 					// Unknown variable or Paramater
 					if (!isdigit(c))
@@ -278,7 +280,7 @@ namespace hnc
 						T tmp;
 						i >> tmp; 
 						
-						c = i.peek(); while (c == ' ') { i.get(c); c = i.peek(); }
+						c = char(i.peek()); while (c == ' ') { i.get(c); c = char(i.peek()); }
 						
 						// Constant
 						if (c == '=' || c == '<' || c == '>') { constant = tmp; }
@@ -321,7 +323,7 @@ namespace hnc
 					
 					else if (c == '>')
 					{
-						i.get(c); c = i.peek();
+						i.get(c); c = char(i.peek());
 						
 						// >=
 						if (c == '=') { relational_operator = hnc::math::relational_operator::greater_than_or_equal_to; }
@@ -332,7 +334,7 @@ namespace hnc
 				
 					else if (c == '<')
 					{
-						i.get(c); c = i.peek();
+						i.get(c); c = char(i.peek());
 						
 						// <=
 						if (c == '=') { relational_operator = hnc::math::relational_operator::less_than_or_equal_to; }
