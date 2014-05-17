@@ -26,10 +26,11 @@
 #include <iostream>
 #include <algorithm>
 
+#include "time.hpp"
 #include "math/median.hpp"
 #include "math/geometric_mean.hpp"
 #include "math/mean.hpp"
-#include "ostream_std.hpp"
+#include "ostreamable.hpp"
 
 
 namespace hnc
@@ -52,25 +53,25 @@ namespace hnc
 	public:
 
 		/// Vector of all elapsed times
-		std::vector<double> all;
+		std::vector<long double> all;
 		
 	private:
 
-		/// Temporary time point to get duration between start and end
-		std::chrono::time_point<std::chrono::high_resolution_clock> m_tmp_time_point;
+		/// Last start time
+		long double m_start;
 
 	public:
 
 		/// @brief Start timer for benchmark
 		void start()
 		{
-			m_tmp_time_point = std::chrono::high_resolution_clock::now();
+			m_start = hnc::time::s();
 		}
 
 		/// @brief Stop timer and save the duration (elapsed time during last .start()) (in seconds)
 		void stop()
 		{
-			all.push_back(std::chrono::duration<double>(std::chrono::high_resolution_clock::now() - m_tmp_time_point).count());
+			all.push_back(hnc::time::s() - m_start);
 		}
 
 		/// @brief Add (push back) a user elapsed time value
@@ -79,28 +80,28 @@ namespace hnc
 
 		/// @brief Return the minimum of elapsed time
 		/// @return the minimum of elapsed time
-		double min() const { return *std::min_element(all.begin(), all.end()); }
+		long double min() const { return *std::min_element(all.begin(), all.end()); }
 
 		/// @brief Return the maximum of elapsed time
 		/// @return the maximum of elapsed time
-		double max() const { return *std::max_element(all.begin(), all.end()); }
+		long double max() const { return *std::max_element(all.begin(), all.end()); }
 
 		/// @brief Return the median of all elapsed times
 		/// @return the median of all elapsed times
-		double median() const { return hnc::math::median(all); }
+		long double median() const { return hnc::math::median(all); }
 
 		/// @brief Return the geometric mean of all elapsed times
 		/// @return the geometric mean of all elapsed times
-		double geometric_mean() const { return hnc::math::geometric_mean(all); }
+		long double geometric_mean() const { return hnc::math::geometric_mean(all); }
 
 		/**
 		 * @brief Return the mean of all elapsed times
 		 *
-		 * Benchmark is a long tail distribution, mean (may) have no sense; use media or geometric mean instead
+		 * Benchmark is a long tail distribution, mean (may) have no sense; use median (or geometric mean) instead
 		 * 
 		 * @return the mean of all elapsed times
 		 */
-		double mean() const { return hnc::math::mean(all); }
+		long double mean() const { return hnc::math::mean(all); }
 	};
 	
 	/**
@@ -158,7 +159,7 @@ namespace hnc
 			auto const & key = t.first;
 			auto const & value = t.second;
 			std::cout << key << ":" << "\n";
-			std::cout << "- all:            " << value.all << "\n";
+			std::cout << "- all:            " << hnc::ostreamable(value.all) << "\n";
 			std::cout << "- min:            " << value.min() << "\n";
 			std::cout << "- max:            " << value.max() << "\n";
 			std::cout << "- median:         " << value.median() << "\n";
@@ -180,9 +181,9 @@ namespace hnc
 	 * 
 	 * @return a std::map of double, key is the name of the benchmark, value is the mean
 	 */
-	std::map<std::string, double> benchmark_extract_mean(hnc::benchmark const & b)
+	std::map<std::string, long double> benchmark_extract_mean(hnc::benchmark const & b)
 	{
-		std::map<std::string, double> r;
+		std::map<std::string, long double> r;
 		
 		for (auto const & t : b)
 		{
@@ -249,23 +250,24 @@ namespace hnc
 		{
 			auto const & key = t.first;
 			auto const & value_map = t.second;
-			std::cout << key << ":";
+			o << key << ":";
 			// Copy paste of << hnc::benchmark (with identation)
 			for (auto const & t : value_map)
 			{
 				auto const & key = t.first;
 				auto const & value = t.second;
-				std::cout << "\n";
-				std::cout << "- " << key << ":" << "\n";
-				std::cout << "  " << "- all:            " << value.all << "\n";
-				std::cout << "  " << "- min:            " << value.min() << "\n";
-				std::cout << "  " << "- max:            " << value.max() << "\n";
-				std::cout << "  " << "- median:         " << value.median() << "\n";
-				std::cout << "  " << "- geometric mean: " << value.geometric_mean() << "\n";
-				std::cout << "  " << "- mean:           " << value.mean();
+				o << "\n";
+				o << "- " << key << ":" << "\n";
+				o << "  " << "- all:            " << hnc::ostreamable(value.all) << "\n";
+				o << "  " << "- min:            " << value.min() << "\n";
+				o << "  " << "- max:            " << value.max() << "\n";
+				o << "  " << "- median:         " << value.median() << "\n";
+				o << "  " << "- geometric mean: " << value.geometric_mean() << "\n";
+				o << "  " << "- mean:           " << value.mean();
 			}
-			if (t.first != b.rbegin()->first) { std::cout << "\n"; }
+			if (t.first != b.rbegin()->first) { o << "\n"; }
 		}
+		
 		return o;
 	}
 }

@@ -144,7 +144,7 @@ namespace hnc
 		}
 
 		// Extract mean
-		std::map<std::string, double> benchs_mean = benchmark_extract_mean(benchs);
+		std::map<std::string, long double> benchs_mean = benchmark_extract_mean(benchs);
 
 		// Create the GNUPlot script
 		hnc::gnuplot::gnuplot_boxes gp
@@ -158,7 +158,7 @@ namespace hnc
 		gp.plot().no_title();
 
 		// Create data for tabular
-		std::vector<std::vector<double>> tabular_data(1);
+		std::vector<std::vector<long double>> tabular_data(1);
 		std::vector<std::string> tabular_header;
 		for (auto const & bench_mean : benchs_mean)
 		{
