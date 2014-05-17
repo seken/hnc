@@ -612,11 +612,11 @@ namespace hnc
 		 */
 		std::vector<std::string> read_directory(std::string const & path)
 		{
+			// http://stackoverflow.com/questions/612097/how-can-i-get-a-list-of-files-in-a-directory-using-c-or-c
+			
 			#ifdef hnc_unix
 				
 				std::vector<std::string> r;
-				
-				// http://stackoverflow.com/questions/612097/how-can-i-get-a-list-of-files-in-a-directory-using-c-or-c
 				
 				DIR * dir = opendir(path.c_str());
 				
@@ -638,19 +638,17 @@ namespace hnc
 				
 				std::vector<std::string> r;
 				
-				// http://stackoverflow.com/questions/612097/how-can-i-get-a-list-of-files-in-a-directory-using-c-or-c
+				WIN32_FIND_DATA find_file_data;
+				HANDLE h_find = FindFirstFile((path + "/*").c_str(), &find_file_data);
 				
-				WIN32_FIND_DATA FindFileData;
-				HANDLE hFind = FindFirstFile(path.c_str(), &FindFileData);
-				
-				while (hFind != INVALID_HANDLE_VALUE)
+				while (h_find != INVALID_HANDLE_VALUE)
 				{
-					r.emplace_back(FindFileData.cFileName);
+					r.emplace_back(find_file_data.cFileName);
 					
-					if (!FindNextFile(hFind, &FindFileData))
+					if (FindNextFile(h_find, &find_file_data) == 0)
 					{
-						FindClose(hFind);
-						hFind = INVALID_HANDLE_VALUE;
+						FindClose(h_find);
+						h_find = INVALID_HANDLE_VALUE;
 					}
 				}
 				
