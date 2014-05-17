@@ -164,7 +164,12 @@ namespace hnc
 			#elif hnc_windows
 				
 				// http://msdn.microsoft.com/en-us/library/windows/desktop/ms724833%28v=vs.85%29.aspx
+				
 				OSVERSIONINFOEX infos;
+				ZeroMemory(&infos, sizeof(OSVERSIONINFOEX));
+				infos.dwOSVersionInfoSize = sizeof(OSVERSIONINFOEX);
+				GetVersionEx((OSVERSIONINFO *)(&infos));
+				
 				return hnc::to_string(infos.dwMajorVersion) + "." + hnc::to_string(infos.dwMinorVersion);
 				
 			#else
