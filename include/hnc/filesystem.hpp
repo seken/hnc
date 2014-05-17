@@ -577,6 +577,8 @@ namespace hnc
 		   @endcode
 		 *
 		 * @param[in] path Path
+		 * 
+		 * @note One Microsoft Windows, an executable is a file with "exe" extension
 		 *
 		 * @return true if the path is executable, false otherwise
 		 */
@@ -588,7 +590,7 @@ namespace hnc
 				
 			#elif hnc_windows
 				
-				throw hnc::except::incomplete_implementation("hnc::filesystem::is_executable is not implemented on your platform, please write a bug report or send a mail https://gitorious.org/hnc");
+				return (hnc::filesystem::extension(path) == "exe");
 				
 			#else
 				
