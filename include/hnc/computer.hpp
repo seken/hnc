@@ -52,7 +52,7 @@ namespace hnc
 		   	#include <hnc/computer.hpp>
 		   @endcode
 		 * 
-		 * @Return the name of the operating system
+		 * @return the name of the operating system
 		 */
 		inline std::string system_name()
 		{
@@ -150,7 +150,7 @@ namespace hnc
 		   	#include <hnc/computer.hpp>
 		   @endcode
 		 * 
-		 * @Return the version of the operating system
+		 * @return the version of the operating system
 		 */
 		inline std::string system_version()
 		{
@@ -186,7 +186,7 @@ namespace hnc
 		   	#include <hnc/computer.hpp>
 		   @endcode
 		 * 
-		 * @Return the model name of the processor
+		 * @return the model name of the processor
 		 */
 		inline std::string processor_name()
 		{

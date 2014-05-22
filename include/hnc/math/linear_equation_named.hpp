@@ -129,8 +129,8 @@ namespace hnc
 		};
 		
 		/// @brief Operator << between a std::ostream and a hnc::math::linear_equation_named<T>
-		/// @param[in,out] o  Output stream
-		/// @param[in]     eq A hnc::math::linear_equation_named<T>
+		/// @param[in,out] o                     Output stream
+		/// @param[in]     linear_equation_named A hnc::math::linear_equation_named<T>
 		/// @return the output stream
 		template <class T>
 		std::ostream & operator<<(std::ostream & o, hnc::math::linear_equation_named<T> const & linear_equation_named)

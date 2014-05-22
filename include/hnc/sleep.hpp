@@ -52,7 +52,7 @@ namespace hnc
 		   	#include <hnc/time.hpp>
 		   @endcode
 		 * 
-		 * @param[in] h Number of minutes to sleep
+		 * @param[in] m Number of minutes to sleep
 		 */
 		inline void min(unsigned int const m)
 		{
@@ -66,7 +66,7 @@ namespace hnc
 		   	#include <hnc/time.hpp>
 		   @endcode
 		 * 
-		 * @param[in] h Number of seconds to sleep
+		 * @param[in] s Number of seconds to sleep
 		 */
 		inline void s(unsigned int const s)
 		{
@@ -80,7 +80,7 @@ namespace hnc
 		   	#include <hnc/time.hpp>
 		   @endcode
 		 * 
-		 * @param[in] h Number of milliseconds to sleep
+		 * @param[in] ms Number of milliseconds to sleep
 		 */
 		inline void ms(unsigned int const ms)
 		{
@@ -94,7 +94,7 @@ namespace hnc
 		   	#include <hnc/time.hpp>
 		   @endcode
 		 * 
-		 * @param[in] h Number of microseconds to sleep
+		 * @param[in] us Number of microseconds to sleep
 		 */
 		inline void us(unsigned int const us)
 		{
@@ -108,7 +108,7 @@ namespace hnc
 		   	#include <hnc/time.hpp>
 		   @endcode
 		 * 
-		 * @param[in] h Number of nanoseconds to sleep
+		 * @param[in] ns Number of nanoseconds to sleep
 		 */
 		inline void ns(unsigned int const ns)
 		{

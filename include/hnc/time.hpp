@@ -37,7 +37,7 @@ namespace hnc
 		   	#include <hnc/time.hpp>
 		   @endcode
 		 * 
-		 * @Return time in ratio_t
+		 * @return time in ratio_t
 		 */
 		template <class return_t, class ratio_t>
 		return_t time()
@@ -58,7 +58,7 @@ namespace hnc
 		   	#include <hnc/time.hpp>
 		   @endcode
 		 * 
-		 * @Return time in hours
+		 * @return time in hours
 		 */
 		template <class return_t = long double>
 		return_t h()
@@ -73,7 +73,7 @@ namespace hnc
 		   	#include <hnc/time.hpp>
 		   @endcode
 		 * 
-		 * @Return time in minutes
+		 * @return time in minutes
 		 */
 		template <class return_t = long double>
 		return_t min()
@@ -88,7 +88,7 @@ namespace hnc
 		   	#include <hnc/time.hpp>
 		   @endcode
 		 * 
-		 * @Return time in seconds
+		 * @return time in seconds
 		 */
 		template <class return_t = long double>
 		return_t s()
@@ -103,7 +103,7 @@ namespace hnc
 		   	#include <hnc/time.hpp>
 		   @endcode
 		 * 
-		 * @Return time in milliseconds
+		 * @return time in milliseconds
 		 */
 		template <class return_t = long double>
 		return_t ms()
@@ -118,7 +118,7 @@ namespace hnc
 		   	#include <hnc/time.hpp>
 		   @endcode
 		 * 
-		 * @Return time in microseconds
+		 * @return time in microseconds
 		 */
 		template <class return_t = long double>
 		return_t us()
@@ -133,7 +133,7 @@ namespace hnc
 		   	#include <hnc/time.hpp>
 		   @endcode
 		 * 
-		 * @Return time in nanoseconds
+		 * @return time in nanoseconds
 		 */
 		template <class return_t = long double>
 		return_t ns()

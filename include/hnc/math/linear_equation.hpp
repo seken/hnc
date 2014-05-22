@@ -127,7 +127,7 @@ namespace hnc
 		template <class T>
 		bool operator!=(hnc::math::linear_equation<T> const & linear_equation_0, hnc::math::linear_equation<T> const & linear_equation_1)
 		{
-			return ! (linear_equation_0 != linear_equation_1);
+			return ! (linear_equation_0 == linear_equation_1);
 		}
 		
 		/// @brief Operator << between a std::ostream and a hnc::math::linear_equation<T>
