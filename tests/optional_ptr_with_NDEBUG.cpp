@@ -63,15 +63,15 @@ int main()
 		
 		maybe = hnc::optional_ptr<std::string>("one_string");
 		std::cout << maybe << std::endl;
-		nb_test -= hnc::test::warning(bool(maybe) == true, "maybe = hnc::optional_ptr<std::string>(\"one_string\"); fails\n");
+		nb_test -= hnc::test::warning(maybe == true, "maybe = hnc::optional_ptr<std::string>(\"one_string\"); fails\n");
 		
 		maybe = hnc::optional_ptr<std::string>();
 		std::cout << maybe << std::endl;
-		nb_test -= hnc::test::warning(bool(maybe) == false, "maybe = hnc::optional_ptr<std::string>(); fails\n");
+		nb_test -= hnc::test::warning(maybe == false, "maybe = hnc::optional_ptr<std::string>(); fails\n");
 		
 		maybe = std::string("one_other_string");
 		std::cout << maybe << std::endl;
-		nb_test -= hnc::test::warning(bool(maybe) == true, "maybe = hnc::optional_ptr<std::string>(\"one_other_string\"); fails\n");
+		nb_test -= hnc::test::warning(maybe == true, "maybe = hnc::optional_ptr<std::string>(\"one_other_string\"); fails\n");
 		
 		std::cout << maybe.value() << std::endl;
 		std::cout << *maybe << std::endl;
@@ -80,6 +80,9 @@ int main()
 		std::cout << maybe << std::endl;
 		
 		*maybe = "another_direct_write";
+		std::cout << maybe << std::endl;
+		
+		maybe = "last_write";
 		std::cout << maybe << std::endl;
 		
 		std::cout << "Size = " << maybe->size() << std::endl;

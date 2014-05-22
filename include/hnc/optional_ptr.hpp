@@ -54,6 +54,19 @@ namespace hnc
 			hnc::copy_ptr<T>((value) ? hnc::clone_to_unique_ptr(*value).release() : std::unique_ptr<T>().release())
 		{ }
 		
+		/// @brief Operator = with a hnc::optional_ptr<T>
+		/// @param[in] optional A hnc::optional_ptr<T>
+		hnc::optional_ptr<T> & operator=(hnc::optional_ptr<T> const & optional) = default;
+		
+		/// @brief Operator = with a T
+		/// @param[in] value Value
+		template <class U>
+		hnc::optional_ptr<T> & operator=(U const & value)
+		{
+			*this = hnc::optional_ptr<T>(value);
+			return *this;
+		}
+		
 		/// @brief Operator bool
 		/// @return true is the value is present, false otherwise
 		constexpr explicit operator bool() const { return hnc::copy_ptr<T>::operator bool(); }
@@ -101,9 +114,79 @@ namespace hnc
 		T const * operator ->() const { return &value(); }
 	};
 	
-	/// @brief Operator << between a std::ostream and a hnc::optional<T>
+	/**
+	 * @brief Operator == between two hnc::optional_ptr<T>
+	 * 
+	 * See http://en.cppreference.com/w/cpp/experimental/optional/operator_cmp from return
+	 * 
+	 * @param[in] optional_0 A hnc::optional_ptr<T>
+	 * @param[in] optional_1 A hnc::optional_ptr<T>
+	 * 
+	 * @return true if the hnc::optional_ptr<T> are equal, false otherwise
+	 */
+	template <class T>
+	bool operator==(hnc::optional_ptr<T> const & optional_0, hnc::optional_ptr<T> const & optional_1)
+	{
+		if (&optional_0 == & optional_1) { return true; }
+		
+		if (bool(optional_0) != bool(optional_1)) { return false; }
+		
+		if (bool(optional_0) == false) { return true; }
+		
+		return *optional_0 == *optional_1;
+	}
+	
+	/**
+	 * @brief Operator == between a hnc::optional_ptr<T> and a bool
+	 * 
+	 * See http://en.cppreference.com/w/cpp/experimental/optional/operator_cmp from return
+	 * 
+	 * @param[in] optional A hnc::optional_ptr<T>
+	 * @param[in] b        A bool
+	 * 
+	 * @return true if bool(hnc::optional_ptr<T>) and the bool are equal, false otherwise
+	 */
+	template <class T>
+	bool operator==(hnc::optional_ptr<T> const & optional, bool const b)
+	{
+		return bool(optional) == b;
+	}
+	
+	/**
+	 * @brief Operator != between two hnc::optional_ptr<T>
+	 * 
+	 * See http://en.cppreference.com/w/cpp/experimental/optional/operator_cmp from return
+	 * 
+	 * @param[in] optional_0 A hnc::optional_ptr<T>
+	 * @param[in] optional_1 A hnc::optional_ptr<T>
+	 * 
+	 * @return true if the hnc::optional_ptr<T> are not equal, false otherwise
+	 */
+	template <class T>
+	bool operator!=(hnc::optional_ptr<T> const & optional_0, hnc::optional_ptr<T> const & optional_1)
+	{
+		return ! (optional_0 == optional_1);
+	}
+	
+	/**
+	 * @brief Operator != between a hnc::optional_ptr<T> and a bool
+	 * 
+	 * See http://en.cppreference.com/w/cpp/experimental/optional/operator_cmp from return
+	 * 
+	 * @param[in] optional A hnc::optional_ptr<T>
+	 * @param[in] b        A bool
+	 * 
+	 * @return true if bool(hnc::optional_ptr<T>) and the bool are not equal, false otherwise
+	 */
+	template <class T>
+	bool operator!=(hnc::optional_ptr<T> const & optional, bool const b)
+	{
+		return ! (optional == b);
+	}
+	
+	/// @brief Operator << between a std::ostream and a hnc::optional_ptr<T>
 	/// @param[in,out] o        Output stream
-	/// @param[in]     optional A hnc::optional<T>
+	/// @param[in]     optional A hnc::optional_ptr<T>
 	/// @return the output stream
 	template <class T>
 	std::ostream & operator << (std::ostream & o, hnc::optional_ptr<T> const & optional)
