@@ -135,7 +135,7 @@ namespace hnc
 		 * 
 		 * @return time in nanoseconds
 		 */
-		template <class return_t = long double>
+		template <class return_t = long unsigned int>
 		return_t ns()
 		{
 			return hnc::time::time<return_t, std::nano>();
