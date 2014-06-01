@@ -14,6 +14,7 @@
 
 
 #include <iostream>
+#include <vector>
 
 #include <hnc/random.hpp>
 #include <hnc/test.hpp>
@@ -94,6 +95,35 @@ int main()
 		int const n1 = random(0.1);
 		std::cout << n0 << std::endl;
 		std::cout << n1 << std::endl;
+	}
+	std::cout << std::endl;
+	
+	{
+		auto random = hnc::random::make_uniform_t(0, 9);
+		std::vector<int> r(10, 0);
+		for (unsigned int i = 0; i < 10000; ++i)
+		{
+			++r.at(std::size_t(random()));
+		}
+		for (std::size_t i =0; i < r.size(); ++i)
+		{
+			std::cout << i << " - " << r[i] << std::endl;
+		}
+	}
+	std::cout << std::endl;
+	
+	{
+		auto random = hnc::random::make_true_false_t();
+		std::vector<int> r(2, 0);
+		for (unsigned int i = 0; i < 1000; ++i)
+		{
+			if (random()) { ++r[1]; }
+			if (random()) { ++r[0]; }
+		}
+		for (std::size_t i =0; i < r.size(); ++i)
+		{
+			std::cout << i << " - " << r[i] << std::endl;
+		}
 	}
 	std::cout << std::endl;
 	
