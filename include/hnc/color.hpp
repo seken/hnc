@@ -85,6 +85,14 @@ namespace hnc
 		}
 		
 		hnc_generate_serialize_method(r, g, b, a)
+	
+		/// @brief Black color
+		/// @return Black color
+		static hnc::color black() { return { 0, 0, 0 }; }
+	
+		/// @brief White color
+		/// @return White color
+		static hnc::color white() { return { 255, 255, 255 }; }
 	};
 	
 	/// @brief Operator == between two hnc::color
