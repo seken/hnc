@@ -45,6 +45,10 @@ cmake_minimum_required(VERSION 2.6)
 	message(STATUS "---")
 	find_package(hnc_linux PATHS "${FIND_PACKAGE_LOCAL_PATH}" NO_DEFAULT_PATH)
 
+# OS X
+	message(STATUS "---")
+	find_package(hnc_os_x PATHS "${FIND_PACKAGE_LOCAL_PATH}" NO_DEFAULT_PATH)
+
 # Windows
 	message(STATUS "---")
 	find_package(hnc_windows PATHS "${FIND_PACKAGE_LOCAL_PATH}" NO_DEFAULT_PATH)
@@ -183,6 +187,22 @@ cmake_minimum_required(VERSION 2.6)
 			set_target_properties("${test_name}_without_boost_asio" PROPERTIES COMPILE_FLAGS "-D${HNC_NO_BOOST_ASIO_MACRO}")
 			message(STATUS "Add test ${test_name}_without_boost_asio")
 			add_test("${test_name}_without_boost_asio" "${test_name}_without_boost_asio")
+			
+		# Compilation with Boost.Serialization
+		elseif ("${test_name}" MATCHES ".*test__serialization.*")
+		
+			# With Boost.Serialization
+			if (HNC_BOOST_SERIALIZATION_FOUND)
+				add_executable(${test_name} "${test_source}")
+				target_link_libraries(${test_name} ${HNC_BOOST_SERIALIZATION_LIBRARY})
+				add_test(${test_name} "${test_name}")
+			endif()
+			
+			# Without Boost.Serialization
+			add_executable("${test_name}_without_boost_serialization" "${test_source}")
+			set_target_properties("${test_name}_without_boost_serialization" PROPERTIES COMPILE_FLAGS "-D${HNC_NO_BOOST_SERIALIZATION_MACRO}")
+			message(STATUS "Add test ${test_name}_without_boost_serialization")
+			add_test("${test_name}_without_boost_serialization" "${test_name}_without_boost_serialization")
 			
 		# Executable
 		else()

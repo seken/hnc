@@ -37,20 +37,27 @@ else()
 	
 endif()
 
-find_package(hnc_boost_asio)
 
-find_package(hnc_boost_mpi)
+find_package(hnc_unix)
+
+find_package(hnc_linux)
+
+find_package(hnc_os_x)
+
+find_package(hnc_windows)
 
 find_package(hnc_boost_serialization)
 
 find_package(hnc_boost_system)
 
+find_package(hnc_boost_mpi)
+
 find_package(hnc_compiler_mpi_cpp)
 
-find_package(hnc_gnuplot_exe)
+find_package(hnc_boost_asio)
 
 find_package(hnc_openssl)
 
-find_package(hnc_pdflatex_exe)
+find_package(hnc_gnuplot_exe)
 
-find_package(hnc_unix)
+find_package(hnc_pdflatex_exe)
