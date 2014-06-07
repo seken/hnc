@@ -49,9 +49,9 @@ namespace hnc
 	   { };
 	   
 	   // This partial template specialization fonctor (return true) is created only if
-	   // the type "decltype(std::declval<T&>().clone())" is valid i.e. T::clone() exists
+	   // the type "decltype(std::declval<T &>().clone())" is valid i.e. T::clone() exists
 	   template <class T>
-	   class is_cloneable<T, typename hnc::this_type<decltype(std::declval<T&>().clone())>::is_valid> : public std::true_type
+	   class is_cloneable<T, typename hnc::this_type<decltype(std::declval<T &>().clone())>::is_valid> : public std::true_type
 	   { };
 	   @endcode
 	 */
