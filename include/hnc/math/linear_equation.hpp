@@ -102,7 +102,7 @@ namespace hnc
 		/// @param[in] linear_equation_1 A hnc::math::linear_equation<T>
 		/// @return true if the hnc::math::linear_equation<T> are equal, false otherwise
 		template <class T>
-		bool operator==(hnc::math::linear_equation<T> const & linear_equation_0, hnc::math::linear_equation<T> const & linear_equation_1)
+		bool operator ==(hnc::math::linear_equation<T> const & linear_equation_0, hnc::math::linear_equation<T> const & linear_equation_1)
 		{
 			if (&linear_equation_0 == &linear_equation_1)
 			{
@@ -125,7 +125,7 @@ namespace hnc
 		/// @param[in] linear_equation_1 A hnc::math::linear_equation<T>
 		/// @return true if the hnc::math::linear_equation<T> are not equal, false otherwise
 		template <class T>
-		bool operator!=(hnc::math::linear_equation<T> const & linear_equation_0, hnc::math::linear_equation<T> const & linear_equation_1)
+		bool operator !=(hnc::math::linear_equation<T> const & linear_equation_0, hnc::math::linear_equation<T> const & linear_equation_1)
 		{
 			return ! (linear_equation_0 == linear_equation_1);
 		}
@@ -135,7 +135,7 @@ namespace hnc
 		/// @param[in]     linear_equation A hnc::math::linear_equation<T>
 		/// @return the output stream
 		template <class T>
-		std::ostream & operator<<(std::ostream & o, hnc::math::linear_equation<T> const & linear_equation)
+		std::ostream & operator <<(std::ostream & o, hnc::math::linear_equation<T> const & linear_equation)
 		{
 			// Only first write do not print " + "
 			bool first_write = true;

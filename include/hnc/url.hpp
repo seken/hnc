@@ -150,7 +150,7 @@ namespace hnc
 	/// @param[in,out] o   Output stream
 	/// @param[in]     url A hnc::url
 	/// @return the output stream
-	inline std::ostream & operator<<(std::ostream & o, hnc::url const & url)
+	inline std::ostream & operator <<(std::ostream & o, hnc::url const & url)
 	{
 		o << url.to_string();
 		return o;

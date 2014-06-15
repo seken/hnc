@@ -74,7 +74,7 @@ namespace hnc
 					/// @brief To sort solutions
 					/// @param[in] solution An other solution
 					/// @return true if my solution's grade >= solution's grade
-					bool operator<(solution_grade const & solution) const
+					bool operator <(solution_grade const & solution) const
 					{
 						return (solution.grade < grade);
 					}
@@ -85,7 +85,7 @@ namespace hnc
 			/// @param[in]     solution A hnc::algo::genetic_algo::solution_grade<solution_t, grade_t>
 			/// @return the output stream
 			template <class solution_t, class grade_t>
-			std::ostream & operator<<(std::ostream & o, hnc::algo::genetic_algo::solution_grade<solution_t, grade_t> const & solution)
+			std::ostream & operator <<(std::ostream & o, hnc::algo::genetic_algo::solution_grade<solution_t, grade_t> const & solution)
 			{
 				o << "(" << solution.solution << ", " << solution.grade << ")";
 				return o;

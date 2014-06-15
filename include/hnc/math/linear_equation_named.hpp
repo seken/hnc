@@ -133,7 +133,7 @@ namespace hnc
 		/// @param[in]     linear_equation_named A hnc::math::linear_equation_named<T>
 		/// @return the output stream
 		template <class T>
-		std::ostream & operator<<(std::ostream & o, hnc::math::linear_equation_named<T> const & linear_equation_named)
+		std::ostream & operator <<(std::ostream & o, hnc::math::linear_equation_named<T> const & linear_equation_named)
 		{
 			// Only first write do not print " + "
 			bool first_write = true;
@@ -218,7 +218,7 @@ namespace hnc
 		/// @param[in]     eq A hnc::math::linear_equation_named<T>
 		/// @return the input stream
 		template <class T>
-		std::istream & operator>>(std::istream & i, hnc::math::linear_equation_named<T> & eq)
+		std::istream & operator >>(std::istream & i, hnc::math::linear_equation_named<T> & eq)
 		{
 			// Tmp variables for get from istream
 			T coeff = T(0);

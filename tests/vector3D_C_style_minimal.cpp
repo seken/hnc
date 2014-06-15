@@ -167,8 +167,8 @@ int main()
 		}
 		std::cout << v << std::endl;
 		std::cout << v_base << std::endl;
-		nb_test -= hnc::test::warning(test, "hnc::vector3D_C_style_minimal operator= (copy) 3 size_x, 5 size_y, 7 size_z, default value = 12 fails\n");
-		nb_test -= hnc::test::warning(test_base, "hnc::vector3D_C_style_minimal operator= (original) 3 size_x, 5 size_y, 7 size_z, default value = 12 fails\n");
+		nb_test -= hnc::test::warning(test, "hnc::vector3D_C_style_minimal operator = (copy) 3 size_x, 5 size_y, 7 size_z, default value = 12 fails\n");
+		nb_test -= hnc::test::warning(test_base, "hnc::vector3D_C_style_minimal operator = (original) 3 size_x, 5 size_y, 7 size_z, default value = 12 fails\n");
 	}
 	std::cout << std::endl;
 

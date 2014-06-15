@@ -46,7 +46,7 @@ namespace hnc
 		/// @param[out] o                   Output stream
 		/// @param[in]  relational_operator A hnc::math::relational_operator
 		/// @return the output stream
-		std::ostream & operator<<(std::ostream & o, hnc::math::relational_operator const & relational_operator)
+		std::ostream & operator <<(std::ostream & o, hnc::math::relational_operator const & relational_operator)
 		{
 			if (relational_operator == hnc::math::relational_operator::equal_to)
 			{

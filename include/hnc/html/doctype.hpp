@@ -76,7 +76,7 @@ namespace hnc
 			/// @param[in,out] o            Output stream
 			/// @param[in]     html_doctype A hnc::html::doctype::html
 			/// @return the output stream
-			inline std::ostream & operator<<(std::ostream & o, hnc::html::doctype::html const & html_doctype)
+			inline std::ostream & operator <<(std::ostream & o, hnc::html::doctype::html const & html_doctype)
 			{
 				o << html_doctype.doctype();
 				return o;

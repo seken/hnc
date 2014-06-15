@@ -66,7 +66,7 @@ namespace hnc
 	/// @param[in]     ostreamable A hnc::ostreamable_t<T>
 	/// @return the output stream
 	template <class T>
-	std::ostream & operator<<(std::ostream & o, hnc::ostreamable_t<T> const & ostreamable)
+	std::ostream & operator <<(std::ostream & o, hnc::ostreamable_t<T> const & ostreamable)
 	{
 		o << ostreamable.raw;
 		return o;
@@ -117,7 +117,7 @@ namespace hnc
 	/// @param[in]     ostreamable A hnc::ostreamable_t<std::vector<T>>
 	/// @return the output stream
 	template <class T>
-	std::ostream & operator<<(std::ostream & o, hnc::ostreamable_t<std::vector<T>> const & ostreamable)
+	std::ostream & operator <<(std::ostream & o, hnc::ostreamable_t<std::vector<T>> const & ostreamable)
 	{
 		hnc::print_std_container(o, ostreamable.raw);
 		return o;
@@ -128,7 +128,7 @@ namespace hnc
 	/// @param[in]     ostreamable A hnc::ostreamable_t<std::array<T, N>>
 	/// @return the output stream
 	template <std::size_t N, class T>
-	std::ostream & operator<<(std::ostream & o, hnc::ostreamable_t<std::array<T, N>> const & ostreamable)
+	std::ostream & operator <<(std::ostream & o, hnc::ostreamable_t<std::array<T, N>> const & ostreamable)
 	{
 		hnc::print_std_container(o, ostreamable.raw);
 		return o;
@@ -139,7 +139,7 @@ namespace hnc
 	/// @param[in]     ostreamable A hnc::ostreamable_t<std::list<T>>
 	/// @return the output stream
 	template <class T>
-	std::ostream & operator<<(std::ostream & o, hnc::ostreamable_t<std::list<T>> const & ostreamable)
+	std::ostream & operator <<(std::ostream & o, hnc::ostreamable_t<std::list<T>> const & ostreamable)
 	{
 		hnc::print_std_container(o, ostreamable.raw);
 		return o;
@@ -150,7 +150,7 @@ namespace hnc
 	/// @param[in]     ostreamable A hnc::ostreamable_t<std::set<T>>
 	/// @return the output stream
 	template <class T>
-	std::ostream & operator<<(std::ostream & o, hnc::ostreamable_t<std::set<T>> const & ostreamable)
+	std::ostream & operator <<(std::ostream & o, hnc::ostreamable_t<std::set<T>> const & ostreamable)
 	{
 		hnc::print_std_container(o, ostreamable.raw);
 		return o;
@@ -161,7 +161,7 @@ namespace hnc
 	/// @param[in]     ostreamable A hnc::ostreamable_t<std::map<key_t, T>>
 	/// @return the output stream
 	template <class key_t, class T>
-	std::ostream & operator<<(std::ostream & o, hnc::ostreamable_t<std::map<key_t, T>> const & ostreamable)
+	std::ostream & operator <<(std::ostream & o, hnc::ostreamable_t<std::map<key_t, T>> const & ostreamable)
 	{
 		hnc::print_std_container(o, ostreamable.raw);
 		return o;
@@ -241,7 +241,7 @@ namespace hnc
 	/// @param[in]     ostreamable A hnc::ostreamable_tuple_t<T ...>
 	/// @return the output stream
 	template <class ... T>
-	std::ostream & operator<<(std::ostream & o, hnc::ostreamable_tuple_t<T ...> const & ostreamable)
+	std::ostream & operator <<(std::ostream & o, hnc::ostreamable_tuple_t<T ...> const & ostreamable)
 	{
 		hnc::print_tuple(o, ostreamable.tuple);
 		return o;

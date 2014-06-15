@@ -98,7 +98,7 @@ namespace hnc
 	   	virtual void display(std::ostream & o) const override { o << "one_B"; }
 	   };
 	   
-	   std::ostream & operator<<(std::ostream & o, A const & v) { v.display(o); return o; }
+	   std::ostream & operator <<(std::ostream & o, A const & v) { v.display(o); return o; }
 	   
 	   int main()
 	   {
@@ -140,7 +140,7 @@ namespace hnc
 		{
 			if (p)
 			{
-				std::unique_ptr<T>::operator=
+				std::unique_ptr<T>::operator =
 				(
 					hnc::is_cloneable<T>()
 					?
@@ -162,7 +162,7 @@ namespace hnc
 		{
 			if (p)
 			{
-				std::unique_ptr<T>::operator=
+				std::unique_ptr<T>::operator =
 				(
 					hnc::is_cloneable<T>()
 					?
@@ -213,12 +213,12 @@ namespace hnc
 		/// @brief Return a reference to the stored object
 		/// @pre The pointer is nott nullptr
 		/// @return a reference to the stored object
-		using std::unique_ptr<T>::operator*;
+		using std::unique_ptr<T>::operator *;
 		
 		/// @brief Return a reference to the stored object to access of its members
 		/// @pre The pointer is nott nullptr
 		/// @return a reference to the stored object to access of its members
-		using std::unique_ptr<T>::operator->;
+		using std::unique_ptr<T>::operator  ->;
 		
 	protected:
 		

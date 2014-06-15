@@ -77,7 +77,7 @@ namespace hnc
 		/// @param[in] rectangle_b A hnc::geometry::rectangle<T>
 		/// @return true if hnc::geometry::rectangle<T> have same values, false otherwise
 		template <class T>
-		bool operator==(hnc::geometry::rectangle<T> const & rectangle_a, hnc::geometry::rectangle<T> const & rectangle_b)
+		bool operator ==(hnc::geometry::rectangle<T> const & rectangle_a, hnc::geometry::rectangle<T> const & rectangle_b)
 		{
 			return
 			(
@@ -93,7 +93,7 @@ namespace hnc
 		/// @param[in] rectangle_b A hnc::geometry::rectangle<T>
 		/// @return true if hnc::geometry::rectangle<T> have different values, false otherwise
 		template <class T>
-		bool operator!=(hnc::geometry::rectangle<T> const & rectangle_a, hnc::geometry::rectangle<T> const & rectangle_b)
+		bool operator !=(hnc::geometry::rectangle<T> const & rectangle_a, hnc::geometry::rectangle<T> const & rectangle_b)
 		{
 			return !(rectangle_a == rectangle_b);
 		}
@@ -103,7 +103,7 @@ namespace hnc
 		/// @param[in]     rectangle A hnc::geometry::rectangle<T>
 		/// @return the output stream
 		template <class T>
-		std::ostream & operator<<(std::ostream & o, hnc::geometry::rectangle<T> const & rectangle)
+		std::ostream & operator <<(std::ostream & o, hnc::geometry::rectangle<T> const & rectangle)
 		{
 			o << "{ left = " << rectangle.left << ", top = " << rectangle.top << ", width = " << rectangle.width << ", height = " << rectangle.height << " }";
 			return o;

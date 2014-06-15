@@ -207,7 +207,7 @@ namespace hnc
 		/// @param[in,out] o         Output stream
 		/// @param[in]     html_head A hnc::html::head
 		/// @return the output stream
-		inline std::ostream & operator<<(std::ostream & o, hnc::html::head const & html_head)
+		inline std::ostream & operator <<(std::ostream & o, hnc::html::head const & html_head)
 		{
 			o << html_head.html();
 			return o;

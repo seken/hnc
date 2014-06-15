@@ -287,7 +287,7 @@ namespace hnc
 			/// @param[in] data Data for the cell
 			/// @return The cell
 			template <class T>
-			cell_t & operator=(T const & data)
+			cell_t & operator =(T const & data)
 			{
 				this->data = hnc::to_string(data);
 				return *this;
@@ -806,7 +806,7 @@ namespace hnc
 	/// @param[in,out] o       Output stream
 	/// @param[in]     tabular A hnc::tabular
 	/// @return the output stream
-	std::ostream & operator<<(std::ostream & o, hnc::tabular const & tabular)
+	std::ostream & operator <<(std::ostream & o, hnc::tabular const & tabular)
 	{
 		o << tabular.to_string();
 		return o;

@@ -145,7 +145,7 @@ namespace hnc
 		/// @param[in,out] o            Output stream
 		/// @param[in]     html_webpage A hnc::html::webpage
 		/// @return the output stream
-		inline std::ostream & operator<<(std::ostream & o, hnc::html::webpage const & html_webpage)
+		inline std::ostream & operator <<(std::ostream & o, hnc::html::webpage const & html_webpage)
 		{
 			o << html_webpage.html();
 			return o;

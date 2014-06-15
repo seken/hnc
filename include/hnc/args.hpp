@@ -798,7 +798,7 @@ namespace hnc
 	/// @param[in,out] o    Output stream
 	/// @param[in]     args A hnc::args
 	/// @return the output stream
-	inline std::ostream & operator<<(std::ostream & o, hnc::args const & args)
+	inline std::ostream & operator <<(std::ostream & o, hnc::args const & args)
 	{
 		o << args.help();
 		return o;

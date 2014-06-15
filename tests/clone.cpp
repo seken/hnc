@@ -131,14 +131,14 @@ public:
 };
 
 
-std::ostream & operator<<(std::ostream & o, A const & v) { v.display(o); return o; }
-std::ostream & operator<<(std::ostream & o, C const & v) { v.display(o); return o; }
-std::ostream & operator<<(std::ostream & o, E const & v) { v.display(o); return o; }
-std::ostream & operator<<(std::ostream & o, H const & v) { v.display(o); return o; }
-std::ostream & operator<<(std::ostream & o, K const & v) { v.display(o); return o; }
+std::ostream & operator <<(std::ostream & o, A const & v) { v.display(o); return o; }
+std::ostream & operator <<(std::ostream & o, C const & v) { v.display(o); return o; }
+std::ostream & operator <<(std::ostream & o, E const & v) { v.display(o); return o; }
+std::ostream & operator <<(std::ostream & o, H const & v) { v.display(o); return o; }
+std::ostream & operator <<(std::ostream & o, K const & v) { v.display(o); return o; }
 
 template <class T>
-std::ostream & operator<<(std::ostream & o, std::unique_ptr<T> const & p) { o << *p; return o; }
+std::ostream & operator <<(std::ostream & o, std::unique_ptr<T> const & p) { o << *p; return o; }
 
 
 template <class T>

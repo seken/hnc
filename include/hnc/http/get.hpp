@@ -253,7 +253,7 @@ namespace hnc
 		/// @param[in,out] o                Output stream
 		/// @param[in]     http_get_request A hnc::http::get
 		/// @return the output stream
-		inline std::ostream & operator<<(std::ostream & o, hnc::http::get const & http_get_request)
+		inline std::ostream & operator <<(std::ostream & o, hnc::http::get const & http_get_request)
 		{
 			o << http_get_request.to_string();
 			return o;

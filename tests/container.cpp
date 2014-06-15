@@ -162,13 +162,13 @@ int main()
 		c.push_back("and");
 		c.push_back("_");
 		c.front() = "test";
-		c.back() = "operator<<";
-		std::cout << "operator<< = " << c << std::endl;
+		c.back() = "operator <<";
+		std::cout << "operator << = " << c << std::endl;
 		std::cout << "front      = " << c.front() << std::endl;
 		std::cout << "back       = " << c.back() << std::endl;
 		nb_test -= hnc::test::warning(c.size() == 8, "hnc::container extra test fails!\n");
 		nb_test -= hnc::test::warning(c.front() == "test", "hnc::container extra test fails!\n");
-		nb_test -= hnc::test::warning(c.back() == "operator<<", "hnc::container extra test fails!\n");
+		nb_test -= hnc::test::warning(c.back() == "operator <<", "hnc::container extra test fails!\n");
 		nb_test -= hnc::test::warning(c.at(0) == "test", "hnc::container extra test fails!\n");
 		nb_test -= hnc::test::warning(c.at(1) == "other", "hnc::container extra test fails!\n");
 		nb_test -= hnc::test::warning(c.at(2) == "functions", "hnc::container extra test fails!\n");
@@ -176,7 +176,7 @@ int main()
 		nb_test -= hnc::test::warning(c.at(4) == "front", "hnc::container extra test fails!\n");
 		nb_test -= hnc::test::warning(c.at(5) == "back", "hnc::container extra test fails!\n");
 		nb_test -= hnc::test::warning(c.at(6) == "and", "hnc::container extra test fails!\n");
-		nb_test -= hnc::test::warning(c.at(7) == "operator<<", "hnc::container extra test fails!\n");
+		nb_test -= hnc::test::warning(c.at(7) == "operator <<", "hnc::container extra test fails!\n");
 	}
 	
 	hnc::test::warning(nb_test == 0, "hnc::arg " + hnc::to_string(nb_test) + " test fail!\n");

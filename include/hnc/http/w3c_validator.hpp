@@ -368,7 +368,7 @@ namespace hnc
 		/// @param[in,out] o     Output stream
 		/// @param[in]     error A hnc::http::w3c_validator::error
 		/// @return the output stream
-		inline std::ostream & operator<<(std::ostream & o, hnc::http::w3c_validator::error const & error)
+		inline std::ostream & operator <<(std::ostream & o, hnc::http::w3c_validator::error const & error)
 		{
 			o << error.to_string();
 			return o;
@@ -378,7 +378,7 @@ namespace hnc
 		/// @param[in,out] o                    Output stream
 		/// @param[in]     w3c_validator_server A hnc::http::w3c_validator::server
 		/// @return the output stream
-		inline std::ostream & operator<<(std::ostream & o, hnc::http::w3c_validator::server const & w3c_validator_server)
+		inline std::ostream & operator <<(std::ostream & o, hnc::http::w3c_validator::server const & w3c_validator_server)
 		{
 			o << w3c_validator_server.url();
 			return o;
@@ -388,7 +388,7 @@ namespace hnc
 		/// @param[in,out] o             Output stream
 		/// @param[in]     w3c_validator A hnc::http::w3c_validator
 		/// @return the output stream
-		inline std::ostream & operator<<(std::ostream & o, hnc::http::w3c_validator const & w3c_validator)
+		inline std::ostream & operator <<(std::ostream & o, hnc::http::w3c_validator const & w3c_validator)
 		{
 			// TODO
 			o << "W3C validator (" << w3c_validator.validator_server() << "):" << "\n";

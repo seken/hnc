@@ -131,8 +131,8 @@ int main()
 		}
 		std::cout << v << std::endl;
 		std::cout << v_base << std::endl;
-		nb_test -= hnc::test::warning(test, "hnc::vector2D_C_style_minimal operator= (copy) 3 rows, 5 columns, default value = 12 fails\n");
-		nb_test -= hnc::test::warning(test_base, "hnc::vector2D_C_style_minimal operator= (original) 3 rows, 5 columns, default value = 12 fails\n");
+		nb_test -= hnc::test::warning(test, "hnc::vector2D_C_style_minimal operator = (copy) 3 rows, 5 columns, default value = 12 fails\n");
+		nb_test -= hnc::test::warning(test_base, "hnc::vector2D_C_style_minimal operator = (original) 3 rows, 5 columns, default value = 12 fails\n");
 	}
 	std::cout << std::endl;
 

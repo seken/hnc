@@ -110,7 +110,7 @@ namespace hnc
 		/// @brief Move assignment operator between two vector2D 
 		/// @param[in] v2D A vector2D
 		/// @return the vector2D_C_style_minimal
-		vector2D_C_style_minimal<T> operator=(vector2D_C_style_minimal<T> && v2D)
+		vector2D_C_style_minimal<T> operator =(vector2D_C_style_minimal<T> && v2D)
 		{
 			// If it is a different vector2D
 			if (this != &v2D)
@@ -133,7 +133,7 @@ namespace hnc
 		/// @brief Affectation operator between two vector2D
 		/// @param[in] v2D A vector2D
 		/// @return the vector2D_C_style_minimal
-		vector2D_C_style_minimal<T> operator=(vector2D_C_style_minimal<T> const & v2D)
+		vector2D_C_style_minimal<T> operator =(vector2D_C_style_minimal<T> const & v2D)
 		{
 			// If it is a different vector2D
 			if (this != &v2D)
@@ -183,7 +183,7 @@ namespace hnc
 	/// @param[in]     v A hnc::vector2D_C_style_minimal<T>
 	/// @return the output stream
 	template <class T>
-	std::ostream & operator<<(std::ostream & o, hnc::vector2D_C_style_minimal<T> const & v)
+	std::ostream & operator <<(std::ostream & o, hnc::vector2D_C_style_minimal<T> const & v)
 	{
 		// Display data
 		for (std::size_t row = 0; row < v.nb_row(); ++row)

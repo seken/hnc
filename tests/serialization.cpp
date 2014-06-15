@@ -56,7 +56,7 @@ public:
 	hnc_generate_serialize_method(m_first_names, m_name, m_age)
 };
 
-std::ostream & operator<<(std::ostream & o, human_t const & human)
+std::ostream & operator <<(std::ostream & o, human_t const & human)
 {
 	if (human.name().empty() == false)
 	{
@@ -79,7 +79,7 @@ std::ostream & operator<<(std::ostream & o, human_t const & human)
 	return o;
 }
 
-bool operator==(human_t const & a, human_t const & b)
+bool operator ==(human_t const & a, human_t const & b)
 {
 	return
 	(

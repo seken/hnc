@@ -147,7 +147,7 @@ namespace hnc
 		/// @param[in,out] o             Output stream
 		/// @param[in]     latex_article A hnc::latex::article
 		/// @return the output stream
-		inline std::ostream & operator<<(std::ostream & o, hnc::latex::article const & latex_article)
+		inline std::ostream & operator <<(std::ostream & o, hnc::latex::article const & latex_article)
 		{
 			o << latex_article.latex();
 			return o;

@@ -22,7 +22,7 @@
 #include <iomanip>
 
 
-// Pre-declare hnc::raw_data for operator<<
+// Pre-declare hnc::raw_data for operator <<
 namespace hnc
 {
 	template <std::size_t N>
@@ -30,7 +30,7 @@ namespace hnc
 	
 	// Declarate this function for hnc::raw_data can be friend with
 	template <std::size_t N>
-	std::ostream & operator<<(std::ostream & o, hnc::raw_data<N> const & c);
+	std::ostream & operator <<(std::ostream & o, hnc::raw_data<N> const & c);
 }
 
 namespace hnc
@@ -95,38 +95,38 @@ namespace hnc
 
 		/// @brief Equality test for each elements of two raw_data
 		/// @return true if each element of the raw_data are equals, else false
-		bool operator==(raw_data<N> const & c) const
+		bool operator ==(raw_data<N> const & c) const
 		{ return static_cast<std::array<unsigned char, N>>(*this) == static_cast<std::array<unsigned char, N>>(c); }
 
 		/// @brief Inequality test for each elements of two raw_data
 		/// @return true if one element of the raw_data is not equals, else false
-		bool operator!=(raw_data<N> const & c) const
+		bool operator !=(raw_data<N> const & c) const
 		{ return static_cast<std::array<unsigned char, N>>(*this) != static_cast<std::array<unsigned char, N>>(c); }
 
 		/// @brief < test for each elements of two raw_data
 		/// @return true if each element of the raw_data are <, else false
-		bool operator<(raw_data<N> const & c) const
+		bool operator <(raw_data<N> const & c) const
 		{ return static_cast<std::array<unsigned char, N>>(*this) < static_cast<std::array<unsigned char, N>>(c); }
 
 		/// @brief <= test for each elements of two raw_data
 		/// @return true if each element of the raw_data are <=, else false
-		bool operator<=(raw_data<N> const & c) const
+		bool operator <=(raw_data<N> const & c) const
 		{ return static_cast<std::array<unsigned char, N>>(*this) <= static_cast<std::array<unsigned char, N>>(c); }
 
 		/// @brief > test for each elements of two raw_data
 		/// @return true if each element of the raw_data are >, else false
-		bool operator>(raw_data<N> const & c) const
+		bool operator >(raw_data<N> const & c) const
 		{ return static_cast<std::array<unsigned char, N>>(*this) > static_cast<std::array<unsigned char, N>>(c); }
 
 		/// @brief >= test for each elements of two raw_data
 		/// @return true if each element of the raw_data are >=, else false
-		bool operator>=(raw_data<N> const & c) const
+		bool operator >=(raw_data<N> const & c) const
 		{ return static_cast<std::array<unsigned char, N>>(*this) >= static_cast<std::array<unsigned char, N>>(c); }
 
 		// ostream
 
 		/// Declare operator << with std::ostream as a friend
-		friend std::ostream & operator<< <>(std::ostream & o, hnc::raw_data<N> const & c);
+		friend std::ostream & operator << <>(std::ostream & o, hnc::raw_data<N> const & c);
 	};
 	
 	/// @brief Operator << between a std::ostream and a hnc::raw_data<N>
@@ -134,7 +134,7 @@ namespace hnc
 	/// @param[in]     c A hnc::raw_data<N>
 	/// @return the output stream
 	template <std::size_t N>
-	std::ostream & operator<<(std::ostream & o, hnc::raw_data<N> const & c)
+	std::ostream & operator <<(std::ostream & o, hnc::raw_data<N> const & c)
 	{
 		for (std::size_t i = 0; i < N; ++i)
 		{

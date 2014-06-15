@@ -22,7 +22,7 @@
 #include "ostream_std.hpp"
 
 
-// Pre-declare hnc::container for operator<<
+// Pre-declare hnc::container for operator <<
 namespace hnc
 {
 	template <class T>
@@ -30,7 +30,7 @@ namespace hnc
 	
 	// Declarate this function for hnc::container can be friend with
 	template <class T>
-	std::ostream & operator<<(std::ostream & o, hnc::container<T> const & c);
+	std::ostream & operator <<(std::ostream & o, hnc::container<T> const & c);
 }
 
 
@@ -198,38 +198,38 @@ namespace hnc
 
 		/// @brief Equality test for each elements of two containers
 		/// @return true if each element of the container are equals, else false
-		bool operator==(container<T> const & c) const
+		bool operator ==(container<T> const & c) const
 		{ return static_cast<std::vector<T>>(*this) == static_cast<std::vector<T>>(c); }
 
 		/// @brief Inequality test for each elements of two containers
 		/// @return true if one element of the container is not equals, else false
-		bool operator!=(container<T> const & c) const
+		bool operator !=(container<T> const & c) const
 		{ return static_cast<std::vector<T>>(*this) != static_cast<std::vector<T>>(c); }
 
 		/// @brief < test for each elements of two containers
 		/// @return true if each element of the container are <, else false
-		bool operator<(container<T> const & c) const
+		bool operator <(container<T> const & c) const
 		{ return static_cast<std::vector<T>>(*this) < static_cast<std::vector<T>>(c); }
 
 		/// @brief <= test for each elements of two containers
 		/// @return true if each element of the container are <=, else false
-		bool operator<=(container<T> const & c) const
+		bool operator <=(container<T> const & c) const
 		{ return static_cast<std::vector<T>>(*this) <= static_cast<std::vector<T>>(c); }
 
 		/// @brief > test for each elements of two containers
 		/// @return true if each element of the container are >, else false
-		bool operator>(container<T> const & c) const
+		bool operator >(container<T> const & c) const
 		{ return static_cast<std::vector<T>>(*this) > static_cast<std::vector<T>>(c); }
 
 		/// @brief >= test for each elements of two containers
 		/// @return true if each element of the container are >=, else false
-		bool operator>=(container<T> const & c) const
+		bool operator >=(container<T> const & c) const
 		{ return static_cast<std::vector<T>>(*this) >= static_cast<std::vector<T>>(c); }
 
 		// ostream
 
 		/// Declare operator << with std::ostream as a friend
-		friend std::ostream & operator<< <>(std::ostream & o, hnc::container<T> const & c);
+		friend std::ostream & operator << <>(std::ostream & o, hnc::container<T> const & c);
 	};
 	
 	/// @brief Operator << between a std::ostream and a hnc::container<T>
@@ -237,7 +237,7 @@ namespace hnc
 	/// @param[in]     c A hnc::container<T>
 	/// @return the output stream
 	template <class T>
-	std::ostream & operator<<(std::ostream & o, hnc::container<T> const & c)
+	std::ostream & operator <<(std::ostream & o, hnc::container<T> const & c)
 	{
 		o << static_cast<std::vector<T>>(c);
 		return o;

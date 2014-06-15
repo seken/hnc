@@ -127,7 +127,7 @@ namespace hnc
 		/// @param[in,out] o          Output stream
 		/// @param[in]     axis_range A hnc::gnuplot::axis_range
 		/// @return the output stream
-		inline std::ostream & operator<<(std::ostream & o, hnc::gnuplot::axis_range const & axis_range)
+		inline std::ostream & operator <<(std::ostream & o, hnc::gnuplot::axis_range const & axis_range)
 		{
 			o << axis_range.to_string();
 			return o;

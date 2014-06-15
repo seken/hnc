@@ -128,7 +128,7 @@ namespace hnc
 		/// @param[in,out] o               Output stream
 		/// @param[in]     output_terminal A  hnc::gnuplot::output_terminal_png
 		/// @return the output stream
-		inline std::ostream & operator<<(std::ostream & o, hnc::gnuplot::output_terminal_png const & output_terminal)
+		inline std::ostream & operator <<(std::ostream & o, hnc::gnuplot::output_terminal_png const & output_terminal)
 		{
 			o << output_terminal.to_string();
 			return o;
@@ -234,7 +234,7 @@ namespace hnc
 		/// @param[in,out] o               Output stream
 		/// @param[in]     output_terminal A  hnc::gnuplot::output_terminal_svg
 		/// @return the output stream
-		inline std::ostream & operator<<(std::ostream & o, hnc::gnuplot::output_terminal_svg const & output_terminal)
+		inline std::ostream & operator <<(std::ostream & o, hnc::gnuplot::output_terminal_svg const & output_terminal)
 		{
 			o << output_terminal.to_string();
 			return o;
@@ -352,7 +352,7 @@ namespace hnc
 		/// @param[in,out] o               Output stream
 		/// @param[in]     output_terminal A  hnc::gnuplot::output_terminal_pdf
 		/// @return the output stream
-		inline std::ostream & operator<<(std::ostream & o, hnc::gnuplot::output_terminal_pdf const & output_terminal)
+		inline std::ostream & operator <<(std::ostream & o, hnc::gnuplot::output_terminal_pdf const & output_terminal)
 		{
 			o << output_terminal.to_string();
 			return o;
@@ -477,7 +477,7 @@ namespace hnc
 		/// @param[in,out] o               Output stream
 		/// @param[in]     output_terminal A  hnc::gnuplot::output_terminal_postscript
 		/// @return the output stream
-		inline std::ostream & operator<<(std::ostream & o, hnc::gnuplot::output_terminal_postscript const & output_terminal)
+		inline std::ostream & operator <<(std::ostream & o, hnc::gnuplot::output_terminal_postscript const & output_terminal)
 		{
 			o << output_terminal.to_string();
 			return o;
@@ -572,7 +572,7 @@ namespace hnc
 		/// @param[in,out] o               Output stream
 		/// @param[in]     output_terminal A  hnc::gnuplot::output_terminal_epslatex
 		/// @return the output stream
-		inline std::ostream & operator<<(std::ostream & o, hnc::gnuplot::output_terminal_epslatex const & output_terminal)
+		inline std::ostream & operator <<(std::ostream & o, hnc::gnuplot::output_terminal_epslatex const & output_terminal)
 		{
 			o << output_terminal.to_string();
 			return o;
@@ -666,7 +666,7 @@ namespace hnc
 		/// @param[in,out] o               Output stream
 		/// @param[in]     output_terminal A  hnc::gnuplot::output_terminal_wxt
 		/// @return the output stream
-		inline std::ostream & operator<<(std::ostream & o, hnc::gnuplot::output_terminal_wxt const & output_terminal)
+		inline std::ostream & operator <<(std::ostream & o, hnc::gnuplot::output_terminal_wxt const & output_terminal)
 		{
 			o << output_terminal.to_string();
 			return o;

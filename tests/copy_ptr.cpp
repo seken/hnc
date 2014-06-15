@@ -46,7 +46,7 @@ public:
 	virtual void display(std::ostream & o) const override { o << "one_B"; }
 };
 
-std::ostream & operator<<(std::ostream & o, A const & v) { v.display(o); return o; }
+std::ostream & operator <<(std::ostream & o, A const & v) { v.display(o); return o; }
 
 
 int main()

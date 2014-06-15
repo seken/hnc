@@ -56,12 +56,12 @@ namespace hnc
 		
 		/// @brief Operator = with a hnc::optional_ptr<T>
 		/// @param[in] optional A hnc::optional_ptr<T>
-		hnc::optional_ptr<T> & operator=(hnc::optional_ptr<T> const & optional) = default;
+		hnc::optional_ptr<T> & operator =(hnc::optional_ptr<T> const & optional) = default;
 		
 		/// @brief Operator = with a T
 		/// @param[in] value Value
 		template <class U>
-		hnc::optional_ptr<T> & operator=(U const & value)
+		hnc::optional_ptr<T> & operator =(U const & value)
 		{
 			*this = hnc::optional_ptr<T>(value);
 			return *this;
@@ -79,7 +79,7 @@ namespace hnc
 			#ifndef NDEBUG
 			if (bool(*this) == false) { throw std::out_of_range("value is not present in hnc::optional_ptr<T>"); }
 			#endif
-			return hnc::copy_ptr<T>::operator*();
+			return hnc::copy_ptr<T>::operator *();
 		}
 		
 		/// @brief Get const access to the value
@@ -90,18 +90,18 @@ namespace hnc
 			#ifndef NDEBUG
 			if (bool(*this) == false) { throw std::out_of_range("value is not present in hnc::optional_ptr<T>"); }
 			#endif
-			return hnc::copy_ptr<T>::operator*();
+			return hnc::copy_ptr<T>::operator *();
 		}
 		
 		/// @brief Get the value
 		/// @pre The value must be present
 		/// @return the value
-		T & operator*() { return value(); }
+		T & operator *() { return value(); }
 
 		/// @brief Get const access to the value
 		/// @pre The value must be present
 		/// @return a const access to the value
-		T const & operator*() const { return value(); }
+		T const & operator *() const { return value(); }
 		
 		/// @brief Get the value
 		/// @pre The value must be present
@@ -125,7 +125,7 @@ namespace hnc
 	 * @return true if the hnc::optional_ptr<T> are equal, false otherwise
 	 */
 	template <class T>
-	bool operator==(hnc::optional_ptr<T> const & optional_0, hnc::optional_ptr<T> const & optional_1)
+	bool operator ==(hnc::optional_ptr<T> const & optional_0, hnc::optional_ptr<T> const & optional_1)
 	{
 		if (&optional_0 == & optional_1) { return true; }
 		
@@ -147,7 +147,7 @@ namespace hnc
 	 * @return true if bool(hnc::optional_ptr<T>) and the bool are equal, false otherwise
 	 */
 	template <class T>
-	bool operator==(hnc::optional_ptr<T> const & optional, bool const b)
+	bool operator ==(hnc::optional_ptr<T> const & optional, bool const b)
 	{
 		return bool(optional) == b;
 	}
@@ -163,7 +163,7 @@ namespace hnc
 	 * @return true if the hnc::optional_ptr<T> are not equal, false otherwise
 	 */
 	template <class T>
-	bool operator!=(hnc::optional_ptr<T> const & optional_0, hnc::optional_ptr<T> const & optional_1)
+	bool operator !=(hnc::optional_ptr<T> const & optional_0, hnc::optional_ptr<T> const & optional_1)
 	{
 		return ! (optional_0 == optional_1);
 	}
@@ -179,7 +179,7 @@ namespace hnc
 	 * @return true if bool(hnc::optional_ptr<T>) and the bool are not equal, false otherwise
 	 */
 	template <class T>
-	bool operator!=(hnc::optional_ptr<T> const & optional, bool const b)
+	bool operator !=(hnc::optional_ptr<T> const & optional, bool const b)
 	{
 		return ! (optional == b);
 	}

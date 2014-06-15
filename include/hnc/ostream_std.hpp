@@ -27,7 +27,7 @@ namespace std
 	/// @param[in]     container A standard container
 	/// @return the output stream
 	template <class T, template <class, class Alloc = std::allocator<T>> class container_t>
-	std::ostream & operator<<(std::ostream & o, container_t<T> const & container)
+	std::ostream & operator <<(std::ostream & o, container_t<T> const & container)
 	{
 		hnc::print_std_container(o, container);
 		return o;
@@ -38,7 +38,7 @@ namespace std
 	/// @param[in]     array A std::array<T, N>
 	/// @return the output stream
 	template <std::size_t N, class T>
-	std::ostream & operator<<(std::ostream & o, std::array<T, N> const & array)
+	std::ostream & operator <<(std::ostream & o, std::array<T, N> const & array)
 	{
 		hnc::print_std_container(o, array);
 		return o;
@@ -49,7 +49,7 @@ namespace std
 	/// @param[in]     set A std::set<T>
 	/// @return the output stream
 	template <class T>
-	std::ostream & operator<<(std::ostream & o, std::set<T> const & set)
+	std::ostream & operator <<(std::ostream & o, std::set<T> const & set)
 	{
 		hnc::print_std_container(o, set);
 		return o;
@@ -60,7 +60,7 @@ namespace std
 	/// @param[in]     map A std::map<key_t, T>
 	/// @return the output stream
 	template <class key_t, class T>
-	std::ostream & operator<<(std::ostream & o, std::map<key_t, T> const & map)
+	std::ostream & operator <<(std::ostream & o, std::map<key_t, T> const & map)
 	{
 		hnc::print_std_container(o, map);
 		return o;
@@ -71,7 +71,7 @@ namespace std
 	/// @param[in]     tuple A std::tuple<T ...>
 	/// @return the output stream
 	template <class ... T>
-	std::ostream & operator<<(std::ostream & o, std::tuple<T ...> const & tuple)
+	std::ostream & operator <<(std::ostream & o, std::tuple<T ...> const & tuple)
 	{
 		hnc::print_tuple(o, tuple);
 		return o;

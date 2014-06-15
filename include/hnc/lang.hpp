@@ -15,7 +15,7 @@
 
 /**
  * @file
- * @brief Just for operator<<(std::ostream & o, hnc::lang::lang_code const & lang_code)
+ * @brief Just for operator <<(std::ostream & o, hnc::lang::lang_code const & lang_code)
  */
 
 #ifndef HNC_LANG_HPP
@@ -122,7 +122,7 @@ namespace hnc
 		/// @param[in,out] o         Output stream
 		/// @param[in]     lang_code A hnc::lang::lang_code
 		/// @return the output stream
-		inline std::ostream & operator<<(std::ostream & o, hnc::lang::lang_code const & lang_code)
+		inline std::ostream & operator <<(std::ostream & o, hnc::lang::lang_code const & lang_code)
 		{
 			o << lang_code.name();
 			return o;

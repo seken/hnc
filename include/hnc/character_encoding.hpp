@@ -91,7 +91,7 @@ namespace hnc
 		/// @param[in,out] o                       Output stream
 		/// @param[in]     character_encoding_code A hnc::character_encoding::encoding
 		/// @return the output stream
-		inline std::ostream & operator<<(std::ostream & o, hnc::character_encoding::encoding const & character_encoding_code)
+		inline std::ostream & operator <<(std::ostream & o, hnc::character_encoding::encoding const & character_encoding_code)
 		{
 			o << character_encoding_code.code();
 			return o;

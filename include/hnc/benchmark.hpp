@@ -152,7 +152,7 @@ namespace hnc
 	/// @param[in,out] o Output stream
 	/// @param[in]     b A hnc::benchmark
 	/// @return the output stream
-	inline std::ostream & operator<<(std::ostream & o, hnc::benchmark const & b)
+	inline std::ostream & operator <<(std::ostream & o, hnc::benchmark const & b)
 	{
 		for (auto const & t : b)
 		{
@@ -244,7 +244,7 @@ namespace hnc
 	/// @param[in,out] o Output stream
 	/// @param[in]     b A hnc::benchmark_name_opt
 	/// @return the output stream
-	inline std::ostream & operator<<(std::ostream & o, hnc::benchmark_name_opt const & b)
+	inline std::ostream & operator <<(std::ostream & o, hnc::benchmark_name_opt const & b)
 	{
 		for (auto const & t : b)
 		{

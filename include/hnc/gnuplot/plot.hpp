@@ -210,7 +210,7 @@ namespace hnc
 		/// @param[in,out] o    Output stream
 		/// @param[in]     plot A hnc::gnuplot::plot
 		/// @return the output stream
-		inline std::ostream & operator<<(std::ostream & o, hnc::gnuplot::plot const & plot)
+		inline std::ostream & operator <<(std::ostream & o, hnc::gnuplot::plot const & plot)
 		{
 			o << plot.plot_line();
 			return o;

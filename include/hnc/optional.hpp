@@ -56,12 +56,12 @@ namespace hnc
 		
 		/// @brief Operator = with a hnc::optional<T>
 		/// @param[in] optional A hnc::optional<T>
-		hnc::optional<T> & operator=(hnc::optional<T> const & optional) = default;
+		hnc::optional<T> & operator =(hnc::optional<T> const & optional) = default;
 		
 		/// @brief Operator = with a T
 		/// @param[in] value Value
 		template <class U>
-		hnc::optional<T> & operator=(U const & value)
+		hnc::optional<T> & operator =(U const & value)
 		{
 			m_is_present = true;
 			m_value = value;
@@ -98,12 +98,12 @@ namespace hnc
 		/// @brief Get the value
 		/// @pre The value must be present
 		/// @return the value
-		T & operator*() { return value(); }
+		T & operator *() { return value(); }
 
 		/// @brief Get const access to the value
 		/// @pre The value must be present
 		/// @return a const access to the value
-		T const & operator*() const { return value(); }
+		T const & operator *() const { return value(); }
 		
 		/// @brief Get the value
 		/// @pre The value must be present
@@ -127,7 +127,7 @@ namespace hnc
 	 * @return true if the hnc::optional<T> are equal, false otherwise
 	 */
 	template <class T>
-	bool operator==(hnc::optional<T> const & optional_0, hnc::optional<T> const & optional_1)
+	bool operator ==(hnc::optional<T> const & optional_0, hnc::optional<T> const & optional_1)
 	{
 		if (&optional_0 == & optional_1) { return true; }
 		
@@ -149,7 +149,7 @@ namespace hnc
 	 * @return true if bool(hnc::optional<T>) and the bool are equal, false otherwise
 	 */
 	template <class T>
-	bool operator==(hnc::optional<T> const & optional, bool const b)
+	bool operator ==(hnc::optional<T> const & optional, bool const b)
 	{
 		return bool(optional) == b;
 	}
@@ -165,7 +165,7 @@ namespace hnc
 	 * @return true if the hnc::optional<T> are not equal, false otherwise
 	 */
 	template <class T>
-	bool operator!=(hnc::optional<T> const & optional_0, hnc::optional<T> const & optional_1)
+	bool operator !=(hnc::optional<T> const & optional_0, hnc::optional<T> const & optional_1)
 	{
 		return ! (optional_0 == optional_1);
 	}
@@ -181,7 +181,7 @@ namespace hnc
 	 * @return true if bool(hnc::optional<T>) and the bool are not equal, false otherwise
 	 */
 	template <class T>
-	bool operator!=(hnc::optional<T> const & optional, bool const b)
+	bool operator !=(hnc::optional<T> const & optional, bool const b)
 	{
 		return ! (optional == b);
 	}

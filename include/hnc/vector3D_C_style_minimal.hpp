@@ -135,7 +135,7 @@ namespace hnc
 		/// @brief Move assignment operator between two vector3D
 		/// @param[in] v3D A vector3D
 		/// @return the vector3D_C_style_minimal
-		vector3D_C_style_minimal<T> operator=(vector3D_C_style_minimal<T> && v3D)
+		vector3D_C_style_minimal<T> operator =(vector3D_C_style_minimal<T> && v3D)
 		{
 			// If it is a different vector3D
 			if (this != &v3D)
@@ -160,7 +160,7 @@ namespace hnc
 		/// @brief Affectation operator between two vector3D
 		/// @param[in] v3D A vector3D
 		/// @return the vector3D_C_style_minimal
-		vector3D_C_style_minimal<T> operator=(vector3D_C_style_minimal<T> const & v3D)
+		vector3D_C_style_minimal<T> operator =(vector3D_C_style_minimal<T> const & v3D)
 		{
 			// If it is a different vector3D
 			if (this != &v3D)
@@ -218,7 +218,7 @@ namespace hnc
 	/// @param[in]     v A hnc::vector3D_C_style_minimal<T>
 	/// @return the output stream
 	template <class T>
-	std::ostream & operator<<(std::ostream & o, hnc::vector3D_C_style_minimal<T> const & v)
+	std::ostream & operator <<(std::ostream & o, hnc::vector3D_C_style_minimal<T> const & v)
 	{
 		// Display data
 		o << "{";

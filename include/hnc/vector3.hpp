@@ -57,12 +57,12 @@ namespace hnc
 		/// @brief Equality operator
 		/// @param[in] v A hnc::vector3
 		/// @return true if hnc::vector3 have same values
-		bool operator==(vector3 const & v) const { return (x == v.x && y == v.y && z == v.z); }
+		bool operator ==(vector3 const & v) const { return (x == v.x && y == v.y && z == v.z); }
 
 		/// @brief Inequality operator
 		/// @param[in] v A hnc::vector3
 		/// @return true if hnc::vector3 have different values
-		bool operator!=(vector3 const & v) const { return (! ((*this) == v)); }
+		bool operator !=(vector3 const & v) const { return (! ((*this) == v)); }
 	};
 	
 	/// @brief Operator << between a std::ostream and a hnc::vector3<T>

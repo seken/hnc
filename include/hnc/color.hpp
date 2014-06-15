@@ -99,7 +99,7 @@ namespace hnc
 	/// @param[in] a A hnc::color
 	/// @param[in] b A hnc::color
 	/// @return true if the hnc::color are equal, false otherwise
-	inline bool operator==(hnc::color const & a, hnc::color const & b)
+	inline bool operator ==(hnc::color const & a, hnc::color const & b)
 	{
 		return a.r == b.r && a.g == b.g && a.b == b.b && a.a == b.a;
 	}
@@ -108,7 +108,7 @@ namespace hnc
 	/// @param[in] a A hnc::color
 	/// @param[in] b A hnc::color
 	/// @return true if the hnc::color are different, false otherwise
-	inline bool operator!=(hnc::color const & a, hnc::color const & b)
+	inline bool operator !=(hnc::color const & a, hnc::color const & b)
 	{
 		return !(a == b);
 	}
@@ -117,7 +117,7 @@ namespace hnc
 	/// @param[in,out] o     Output stream
 	/// @param[in]     color A hnc::color
 	/// @return the output stream
-	inline std::ostream & operator<<(std::ostream & o, hnc::color const & color)
+	inline std::ostream & operator <<(std::ostream & o, hnc::color const & color)
 	{
 		o << "{ " << color.r << ", " << color.g << ", " << color.b << ", " << color.a << " }";
 		return o;

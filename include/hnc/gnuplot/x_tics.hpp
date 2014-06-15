@@ -407,7 +407,7 @@ namespace hnc
 		/// @param[in,out] o         Output stream
 		/// @param[in]     axis_tics A hnc::gnuplot::axis_tics
 		/// @return the output stream
-		inline std::ostream & operator<<(std::ostream & o, hnc::gnuplot::axis_tics const & axis_tics)
+		inline std::ostream & operator <<(std::ostream & o, hnc::gnuplot::axis_tics const & axis_tics)
 		{
 			o << axis_tics.to_string();
 			return o;

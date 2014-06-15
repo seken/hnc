@@ -61,7 +61,7 @@ namespace hnc
 		/// @brief Operator= between hnc::degree and hnc::radian
 		/// @param[in] radian A hnc::radian
 		/// @return the hnc::degree
-		hnc::degree<T> & operator=(hnc::radian<T> const radian)
+		hnc::degree<T> & operator =(hnc::radian<T> const radian)
 		{
 			m_value = radian.degree_value();
 			return *this;
@@ -70,7 +70,7 @@ namespace hnc
 		/// @brief Operator== between two hnc::degree
 		/// @param[in] degree A hnc::degree
 		/// @return true if the hnc::degree are equals, false otherwise
-		bool operator==(hnc::degree<T> const degree)
+		bool operator ==(hnc::degree<T> const degree)
 		{
 			return (m_value == degree.value());
 		}
@@ -78,7 +78,7 @@ namespace hnc
 		/// @brief Operator!= between two hnc::degree
 		/// @param[in] degree A hnc::degree
 		/// @return true if the hnc::degree are not equals, false otherwise
-		bool operator!=(hnc::degree<T> const degree)
+		bool operator !=(hnc::degree<T> const degree)
 		{
 			return (! (*this == degree));
 		}
@@ -86,7 +86,7 @@ namespace hnc
 		/// @brief Operator== between hnc::degree and hnc::radian
 		/// @param[in] radian A hnc::radian
 		/// @return true if the hnc::degree and the hnc::radian are equals, false otherwise
-		bool operator==(hnc::radian<T> const radian)
+		bool operator ==(hnc::radian<T> const radian)
 		{
 			return (m_value == radian.degree_value());
 		}
@@ -94,7 +94,7 @@ namespace hnc
 		/// @brief Operator!= between hnc::degree and hnc::radian
 		/// @param[in] radian A hnc::radian
 		/// @return true if the hnc::degree and the hnc::radian are not equals, false otherwise
-		bool operator!=(hnc::radian<T> const radian)
+		bool operator !=(hnc::radian<T> const radian)
 		{
 			return (! (*this == radian));
 		}
@@ -119,7 +119,7 @@ namespace hnc
 	/// @param[in]     angle_degree A hnc::degree<T>
 	/// @return the output stream
 	template <class T>
-	std::ostream & operator<<(std::ostream & o, hnc::degree<T> const & angle_degree)
+	std::ostream & operator <<(std::ostream & o, hnc::degree<T> const & angle_degree)
 	{
 		o << angle_degree.value() << "°";
 		return o;

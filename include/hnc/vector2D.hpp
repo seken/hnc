@@ -408,7 +408,7 @@ namespace hnc
 
 		/// @brief Move assignment operator between two vector2D
 		/// @param[in] v2D A vector2D
-		vector2D<T> operator=(vector2D<T> && v2D)
+		vector2D<T> operator =(vector2D<T> && v2D)
 		{
 			// If it is a different vector2D
 			if (this != &v2D)
@@ -428,7 +428,7 @@ namespace hnc
 
 		/// @brief Affectation operator between two vector2D
 		/// @param[in] v2D A vector2D
-		vector2D<T> operator=(vector2D<T> const & v2D)
+		vector2D<T> operator =(vector2D<T> const & v2D)
 		{
 			// If it is a different vector2D
 			if (this != &v2D)
@@ -629,7 +629,7 @@ namespace hnc
 		/// @brief Equality operator
 		/// @param[in] v A hnc::vector2D<T> for the comparaison
 		/// @return true if hnc::vector2D<T> are equals, false otherwise
-		bool operator==(hnc::vector2D<T> const & v) const
+		bool operator ==(hnc::vector2D<T> const & v) const
 		{
 			// Different size
 			if (this->nb_row() != v.nb_row() || this->nb_col() != v.nb_col())
@@ -645,7 +645,7 @@ namespace hnc
 		/// @brief Inequality operator
 		/// @param[in] v A hnc::vector2D<T> for the comparaison
 		/// @return true if hnc::vector2D<T> are not equals, false otherwise
-		bool operator!=(hnc::vector2D<T> const & v) const
+		bool operator !=(hnc::vector2D<T> const & v) const
 		{
 			return ! (*this == v);
 		}
@@ -818,7 +818,7 @@ namespace hnc
 			}
 		}
 
-		/// @brief Udapte lines const and lines after each modifications of the vector2D (constructors, operator=, add/remove line/column)
+		/// @brief Udapte lines const and lines after each modifications of the vector2D (constructors, operator =, add/remove line/column)
 		void update_lines_ptr()
 		{
 			m_lines_const_ptr.resize(nb_row());
@@ -836,7 +836,7 @@ namespace hnc
 	/// @param[in]     v A hnc::vector2D<T>
 	/// @return the output stream
 	template <class T>
-	std::ostream & operator<<(std::ostream & o, hnc::vector2D<T> const & v)
+	std::ostream & operator <<(std::ostream & o, hnc::vector2D<T> const & v)
 	{
 		// Display data
 		for (std::size_t row = 0; row < v.nb_row(); ++row)

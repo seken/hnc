@@ -56,12 +56,12 @@ namespace hnc
 		/// @brief Equality operator
 		/// @param[in] v A hnc::vector2
 		/// @return true if hnc::vector2 have same values, false otherwise
-		bool operator==(vector2 const & v) const { return (x == v.x && y == v.y); }
+		bool operator ==(vector2 const & v) const { return (x == v.x && y == v.y); }
 		
 		/// @brief Inequality operator
 		/// @param[in] v A hnc::vector2
 		/// @return true if hnc::vector2 have different values, false otherwise
-		bool operator!=(vector2 const & v) const { return (! ((*this) == v)); }
+		bool operator !=(vector2 const & v) const { return (! ((*this) == v)); }
 	};
 	
 	/// @brief Operator << between a std::ostream and a hnc::vector2<T>
@@ -69,7 +69,7 @@ namespace hnc
 	/// @param[in]     vector2 A hnc::vector2<T>
 	/// @return the output stream
 	template <class T>
-	std::ostream & operator<<(std::ostream & o, hnc::vector2<T> const & vector2)
+	std::ostream & operator <<(std::ostream & o, hnc::vector2<T> const & vector2)
 	{
 		o << "{ " << vector2.x << ", " << vector2.y << " }";
 		return o;

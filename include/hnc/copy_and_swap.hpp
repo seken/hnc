@@ -35,7 +35,7 @@ namespace hnc
 }
 
 /**
- * @brief Generate copy and move assignement (operator=) with copy and swap idiom
+ * @brief Generate copy and move assignement (operator =) with copy and swap idiom
  * 
  * @code
    #include <hnc/copy_and_swap.hpp>
@@ -71,14 +71,14 @@ namespace hnc
  * @note For base class, consider hnc_generate_virtual_copy_and_move_assignment
  */
 #define hnc_generate_copy_and_move_assignment(T) \
-	T & operator=(T const & p) \
+	T & operator =(T const & p) \
 	{ \
 		T copy(p); \
 		swap(copy); \
 		return *this; \
 	} \
 	\
-	T & operator=(T && p) \
+	T & operator =(T && p) \
 	{ \
 		T moved(std::move(p)); \
 		swap(moved); \
@@ -86,7 +86,7 @@ namespace hnc
 	}
 
 /**
- * @brief Generate virtual (for base class) copy and move assignement (operator=) with copy and swap idiom
+ * @brief Generate virtual (for base class) copy and move assignement (operator =) with copy and swap idiom
  *
  * @code
    #include <hnc/copy_and_swap.hpp>
@@ -124,14 +124,14 @@ namespace hnc
  * @note For no base class, consider hnc_generate_copy_and_move_assignment
  */
 #define hnc_generate_virtual_copy_and_move_assignment(T) \
-	virtual T & operator=(T const & p) \
+	virtual T & operator =(T const & p) \
 	{ \
 		T copy(p); \
 		swap(copy); \
 		return *this; \
 	} \
 	\
-	virtual T & operator=(T && p) \
+	virtual T & operator =(T && p) \
 	{ \
 		T moved(std::move(p)); \
 		swap(moved); \
