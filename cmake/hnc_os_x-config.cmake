@@ -19,7 +19,7 @@
 # HNC_OS_X_MACRO - Macro to define
 
 
-set(HNC_UNIX_MACRO "hnc_os_x")
+set(HNC_OS_X_MACRO "hnc_os_x")
 
 if (APPLE AND ${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
 	
