@@ -20,6 +20,7 @@
 
 #include "../math/pi.hpp"
 #include "degree.hpp"
+#include "../serialization.hpp"
 
 
 namespace hnc
@@ -66,6 +67,8 @@ namespace hnc
 			m_value = degree.radian_value();
 			return *this;
 		}
+		
+		hnc_generate_serialize_method(m_value)
 		
 		/// @brief Operator== between two hnc::radian
 		/// @param[in] radian A hnc::radian
