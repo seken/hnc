@@ -52,7 +52,7 @@ namespace hnc
 				previous_delta = delta;
 				delta = r;
 				// Compute
-				r = (T(1) / n) * (T(n - 1) * r + (a / T(std::pow(r, n - 1))));
+				r = (T(1) / T(n)) * (T(n - 1) * r + (a / T(std::pow(r, n - 1))));
 				// Get delta
 				delta -= r;
 			}
