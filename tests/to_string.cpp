@@ -27,48 +27,72 @@ int main()
 	{
 		int i = 56648;
 		std::string s = hnc::to_string(i);
-		std::cout << s << " == " << i << std::endl;
+		std::cout << i << "\n" << s << std::endl;
 		nb_test -= hnc::test::warning(s == "56648", "hnc::to_string fail!\n");
 	}
+	std::cout << std::endl;
 
 	++nb_test;
 	{
 		double i = -54664.6546;
 		std::string s = hnc::to_string(i);
-		std::cout << s << " == " << i << std::endl;
+		std::cout << i << "\n" << s << std::endl;
 		nb_test -= hnc::test::warning(s == "-54664.6546", "hnc::to_string fail!\n");
 	}
+	std::cout << std::endl;
 
 	++nb_test;
 	{
 		char i = 'i';
 		std::string s = hnc::to_string(i);
-		std::cout << s << " == " << i << std::endl;
+		std::cout << i << "\n" << s << std::endl;
 		nb_test -= hnc::test::warning(s == "i", "hnc::to_string fail!\n");
 	}
+	std::cout << std::endl;
 
 	++nb_test;
 	{
 		std::string i = "a std::string";
 		std::string s = hnc::to_string(i);
-		std::cout << s << " == " << i << std::endl;
+		std::cout << i << "\n" << s << std::endl;
 		nb_test -= hnc::test::warning(s == i, "hnc::to_string fail!\n");
 	}
+	std::cout << std::endl;
 
 	++nb_test;
 	{
 		char const * const i = "a char const * const";
 		std::string s = hnc::to_string(i);
-		std::cout << s << " == " << i << std::endl;
+		std::cout << i << "\n" << s << std::endl;
 		nb_test -= hnc::test::warning(s == i, "hnc::to_string fail!\n");
 	}
+	std::cout << std::endl;
 
 	++nb_test;
 	{
-		std::string s = hnc::to_string("a char []");
-		std::cout << s << " == " << "a char []" << std::endl;
-		nb_test -= hnc::test::warning(s == "a char []", "hnc::to_string fail!\n");
+		bool i = true;
+		std::string s = hnc::to_string(i);
+		std::cout << i << "\n" << s << std::endl;
+		nb_test -= hnc::test::warning(s == "1", "hnc::to_string fail!\n");
 	}
+	std::cout << std::endl;
+
+	++nb_test;
+	{
+		bool i = true;
+		std::string s = hnc::to_string(std::boolalpha, i);
+		std::cout << i << "\n" << s << std::endl;
+		nb_test -= hnc::test::warning(s == "true", "hnc::to_string fail!\n");
+	}
+	std::cout << std::endl;
+
+	++nb_test;
+	{
+		std::string s = hnc::to_string("a char []", ',', std::string("a std::string"), ", some numbers:", 21, ' ', 73.42, ' ', 3.14f, " and bools without and with std::boolalpha:", true, ' ', false, ' ', true, ' ', false);
+		std::cout << s << "\n" << "a char [],a std::string, some numbers:21 73.42 3.14 and bools without and with std::boolalpha:1 0 1 0" << std::endl;
+		nb_test -= hnc::test::warning(s == "a char [],a std::string, some numbers:21 73.42 3.14 and bools without and with std::boolalpha:1 0 1 0", "hnc::to_string fail!\n");
+	}
+	std::cout << std::endl;
 
 	hnc::test::warning(nb_test == 0, "hnc::to_string: " + hnc::to_string(nb_test) + " test fail!\n");
 

@@ -19,12 +19,59 @@
 #include <string>
 #include <sstream>
 #include <limits>
+#include <type_traits>
 #include <iomanip>
-#include <ios>
 
 
 namespace hnc
 {
+	/**
+	 * @brief Convert a std::ostringstream into a std::string
+	 *
+	 * @code
+	   #include <hnc/to_string.hpp>
+	   @endcode
+	 *
+	 * @param[in] o A std::ostringstream
+	 *
+	 * @return the std::string that corresponds to the std::ostringstream
+	 */
+	inline std::string to_string_with_ostringstream(std::ostringstream & o)
+	{
+		return (o.str());
+	}
+	
+	// Floating point
+	template <class T>
+	void save_in_ostringstream(std::ostringstream & o, T const & t, std::true_type const)
+	{
+		o << std::setprecision(std::numeric_limits<T>::digits10 + 1);
+		o << t;
+	}
+	
+	// Not floating point
+	template <class T>
+	void save_in_ostringstream(std::ostringstream & o, T const & t, std::false_type const)
+	{
+		o << t;
+	}
+	
+	/**
+	 * @brief Save the input in a std::ostringstream
+	 *
+	 * @code
+	   #include <hnc/to_string.hpp>
+	   @endcode
+	 *
+	 * @param[in] o A std::ostringstream
+	 * @param[in] t Object to be saved
+	 */
+	template <class T>
+	void save_in_ostringstream(std::ostringstream & o, T const & t)
+	{
+		save_in_ostringstream(o, t, std::is_floating_point<T>());
+	}
+	
 	/**
 	 * @brief Convert the input into a std::string with a std::ostringstream
 	 *
@@ -32,62 +79,36 @@ namespace hnc
 	   #include <hnc/to_string.hpp>
 	   @endcode
 	 *
-	 * @param[in] in The input
-	 * @param[in] o  A std::ostringstream
+	 * @param[in] o    A std::ostringstream
+	 * @param[in] t    Object to be converted
+	 * @param[in] args Other objects to be converted
 	 *
-	 * @return the converted input into a std::string
+	 * @return the std::string that corresponds to the input
 	 */
-	template <class T, class ... iomanip_list_t>
-	std::string to_string(T const & in, std::ostringstream & o)
+	template <class T, class... args_t>
+	std::string to_string_with_ostringstream(std::ostringstream & o, T const & t, args_t const & ... args)
 	{
-		// Fill the stream
-		o << in;
-		
-		// Output the stream in string
-		return (o.str());
+		hnc::save_in_ostringstream(o, t);
+		return hnc::to_string_with_ostringstream(o, args...);
 	}
 	
 	/**
-	 * @brief Convert the input into a std::string with a std::ostringstream and iomanip
+	 * @brief Convert the input into a std::string with a std::ostringstream
 	 *
 	 * @code
 	   #include <hnc/to_string.hpp>
 	   @endcode
 	 *
-	 * @param[in] in       The input
-	 * @param[in] o        A std::ostringstream
-	 * @param[in] iomanip  A iomanip (like std::boolalpha, std::hex)
-	 * @param[in] iomanips Others iomanip
+	 * @param[in] args Objects to be converted
 	 *
-	 * @return the converted input into a std::string
+	 * @return the std::string that corresponds to the input
 	 */
-	template <class T, class iomanip_t, class ... iomanips_t>
-	std::string to_string(T const & in, std::ostringstream & o, iomanip_t const & iomanip, iomanips_t const & ... iomanips)
+	template <class... args_t>
+	std::string to_string(args_t const & ... args)
 	{
-		o << iomanip;
-		return hnc::to_string(in, o, iomanips...);
-	}
-	
-	/**
-	 * @brief Convert the input into a std::string with iomanip
-	 *
-	 * @code
-	   #include <hnc/to_string.hpp>
-	   @endcode
-	 *
-	 * @param[in] in       The input
-	 * @param[in] iomanips Some iomanip (like std::boolalpha, std::hex)
-	 *
-	 * @return the converted input into a std::string
-	 */
-	template <class T, class ... iomanips_t>
-	std::string to_string(T const & in, iomanips_t const & ... iomanips)
-	{
-		// Declare a stream
 		std::ostringstream o;
-		o << std::setprecision(std::numeric_limits<T>::digits10 + 1);
 		
-		return hnc::to_string(in, o, iomanips...);
+		return hnc::to_string_with_ostringstream(o, args...);
 	}
 
 	// Specialization for std::string
