@@ -25,6 +25,8 @@
 
 #include "algo/genetic_algo.hpp"
 
+#include "algo/random_element.hpp"
+
 #include "algo/replace_range.hpp"
 #include "algo/replace.hpp"
 #include "algo/replace_all.hpp"
