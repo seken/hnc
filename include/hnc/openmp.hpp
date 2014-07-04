@@ -20,8 +20,9 @@
 #define HNC_OPENMP_HPP
 
 
-#include "openmp/run_parallel.hpp"
-#include "openmp/run_at_same_time.hpp"
+#if defined(_OPENMP)
+	#include <omp.h>
+#endif
 
 
 namespace hnc
@@ -39,8 +40,66 @@ namespace hnc
 	 */
 	namespace openmp
 	{
-		// For Doxygen only
+		/**
+		 * @brief Get the id of OpenMP thread
+		 * 
+		 * @code
+		   #include <hnc/openmp.h>
+		   @endcode
+		 * 
+		 * 
+		 * @return the id of OpenMP thread
+		 */
+		std::size_t thread_id()
+		{
+			#if defined(_OPENMP)
+				return std::size_t(omp_get_thread_num());
+			#else
+				return 0;
+			#endif
+		}
+		
+		/**
+		 * @brief Get the actual number of OpenMP threads
+		 * 
+		 * @code
+		   #include <hnc/openmp.h>
+		   @endcode
+		 * 
+		 * 
+		 * @return the actual number of OpenMP threads
+		 */
+		std::size_t nb_thread_actual()
+		{
+			#if defined(_OPENMP)
+				return std::size_t(omp_get_num_threads());
+			#else
+				return 0;
+			#endif
+		}
+		
+		/**
+		 * @brief Get the maximum number of OpenMP threads
+		 * 
+		 * @code
+		   #include <hnc/openmp.h>
+		   @endcode
+		 * 
+		 * 
+		 * @return the maximum number of OpenMP threads
+		 */
+		std::size_t nb_thread_max()
+		{
+			#if defined(_OPENMP)
+				return std::size_t(omp_get_max_threads());
+			#else
+				return 0;
+			#endif
+		}
 	}
 }
+
+#include "openmp/run_at_same_time.hpp"
+#include "openmp/run_parallel.hpp"
 
 #endif

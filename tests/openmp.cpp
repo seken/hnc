@@ -19,11 +19,19 @@
 #include <iostream>
 
 #include <hnc/openmp.hpp>
+#include <hnc/print.hpp>
 
 
 int main()
 {
-	std::cout << "Just test hnc/openmp.hpp include" << std::endl;
-
+	std::cout << "hnc::openmp::nb_thread_max() = " << hnc::openmp::nb_thread_max() << std::endl;
+	std::cout << std::endl;
+	
+	#pragma omp parallel for
+	for (std::size_t i = 0; i < 16; ++i)
+	{
+		hnc::print_mutex("Thread ", hnc::openmp::thread_id(), " / ", hnc::openmp::nb_thread_actual(), '\n');
+	}
+	
 	return 0;
 }
