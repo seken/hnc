@@ -21,6 +21,13 @@
 #include "sfinae.hpp"
 
 
+// Forward declaration
+namespace thoth
+{
+	class sfml_archive_save;
+	class sfml_archive_load;
+}
+
 
 /**
  * @brief Generate .serialize() methods
@@ -157,7 +164,7 @@ namespace hnc
 		};
 	}
 	
-	// Type traits on archive
+	// Type traits on archives
 	
 	/// @brief Type is not a save archive
 	template <class T>
@@ -168,7 +175,7 @@ namespace hnc
 	template <class T>
 	class is_load_archive : public std::false_type
 	{ };
-	
+
 	#ifndef hnc_no_boost_serialization
 	
 	/// @brief Type is a save archive
@@ -193,21 +200,14 @@ namespace hnc
 	class is_load_archive<hnc::false_load_archive_t> : public std::true_type
 	{ };
 	
-	// Forward declaration
-	namespace thoth
-	{
-		class sfml_save_archive;
-		class sfml_load_archive;
-	}
-		
 	/// @brief Type is a save archive
 	template <>
-	class is_save_archive<thoth::sfml_save_archive> : public std::true_type
+	class is_save_archive<thoth::sfml_archive_save> : public std::true_type
 	{ };
 	
 	/// @brief Type is a load archive
 	template <>
-	class is_load_archive<thoth::sfml_load_archive> : public std::true_type
+	class is_load_archive<thoth::sfml_archive_load> : public std::true_type
 	{ };
 	
 	// Call fonction is save or load archive

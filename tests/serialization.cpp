@@ -290,6 +290,12 @@ int main()
 		std::cout << "boost::archive::text_iarchive is a load archive = " << hnc::is_load_archive<boost::archive::text_iarchive>() << std::endl;
 		std::cout << std::endl;
 		
+		std::cout << "thoth::sfml_archive_save is a save archive = " << hnc::is_save_archive<thoth::sfml_archive_save>() << std::endl;
+		std::cout << "thoth::sfml_archive_load is a save archive = " << hnc::is_save_archive<thoth::sfml_archive_load>() << std::endl;
+		std::cout << "thoth::sfml_archive_save is a load archive = " << hnc::is_load_archive<thoth::sfml_archive_save>() << std::endl;
+		std::cout << "thoth::sfml_archive_load is a load archive = " << hnc::is_load_archive<thoth::sfml_archive_load>() << std::endl;
+		std::cout << std::endl;
+		
 		++nb_test;
 		{
 			human_t a({ "Saoirse", "Sigourney" }, "Rianne", 42);
