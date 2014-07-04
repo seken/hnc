@@ -488,7 +488,7 @@ namespace hnc
 			else
 			{
 				// Find the next available pathname
-				std::string available_pathname = pathname_wanted;
+				std::string available_pathname;
 				unsigned int i = 0;
 				do
 				{
