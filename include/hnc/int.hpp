@@ -22,4 +22,11 @@
 #include "int/int8.hpp"
 #include "int/uint8.hpp"
 
+
+namespace hnc
+{
+	/// @brief Typedef for unsigned int
+	using uint_t = unsigned int;
+}
+
 #endif
