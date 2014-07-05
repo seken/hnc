@@ -27,6 +27,9 @@ namespace hnc
 {
 	/// @brief Typedef for unsigned int
 	using uint_t = unsigned int;
+	
+	/// @brief Typedef for long unsigned int
+	using luint_t = unsigned int;
 }
 
 #endif
