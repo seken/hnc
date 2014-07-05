@@ -22,6 +22,7 @@
 #include "assert.hpp"
 #include "to_string.hpp"
 #include "iterator.hpp"
+#include "serialization.hpp"
 
 
 namespace hnc
@@ -441,6 +442,11 @@ namespace hnc
 			// Return
 			return *this;
 		}
+		
+		hnc_generate_serialize_method(m_data, m_nb_row, m_nb_col)
+		
+		/// @brief After load serialization
+		void after_load_serialization() { update_lines_ptr(); }
 
 		// operator () acces
 
