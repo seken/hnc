@@ -335,7 +335,7 @@ namespace hnc
 		   #include <hnc/filesystem.hpp>
 		   @endcode
 		 *
-		 * @param[in] pathname Pathname wanted
+		 * @param[in] pathname Pathname of the file
 		 *
 		 * @return true if the file exists, false otherwise
 		 */
@@ -343,6 +343,46 @@ namespace hnc
 		{
 			std::ifstream f(pathname);
 			return bool(f);
+		}
+
+		/**
+		 * @brief Return true if we can read the file, false otherwise
+		 *
+		 * @code
+		   #include <hnc/filesystem.hpp>
+		   @endcode
+		 *
+		 * @param[in] pathname Pathname of the file
+		 *
+		 * @return true if we can read the file, false otherwise
+		 */
+		bool file_is_readable(std::string const & pathname)
+		{
+			return hnc::filesystem::file_exists(pathname);
+		}
+
+		/**
+		 * @brief Return true if we can write the file, false otherwise
+		 *
+		 * @code
+		   #include <hnc/filesystem.hpp>
+		   @endcode
+		 *
+		 * @param[in] pathname Pathname of the file
+		 *
+		 * @return true if we can write the file, false otherwise
+		 */
+		bool file_is_writeable(std::string const & pathname)
+		{
+			if (hnc::filesystem::file_exists(pathname))
+			{
+				std::ofstream f(pathname, std::ofstream::out | std::ofstream::app);
+				return bool(f);
+			}
+			else
+			{
+				return false;
+			}
 		}
 
 		/**

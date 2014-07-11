@@ -449,7 +449,7 @@ int main()
 	{
 		std::string const r = hnc::filesystem::tmp_filename();
 		std::cout << "File \"" << r << "\" must exist" << std::endl;
-		nb_test -= hnc::test::warning(hnc::filesystem::file_exists(r) == true, "hnc::filesystem::file_exists fails\n");
+		nb_test -= hnc::test::warning(hnc::filesystem::file_exists(r) == true && hnc::filesystem::file_is_readable(r) == true && hnc::filesystem::file_is_writeable(r) == true, "hnc::filesystem::file_exists fails\n");
 		hnc::filesystem::remove(r);
 	}
 
@@ -458,7 +458,7 @@ int main()
 		std::string const r = hnc::filesystem::tmp_filename();
 		hnc::filesystem::remove(r);
 		std::cout << "File \"" << r << "\" must not exist" << std::endl;
-		nb_test -= hnc::test::warning(hnc::filesystem::file_exists(r) == false, "hnc::filesystem::file_exists fails\n");
+		nb_test -= hnc::test::warning(hnc::filesystem::file_exists(r) == false && hnc::filesystem::file_is_readable(r) == false && hnc::filesystem::file_is_writeable(r) == false, "hnc::filesystem::file_exists fails\n");
 	}
 	std::cout << std::endl;
 
@@ -498,6 +498,22 @@ int main()
 	}
 	std::cout << std::endl;
 
+	++nb_test;
+	{
+		if (hnc::filesystem::file_exists("/proc/cpuinfo"))
+		{
+			nb_test -= hnc::test::warning(hnc::filesystem::file_is_writeable("/proc/cpuinfo") == false, "hnc::filesystem::file_is_writeable fails with \"/proc/cpuinfo\"\n\n");
+		}
+		else
+		{
+			std::cout << "/proc/cpuinfo does not exist, skip tst of hnc::filesystem::file_is_writeable" << std::endl;
+			std::cout << std::endl;
+			--nb_test;
+		}
+	}
+	
+	// home directory
+
 	{
 		std::cout << "home directory = " << hnc::filesystem::home() << std::endl;
 		auto const filenames = hnc::filesystem::read_directory(hnc::filesystem::home());
@@ -507,6 +523,8 @@ int main()
 		}
 	}
 	std::cout << std::endl;
+	
+	// hnc::filesystem::read_directory
 
 	{
 		std::cout << ". = " << std::endl;
