@@ -420,10 +420,12 @@ namespace hnc
 								// Crossover
 								if (m_random_probability[thread_id]() <= crossover_probability)
 								{
-									auto const & random_solution = this->random_solution(solutions, thread_id);
+									auto const random_solution_i = m_random_index[thread_id]();
 									
-									if ((solutions[i].solution == random_solution.solution) == false)
+									if (i != random_solution_i)
 									{
+										auto const & random_solution = solutions[random_solution_i];
+										
 										auto const new_solution = m_evolve_functions[thread_id].crossover
 										(
 											solutions[i].solution,
@@ -518,16 +520,6 @@ namespace hnc
 						}
 						std::sort(m_solutions[archipelago][0].begin(), m_solutions[archipelago][0].end());
 					}
-				}
-				
-				/// @brief Return a reference of the best solution
-				/// @param[in] solutions Solutions
-				/// @param[in] thread_id Id of the current OpenMP thread
-				/// @return a reference of the best solution
-				template <class solutions_t>
-				typename solutions_t::value_type const & random_solution(solutions_t const & solutions, std::size_t const thread_id)
-				{
-					return solutions[m_random_index[thread_id]()];
 				}
 				
 				/// @brief Update best solution
