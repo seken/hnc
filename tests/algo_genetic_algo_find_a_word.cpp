@@ -111,9 +111,9 @@ int main()
 	hnc::algo::genetic_algo::genetic_algo<std::string, unsigned int, search_a_word> ga
 	(
 		search_a_word(target),
-		2, // nb_archipelago
+		1, // nb_archipelago
 		4, // nb_island_per_archipelago
-		50, // nb_solution_per_island
+		250, // nb_solution_per_island
 		0.7, // crossover_probability = 0.7
 		0.1, // mutation_probability = 0.1
 		3, // nb_migration_per_island = 3
