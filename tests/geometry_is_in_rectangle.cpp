@@ -48,6 +48,9 @@ int main()
 		nb_test -= hnc::test::warning(hnc::geometry::is_in_rectangle(5 + 10, 7 - 1, r) == false, "hnc::geometry::is_in_rectangle " + hnc::to_string(r) + " fails\n");
 		nb_test -= hnc::test::warning(hnc::geometry::is_in_rectangle(5, 7 + 3 + 1, r) == false, "hnc::geometry::is_in_rectangle " + hnc::to_string(r) + " fails\n");
 		nb_test -= hnc::test::warning(hnc::geometry::is_in_rectangle(5 + 10, 7 + 3 + 1, r) == false, "hnc::geometry::is_in_rectangle " + hnc::to_string(r) + " fails\n");
+		
+		nb_test -= hnc::test::warning(hnc::geometry::is_in_rectangle({ 5, 7 }, r), "hnc::geometry::is_in_rectangle " + hnc::to_string(r) + " fails\n");
+		nb_test -= hnc::test::warning(hnc::geometry::is_in_rectangle({ 5, 7 - 1 }, r) == false, "hnc::geometry::is_in_rectangle " + hnc::to_string(r) + " fails\n");
 	}
 	
 	std::cout << std::endl;
