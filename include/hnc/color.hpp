@@ -93,6 +93,10 @@ namespace hnc
 		/// @brief White color
 		/// @return White color
 		static hnc::color white() { return { 255, 255, 255 }; }
+	
+		/// @brief Grey color
+		/// @return Grey color
+		static hnc::color grey() { return { 128, 128, 128 }; }
 	};
 	
 	/// @brief Operator == between two hnc::color
