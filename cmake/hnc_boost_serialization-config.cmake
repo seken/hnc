@@ -29,9 +29,12 @@ set(HNC_NO_BOOST_SERIALIZATION_MACRO "hnc_no_boost_serialization")
 if (Boost_FOUND)
 	
 	set(HNC_BOOST_SERIALIZATION_FOUND "TRUE")
+	set(HNC_BOOST_SERIALIZATION_INCLUDE_DIR "${Boost_INCLUDE_DIR}")
 	set(HNC_BOOST_SERIALIZATION_LIBRARY "${Boost_LIBRARIES}")
 	
-	message(STATUS "Library Boost.Serialization found =) ${HNC_BOOST_SERIALIZATION_LIBRARY}")
+	include_directories(${HNC_BOOST_SERIALIZATION_INCLUDE_DIR})
+	
+	message(STATUS "Library Boost.Serialization found =) ${HNC_BOOST_SERIALIZATION_INCLUDE_DIR} | ${HNC_BOOST_SERIALIZATION_LIBRARY}")
 	
 else()
 	

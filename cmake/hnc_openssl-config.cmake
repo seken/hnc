@@ -29,9 +29,12 @@ set(HNC_NO_OPENSSL_MACRO "hnc_no_openssl")
 if (OPENSSL_FOUND)
 	
 	set(HNC_OPENSSL_FOUND "TRUE")
+	set(HNC_OPENSSL_INCLUDE_DIR "${OPENSSL_INCLUDE_DIR}")
 	set(HNC_OPENSSL_LIBRARY "${OPENSSL_LIBRARIES}")
 	
-	message(STATUS "Library OpenSSL found =) ${HNC_OPENSSL_LIBRARY}")
+	include_directories(${HNC_OPENSSL_INCLUDE_DIR})
+	
+	message(STATUS "Library OpenSSL found =) ${HNC_OPENSSL_INCLUDE_DIR} | ${HNC_OPENSSL_LIBRARY}")
 	
 else()
 	

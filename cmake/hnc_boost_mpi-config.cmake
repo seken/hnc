@@ -29,9 +29,12 @@ set(HNC_NO_BOOST_MPI_MACRO "hnc_no_boost_mpi")
 if (Boost_FOUND)
 	
 	set(HNC_BOOST_MPI_FOUND "TRUE")
+	set(HNC_BOOST_MPI_INCLUDE_DIR "${Boost_INCLUDE_DIR}")
 	set(HNC_BOOST_MPI_LIBRARY "${Boost_LIBRARIES}")
 	
-	message(STATUS "Library Boost.MPI found =) ${HNC_BOOST_MPI_LIBRARY}")
+	include_directories(${HNC_BOOST_MPI_INCLUDE_DIR})
+	
+	message(STATUS "Library Boost.MPI found =) ${HNC_BOOST_MPI_INCLUDE_DIR} | ${HNC_BOOST_MPI_LIBRARY}")
 	
 else()
 	

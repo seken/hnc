@@ -29,9 +29,12 @@ set(HNC_NO_BOOST_SYSTEM_MACRO "hnc_no_boost_system")
 if (Boost_FOUND)
 	
 	set(HNC_BOOST_SYSTEM_FOUND "TRUE")
+	set(HNC_BOOST_SYSTEM_INCLUDE_DIR "${Boost_INCLUDE_DIR}")
 	set(HNC_BOOST_SYSTEM_LIBRARY "${Boost_LIBRARIES}")
 	
-	message(STATUS "Library Boost.Sytem found =) ${HNC_BOOST_SYSTEM_LIBRARY}")
+	include_directories(${HNC_BOOST_SYSTEM_INCLUDE_DIR})
+	
+	message(STATUS "Library Boost.Sytem found =) ${HNC_BOOST_SYSTEM_INCLUDE_DIR} | ${HNC_BOOST_SYSTEM_LIBRARY}")
 	
 else()
 	

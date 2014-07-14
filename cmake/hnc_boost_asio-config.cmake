@@ -21,13 +21,17 @@
 # HNC_NO_BOOST_ASIO_MACRO    - System has not Boost.Asio library
 
 
-find_file(HNC_BOOST_ASIO_INCLUDE_DIR "boost/asio.hpp")
+find_file(HNC_BOOST_ASIO_HPP "boost/asio.hpp")
 
 set(HNC_NO_BOOST_ASIO_MACRO "hnc_no_boost_asio")
 
-if (HNC_BOOST_ASIO_INCLUDE_DIR)
+if (HNC_BOOST_ASIO_HPP)
+	
+	string(REPLACE "/asio.hpp" "" HNC_BOOST_ASIO_INCLUDE_DIR ${HNC_BOOST_ASIO_HPP})
 	
 	set(HNC_BOOST_ASIO_FOUND "TRUE")
+	
+	include_directories(${HNC_BOOST_ASIO_INCLUDE_DIR})
 	
 	message(STATUS "Library Boost.Asio found =) ${HNC_BOOST_ASIO_INCLUDE_DIR}")
 	
