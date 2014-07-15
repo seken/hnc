@@ -22,6 +22,7 @@
 #include <iterator>
 #include <stdexcept>
 #include <algorithm>
+#include <numeric>
 
 #include "../assert.hpp"
 #include "nth_root.hpp"
