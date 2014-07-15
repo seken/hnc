@@ -19,8 +19,13 @@
 #ifndef HNC_MATH_HPP
 #define HNC_MATH_HPP
 
+
+#include "math/abs.hpp"
+
 #include "math/cartesian_product.hpp"
 #include "math/combination.hpp"
+
+#include "math/gcd.hpp"
 
 #include "math/geometric_mean.hpp"
 
