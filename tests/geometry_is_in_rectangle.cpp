@@ -26,7 +26,7 @@ int main()
 {
 	int nb_test = 0;
 
-	nb_test += 14;
+	nb_test += 16;
 	{
 		hnc::geometry::rectangle<int> r(5, 7, 10, 3);
 		std::cout << r << std::endl;
