@@ -69,7 +69,7 @@ namespace hnc
 
 		/// @brief Pre-incrementation of the iterator
 		/// @return the iterator
-		const_reverse_iterator & operator  ++()
+		const_reverse_iterator & operator ++()
 		{
 			if (m_i == 0) { m_i = p_data->size(); }
 			else { --m_i; }
@@ -78,7 +78,7 @@ namespace hnc
 
 		/// @brief Post-incrementation of the iterator
 		/// @return a copy of the iterator before the incrementation
-		const_reverse_iterator operator  ++(int)
+		const_reverse_iterator operator ++(int)
 		{
 			const_reverse_iterator copy = *this;
 			++(*this);
@@ -118,7 +118,7 @@ namespace hnc
 
 		/// @brief Return the const element pointed by the iterator
 		/// @return the const element pointed by the iterator
-		T const * operator  ->() const
+		T const * operator ->() const
 		{
 			return (&((*p_data)[m_i]));
 		}
@@ -149,7 +149,7 @@ namespace hnc
 
 		/// @brief Pre-decrementation of the iterator
 		/// @return the iterator
-		const_reverse_iterator & operator  --()
+		const_reverse_iterator & operator --()
 		{
 			m_i = std::min(m_i + 1, p_data->size());
 			return *this;
@@ -157,7 +157,7 @@ namespace hnc
 
 		/// @brief Post-decrementation of the iterator
 		/// @return a copy of the iterator before the incrementation
-		const_reverse_iterator operator  --(int)
+		const_reverse_iterator operator --(int)
 		{
 			const_reverse_iterator copy = *this;
 			--(*this);
@@ -175,7 +175,7 @@ namespace hnc
 		/// @brief Operator +
 		/// @param[in] n Number to add
 		/// @return a copy of the iterator after operation
-		const_reverse_iterator operator  +(std::size_t const n) const
+		const_reverse_iterator operator +(std::size_t const n) const
 		{
 			std::size_t i = m_i - n;
 			if (i > p_data->size()) { i = p_data->size(); }
@@ -185,7 +185,7 @@ namespace hnc
 		/// @brief Operator -
 		/// @param[in] n Number to sub
 		/// @return a copy of the iterator after operation
-		const_reverse_iterator operator  -(std::size_t const n) const
+		const_reverse_iterator operator -(std::size_t const n) const
 		{
 			std::size_t i = m_i + n;
 			if (i > p_data->size()) { i = p_data->size(); }
@@ -195,7 +195,7 @@ namespace hnc
 		/// @brief Operator -
 		/// @param[in] it Iterator
 		/// @return the difference between the iterators
-		typename const_reverse_iterator::difference_type operator  -(const_reverse_iterator const & it) const
+		typename const_reverse_iterator::difference_type operator -(const_reverse_iterator const & it) const
 		{
 			using diff_t = typename const_reverse_iterator::difference_type;
 			return diff_t(m_i - it.m_i);
@@ -250,7 +250,7 @@ namespace hnc
 		/// @brief Operator +=
 		/// @param[in] n Number to add
 		/// @return the iterator after operation
-		const_reverse_iterator & operator  +=(std::size_t const n)
+		const_reverse_iterator & operator +=(std::size_t const n)
 		{
 			m_i -= n;
 			if (m_i > p_data->size()) { m_i = p_data->size(); }
@@ -260,7 +260,7 @@ namespace hnc
 		/// @brief Operator -=
 		/// @param[in] n Number to sub
 		/// @return the iterator after operation
-		const_reverse_iterator & operator  -=(std::size_t const n)
+		const_reverse_iterator & operator -=(std::size_t const n)
 		{
 			m_i += n;
 			if (m_i > p_data->size()) { m_i = p_data->size(); }

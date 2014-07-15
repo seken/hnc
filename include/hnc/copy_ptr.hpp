@@ -218,7 +218,7 @@ namespace hnc
 		/// @brief Return a reference to the stored object to access of its members
 		/// @pre The pointer is nott nullptr
 		/// @return a reference to the stored object to access of its members
-		using std::unique_ptr<T>::operator  ->;
+		using std::unique_ptr<T>::operator ->;
 		
 	protected:
 		

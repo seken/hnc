@@ -61,7 +61,7 @@ unsigned int test_const_it(const_random_iterator a)
 	// a->m
 
 	typename const_random_iterator::value_type val = *a;
-	std::cout << "Display *a = " << val << ", and b with -> " << *(b.operator  ->()) << std::endl;
+	std::cout << "Display *a = " << val << ", and b with -> " << *(b.operator ->()) << std::endl;
 
 	// Output
 

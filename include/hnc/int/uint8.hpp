@@ -68,7 +68,7 @@ namespace hnc
 	/// @param[in] a A hnc::uint8
 	/// @param[in] b A hnc::uint8
 	/// @return a + b
-	inline hnc::uint8 operator  +(hnc::uint8 const & a, hnc::uint8 const & b)
+	inline hnc::uint8 operator +(hnc::uint8 const a, hnc::uint8 const b)
 	{
 		return a.i + b.i;
 	}
@@ -77,7 +77,7 @@ namespace hnc
 	/// @param[in] a A hnc::uint8
 	/// @param[in] b A hnc::uint8
 	/// @return a += b
-	inline hnc::uint8 & operator  +=(hnc::uint8 & a, hnc::uint8 const & b)
+	inline hnc::uint8 & operator +=(hnc::uint8 & a, hnc::uint8 const b)
 	{
 		a = a + b;
 		return a;
@@ -86,7 +86,7 @@ namespace hnc
 	/// @brief Operator ++ (prefix) with a hnc::uint8
 	/// @param[in] i A hnc::uint8
 	/// @return i++
-	inline hnc::uint8 & operator  ++(hnc::uint8 & i)
+	inline hnc::uint8 & operator ++(hnc::uint8 & i)
 	{
 		++i.i;
 		return i;
@@ -95,7 +95,7 @@ namespace hnc
 	/// @brief Operator ++ (postfix) with a hnc::uint8
 	/// @param[in] i A hnc::uint8
 	/// @return i++
-	inline hnc::uint8 operator  ++(hnc::uint8 & i, int)
+	inline hnc::uint8 operator ++(hnc::uint8 & i, int)
 	{
 		hnc::uint8 tmp = i;
 		++i;
@@ -108,7 +108,7 @@ namespace hnc
 	/// @param[in] a A hnc::uint8
 	/// @param[in] b A hnc::uint8
 	/// @return a - b
-	inline hnc::uint8 operator  -(hnc::uint8 const & a, hnc::uint8 const & b)
+	inline hnc::uint8 operator -(hnc::uint8 const a, hnc::uint8 const b)
 	{
 		return a.i - b.i;
 	}
@@ -117,7 +117,7 @@ namespace hnc
 	/// @param[in] a A hnc::uint8
 	/// @param[in] b A hnc::uint8
 	/// @return a -= b
-	inline hnc::uint8 & operator  -=(hnc::uint8 & a, hnc::uint8 const & b)
+	inline hnc::uint8 & operator -=(hnc::uint8 & a, hnc::uint8 const b)
 	{
 		a = a - b;
 		return a;
@@ -126,7 +126,7 @@ namespace hnc
 	/// @brief Operator -- (prefix) with a hnc::uint8
 	/// @param[in] i A hnc::uint8
 	/// @return i--
-	inline hnc::uint8 & operator  --(hnc::uint8 & i)
+	inline hnc::uint8 & operator --(hnc::uint8 & i)
 	{
 		--i.i;
 		return i;
@@ -135,7 +135,7 @@ namespace hnc
 	/// @brief Operator -- (postfix) with a hnc::uint8
 	/// @param[in] i A hnc::uint8
 	/// @return i--
-	inline hnc::uint8 operator  --(hnc::uint8 & i, int)
+	inline hnc::uint8 operator --(hnc::uint8 & i, int)
 	{
 		hnc::uint8 tmp = i;
 		--i;
@@ -148,7 +148,7 @@ namespace hnc
 	/// @param[in] a A hnc::uint8
 	/// @param[in] b A hnc::uint8
 	/// @return a * b
-	inline hnc::uint8 operator *(hnc::uint8 const & a, hnc::uint8 const & b)
+	inline hnc::uint8 operator *(hnc::uint8 const a, hnc::uint8 const b)
 	{
 		return a.i * b.i;
 	}
@@ -157,7 +157,7 @@ namespace hnc
 	/// @param[in] a A hnc::uint8
 	/// @param[in] b A hnc::uint8
 	/// @return a *= b
-	inline hnc::uint8 & operator *=(hnc::uint8 & a, hnc::uint8 const & b)
+	inline hnc::uint8 & operator *=(hnc::uint8 & a, hnc::uint8 const b)
 	{
 		a = a * b;
 		return a;
@@ -169,7 +169,7 @@ namespace hnc
 	/// @param[in] a A hnc::uint8
 	/// @param[in] b A hnc::uint8
 	/// @return a / b
-	inline hnc::uint8 operator  /(hnc::uint8 const & a, hnc::uint8 const & b)
+	inline hnc::uint8 operator /(hnc::uint8 const a, hnc::uint8 const b)
 	{
 		return a.i / b.i;
 	}
@@ -178,7 +178,7 @@ namespace hnc
 	/// @param[in] a A hnc::uint8
 	/// @param[in] b A hnc::uint8
 	/// @return a /= b
-	inline hnc::uint8 & operator  /=(hnc::uint8 & a, hnc::uint8 const & b)
+	inline hnc::uint8 & operator /=(hnc::uint8 & a, hnc::uint8 const b)
 	{
 		a = a / b;
 		return a;
@@ -190,7 +190,7 @@ namespace hnc
 	/// @param[in] a A hnc::uint8
 	/// @param[in] b A hnc::uint8
 	/// @return true if the hnc::uint8 are equal, false otherwise
-	inline bool operator ==(hnc::uint8 const & a, hnc::uint8 const & b)
+	inline bool operator ==(hnc::uint8 const a, hnc::uint8 const b)
 	{
 		return a.i == b.i;
 	}
@@ -199,7 +199,7 @@ namespace hnc
 	/// @param[in] a A hnc::uint8
 	/// @param[in] b A hnc::uint8
 	/// @return true if the hnc::uint8 are different, false otherwise
-	inline bool operator !=(hnc::uint8 const & a, hnc::uint8 const & b)
+	inline bool operator !=(hnc::uint8 const a, hnc::uint8 const b)
 	{
 		return a.i != b.i;
 	}
@@ -208,7 +208,7 @@ namespace hnc
 	/// @param[in] a A hnc::uint8
 	/// @param[in] b A hnc::uint8
 	/// @return true if a < b, false otherwise
-	inline bool operator <(hnc::uint8 const & a, hnc::uint8 const & b)
+	inline bool operator <(hnc::uint8 const a, hnc::uint8 const b)
 	{
 		return a.i < b.i;
 	}
@@ -217,7 +217,7 @@ namespace hnc
 	/// @param[in] a A hnc::uint8
 	/// @param[in] b A hnc::uint8
 	/// @return true if a > b, false otherwise
-	inline bool operator >(hnc::uint8 const & a, hnc::uint8 const & b)
+	inline bool operator >(hnc::uint8 const a, hnc::uint8 const b)
 	{
 		return a.i > b.i;
 	}
@@ -226,7 +226,7 @@ namespace hnc
 	/// @param[in] a A hnc::uint8
 	/// @param[in] b A hnc::uint8
 	/// @return true if a <= b, false otherwise
-	inline bool operator <=(hnc::uint8 const & a, hnc::uint8 const & b)
+	inline bool operator <=(hnc::uint8 const a, hnc::uint8 const b)
 	{
 		return a.i <= b.i;
 	}
@@ -235,7 +235,7 @@ namespace hnc
 	/// @param[in] a A hnc::uint8
 	/// @param[in] b A hnc::uint8
 	/// @return true if a >= b, false otherwise
-	inline bool operator >=(hnc::uint8 const & a, hnc::uint8 const & b)
+	inline bool operator >=(hnc::uint8 const a, hnc::uint8 const b)
 	{
 		return a.i >= b.i;
 	}
@@ -246,7 +246,7 @@ namespace hnc
 	/// @param[in,out] o    Output stream
 	/// @param[in]     uint8 A hnc::uint8
 	/// @return the output stream
-	inline std::ostream & operator <<(std::ostream & o, hnc::uint8 const & uint8)
+	inline std::ostream & operator <<(std::ostream & o, hnc::uint8 const uint8)
 	{
 		o << static_cast<int>(uint8.i);
 		return o;

@@ -22,6 +22,8 @@
 #include "int/int8.hpp"
 #include "int/uint8.hpp"
 
+#include "int/rational.hpp"
+
 
 namespace hnc
 {

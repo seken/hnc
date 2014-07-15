@@ -112,7 +112,7 @@ namespace hnc
 		
 		/// @brief Return a reference to the stored object to access of its members
 		/// @return a reference to the stored object to access of its members
-		using hnc::copy_ptr<T>::operator  ->;
+		using hnc::copy_ptr<T>::operator ->;
 	};
 
 	/// @brief Equality operator between two hnc::value_ptr<T>
