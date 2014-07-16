@@ -30,8 +30,13 @@ cmake_minimum_required(VERSION 2.6)
 		set(CMAKE_CXX_FLAGS "-O0 -g3")
 	endif()
 
-# User's settings - General C++ Flags
-	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra -Wconversion -Wsign-conversion -std=c++11 -pedantic -fopenmp")
+# General C++ flags
+	# General
+	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra -Wconversion -Wsign-conversion -std=c++11 -pedantic")
+	# Thread support
+	if ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
+		set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fopenmp")
+	endif()
 
 
 # Get local directory where .cmake are
