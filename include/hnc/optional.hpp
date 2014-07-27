@@ -109,10 +109,67 @@ namespace hnc
 		/// @pre The value must be present
 		/// @return the value
 		T * operator ->() { return &value(); }
-
+		
 		/// @brief Get const access to the value
 		/// @pre The value must be present
 		/// @return a const access to the value
+		T const * operator ->() const { return &value(); }
+	};
+	
+	// Specialization for T &
+	template <class T>
+	class optional<T &>
+	{
+	private:
+		
+		bool m_is_present;
+		
+		typename std::remove_reference<T>::type m_default;
+		
+		T & m_value;
+		
+	public:
+		
+		// Only this constructor is different
+		optional() : m_is_present(false), m_default(), m_value(m_default) { }
+		
+		optional(T const & value) : m_is_present(true), m_value(value) { }
+		
+		//hnc::optional<T> & operator =(hnc::optional<T> const & optional) = default;
+		
+		template <class U>
+		hnc::optional<T> & operator =(U const & value)
+		{
+			m_is_present = true;
+			m_value = value;
+			
+			return *this;
+		}
+		
+		constexpr explicit operator bool() const { return m_is_present; }
+		
+		T & value()
+		{
+			#ifndef NDEBUG
+			if (m_is_present == false) { throw std::out_of_range("value is not present in hnc::optional<T>"); }
+			#endif
+			return m_value;
+		}
+		
+		T const & value() const
+		{
+			#ifndef NDEBUG
+			if (m_is_present == false) { throw std::out_of_range("value is not present in hnc::optional<T>"); }
+			#endif
+			return m_value;
+		}
+		
+		T & operator *() { return value(); }
+		
+		T const & operator *() const { return value(); }
+		
+		T * operator ->() { return &value(); }
+		
 		T const * operator ->() const { return &value(); }
 	};
 	
