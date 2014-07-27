@@ -23,6 +23,7 @@
 #include <vector>
 
 #include "except.hpp"
+#include "unused.hpp"
 
 #ifdef hnc_unix
 	#include <unistd.h>
@@ -478,7 +479,8 @@ namespace hnc
 			
 				// Generate filename
 				char filename_buffer[] = "/tmp/XXXXXXXX\0";
-				mkstemp(filename_buffer);
+				int r = mkstemp(filename_buffer);
+				hnc_unused(r);
 				std::string const filename = filename_buffer;
 				
 			// std::tmpnam
