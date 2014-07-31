@@ -25,11 +25,8 @@ namespace hnc
 	 * @brief hnc::view_ptr is like std::reference_wrapper but it can be nullptr
 	 * 
 	 * @code
-	   #include <hnc/copy_ptr.hpp>
+	   #include <hnc/view_ptr.hpp>
 	   @endcode
-	 * 
-	 * hnc::copy_ptr performs a deep copy; it uses hnc::clone function which uses [virtual] .clone() method if it exists @n
-	 * So, copy a hnc::copy_ptr of base class which olds a derived class object works and does what you think
 	 */
 	template <class T>
 	class view_ptr
@@ -62,22 +59,22 @@ namespace hnc
 		operator bool() const { return m_ptr != nullptr; }
 		
 		/// @brief Return a reference to the stored object
-		/// @pre The pointer is nott nullptr
+		/// @pre The pointer is not nullptr
 		/// @return a reference to the stored object
 		T const & operator *() const { return *m_ptr; }
 		
 		/// @brief Return a reference to the stored object
-		/// @pre The pointer is nott nullptr
+		/// @pre The pointer is not nullptr
 		/// @return a reference to the stored object
 		T & operator *() { return *m_ptr; }
 		
 		/// @brief Return a reference to the stored object to access of its members
-		/// @pre The pointer is nott nullptr
+		/// @pre The pointer is not nullptr
 		/// @return a reference to the stored object to access of its members
 		T const * operator ->() const { return m_ptr; }
 		
 		/// @brief Return a reference to the stored object to access of its members
-		/// @pre The pointer is nott nullptr
+		/// @pre The pointer is not nullptr
 		/// @return a reference to the stored object to access of its members
 		T * operator ->() { return m_ptr; }
 	};
