@@ -85,7 +85,9 @@ namespace hnc
 		}
 		
 		hnc_generate_serialize_method(r, g, b, a)
-	
+		
+		// Basic colors
+		
 		/// @brief Black color
 		/// @return Black color
 		static hnc::color black() { return { 0, 0, 0 }; }
@@ -97,6 +99,12 @@ namespace hnc
 		/// @brief Grey color
 		/// @return Grey color
 		static hnc::color grey() { return { 128, 128, 128 }; }
+		
+		// LaTeX colors
+		
+		#ifndef hnc_no_color_latex
+			#include "color/latex.hpp"
+		#endif
 	};
 	
 	/// @brief Operator == between two hnc::color
