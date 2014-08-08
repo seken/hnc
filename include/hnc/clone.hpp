@@ -16,6 +16,8 @@
 #ifndef HNC_CLONE_HPP
 #define HNC_CLONE_HPP
 
+#include <memory>
+
 #include "sfinae.hpp"
 #include "unused.hpp"
 
