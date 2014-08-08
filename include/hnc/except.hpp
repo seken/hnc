@@ -56,29 +56,29 @@ namespace hnc
 		class incomplete_implementation : public std::logic_error
 		{
 		public:
-
+			
 			/// @brief Constructor
 			/// @param[in] what_arg Description of the error
 			explicit incomplete_implementation(std::string const & what_arg) :
 				std::logic_error(what_arg)
 			{ }
-
+			
 			/// @copydoc hnc::except::incomplete_implementation::incomplete_implementation(std::string const &)
 			explicit incomplete_implementation(char const * const what_arg) :
 				std::logic_error(what_arg)
 			{ }
-
+			
 			/// @brief Return the description of the error
 			/// @return the description of the error
 			virtual char const * what() const noexcept
 			{
 				return std::logic_error::what();
 			}
-
+			
 			/// @brief Destructor
 			virtual ~incomplete_implementation() noexcept { }
 		};
-
+		
 		/**
 		 * @brief Exception "file not found"
 		 * 
@@ -89,29 +89,29 @@ namespace hnc
 		class file_not_found : public std::runtime_error
 		{
 		public:
-
+			
 			/// @brief Constructor
 			/// @param[in] what_arg Description of the error
 			explicit file_not_found(std::string const & what_arg) :
 				std::runtime_error(what_arg)
 			{ }
-
+			
 			/// @copydoc hnc::except::file_not_found::file_not_found(std::string const &)
 			explicit file_not_found(char const * const what_arg) :
 				std::runtime_error(what_arg)
 			{ }
-
+			
 			/// @brief Return the description of the error
 			/// @return the description of the error
 			virtual char const * what() const noexcept
 			{
 				return std::runtime_error::what();
 			}
-
+			
 			/// @brief Destructor
 			virtual ~file_not_found() noexcept { }
 		};
-
+		
 		/**
 		 * @brief Exception "parse error"
 		 * 
@@ -140,14 +140,14 @@ namespace hnc
 				m_line_number(line_number),
 				m_column_number(column_number)
 			{ }
-
+			
 			/// @copydoc hnc::except::parse_error::parse_error(std::string const &)
 			explicit parse_error(char const * const what_arg, unsigned int line_number = 0, unsigned int column_number = 0) :
 				std::logic_error(what_arg),
 				m_line_number(line_number),
 				m_column_number(column_number)
 			{ }
-
+			
 			/// @brief Return the description of the error
 			/// @return the description of the error
 			virtual char const * what() const noexcept
@@ -165,6 +165,39 @@ namespace hnc
 
 			/// @brief Destructor
 			virtual ~parse_error() noexcept { }
+		};
+		
+		/**
+		 * @brief Exception "bad cast"
+		 * 
+		 * @code
+		   #include <hnc/except.hpp>
+		   @endcode
+		 */
+		class bad_cast : public std::runtime_error
+		{
+		public:
+			
+			/// @brief Constructor
+			/// @param[in] what_arg Description of the error
+			explicit bad_cast(std::string const & what_arg) :
+				std::runtime_error(what_arg)
+			{ }
+			
+			/// @copydoc hnc::except::bad_cast::bad_cast(std::string const &)
+			explicit bad_cast(char const * const what_arg) :
+				std::runtime_error(what_arg)
+			{ }
+			
+			/// @brief Return the description of the error
+			/// @return the description of the error
+			virtual char const * what() const noexcept
+			{
+				return std::runtime_error::what();
+			}
+			
+			/// @brief Destructor
+			virtual ~bad_cast() noexcept { }
 		};
 	}
 }

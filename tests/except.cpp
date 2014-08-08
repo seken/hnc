@@ -133,6 +133,32 @@ int main()
 		nb_test -= hnc::test::warning(e.column_number() == 42, "hnc::except::parse_error column number is " + hnc::to_string(e.column_number()) + " instead of 42\n");
 	}
 	std::cout << std::endl;
+
+	// bad_cast
+
+	++nb_test;
+	try
+	{
+		throw hnc::except::bad_cast(std::string("hnc::except::bad_cast with std::string"));
+	}
+	catch (hnc::except::bad_cast const & e)
+	{
+		std::cerr << e.what() << std::endl;
+		--nb_test;
+	}
+	std::cout << std::endl;
+
+	++nb_test;
+	try
+	{
+		throw hnc::except::bad_cast("hnc::except::bad_cast with char const * const");
+	}
+	catch (hnc::except::bad_cast const & e)
+	{
+		std::cerr << e.what() << std::endl;
+		--nb_test;
+	}
+	std::cout << std::endl;
 	
 	hnc::test::warning(nb_test == 0, "hnc::except " + hnc::to_string(nb_test) + " test fail!\n");
 
