@@ -125,7 +125,7 @@ namespace hnc
 
 		// ostream
 
-		/// Declare operator << with std::ostream as a friend
+		/// @brief Declare operator << with std::ostream as a friend
 		friend std::ostream & operator << <>(std::ostream & o, hnc::raw_data<N> const & c);
 	};
 	

@@ -228,7 +228,7 @@ namespace hnc
 
 		// ostream
 
-		/// Declare operator << with std::ostream as a friend
+		/// @brief Declare operator << with std::ostream as a friend
 		friend std::ostream & operator << <>(std::ostream & o, hnc::container<T> const & c);
 	};
 	
