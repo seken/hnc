@@ -112,15 +112,15 @@ int main()
 	(
 		search_a_word(target),
 		1, // nb_archipelago
-		4, // nb_island_per_archipelago
-		250, // nb_solution_per_island
+		hnc::openmp::nb_thread_max(), // nb_island_per_archipelago
+		500, // nb_solution_per_island
 		0.7, // crossover_probability = 0.7
-		0.1, // mutation_probability = 0.1
+		0.2, // mutation_probability = 0.1
 		3, // nb_migration_per_island = 3
 		5, // nb_generation_between_island_migration = 5
 		2, // nb_migration_per_archipelago = 2
 		10, // nb_generation_between_archipelago_migration = 10
-		20, // nb_same_solution_max = 20
+		100, // nb_same_solution_max = 20
 		0, // nb_generation_max = 0
 		0.0, // max_time = 0.0
 		hnc::algo::genetic_algo::log_level_t::minimal_plus_log // no_log, minimal_log, minimal_plus_log, archipelago_log, island_log, solution_grade_log
