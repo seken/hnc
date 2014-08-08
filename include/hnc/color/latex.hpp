@@ -14,11 +14,11 @@
 
 
 /**
- * @brief LaTex Color
+ * @brief LaTex colors
  *
  * @code
    #include <hnc/color.hpp>
- @endcode
+   @endcode
  *
  * http://latexcolor.com/
  */
@@ -3053,5 +3053,4 @@ public:
 	/// @brief Zinnwaldite brown color
 	/// @return Zinnwaldite brown color
 	static hnc::color brown_zinnaldite() { return { 44, 22, 6 }; }
-	
 };
