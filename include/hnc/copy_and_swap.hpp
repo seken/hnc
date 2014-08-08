@@ -68,20 +68,27 @@ namespace hnc
    hnc_overload_std_swap_with_swap_method_for_class(A)
    @endcode
  *
+ * @note For no base class, consider hnc_generate_copy_and_move_assignment
  * @note For base class, consider hnc_generate_virtual_copy_and_move_assignment
  */
 #define hnc_generate_copy_and_move_assignment(T) \
-	T & operator =(T const & p) \
+	T & operator =(T const & t) \
 	{ \
-		T copy(p); \
-		swap(copy); \
+		if (&t != this) \
+		{ \
+			T copy(t); \
+			swap(copy); \
+		} \
 		return *this; \
 	} \
 	\
-	T & operator =(T && p) \
+	T & operator =(T && t) \
 	{ \
-		T moved(std::move(p)); \
-		swap(moved); \
+		if (&t != this) \
+		{ \
+			T moved(std::move(t)); \
+			swap(moved); \
+		} \
 		return *this; \
 	}
 
@@ -122,19 +129,26 @@ namespace hnc
    @endcode
  *
  * @note For no base class, consider hnc_generate_copy_and_move_assignment
+ * @note For base class, consider hnc_generate_virtual_copy_and_move_assignment
  */
 #define hnc_generate_virtual_copy_and_move_assignment(T) \
-	virtual T & operator =(T const & p) \
+	virtual T & operator =(T const & t) \
 	{ \
-		T copy(p); \
-		swap(copy); \
+		if (&t != this) \
+		{ \
+			T copy(t); \
+			swap(copy); \
+		} \
 		return *this; \
 	} \
 	\
-	virtual T & operator =(T && p) \
+	virtual T & operator =(T && t) \
 	{ \
-		T moved(std::move(p)); \
-		swap(moved); \
+		if (&t != this) \
+		{ \
+			T moved(std::move(t)); \
+			swap(moved); \
+		} \
 		return *this; \
 	}
 
