@@ -110,7 +110,7 @@ class K
 {
 public:
 	virtual ~K() { }
-	hnc_generate_clone_method(K, K)
+	hnc_generate_clone_member_function(K, K)
 	virtual void display(std::ostream & o) const { o << "one_K"; }
 };
 
@@ -118,7 +118,7 @@ class L : public K
 {
 public:
 	virtual ~L() { }
-	hnc_generate_clone_method(K, L)
+	hnc_generate_clone_member_function(K, L)
 	virtual void display(std::ostream & o) const { o << "one_L"; }
 };
 
@@ -126,7 +126,7 @@ class M : public L
 {
 public:
 	virtual ~M() { }
-	hnc_generate_clone_method(K, M)
+	hnc_generate_clone_member_function(K, M)
 	virtual void display(std::ostream & o) const { o << "one_M"; }
 };
 
@@ -186,7 +186,7 @@ int main()
 	test_is_cloneable_and_clone(73.42, "double", false, "73.42", nb_test);
 	
 	test_is_cloneable_and_clone(A(), "A", true, "one_A", nb_test);
-	test_is_cloneable_and_clone(B(), "B", true, "one_A", nb_test); // B has not override the .clone() method
+	test_is_cloneable_and_clone(B(), "B", true, "one_A", nb_test); // B has not override the .clone() member function
 	
 	test_is_cloneable_and_clone(C(), "C", false, "one_C", nb_test);
 	test_is_cloneable_and_clone(D(), "D", true, "one_D", nb_test);

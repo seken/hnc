@@ -68,7 +68,7 @@ namespace hnc
 			return *this;
 		}
 		
-		hnc_generate_serialize_method(m_value)
+		hnc_generate_serialize_member_function(m_value)
 		
 		/// @brief Operator== between two hnc::radian
 		/// @param[in] radian A hnc::radian

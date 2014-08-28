@@ -59,7 +59,7 @@ namespace hnc
 		/// @param[in] i Integer between 0 and 255
 		uint8(int const i) : i(static_cast<unsigned char>(i)) { }
 		
-		hnc_generate_serialize_method(i)
+		hnc_generate_serialize_member_function(i)
 	};
 	
 	// +

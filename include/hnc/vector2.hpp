@@ -51,7 +51,7 @@ namespace hnc
 			x(x), y(y)
 		{ }
 		
-		hnc_generate_serialize_method(x, y)
+		hnc_generate_serialize_member_function(x, y)
 		
 		/// @brief Equality operator
 		/// @param[in] v A hnc::vector2

@@ -372,7 +372,7 @@ namespace hnc
 			 * @brief Return the plot
 			 *
 			 * When we access the plot, daughter class can overrite this getter to replace plot by the good one @n
-			 * Mother class access to m_plots for write only by this method
+			 * Mother class access to m_plots for write only by this member function
 			 *
 			 * @return the plot
 			 */

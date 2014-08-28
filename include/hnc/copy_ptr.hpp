@@ -67,7 +67,7 @@ namespace hnc
 	   #include <hnc/copy_ptr.hpp>
 	   @endcode
 	 * 
-	 * hnc::copy_ptr performs a deep copy; it uses hnc::clone function which uses [virtual] .clone() method if it exists @n
+	 * hnc::copy_ptr performs a deep copy; it uses hnc::clone function which uses [virtual] .clone() member function if it exists @n
 	 * So, copy a hnc::copy_ptr of base class which olds a derived class object works and does what you think
 	 * 
 	 * Example:
@@ -82,7 +82,7 @@ namespace hnc
 	   	
 	   	virtual ~A() { }
 	   	
-	   	hnc_generate_clone_method(A, A)
+	   	hnc_generate_clone_member_function(A, A)
 	   	
 	   	virtual void display(std::ostream & o) const { o << "one_A"; }
 	   };
@@ -93,7 +93,7 @@ namespace hnc
 	   	
 	   	virtual ~B() { }
 	   	
-	   	hnc_generate_clone_method(A, B)
+	   	hnc_generate_clone_member_function(A, B)
 	   	
 	   	virtual void display(std::ostream & o) const override { o << "one_B"; }
 	   };
@@ -123,7 +123,7 @@ namespace hnc
 	   @endcode
 	 * 
 	 * @note Do not use hnc::copy_ptr:
-	 * - If you want copy a std::unique_ptr, add .clone() method to your classe and use it (see hnc_generate_clone_method and hnc::clone)
+	 * - If you want copy a std::unique_ptr, add .clone() member function to your classe and use it (see hnc_generate_clone_member_function and hnc::clone)
 	 * - If you want value semantic with base ad derived class, use hnc::value_ptr
 	 */
 	template <class T>
@@ -264,6 +264,6 @@ namespace hnc
 }
 
 /// @brief std::swap between two hnc::copy_ptr
-hnc_overload_std_swap_with_swap_method_for_template_class(hnc::copy_ptr<T>, class T)
+hnc_overload_std_swap_with_swap_member_function_for_template_class(hnc::copy_ptr<T>, class T)
 
 #endif

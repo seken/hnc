@@ -30,7 +30,7 @@ public:
 	
 	virtual ~A() { }
 	
-	hnc_generate_clone_method(A, A)
+	hnc_generate_clone_member_function(A, A)
 	
 	virtual void display(std::ostream & o) const { o << "one_A"; }
 };
@@ -41,7 +41,7 @@ public:
 	
 	virtual ~B() { }
 	
-	hnc_generate_clone_method(A, B)
+	hnc_generate_clone_member_function(A, B)
 	
 	virtual void display(std::ostream & o) const override { o << "one_B"; }
 };

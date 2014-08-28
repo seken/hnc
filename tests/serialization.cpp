@@ -53,7 +53,7 @@ public:
 	
 	unsigned int age() const { return m_age; }
 	
-	hnc_generate_serialize_method(m_first_names, m_name, m_age)
+	hnc_generate_serialize_member_function(m_first_names, m_name, m_age)
 };
 
 std::ostream & operator <<(std::ostream & o, human_t const & human)
@@ -100,7 +100,7 @@ public:
 	
 	test_serialization_const_t(std::string const & member = "member") : m_member(member) { }
 	
-	hnc_generate_serialize_method(m_member)
+	hnc_generate_serialize_member_function(m_member)
 	
 	void before_save_serialization() const
 	{
@@ -134,7 +134,7 @@ public:
 	
 	test_serialization_no_const_t(std::string const & member = "member") : m_member(member) { }
 	
-	hnc_generate_serialize_method(m_member)
+	hnc_generate_serialize_member_function(m_member)
 	
 	void before_save_serialization()
 	{
@@ -168,7 +168,7 @@ public:
 	
 	test_serialization_t(std::string const & member = "member") : m_member(member) { }
 	
-	hnc_generate_serialize_method(m_member)
+	hnc_generate_serialize_member_function(m_member)
 	
 	void before_save_serialization() const
 	{
@@ -225,63 +225,63 @@ int main()
 		std::cout << std::boolalpha;
 		
 		std::cout << "std::string:\n";
-		std::cout << "- serializable              = " << hnc::have_serialize_method<std::string>() << std::endl;
-		std::cout << "- before_save_serialization const = " << hnc::have_before_save_serialization_method_const<std::string>() << std::endl;
-		std::cout << "- before_save_serialization       = " << hnc::have_before_save_serialization_method<std::string>() << std::endl;
-		std::cout << "- after_save_serialization const  = " << hnc::have_after_save_serialization_method_const<std::string>() << std::endl;
-		std::cout << "- after_save_serialization        = " << hnc::have_after_save_serialization_method<std::string>() << std::endl;
-		std::cout << "- before_load_serialization const = " << hnc::have_before_load_serialization_method_const<std::string>() << std::endl;
-		std::cout << "- before_load_serialization       = " << hnc::have_before_load_serialization_method<std::string>() << std::endl;
-		std::cout << "- after_load_serialization const  = " << hnc::have_after_load_serialization_method_const<std::string>() << std::endl;
-		std::cout << "- after_load_serialization        = " << hnc::have_after_load_serialization_method<std::string>() << std::endl;
+		std::cout << "- serializable              = " << hnc::have_serialize_member_function<std::string>() << std::endl;
+		std::cout << "- before_save_serialization const = " << hnc::have_before_save_serialization_member_function_const<std::string>() << std::endl;
+		std::cout << "- before_save_serialization       = " << hnc::have_before_save_serialization_member_function<std::string>() << std::endl;
+		std::cout << "- after_save_serialization const  = " << hnc::have_after_save_serialization_member_function_const<std::string>() << std::endl;
+		std::cout << "- after_save_serialization        = " << hnc::have_after_save_serialization_member_function<std::string>() << std::endl;
+		std::cout << "- before_load_serialization const = " << hnc::have_before_load_serialization_member_function_const<std::string>() << std::endl;
+		std::cout << "- before_load_serialization       = " << hnc::have_before_load_serialization_member_function<std::string>() << std::endl;
+		std::cout << "- after_load_serialization const  = " << hnc::have_after_load_serialization_member_function_const<std::string>() << std::endl;
+		std::cout << "- after_load_serialization        = " << hnc::have_after_load_serialization_member_function<std::string>() << std::endl;
 		std::cout << std::endl;
 		
 		std::cout << "human_t:\n";
-		std::cout << "- serializable              = " << hnc::have_serialize_method<human_t>() << std::endl;
-		std::cout << "- before_save_serialization const = " << hnc::have_before_save_serialization_method_const<human_t>() << std::endl;
-		std::cout << "- before_save_serialization       = " << hnc::have_before_save_serialization_method<human_t>() << std::endl;
-		std::cout << "- after_save_serialization const  = " << hnc::have_after_save_serialization_method_const<human_t>() << std::endl;
-		std::cout << "- after_save_serialization        = " << hnc::have_after_save_serialization_method<human_t>() << std::endl;
-		std::cout << "- before_load_serialization const = " << hnc::have_before_load_serialization_method_const<human_t>() << std::endl;
-		std::cout << "- before_load_serialization       = " << hnc::have_before_load_serialization_method<human_t>() << std::endl;
-		std::cout << "- after_load_serialization const  = " << hnc::have_after_load_serialization_method_const<human_t>() << std::endl;
-		std::cout << "- after_load_serialization        = " << hnc::have_after_load_serialization_method<human_t>() << std::endl;
+		std::cout << "- serializable              = " << hnc::have_serialize_member_function<human_t>() << std::endl;
+		std::cout << "- before_save_serialization const = " << hnc::have_before_save_serialization_member_function_const<human_t>() << std::endl;
+		std::cout << "- before_save_serialization       = " << hnc::have_before_save_serialization_member_function<human_t>() << std::endl;
+		std::cout << "- after_save_serialization const  = " << hnc::have_after_save_serialization_member_function_const<human_t>() << std::endl;
+		std::cout << "- after_save_serialization        = " << hnc::have_after_save_serialization_member_function<human_t>() << std::endl;
+		std::cout << "- before_load_serialization const = " << hnc::have_before_load_serialization_member_function_const<human_t>() << std::endl;
+		std::cout << "- before_load_serialization       = " << hnc::have_before_load_serialization_member_function<human_t>() << std::endl;
+		std::cout << "- after_load_serialization const  = " << hnc::have_after_load_serialization_member_function_const<human_t>() << std::endl;
+		std::cout << "- after_load_serialization        = " << hnc::have_after_load_serialization_member_function<human_t>() << std::endl;
 		std::cout << std::endl;
 		
 		std::cout << "test_serialization_const_t:\n";
-		std::cout << "- serializable              = " << hnc::have_serialize_method<test_serialization_const_t>() << std::endl;
-		std::cout << "- before_save_serialization const = " << hnc::have_before_save_serialization_method_const<test_serialization_const_t>() << std::endl;
-		std::cout << "- before_save_serialization       = " << hnc::have_before_save_serialization_method<test_serialization_const_t>() << std::endl;
-		std::cout << "- after_save_serialization const  = " << hnc::have_after_save_serialization_method_const<test_serialization_const_t>() << std::endl;
-		std::cout << "- after_save_serialization        = " << hnc::have_after_save_serialization_method<test_serialization_const_t>() << std::endl;
-		std::cout << "- before_load_serialization const = " << hnc::have_before_load_serialization_method_const<test_serialization_const_t>() << std::endl;
-		std::cout << "- before_load_serialization       = " << hnc::have_before_load_serialization_method<test_serialization_const_t>() << std::endl;
-		std::cout << "- after_load_serialization const  = " << hnc::have_after_load_serialization_method_const<test_serialization_const_t>() << std::endl;
-		std::cout << "- after_load_serialization        = " << hnc::have_after_load_serialization_method<test_serialization_const_t>() << std::endl;
+		std::cout << "- serializable              = " << hnc::have_serialize_member_function<test_serialization_const_t>() << std::endl;
+		std::cout << "- before_save_serialization const = " << hnc::have_before_save_serialization_member_function_const<test_serialization_const_t>() << std::endl;
+		std::cout << "- before_save_serialization       = " << hnc::have_before_save_serialization_member_function<test_serialization_const_t>() << std::endl;
+		std::cout << "- after_save_serialization const  = " << hnc::have_after_save_serialization_member_function_const<test_serialization_const_t>() << std::endl;
+		std::cout << "- after_save_serialization        = " << hnc::have_after_save_serialization_member_function<test_serialization_const_t>() << std::endl;
+		std::cout << "- before_load_serialization const = " << hnc::have_before_load_serialization_member_function_const<test_serialization_const_t>() << std::endl;
+		std::cout << "- before_load_serialization       = " << hnc::have_before_load_serialization_member_function<test_serialization_const_t>() << std::endl;
+		std::cout << "- after_load_serialization const  = " << hnc::have_after_load_serialization_member_function_const<test_serialization_const_t>() << std::endl;
+		std::cout << "- after_load_serialization        = " << hnc::have_after_load_serialization_member_function<test_serialization_const_t>() << std::endl;
 		std::cout << std::endl;
 		
 		std::cout << "test_serialization_no_const_t:\n";
-		std::cout << "- serializable              = " << hnc::have_serialize_method<test_serialization_no_const_t>() << std::endl;
-		std::cout << "- before_save_serialization const = " << hnc::have_before_save_serialization_method_const<test_serialization_no_const_t>() << std::endl;
-		std::cout << "- before_save_serialization       = " << hnc::have_before_save_serialization_method<test_serialization_no_const_t>() << std::endl;
-		std::cout << "- after_save_serialization const  = " << hnc::have_after_save_serialization_method_const<test_serialization_no_const_t>() << std::endl;
-		std::cout << "- after_save_serialization        = " << hnc::have_after_save_serialization_method<test_serialization_no_const_t>() << std::endl;
-		std::cout << "- before_load_serialization const = " << hnc::have_before_load_serialization_method_const<test_serialization_no_const_t>() << std::endl;
-		std::cout << "- before_load_serialization       = " << hnc::have_before_load_serialization_method<test_serialization_no_const_t>() << std::endl;
-		std::cout << "- after_load_serialization const  = " << hnc::have_after_load_serialization_method_const<test_serialization_no_const_t>() << std::endl;
-		std::cout << "- after_load_serialization        = " << hnc::have_after_load_serialization_method<test_serialization_no_const_t>() << std::endl;
+		std::cout << "- serializable              = " << hnc::have_serialize_member_function<test_serialization_no_const_t>() << std::endl;
+		std::cout << "- before_save_serialization const = " << hnc::have_before_save_serialization_member_function_const<test_serialization_no_const_t>() << std::endl;
+		std::cout << "- before_save_serialization       = " << hnc::have_before_save_serialization_member_function<test_serialization_no_const_t>() << std::endl;
+		std::cout << "- after_save_serialization const  = " << hnc::have_after_save_serialization_member_function_const<test_serialization_no_const_t>() << std::endl;
+		std::cout << "- after_save_serialization        = " << hnc::have_after_save_serialization_member_function<test_serialization_no_const_t>() << std::endl;
+		std::cout << "- before_load_serialization const = " << hnc::have_before_load_serialization_member_function_const<test_serialization_no_const_t>() << std::endl;
+		std::cout << "- before_load_serialization       = " << hnc::have_before_load_serialization_member_function<test_serialization_no_const_t>() << std::endl;
+		std::cout << "- after_load_serialization const  = " << hnc::have_after_load_serialization_member_function_const<test_serialization_no_const_t>() << std::endl;
+		std::cout << "- after_load_serialization        = " << hnc::have_after_load_serialization_member_function<test_serialization_no_const_t>() << std::endl;
 		std::cout << std::endl;
 		
 		std::cout << "test_serialization_t:\n";
-		std::cout << "- serializable              = " << hnc::have_serialize_method<test_serialization_t>() << std::endl;
-		std::cout << "- before_save_serialization const = " << hnc::have_before_save_serialization_method_const<test_serialization_t>() << std::endl;
-		std::cout << "- before_save_serialization       = " << hnc::have_before_save_serialization_method<test_serialization_t>() << std::endl;
-		std::cout << "- after_save_serialization const  = " << hnc::have_after_save_serialization_method_const<test_serialization_t>() << std::endl;
-		std::cout << "- after_save_serialization        = " << hnc::have_after_save_serialization_method<test_serialization_t>() << std::endl;
-		std::cout << "- before_load_serialization const = " << hnc::have_before_load_serialization_method_const<test_serialization_t>() << std::endl;
-		std::cout << "- before_load_serialization       = " << hnc::have_before_load_serialization_method<test_serialization_t>() << std::endl;
-		std::cout << "- after_load_serialization const  = " << hnc::have_after_load_serialization_method_const<test_serialization_t>() << std::endl;
-		std::cout << "- after_load_serialization        = " << hnc::have_after_load_serialization_method<test_serialization_t>() << std::endl;
+		std::cout << "- serializable              = " << hnc::have_serialize_member_function<test_serialization_t>() << std::endl;
+		std::cout << "- before_save_serialization const = " << hnc::have_before_save_serialization_member_function_const<test_serialization_t>() << std::endl;
+		std::cout << "- before_save_serialization       = " << hnc::have_before_save_serialization_member_function<test_serialization_t>() << std::endl;
+		std::cout << "- after_save_serialization const  = " << hnc::have_after_save_serialization_member_function_const<test_serialization_t>() << std::endl;
+		std::cout << "- after_save_serialization        = " << hnc::have_after_save_serialization_member_function<test_serialization_t>() << std::endl;
+		std::cout << "- before_load_serialization const = " << hnc::have_before_load_serialization_member_function_const<test_serialization_t>() << std::endl;
+		std::cout << "- before_load_serialization       = " << hnc::have_before_load_serialization_member_function<test_serialization_t>() << std::endl;
+		std::cout << "- after_load_serialization const  = " << hnc::have_after_load_serialization_member_function_const<test_serialization_t>() << std::endl;
+		std::cout << "- after_load_serialization        = " << hnc::have_after_load_serialization_member_function<test_serialization_t>() << std::endl;
 		std::cout << std::endl;
 		
 		std::cout << "boost::archive::text_oarchive is a save archive = " << hnc::is_save_archive<boost::archive::text_oarchive>() << std::endl;

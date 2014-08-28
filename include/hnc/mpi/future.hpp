@@ -54,14 +54,14 @@ namespace hnc
 		 * Your class must:
 		 * - be serializable with Boost Serialization http://www.boost.org/doc/libs/release/libs/serialization/ (friend class boost::serialization::access, serialize function, default constructor)
 		 * - have result_t type
-		 * - have "result_t move_result()" function (possible implementation is "return std::move(your_result_attribute);")
-		 * - have "void get(int const tag_result) override const" function (possible implementation is "send_result(your_result_attribute, tag_result);")
+		 * - have "result_t move_result()" function (possible implementation is "return std::move(your_result_data_member);")
+		 * - have "void get(int const tag_result) override const" function (possible implementation is "send_result(your_result_data_member, tag_result);")
 		 * - have "void operator()() override" function (contains the computation)
 		 * You must BOOST_CLASS_EXPORT your class
 		 *
 		 * @note You can use the hnc_no_boost_serialization define if you want compile without Boost Serialization (and without Boost MPI)
 		 *
-		 * Exemple: no attribute, no return
+		 * Exemple: no data member, no return
 		 * @code
 		   // Just a display, no return
 		   // You need override the operator()
@@ -95,7 +95,7 @@ namespace hnc
 		   #endif
 		   @endcode
 		 *
-		 * Exemple: no attribute, return a int
+		 * Exemple: no data member, return a int
 		   @code
 		   // Compute a int
 		   // You need:
@@ -150,7 +150,7 @@ namespace hnc
 		   #endif
 		 * @endcode
 		 *
-		 * Exemple: one int attribute, return factorial n
+		 * Exemple: one int data member, return factorial n
 		 * @code
 		   // Compute factorial n
 		   // You need:
@@ -219,7 +219,7 @@ namespace hnc
 		   #endif
 		   @endcode
 		 *
-		 * Exemple: one vector attribute, return the sum of the vector
+		 * Exemple: one vector data member, return the sum of the vector
 		 * @code
 		   // Compute the sum of the std::vector
 		   // You need:
@@ -324,7 +324,7 @@ namespace hnc
 			 * 
 			 * If you want return something:
 			 * @code
-			   return std::move(your_result_attribute);
+			   return std::move(your_result_data_member);
 			   @endcode
 			 * @return the result with std::move
 			 */
@@ -337,7 +337,7 @@ namespace hnc
 			 * 
 			 * If you want send the result:
 			 * @code
-			   send_result(your_result_attribute, tag_result);
+			   send_result(your_result_data_member, tag_result);
 			   @endcode
 			 */
 			virtual void get(int const tag_result) const
@@ -404,7 +404,7 @@ namespace hnc
 		   #include <hnc/mpi/future.hpp>
 		   @endcode
 		 *
-		 * hnc::mpi::future take a hnc::mpi::functor and a processor id. The remote processor compute the functor. The result is available once by get method.
+		 * hnc::mpi::future take a hnc::mpi::functor and a processor id. The remote processor compute the functor. The result is available once by get member function.
 		 *
 		 * @pre The MPI environment is set @n
 		 * You can use hnc::mpi::environment

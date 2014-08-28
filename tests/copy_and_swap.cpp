@@ -34,7 +34,7 @@ public:
 	
 	int v;
 	
-	void swap(B & b) { std::cout << ".swap(B &) method is call" << std::endl; std::swap(v, b.v); }
+	void swap(B & b) { std::cout << ".swap(B &) member function is call" << std::endl; std::swap(v, b.v); }
 };
 
 class C
@@ -43,10 +43,10 @@ public:
 	
 	int v;
 	
-	void swap(C & c) { std::cout << ".swap(C &) method is call" << std::endl; std::swap(v, c.v); }
+	void swap(C & c) { std::cout << ".swap(C &) member function is call" << std::endl; std::swap(v, c.v); }
 };
 
-hnc_overload_std_swap_with_swap_method_for_class(C)
+hnc_overload_std_swap_with_swap_member_function_for_class(C)
 
 template <class T>
 class D
@@ -55,10 +55,10 @@ public:
 	
 	T v;
 	
-	void swap(D<T> & d) { std::cout << ".swap(D<T> &) method is call" << std::endl; std::swap(v, d.v); }
+	void swap(D<T> & d) { std::cout << ".swap(D<T> &) member function is call" << std::endl; std::swap(v, d.v); }
 };
 
-hnc_overload_std_swap_with_swap_method_for_template_class(D<T>, class T)
+hnc_overload_std_swap_with_swap_member_function_for_template_class(D<T>, class T)
 
 class E
 {
@@ -74,10 +74,10 @@ public:
 	
 	hnc_generate_copy_and_move_assignment(E)
 	
-	void swap(E & e) { std::cout << ".swap(E &) method is call" << std::endl; std::swap(v, e.v); }
+	void swap(E & e) { std::cout << ".swap(E &) member function is call" << std::endl; std::swap(v, e.v); }
 };
 
-hnc_overload_std_swap_with_swap_method_for_class(E)
+hnc_overload_std_swap_with_swap_member_function_for_class(E)
 
 class F
 {
@@ -95,10 +95,10 @@ public:
 	
 	hnc_generate_virtual_copy_and_move_assignment(F)
 	
-	void swap(F & f) { std::cout << ".swap(F &) method is call" << std::endl; std::swap(v, f.v); }
+	void swap(F & f) { std::cout << ".swap(F &) member function is call" << std::endl; std::swap(v, f.v); }
 };
 
-hnc_overload_std_swap_with_swap_method_for_class(F)
+hnc_overload_std_swap_with_swap_member_function_for_class(F)
 
 
 int main()
@@ -106,27 +106,27 @@ int main()
 	int nb_test = 0;
 	
 	++nb_test;
-	nb_test -= hnc::test::warning(hnc::is_swappable_with_swap_method<int>() == false, "hnc::is_swappable_with_swap_method<int> fails!\n");
+	nb_test -= hnc::test::warning(hnc::is_swappable_with_swap_member_function<int>() == false, "hnc::is_swappable_with_swap_member_function<int> fails!\n");
 	++nb_test;
-	nb_test -= hnc::test::warning(hnc::is_swappable_with_swap_method<double>() == false, "hnc::is_swappable_with_swap_method<double> fails!\n");
+	nb_test -= hnc::test::warning(hnc::is_swappable_with_swap_member_function<double>() == false, "hnc::is_swappable_with_swap_member_function<double> fails!\n");
 	++nb_test;
-	nb_test -= hnc::test::warning(hnc::is_swappable_with_swap_method<char>() == false, "hnc::is_swappable_with_swap_method<char> fails!\n");
+	nb_test -= hnc::test::warning(hnc::is_swappable_with_swap_member_function<char>() == false, "hnc::is_swappable_with_swap_member_function<char> fails!\n");
 	++nb_test;
-	nb_test -= hnc::test::warning(hnc::is_swappable_with_swap_method<std::string>() == true, "hnc::is_swappable_with_swap_method<std::string> fails!\n");
+	nb_test -= hnc::test::warning(hnc::is_swappable_with_swap_member_function<std::string>() == true, "hnc::is_swappable_with_swap_member_function<std::string> fails!\n");
 	++nb_test;
-	nb_test -= hnc::test::warning(hnc::is_swappable_with_swap_method<std::unique_ptr<int>>() == true, "hnc::is_swappable_with_swap_method<std::unique_ptr<int>> fails!\n");
+	nb_test -= hnc::test::warning(hnc::is_swappable_with_swap_member_function<std::unique_ptr<int>>() == true, "hnc::is_swappable_with_swap_member_function<std::unique_ptr<int>> fails!\n");
 	++nb_test;
-	nb_test -= hnc::test::warning(hnc::is_swappable_with_swap_method<A>() == false, "hnc::is_swappable_with_swap_method<A> fails!\n");
+	nb_test -= hnc::test::warning(hnc::is_swappable_with_swap_member_function<A>() == false, "hnc::is_swappable_with_swap_member_function<A> fails!\n");
 	++nb_test;
-	nb_test -= hnc::test::warning(hnc::is_swappable_with_swap_method<B>() == true, "hnc::is_swappable_with_swap_method<B> fails!\n");
+	nb_test -= hnc::test::warning(hnc::is_swappable_with_swap_member_function<B>() == true, "hnc::is_swappable_with_swap_member_function<B> fails!\n");
 	++nb_test;
-	nb_test -= hnc::test::warning(hnc::is_swappable_with_swap_method<C>() == true, "hnc::is_swappable_with_swap_method<C> fails!\n");
+	nb_test -= hnc::test::warning(hnc::is_swappable_with_swap_member_function<C>() == true, "hnc::is_swappable_with_swap_member_function<C> fails!\n");
 	++nb_test;
-	nb_test -= hnc::test::warning(hnc::is_swappable_with_swap_method<D<int>>() == true, "hnc::is_swappable_with_swap_method<D> fails!\n");
+	nb_test -= hnc::test::warning(hnc::is_swappable_with_swap_member_function<D<int>>() == true, "hnc::is_swappable_with_swap_member_function<D> fails!\n");
 	++nb_test;
-	nb_test -= hnc::test::warning(hnc::is_swappable_with_swap_method<E>() == true, "hnc::is_swappable_with_swap_method<E> fails!\n");
+	nb_test -= hnc::test::warning(hnc::is_swappable_with_swap_member_function<E>() == true, "hnc::is_swappable_with_swap_member_function<E> fails!\n");
 	++nb_test;
-	nb_test -= hnc::test::warning(hnc::is_swappable_with_swap_method<F>() == true, "hnc::is_swappable_with_swap_method<F> fails!\n");
+	nb_test -= hnc::test::warning(hnc::is_swappable_with_swap_member_function<F>() == true, "hnc::is_swappable_with_swap_member_function<F> fails!\n");
 	
 	B b0; B b1; std::swap(b0, b1); b0.swap(b1);
 	std::cout << std::endl;

@@ -115,7 +115,7 @@ namespace hnc
 	 * The name of the test (a std::string) is the key and the hnc::benchmark_base is the value
 	 *
 	 * The value is a vector of elapsed times (in seconds) @n
-	 * To get a elapsed time use the start and stop method
+	 * To get a elapsed time use the start and stop member function
 	 *
 	 * You can acces to some metrics:
 	 * - min
@@ -207,7 +207,7 @@ namespace hnc
 	 * The name of the test (a std::string) and  the option (std::string) are the keys and the hnc::benchmark_base is the final value
 	 *
 	 * The value is a vector of elapsed times (in seconds) @n
-	 * To get a elapsed time use the start and stop method
+	 * To get a elapsed time use the start and stop member function
 	 *
 	 * You can acces to some metrics:
 	 * - min

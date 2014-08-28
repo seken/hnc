@@ -43,7 +43,7 @@ namespace hnc
 		 * http://validator.w3.org/
 		 * http://validator.w3.org/docs/api.html
 		 *
-		 * @warning Actually, hnc::http::get method does not work with redirection. So, hnc::http::w3c_validator uses hnc::http::w3c_validator::server_local. On Debian GNU/Linux distribution you can install the package:
+		 * @warning Actually, hnc::http::get member function does not work with redirection. So, hnc::http::w3c_validator uses hnc::http::w3c_validator::server_local. On Debian GNU/Linux distribution you can install the package:
 		 * @code
 		   w3c-markup-validator
 		   @endcode

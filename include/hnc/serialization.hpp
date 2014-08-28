@@ -30,9 +30,9 @@ namespace thoth
 
 
 /**
- * @brief Generate .serialize() methods
+ * @brief Generate .serialize() member functions
  *
- * This macro generate the .serialize() const and .serialize() methods for Boost.Serialization
+ * This macro generate the .serialize() const and .serialize() member functions for Boost.Serialization
  *
  * @code
    	#include <hnc/serialization.hpp>
@@ -49,30 +49,30 @@ namespace thoth
    
    public:
    
-   	hnc_generate_serialize_method(a, b, c)
+   	hnc_generate_serialize_member_function(a, b, c)
    };
    @endcode
  */
-#define hnc_generate_serialize_method(...) \
+#define hnc_generate_serialize_member_function(...) \
 	\
 	template <class archive_t> \
 	void serialize(archive_t & archive, unsigned int const version = 0) const \
 	{ \
-		hnc::call_if_save_archive<archive_t>([&]() -> void { hnc::call_before_save_serialization_method_if_exist(*this); }); \
-		hnc::call_if_load_archive<archive_t>([&]() -> void { hnc::call_before_load_serialization_method_if_exist(*this); }); \
+		hnc::call_if_save_archive<archive_t>([&]() -> void { hnc::call_before_save_serialization_member_function_if_exist(*this); }); \
+		hnc::call_if_load_archive<archive_t>([&]() -> void { hnc::call_before_load_serialization_member_function_if_exist(*this); }); \
 		hnc::serialize(archive, version, __VA_ARGS__); \
-		hnc::call_if_save_archive<archive_t>([&]() -> void { hnc::call_after_save_serialization_method_if_exist(*this); }); \
-		hnc::call_if_load_archive<archive_t>([&]() -> void { hnc::call_after_load_serialization_method_if_exist(*this); }); \
+		hnc::call_if_save_archive<archive_t>([&]() -> void { hnc::call_after_save_serialization_member_function_if_exist(*this); }); \
+		hnc::call_if_load_archive<archive_t>([&]() -> void { hnc::call_after_load_serialization_member_function_if_exist(*this); }); \
 	} \
 	\
 	template <class archive_t> \
 	void serialize(archive_t & archive, unsigned int const version = 0) \
 	{ \
-		hnc::call_if_save_archive<archive_t>([&]() -> void { hnc::call_before_save_serialization_method_if_exist(*this); }); \
-		hnc::call_if_load_archive<archive_t>([&]() -> void { hnc::call_before_load_serialization_method_if_exist(*this); }); \
+		hnc::call_if_save_archive<archive_t>([&]() -> void { hnc::call_before_save_serialization_member_function_if_exist(*this); }); \
+		hnc::call_if_load_archive<archive_t>([&]() -> void { hnc::call_before_load_serialization_member_function_if_exist(*this); }); \
 		hnc::serialize(archive, version, __VA_ARGS__); \
-		hnc::call_if_save_archive<archive_t>([&]() -> void { hnc::call_after_save_serialization_method_if_exist(*this); }); \
-		hnc::call_if_load_archive<archive_t>([&]() -> void { hnc::call_after_load_serialization_method_if_exist(*this); }); \
+		hnc::call_if_save_archive<archive_t>([&]() -> void { hnc::call_after_save_serialization_member_function_if_exist(*this); }); \
+		hnc::call_if_load_archive<archive_t>([&]() -> void { hnc::call_after_load_serialization_member_function_if_exist(*this); }); \
 	} \
 
 
@@ -268,328 +268,328 @@ namespace hnc
 		hnc::call_if_load_archive(function, hnc::is_load_archive<archive_t>());
 	}
 	
-	// have_serialize_method
+	// have_serialize_member_function
 	
-	/// @brief Type does not have serialize method
+	/// @brief Type does not have serialize member function
 	template <class T, class sfinae_valid_type = void>
-	class have_serialize_method : public std::false_type
+	class have_serialize_member_function : public std::false_type
 	{ };
 	
-	/// @brief Type has serialize method
+	/// @brief Type has serialize member function
 	template <class T>
-	class have_serialize_method<T, typename hnc::this_type<decltype(std::declval<T &>().serialize(std::declval<hnc::false_load_archive_t &>()))>::is_valid> : public std::true_type
+	class have_serialize_member_function<T, typename hnc::this_type<decltype(std::declval<T &>().serialize(std::declval<hnc::false_load_archive_t &>()))>::is_valid> : public std::true_type
 	{ };
 	
 	// before_save_serialization
 	
-	/// @brief Type does not have the before_save_serialization const method
+	/// @brief Type does not have the before_save_serialization const member function
 	template <class T, class sfinae_valid_type = void>
-	class have_before_save_serialization_method_const : public std::false_type
+	class have_before_save_serialization_member_function_const : public std::false_type
 	{ };
 	
-	/// @brief Type has before_save_serialization const method
+	/// @brief Type has before_save_serialization const member function
 	template <class T>
-	class have_before_save_serialization_method_const<T, typename hnc::this_type<decltype(std::declval<T const &>().before_save_serialization())>::is_valid> : public std::true_type
+	class have_before_save_serialization_member_function_const<T, typename hnc::this_type<decltype(std::declval<T const &>().before_save_serialization())>::is_valid> : public std::true_type
 	{ };
 	
-	/// @brief Do not call before_save_serialization const method
-	/// @param[in] t   Object without before_save_serialization const method
+	/// @brief Do not call before_save_serialization const member function
+	/// @param[in] t   Object without before_save_serialization const member function
 	/// @param[in] tag std::false_type
 	template <class T>
-	void call_before_save_serialization_method_const_if_exist(T const & t, std::false_type const tag)
+	void call_before_save_serialization_member_function_const_if_exist(T const & t, std::false_type const tag)
 	{
 		hnc_unused(tag);
 		hnc_unused(t);
 	}
 	
-	/// @brief Do not call before_save_serialization const method
-	/// @param[in] t   Object without before_save_serialization const method
+	/// @brief Do not call before_save_serialization const member function
+	/// @param[in] t   Object without before_save_serialization const member function
 	/// @param[in] tag std::false_type
 	template <class T>
-	void call_before_save_serialization_method_const_if_exist(T const & t, std::true_type const tag)
+	void call_before_save_serialization_member_function_const_if_exist(T const & t, std::true_type const tag)
 	{
 		hnc_unused(tag);
 		t.before_save_serialization();
 	}
 	
-	/// @brief Call before_save_serialization const method if exist
-	/// @param[in,out] t Object with or without before_save_serialization const method
+	/// @brief Call before_save_serialization const member function if exist
+	/// @param[in,out] t Object with or without before_save_serialization const member function
 	template <class T>
-	void call_before_save_serialization_method_const_if_exist(T const & t)
+	void call_before_save_serialization_member_function_const_if_exist(T const & t)
 	{
-		hnc::call_before_save_serialization_method_const_if_exist(t, hnc::have_before_save_serialization_method_const<T>());
+		hnc::call_before_save_serialization_member_function_const_if_exist(t, hnc::have_before_save_serialization_member_function_const<T>());
 	}
 	
-	/// @brief Type does not have the before_save_serialization method
+	/// @brief Type does not have the before_save_serialization member function
 	template <class T, class sfinae_valid_type = void>
-	class have_before_save_serialization_method : public std::false_type
+	class have_before_save_serialization_member_function : public std::false_type
 	{ };
 	
-	/// @brief Type has before_save_serialization method
+	/// @brief Type has before_save_serialization member function
 	template <class T>
-	class have_before_save_serialization_method<T, typename hnc::this_type<decltype(std::declval<T &>().before_save_serialization())>::is_valid> : public std::true_type
+	class have_before_save_serialization_member_function<T, typename hnc::this_type<decltype(std::declval<T &>().before_save_serialization())>::is_valid> : public std::true_type
 	{ };
 	
-	/// @brief Do not call before_save_serialization method
-	/// @param[in,out] t   Object without before_save_serialization method
+	/// @brief Do not call before_save_serialization member function
+	/// @param[in,out] t   Object without before_save_serialization member function
 	/// @param[in]     tag std::false_type
 	template <class T>
-	void call_before_save_serialization_method_if_exist(T & t, std::false_type tag)
+	void call_before_save_serialization_member_function_if_exist(T & t, std::false_type tag)
 	{
 		hnc_unused(tag);
 		hnc_unused(t);
 	}
 	
-	/// @brief Call before_save_serialization method
-	/// @param[in,out] t   Object with before_save_serialization method
+	/// @brief Call before_save_serialization member function
+	/// @param[in,out] t   Object with before_save_serialization member function
 	/// @param[in]     tag std::true_type
 	template <class T>
-	void call_before_save_serialization_method_if_exist(T & t, std::true_type tag)
+	void call_before_save_serialization_member_function_if_exist(T & t, std::true_type tag)
 	{
 		hnc_unused(tag);
 		t.before_save_serialization();
 	}
 	
-	/// @brief Call before_save_serialization method if exist
-	/// @param[in,out] t Object with or without before_save_serialization method
+	/// @brief Call before_save_serialization member function if exist
+	/// @param[in,out] t Object with or without before_save_serialization member function
 	template <class T>
-	void call_before_save_serialization_method_if_exist(T & t)
+	void call_before_save_serialization_member_function_if_exist(T & t)
 	{
-		hnc::call_before_save_serialization_method_if_exist(t, hnc::have_before_save_serialization_method<T>());
+		hnc::call_before_save_serialization_member_function_if_exist(t, hnc::have_before_save_serialization_member_function<T>());
 	}
 	
 	// after_save_serialization
 	
-	/// @brief Type does not have the after_save_serialization const method
+	/// @brief Type does not have the after_save_serialization const member function
 	template <class T, class sfinae_valid_type = void>
-	class have_after_save_serialization_method_const : public std::false_type
+	class have_after_save_serialization_member_function_const : public std::false_type
 	{ };
 	
-	/// @brief Type has after_save_serialization const method
+	/// @brief Type has after_save_serialization const member function
 	template <class T>
-	class have_after_save_serialization_method_const<T, typename hnc::this_type<decltype(std::declval<T const &>().after_save_serialization())>::is_valid> : public std::true_type
+	class have_after_save_serialization_member_function_const<T, typename hnc::this_type<decltype(std::declval<T const &>().after_save_serialization())>::is_valid> : public std::true_type
 	{ };
 	
-	/// @brief Do not call after_save_serialization const method
-	/// @param[in] t   Object without after_save_serialization const method
+	/// @brief Do not call after_save_serialization const member function
+	/// @param[in] t   Object without after_save_serialization const member function
 	/// @param[in] tag std::false_type
 	template <class T>
-	void call_after_save_serialization_method_const_if_exist(T const & t, std::false_type const tag)
+	void call_after_save_serialization_member_function_const_if_exist(T const & t, std::false_type const tag)
 	{
 		hnc_unused(tag);
 		hnc_unused(t);
 	}
 	
-	/// @brief Do not call after_save_serialization const method
-	/// @param[in] t   Object without after_save_serialization const method
+	/// @brief Do not call after_save_serialization const member function
+	/// @param[in] t   Object without after_save_serialization const member function
 	/// @param[in] tag std::false_type
 	template <class T>
-	void call_after_save_serialization_method_const_if_exist(T const & t, std::true_type const tag)
+	void call_after_save_serialization_member_function_const_if_exist(T const & t, std::true_type const tag)
 	{
 		hnc_unused(tag);
 		t.after_save_serialization();
 	}
 	
-	/// @brief Call after_save_serialization const method if exist
-	/// @param[in,out] t Object with or without after_save_serialization const method
+	/// @brief Call after_save_serialization const member function if exist
+	/// @param[in,out] t Object with or without after_save_serialization const member function
 	template <class T>
-	void call_after_save_serialization_method_const_if_exist(T const & t)
+	void call_after_save_serialization_member_function_const_if_exist(T const & t)
 	{
-		hnc::call_after_save_serialization_method_const_if_exist(t, hnc::have_after_save_serialization_method_const<T>());
+		hnc::call_after_save_serialization_member_function_const_if_exist(t, hnc::have_after_save_serialization_member_function_const<T>());
 	}
 	
-	/// @brief Type does not have the after_save_serialization method
+	/// @brief Type does not have the after_save_serialization member function
 	template <class T, class sfinae_valid_type = void>
-	class have_after_save_serialization_method : public std::false_type
+	class have_after_save_serialization_member_function : public std::false_type
 	{ };
 	
-	/// @brief Type has after_save_serialization method
+	/// @brief Type has after_save_serialization member function
 	template <class T>
-	class have_after_save_serialization_method<T, typename hnc::this_type<decltype(std::declval<T &>().after_save_serialization())>::is_valid> : public std::true_type
+	class have_after_save_serialization_member_function<T, typename hnc::this_type<decltype(std::declval<T &>().after_save_serialization())>::is_valid> : public std::true_type
 	{ };
 	
-	/// @brief Do not call after_save_serialization method
-	/// @param[in,out] t   Object without after_save_serialization method
+	/// @brief Do not call after_save_serialization member function
+	/// @param[in,out] t   Object without after_save_serialization member function
 	/// @param[in]     tag std::false_type
 	template <class T>
-	void call_after_save_serialization_method_if_exist(T & t, std::false_type tag)
+	void call_after_save_serialization_member_function_if_exist(T & t, std::false_type tag)
 	{
 		hnc_unused(tag);
 		hnc_unused(t);
 	}
 	
-	/// @brief Call after_save_serialization method
-	/// @param[in,out] t   Object with after_save_serialization method
+	/// @brief Call after_save_serialization member function
+	/// @param[in,out] t   Object with after_save_serialization member function
 	/// @param[in]     tag std::true_type
 	template <class T>
-	void call_after_save_serialization_method_if_exist(T & t, std::true_type tag)
+	void call_after_save_serialization_member_function_if_exist(T & t, std::true_type tag)
 	{
 		hnc_unused(tag);
 		t.after_save_serialization();
 	}
 	
-	/// @brief Call after_save_serialization method if exist
-	/// @param[in,out] t Object with or without after_save_serialization method
+	/// @brief Call after_save_serialization member function if exist
+	/// @param[in,out] t Object with or without after_save_serialization member function
 	template <class T>
-	void call_after_save_serialization_method_if_exist(T & t)
+	void call_after_save_serialization_member_function_if_exist(T & t)
 	{
-		hnc::call_after_save_serialization_method_if_exist(t, hnc::have_after_save_serialization_method<T>());
+		hnc::call_after_save_serialization_member_function_if_exist(t, hnc::have_after_save_serialization_member_function<T>());
 	}
 	
 	// before_load_serialization
 	
-	/// @brief Type does not have the before_load_serialization const method
+	/// @brief Type does not have the before_load_serialization const member function
 	template <class T, class sfinae_valid_type = void>
-	class have_before_load_serialization_method_const : public std::false_type
+	class have_before_load_serialization_member_function_const : public std::false_type
 	{ };
 	
-	/// @brief Type has before_load_serialization const method
+	/// @brief Type has before_load_serialization const member function
 	template <class T>
-	class have_before_load_serialization_method_const<T, typename hnc::this_type<decltype(std::declval<T const &>().before_load_serialization())>::is_valid> : public std::true_type
+	class have_before_load_serialization_member_function_const<T, typename hnc::this_type<decltype(std::declval<T const &>().before_load_serialization())>::is_valid> : public std::true_type
 	{ };
 	
-	/// @brief Do not call before_load_serialization const method
-	/// @param[in] t   Object without before_load_serialization const method
+	/// @brief Do not call before_load_serialization const member function
+	/// @param[in] t   Object without before_load_serialization const member function
 	/// @param[in] tag std::false_type
 	template <class T>
-	void call_before_load_serialization_method_const_if_exist(T const & t, std::false_type const tag)
+	void call_before_load_serialization_member_function_const_if_exist(T const & t, std::false_type const tag)
 	{
 		hnc_unused(tag);
 		hnc_unused(t);
 	}
 	
-	/// @brief Do not call before_load_serialization const method
-	/// @param[in] t   Object without before_load_serialization const method
+	/// @brief Do not call before_load_serialization const member function
+	/// @param[in] t   Object without before_load_serialization const member function
 	/// @param[in] tag std::false_type
 	template <class T>
-	void call_before_load_serialization_method_const_if_exist(T const & t, std::true_type const tag)
+	void call_before_load_serialization_member_function_const_if_exist(T const & t, std::true_type const tag)
 	{
 		hnc_unused(tag);
 		t.before_load_serialization();
 	}
 	
-	/// @brief Call before_load_serialization const method if exist
-	/// @param[in,out] t Object with or without before_load_serialization const method
+	/// @brief Call before_load_serialization const member function if exist
+	/// @param[in,out] t Object with or without before_load_serialization const member function
 	template <class T>
-	void call_before_load_serialization_method_const_if_exist(T const & t)
+	void call_before_load_serialization_member_function_const_if_exist(T const & t)
 	{
-		hnc::call_before_load_serialization_method_const_if_exist(t, hnc::have_before_load_serialization_method_const<T>());
+		hnc::call_before_load_serialization_member_function_const_if_exist(t, hnc::have_before_load_serialization_member_function_const<T>());
 	}
 	
-	/// @brief Type does not have the before_load_serialization method
+	/// @brief Type does not have the before_load_serialization member function
 	template <class T, class sfinae_valid_type = void>
-	class have_before_load_serialization_method : public std::false_type
+	class have_before_load_serialization_member_function : public std::false_type
 	{ };
 	
-	/// @brief Type has before_load_serialization method
+	/// @brief Type has before_load_serialization member function
 	template <class T>
-	class have_before_load_serialization_method<T, typename hnc::this_type<decltype(std::declval<T &>().before_load_serialization())>::is_valid> : public std::true_type
+	class have_before_load_serialization_member_function<T, typename hnc::this_type<decltype(std::declval<T &>().before_load_serialization())>::is_valid> : public std::true_type
 	{ };
 	
-	/// @brief Do not call before_load_serialization method
-	/// @param[in,out] t   Object without before_load_serialization method
+	/// @brief Do not call before_load_serialization member function
+	/// @param[in,out] t   Object without before_load_serialization member function
 	/// @param[in]     tag std::false_type
 	template <class T>
-	void call_before_load_serialization_method_if_exist(T & t, std::false_type tag)
+	void call_before_load_serialization_member_function_if_exist(T & t, std::false_type tag)
 	{
 		hnc_unused(tag);
 		hnc_unused(t);
 	}
 	
-	/// @brief Call before_load_serialization method
-	/// @param[in,out] t   Object with before_load_serialization method
+	/// @brief Call before_load_serialization member function
+	/// @param[in,out] t   Object with before_load_serialization member function
 	/// @param[in]     tag std::true_type
 	template <class T>
-	void call_before_load_serialization_method_if_exist(T & t, std::true_type tag)
+	void call_before_load_serialization_member_function_if_exist(T & t, std::true_type tag)
 	{
 		hnc_unused(tag);
 		t.before_load_serialization();
 	}
 	
-	/// @brief Call before_load_serialization method if exist
-	/// @param[in,out] t Object with or without before_load_serialization method
+	/// @brief Call before_load_serialization member function if exist
+	/// @param[in,out] t Object with or without before_load_serialization member function
 	template <class T>
-	void call_before_load_serialization_method_if_exist(T & t)
+	void call_before_load_serialization_member_function_if_exist(T & t)
 	{
-		hnc::call_before_load_serialization_method_if_exist(t, hnc::have_before_load_serialization_method<T>());
+		hnc::call_before_load_serialization_member_function_if_exist(t, hnc::have_before_load_serialization_member_function<T>());
 	}
 	
 	// after_load_serialization
 	
-	/// @brief Type does not have the after_load_serialization const method
+	/// @brief Type does not have the after_load_serialization const member function
 	template <class T, class sfinae_valid_type = void>
-	class have_after_load_serialization_method_const : public std::false_type
+	class have_after_load_serialization_member_function_const : public std::false_type
 	{ };
 	
-	/// @brief Type has after_load_serialization const method
+	/// @brief Type has after_load_serialization const member function
 	template <class T>
-	class have_after_load_serialization_method_const<T, typename hnc::this_type<decltype(std::declval<T const &>().after_load_serialization())>::is_valid> : public std::true_type
+	class have_after_load_serialization_member_function_const<T, typename hnc::this_type<decltype(std::declval<T const &>().after_load_serialization())>::is_valid> : public std::true_type
 	{ };
 	
-	/// @brief Do not call after_load_serialization const method
-	/// @param[in] t   Object without after_load_serialization const method
+	/// @brief Do not call after_load_serialization const member function
+	/// @param[in] t   Object without after_load_serialization const member function
 	/// @param[in] tag std::false_type
 	template <class T>
-	void call_after_load_serialization_method_const_if_exist(T const & t, std::false_type const tag)
+	void call_after_load_serialization_member_function_const_if_exist(T const & t, std::false_type const tag)
 	{
 		hnc_unused(tag);
 		hnc_unused(t);
 	}
 	
-	/// @brief Do not call after_load_serialization const method
-	/// @param[in] t   Object without after_load_serialization const method
+	/// @brief Do not call after_load_serialization const member function
+	/// @param[in] t   Object without after_load_serialization const member function
 	/// @param[in] tag std::false_type
 	template <class T>
-	void call_after_load_serialization_method_const_if_exist(T const & t, std::true_type const tag)
+	void call_after_load_serialization_member_function_const_if_exist(T const & t, std::true_type const tag)
 	{
 		hnc_unused(tag);
 		t.after_load_serialization();
 	}
 	
-	/// @brief Call after_load_serialization const method if exist
-	/// @param[in,out] t Object with or without after_load_serialization const method
+	/// @brief Call after_load_serialization const member function if exist
+	/// @param[in,out] t Object with or without after_load_serialization const member function
 	template <class T>
-	void call_after_load_serialization_method_const_if_exist(T const & t)
+	void call_after_load_serialization_member_function_const_if_exist(T const & t)
 	{
-		hnc::call_after_load_serialization_method_const_if_exist(t, hnc::have_after_load_serialization_method_const<T>());
+		hnc::call_after_load_serialization_member_function_const_if_exist(t, hnc::have_after_load_serialization_member_function_const<T>());
 	}
 	
-	/// @brief Type does not have the after_load_serialization method
+	/// @brief Type does not have the after_load_serialization member function
 	template <class T, class sfinae_valid_type = void>
-	class have_after_load_serialization_method : public std::false_type
+	class have_after_load_serialization_member_function : public std::false_type
 	{ };
 	
-	/// @brief Type has after_load_serialization method
+	/// @brief Type has after_load_serialization member_function
 	template <class T>
-	class have_after_load_serialization_method<T, typename hnc::this_type<decltype(std::declval<T &>().after_load_serialization())>::is_valid> : public std::true_type
+	class have_after_load_serialization_member_function<T, typename hnc::this_type<decltype(std::declval<T &>().after_load_serialization())>::is_valid> : public std::true_type
 	{ };
 	
-	/// @brief Do not call after_load_serialization method
-	/// @param[in,out] t   Object without after_load_serialization method
+	/// @brief Do not call after_load_serialization member function
+	/// @param[in,out] t   Object without after_load_serialization member function
 	/// @param[in]     tag std::false_type
 	template <class T>
-	void call_after_load_serialization_method_if_exist(T & t, std::false_type tag)
+	void call_after_load_serialization_member_function_if_exist(T & t, std::false_type tag)
 	{
 		hnc_unused(tag);
 		hnc_unused(t);
 	}
 	
-	/// @brief Call after_load_serialization method
-	/// @param[in,out] t   Object with after_load_serialization method
+	/// @brief Call after_load_serialization member function
+	/// @param[in,out] t   Object with after_load_serialization member function
 	/// @param[in]     tag std::true_type
 	template <class T>
-	void call_after_load_serialization_method_if_exist(T & t, std::true_type tag)
+	void call_after_load_serialization_member_function_if_exist(T & t, std::true_type tag)
 	{
 		hnc_unused(tag);
 		t.after_load_serialization();
 	}
 	
-	/// @brief Call after_load_serialization method if exist
-	/// @param[in,out] t Object with or without after_load_serialization method
+	/// @brief Call after_load_serialization member function if exist
+	/// @param[in,out] t Object with or without after_load_serialization member function
 	template <class T>
-	void call_after_load_serialization_method_if_exist(T & t)
+	void call_after_load_serialization_member_function_if_exist(T & t)
 	{
-		hnc::call_after_load_serialization_method_if_exist(t, hnc::have_after_load_serialization_method<T>());
+		hnc::call_after_load_serialization_member_function_if_exist(t, hnc::have_after_load_serialization_member_function<T>());
 	}
 }
 

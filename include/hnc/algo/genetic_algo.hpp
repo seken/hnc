@@ -203,7 +203,7 @@ namespace hnc
 			public:
 				
 				/// @brief Constructor
-				/// @param[in] evolve_functions                            Objet that contains generate_solution, evaluate_solution, crossover, mutation and stop methods
+				/// @param[in] evolve_functions                            Objet that contains generate_solution, evaluate_solution, crossover, mutation and stop member functions
 				/// @param[in] nb_archipelago                              Number of archipelagos
 				/// @param[in] nb_island_per_archipelago                   Number of islands per archipelago
 				/// @param[in] nb_solution_per_island                      Number of solutions per island

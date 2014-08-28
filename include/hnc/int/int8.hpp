@@ -55,7 +55,7 @@ namespace hnc
 		/// @param[in] i Integer between -128 and 127
 		int8(int const i) : i(static_cast<signed char>(i)) { }
 		
-		hnc_generate_serialize_method(i)
+		hnc_generate_serialize_member_function(i)
 	};
 	
 	// +

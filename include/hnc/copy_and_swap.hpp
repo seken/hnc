@@ -23,14 +23,14 @@
 
 namespace hnc
 {
-	/// @brief Type is not swappable with .swap(T &) method
+	/// @brief Type is not swappable with .swap(T &) member function
 	template <class T, class sfinae_valid_type = void>
-	class is_swappable_with_swap_method : public std::false_type
+	class is_swappable_with_swap_member_function : public std::false_type
 	{ };
 	
-	/// @brief Type is swappable with .swap(T &) method
+	/// @brief Type is swappable with .swap(T &) member function
 	template <class T>
-	class is_swappable_with_swap_method<T, typename hnc::this_type<decltype(std::declval<T &>().swap(std::declval<T &>()))>::is_valid> : public std::true_type
+	class is_swappable_with_swap_member_function<T, typename hnc::this_type<decltype(std::declval<T &>().swap(std::declval<T &>()))>::is_valid> : public std::true_type
 	{ };
 }
 
@@ -41,10 +41,10 @@ namespace hnc
    #include <hnc/copy_and_swap.hpp>
    @endcode
  *
- * If the copy and move assignement is not automatically generated, you can generate them if copy and move constructor and .swap(T &) method exist
+ * If the copy and move assignement is not automatically generated, you can generate them if copy and move constructor and .swap(T &) member function exist
  *
  * @pre copy and move constructor exist
- * @pre .swap(T &) method exist
+ * @pre .swap(T &) member function exist
  *
  * Example:
  * @code
@@ -65,7 +65,7 @@ namespace hnc
    	void swap(A & a) { std::swap(v, a.v); }
    };
    
-   hnc_overload_std_swap_with_swap_method_for_class(A)
+   hnc_overload_std_swap_with_swap_member_function_for_class(A)
    @endcode
  *
  * @note For no base class, consider hnc_generate_copy_and_move_assignment
@@ -99,10 +99,10 @@ namespace hnc
    #include <hnc/copy_and_swap.hpp>
    @endcode
  *
- * If the copy and move assignement is not automatically generated, you can generate them if copy and move constructor and .swap(T &) method exist
+ * If the copy and move assignement is not automatically generated, you can generate them if copy and move constructor and .swap(T &) member function exist
  *
  * @pre copy and move constructor exist
- * @pre .swap(T &) method exist
+ * @pre .swap(T &) member function exist
  *
  * Example:
  * @code
@@ -125,7 +125,7 @@ namespace hnc
    	void swap(A & a) { std::swap(v, a.v); }
    };
    
-   hnc_overload_std_swap_with_swap_method_for_class(A)
+   hnc_overload_std_swap_with_swap_member_function_for_class(A)
    @endcode
  *
  * @note For no base class, consider hnc_generate_copy_and_move_assignment
@@ -153,7 +153,7 @@ namespace hnc
 	}
 
 /**
- * @brief Overload std::swap function with .swap(T &) method
+ * @brief Overload std::swap function with .swap(T &) member function
  * 
  * @code
    #include <hnc/copy_and_swap.hpp>
@@ -172,12 +172,12 @@ namespace hnc
    	void swap(A & a) { std::swap(v, a.v); }
    };
    
-   hnc_overload_std_swap_with_swap_method_for_class(A)
+   hnc_overload_std_swap_with_swap_member_function_for_class(A)
    @endcode
  * 
- * @note Use hnc_overload_std_swap_with_swap_method_for_template_class if your class has template arguments
+ * @note Use hnc_overload_std_swap_with_swap_member_function_for_template_class if your class has template arguments
  */
-#define hnc_overload_std_swap_with_swap_method_for_class(T) \
+#define hnc_overload_std_swap_with_swap_member_function_for_class(T) \
 namespace std \
 { \
 	void swap(T & a, T & b) noexcept \
@@ -187,7 +187,7 @@ namespace std \
 }
 
 /**
- * @brief Overload std::swap function with .swap(T &) method
+ * @brief Overload std::swap function with .swap(T &) member function
  * 
  * @code
    #include <hnc/copy_and_swap.hpp>
@@ -208,12 +208,12 @@ namespace std \
    	void swap(A<T> & a) { std::swap(v, a.v); }
    };
    
-   hnc_overload_std_swap_with_swap_method_for_template_class(A<T>, class T)
+   hnc_overload_std_swap_with_swap_member_function_for_template_class(A<T>, class T)
    @endcode
  * 
- * @note Use hnc_overload_std_swap_with_swap_method_for_class if your class does not have template arguments
+ * @note Use hnc_overload_std_swap_with_swap_member_function_for_class if your class does not have template arguments
  */
-#define hnc_overload_std_swap_with_swap_method_for_template_class(T, template_types_declaration) \
+#define hnc_overload_std_swap_with_swap_member_function_for_template_class(T, template_types_declaration) \
 namespace std \
 { \
 	template <template_types_declaration> \

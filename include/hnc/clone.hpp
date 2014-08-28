@@ -36,23 +36,23 @@ namespace hnc
 }
 
 /**
- * @brief Generate .clone() method
+ * @brief Generate .clone() member function
  *
- * This macro generate the .clone() const method which return a std::unique_ptr of the base class
+ * This macro generate the .clone() const member function which return a std::unique_ptr of the base class
  *
  * @code
    class B
    {
    public:
    	virtual ~B() { }
-   	hnc_generate_clone_method(B, B)
+   	hnc_generate_clone_member_function(B, B)
    };
    
    class D
    {
    public:
   	virtual ~D() { }
-   	hnc_generate_clone_method(B, D)
+   	hnc_generate_clone_member_function(B, D)
    };
    @endcode
  *
@@ -61,7 +61,7 @@ namespace hnc
  *
  * @note Consider hnc::cloneable(base_t, derived_t) for template and inheritance solution
  */
-#define hnc_generate_clone_method(base_t, derived_t) \
+#define hnc_generate_clone_member_function(base_t, derived_t) \
 	virtual std::unique_ptr<base_t> clone() const \
 	{ \
 		return std::unique_ptr<base_t>(new derived_t(*this)); \
@@ -74,7 +74,7 @@ namespace hnc
 	 *
 	 * hnc::cloneable takes two template arguments: the base and the derived class
 	 *
-	 * Add a clone method to the derived class
+	 * Add a clone member function to the derived class
 	 * @code
 	   class B : public hnc::cloneable<B, B>
 	   {
@@ -83,7 +83,7 @@ namespace hnc
 	   };
 	 * @endcode
 	 *
-	 * @warning If the class have already a clone method, you must specify which one to use
+	 * @warning If the class have already a clone member function, you must specify which one to use
 	 * @code
 	   class D : public B, public hnc::cloneable<B, D>
 	   {
@@ -93,7 +93,7 @@ namespace hnc
 	   };
 	 * @endcode
 	 *
-	 * @note Consider hnc_generate_clone_method(base_t, derived_t) macro to generate .clone() method
+	 * @note Consider hnc_generate_clone_member_function(base_t, derived_t) macro to generate .clone() member function
 	 */
 	template <class base_t, class derived_t>
 	class cloneable
@@ -125,7 +125,7 @@ namespace hnc
 		return T(v);
 	}
 	
-	/// @brief Clone the object with .clone() method
+	/// @brief Clone the object with .clone() member function
 	/// @param[in] v   An object
 	/// @param[in] tag std::true_type
 	/// @return a clone of the object
@@ -159,7 +159,7 @@ namespace hnc
 		return std::unique_ptr<T>(new T(v));
 	}
 	
-	/// @brief Clone the object with .clone() method
+	/// @brief Clone the object with .clone() member function
 	/// @param[in] v   An object
 	/// @param[in] tag std::true_type
 	/// @return a clone of the object in a std::unique_ptr

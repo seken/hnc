@@ -61,7 +61,7 @@ namespace hnc
 				left(left), top(top), width(width), height(height)
 			{ }
 			
-			hnc_generate_serialize_method(left, top, width, height)
+			hnc_generate_serialize_member_function(left, top, width, height)
 			
 			/// @brief Return right coordinate
 			/// @return right

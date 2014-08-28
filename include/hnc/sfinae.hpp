@@ -41,7 +41,7 @@ namespace hnc
 	   };
 	   @endcode
 	 * 
-	 * For example (see hnc/clone.hpp), you can check is a type has the .clone() method:
+	 * For example (see hnc/clone.hpp), you can check is a type has the .clone() member function:
 	 * @code
 	   // Valid fonctor (return false) for all types
 	   template <class T, class sfinae_valid_type = void>

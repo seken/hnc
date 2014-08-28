@@ -84,7 +84,7 @@ namespace hnc
 			);
 		}
 		
-		hnc_generate_serialize_method(r, g, b, a)
+		hnc_generate_serialize_member_function(r, g, b, a)
 		
 		// Basic colors
 		

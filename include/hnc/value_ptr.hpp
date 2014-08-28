@@ -28,7 +28,7 @@ namespace hnc
 	   #include <hnc/value_ptr.hpp>
 	   @endcode
 	 * 
-	 * hnc::value_ptr performs a deep copy; it uses hnc::clone function which uses [virtual] .clone() method if it exists @n
+	 * hnc::value_ptr performs a deep copy; it uses hnc::clone function which uses [virtual] .clone() member function if it exists @n
 	 * So, copy a hnc::value_ptr of base class which olds a derived class object works and does what you think
 	 * 
 	 * Example:
@@ -43,7 +43,7 @@ namespace hnc
 	   	
 	   	virtual ~A() { }
 	   	
-	   	hnc_generate_clone_method(A, A)
+	   	hnc_generate_clone_member_function(A, A)
 	   	
 	   	virtual void display(std::ostream & o) const { o << "one_A"; }
 	   };
@@ -54,7 +54,7 @@ namespace hnc
 	   	
 	   	virtual ~B() { }
 	   	
-	   	hnc_generate_clone_method(A, B)
+	   	hnc_generate_clone_member_function(A, B)
 	   	
 	   	virtual void display(std::ostream & o) const override { o << "one_B"; }
 	   };
@@ -149,6 +149,6 @@ namespace hnc
 }
 
 /// @brief std::swap between two hnc::value_ptr
-hnc_overload_std_swap_with_swap_method_for_template_class(hnc::value_ptr<T>, class T)
+hnc_overload_std_swap_with_swap_member_function_for_template_class(hnc::value_ptr<T>, class T)
 
 #endif

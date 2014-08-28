@@ -65,7 +65,7 @@ namespace hnc
 		/// @return the denominator
 		T const & denominator() const { return m_denominator; }
 		
-		hnc_generate_serialize_method(m_numerator, m_denominator)
+		hnc_generate_serialize_member_function(m_numerator, m_denominator)
 		
 	private:
 		

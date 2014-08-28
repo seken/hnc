@@ -43,7 +43,7 @@ namespace hnc
 		/// @brief Destructor
 		virtual ~any_value_base() { }
 		
-		hnc_generate_clone_method(hnc::any_value_base, hnc::any_value_base)
+		hnc_generate_clone_member_function(hnc::any_value_base, hnc::any_value_base)
 	};
 	
 	// Forward declaration of hnc::any
@@ -85,7 +85,7 @@ namespace hnc
 		/// @brief Destructor
 		virtual ~any_value() { }
 		
-		hnc_generate_clone_method(hnc::any_value_base, hnc::any_value<T>)
+		hnc_generate_clone_member_function(hnc::any_value_base, hnc::any_value<T>)
 		
 	public:
 		
@@ -173,7 +173,7 @@ namespace hnc
 	};
 }
 
-hnc_overload_std_swap_with_swap_method_for_class(hnc::any)
+hnc_overload_std_swap_with_swap_member_function_for_class(hnc::any)
 
 
 namespace hnc
