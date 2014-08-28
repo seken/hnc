@@ -19,31 +19,39 @@
 # HNC_MPIRUN_EXE       - MPI run executable (false if not found)
 
 
-find_program(HNC_COMPILER_MPI_CPP NAMES mpic++ mpicxx mpiCC mpicc)
+if (NOT CMAKE_HNC_NO_MPI STREQUAL "FALSE")
 
-if (HNC_COMPILER_MPI_CPP)
-	
+	find_program(HNC_COMPILER_MPI_CPP NAMES mpic++ mpicxx mpiCC mpicc)
+
 	if (HNC_COMPILER_MPI_CPP)
-		set(CMAKE_CXX_COMPILER "${HNC_COMPILER_MPI_CPP}")
+		
+		if (HNC_COMPILER_MPI_CPP)
+			set(CMAKE_CXX_COMPILER "${HNC_COMPILER_MPI_CPP}")
+		endif()
+		
+		message(STATUS "MPI C++ Compiler found =) ${HNC_COMPILER_MPI_CPP}")
+		
+	else()
+		
+		message(STATUS "MPI C++ Compiler not found :(")
+		
 	endif()
-	
-	message(STATUS "MPI C++ Compiler found =) ${HNC_COMPILER_MPI_CPP}")
-	
+
+
+	find_program(HNC_MPIRUN_EXE NAMES mpirun)
+
+	if (HNC_MPIRUN_EXE)
+		
+		message(STATUS "MPI run executable found =) ${HNC_MPIRUN_EXE}")
+		
+	else()
+		
+		message(STATUS "MPI run executable not found :(")
+		
+	endif()
+
 else()
-	
-	message(STATUS "MPI C++ Compiler not found :(")
-	
-endif()
 
+	message(STATUS "MPI is disable by CMAKE_HNC_NO_MPI=FALSE")
 
-find_program(HNC_MPIRUN_EXE NAMES mpirun)
-
-if (HNC_MPIRUN_EXE)
-	
-	message(STATUS "MPI run executable found =) ${HNC_MPIRUN_EXE}")
-	
-else()
-	
-	message(STATUS "MPI run executable not found :(")
-	
 endif()

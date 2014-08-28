@@ -36,6 +36,8 @@ cmake_minimum_required(VERSION 2.6)
 	# Thread support
 	if ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
 		set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fopenmp")
+	else()
+		message(STATUS "Your compiler id \"${CMAKE_CXX_COMPILER_ID}\" is not GNU, OpenMP is disable")
 	endif()
 
 
@@ -125,6 +127,8 @@ cmake_minimum_required(VERSION 2.6)
 
 
 # Executables & tests
+	if (NOT CMAKE_HNC_NO_TESTS STREQUAL "FALSE")
+	
 	enable_testing()
 	message(STATUS "---")
 
@@ -255,6 +259,8 @@ cmake_minimum_required(VERSION 2.6)
 		endif()
 		
 	endforeach()
+	
+	endif()
 
 
 # Install

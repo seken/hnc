@@ -26,7 +26,7 @@ find_package(Boost COMPONENTS mpi)
 
 set(HNC_NO_BOOST_MPI_MACRO "hnc_no_boost_mpi")
 
-if (Boost_FOUND)
+if (Boost_FOUND AND NOT CMAKE_HNC_NO_MPI STREQUAL "FALSE")
 	
 	set(HNC_BOOST_MPI_FOUND "TRUE")
 	set(HNC_BOOST_MPI_INCLUDE_DIR "${Boost_INCLUDE_DIR}")
@@ -42,6 +42,14 @@ else()
 	
 	add_definitions("-D${HNC_NO_BOOST_MPI_MACRO}")
 	
-	message(STATUS "Library Boost.MPI not found :(")
+	if (NOT CMAKE_HNC_NO_MPI STREQUAL "FALSE")
+	
+		message(STATUS "Library Boost.MPI not found :(")
+	
+	else()
+	
+		message(STATUS "MPI is disable by CMAKE_HNC_NO_MPI=FALSE")
+	
+	endif()
 	
 endif()
