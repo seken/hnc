@@ -49,6 +49,16 @@ namespace hnc
 	// Forward declaration of hnc::any
 	class any;
 	
+	// Forward declaration of hnc::any_cast
+	template <class cast_t>
+	cast_t any_cast(hnc::any const & any);
+	
+	// Forward declaration of hnc::any_cast_ref
+	template <class cast_t>
+	cast_t const & any_cast_ref(hnc::any const & any);
+	template <class cast_t>
+	cast_t & any_cast_ref(hnc::any & any);
+	
 	/**
 	 * @brief hnc::any_value
 	 * 

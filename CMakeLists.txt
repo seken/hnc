@@ -37,6 +37,7 @@ cmake_minimum_required(VERSION 2.6)
 	if ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
 		set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fopenmp")
 	else()
+		link_libraries(pthread)
 		message(STATUS "Your compiler id \"${CMAKE_CXX_COMPILER_ID}\" is not GNU, OpenMP is disable")
 	endif()
 
